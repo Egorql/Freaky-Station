@@ -167,8 +167,8 @@
   - type: GameRule
   - type: StationEvent
     reoccurrenceDelay: 1
-    earliestStart: 12
-    minimumPlayers: 25
+    earliestStart: 8
+    minimumPlayers: 12
   - type: MeteorSwarm
 
 - type: entity
@@ -224,7 +224,7 @@
   components:
   - type: StationEvent
     weight: 18
-    minimumPlayers: 15
+    minimumPlayers: 10
     chaos: # Goobstation
       Power: 40
       Atmos: 40

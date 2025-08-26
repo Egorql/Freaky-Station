@@ -35,8 +35,8 @@
   id: Cluster
   mapName: 'Cluster'
   mapPath: /Maps/_Goobstation/cluster.yml
-  minPlayers: 10
-  maxPlayers: 35
+  minPlayers: 0
+  maxPlayers: 5
   stations:
     Cluster:
       stationProto: StandardNanotrasenStation

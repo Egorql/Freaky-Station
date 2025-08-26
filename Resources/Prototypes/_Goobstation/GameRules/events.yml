@@ -33,7 +33,7 @@
     chaosScore: 150
   - type: StationEvent
     weight: 4.5 # Uncommon
-    earliestStart: 30
+    earliestStart: 15
     reoccurrenceDelay: 30
     minimumPlayers: 4
     duration: null
@@ -57,8 +57,8 @@
     startAnnouncement: goob-station-event-vent-creatures-ancient-xenos-start-announcement
     startAudio:
       path: /Audio/Announcements/aliens.ogg
-    earliestStart: 20
-    minimumPlayers: 45
+    earliestStart: 10
+    minimumPlayers: 15
     weight: 3
     duration: 30
     eventType: HostilesSpawn
@@ -82,8 +82,8 @@
     startAnnouncement: goob-station-event-vent-creatures-ancient-xenos-start-announcement
     startAudio:
       path: /Audio/Announcements/aliens.ogg
-    earliestStart: 20
-    minimumPlayers: 50
+    earliestStart: 17
+    minimumPlayers: 22
     weight: 3
     duration: 30
     eventType: HostilesSpawn
@@ -108,7 +108,7 @@
     startAudio:
       path: /Audio/Announcements/aliens.ogg
     earliestStart: 20
-    minimumPlayers: 60
+    minimumPlayers: 25
     weight: 2 #This can lead to mass death so it's rarer
     duration: 30
     eventType: HostilesSpawn
@@ -135,8 +135,8 @@
     startAnnouncement: goob-station-event-vent-creatures-ancient-xenos-start-announcement
     startAudio:
       path: /Audio/Announcements/aliens.ogg
-    earliestStart: 20
-    minimumPlayers: 60
+    earliestStart: 22
+    minimumPlayers: 25
     weight: 2 #This can lead to mass death so it's rarer
     duration: 30
     eventType: HostilesSpawn

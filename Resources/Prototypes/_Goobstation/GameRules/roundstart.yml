@@ -35,7 +35,7 @@
   components:
   - type: ChangelingRule
   - type: GameRule
-    minPlayers: 15
+    minPlayers: 12
   - type: AntagRandomObjectives
     sets:
     - groups: ChangelingObjectiveGroups
@@ -76,7 +76,7 @@
     - groups: CorporateObjectiveGroups
     maxDifficulty: 8 # Very rare antag so they should get a lot of objectives
   - type: GameRule
-    minPlayers: 30
+    minPlayers: 25
     delay:
       min: 465
       max: 665 # Delay is so the heads help their department get set up.
@@ -84,7 +84,7 @@
     definitions:
     - prefRoles: [ Traitor ]
       max: 2
-      playerRatio: 25
+      playerRatio: 10
       chaosScore: 300
       jobBlacklist: [ NanotrasenRepresentative ]
       whitelist:
@@ -102,7 +102,7 @@
   id: CalmTraitor # For Dual Antag Gamemodes
   components:
   - type: GameRule
-    minPlayers: 30
+    minPlayers: 20
   - type: AntagSelection
     selectionTime: IntraPlayerSpawn
     definitions:
@@ -126,14 +126,14 @@
   id: CalmLing # For Dual Antag Gamemodes
   components:
   - type: GameRule
-    minPlayers: 30
+    minPlayers: 20
   - type: AntagSelection
     selectionTime: IntraPlayerSpawn
     agentName: changeling-roundend-name
     definitions:
     - prefRoles: [ Changeling ]
       max: 2
-      playerRatio: 15
+      playerRatio: 10
       blacklist:
         components:
         - CommandStaff
@@ -149,7 +149,7 @@
   id: Calmops # For Dual Antag Gamemodes
   components:
   - type: GameRule
-    minPlayers: 30
+    minPlayers: 20
   - type: LoadMapRule
     mapPath: /Maps/_Goobstation/Nonstations/nukieplanet.yml
   - type: AntagSelection
@@ -158,7 +158,7 @@
     - prefRoles: [ NukeopsCommander ]
       fallbackRoles: [ Nukeops, NukeopsMedic ]
       spawnerPrototype: SpawnPointNukeopsCommander
-      playerRatio: 15
+      playerRatio: 10
       startingGear: SyndicateCommanderGearFull
       unequipOldGear: true
       components:
@@ -218,14 +218,14 @@
   parent: BaseGameRule
   components:
   - type: GameRule
-    minPlayers: 30
+    minPlayers: 20
   - type: RevolutionaryRule
   - type: AntagSelection
     selectionTime: IntraPlayerSpawn
     definitions:
     - prefRoles: [ HeadRev ]
       max: 1
-      playerRatio: 20
+      playerRatio: 8
       blacklist:
         components:
         - CommandStaff
@@ -259,7 +259,7 @@
   components:
   - type: BlobRule
   - type: GameRule
-    minPlayers: 20
+    minPlayers: 15
     chaosScore: 1000
   - type: AntagSelection
     selectionTime: IntraPlayerSpawn
@@ -286,7 +286,7 @@
   - type: StationEvent
     weight: 10
     duration: 1
-    earliestStart: 50
+    earliestStart: 10
     minimumPlayers: 20
     maxOccurrences: 2
     chaos:
@@ -383,7 +383,7 @@
   components:
   - type: DevilRule
   - type: GameRule
-    minPlayers: 15
+    minPlayers: 10
   - type: AntagObjectives
     objectives:
     - DevilContractObjective

@@ -16,10 +16,10 @@
   parent: BaseStationEventShortDelay
   components:
   - type: StationEvent
-    earliestStart: 20
+    earliestStart: 15
     weight: 8
     duration: 50
-    minimumPlayers: 15
+    minimumPlayers: 10
     chaos: # Goobstation
       Hostile: 100
       Friend: 20

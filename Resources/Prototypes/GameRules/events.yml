@@ -288,7 +288,7 @@
   - type: StationEvent
     weight: 7
     duration: 1
-    minimumPlayers: 15
+    minimumPlayers: 8
     chaos: # Goobstation
       Power: 100
     eventType: Maintenance # Goobstation
@@ -303,7 +303,7 @@
   components:
   - type: StationEvent
     startAnnouncement: station-event-bureaucratic-error-announcement
-    minimumPlayers: 25
+    minimumPlayers: 12
     weight: 3
     duration: 1
     eventType: Neutral # Goobstation
@@ -320,7 +320,7 @@
   components:
   - type: StationEvent
     startAnnouncement: station-event-clerical-error-announcement
-    minimumPlayers: 15
+    minimumPlayers: 10
     weight: 5
     duration: 1
     eventType: Chaotic # Goobstation
@@ -336,7 +336,7 @@
   - type: StationEvent
     weight: 5
     duration: 1
-    minimumPlayers: 10
+    minimumPlayers: 7
     eventType: Chaotic # Goobstation
   # Goobstation
   - type: GameRule
@@ -350,9 +350,9 @@
   components:
   - type: StationEvent
     weight: 3
-    earliestStart: 45
+    earliestStart: 15
     reoccurrenceDelay: 20
-    minimumPlayers: 60
+    minimumPlayers: 20
     duration: null
     chaos: # Goobstation
       Hostile: 20
@@ -390,9 +390,9 @@
   - type: StationEvent
     weight: 6
     duration: null
-    earliestStart: 45
+    earliestStart: 15
     reoccurrenceDelay: 20
-    minimumPlayers: 30
+    minimumPlayers: 20
     chaos: # Goobstation
       Hostile: 20
       Friend: 20
@@ -459,9 +459,9 @@
   - type: StationEvent
     weight: 5
     duration: null
-    earliestStart: 20
+    earliestStart: 8
     reoccurrenceDelay: 20
-    minimumPlayers: 15
+    minimumPlayers: 12
     eventType: Chaotic # Goobstation
   # Goobstation
   - type: GameRule
@@ -505,8 +505,8 @@
   - type: StationEvent
     weight: 3.5
     duration: 1
-    earliestStart: 30
-    minimumPlayers: 20
+    earliestStart: 8
+    minimumPlayers: 15
     chaos: # Goobstation
       Hostile: 20
       Friend: 20
@@ -593,8 +593,8 @@
   parent: BaseStationEventLongDelay
   components:
   - type: StationEvent
-    earliestStart: 15
-    minimumPlayers: 15
+    earliestStart: 5
+    minimumPlayers: 10
     weight: 7
     duration: 240
     chaos:
@@ -669,8 +669,8 @@
     startAnnouncement: station-event-vent-clog-start-announcement
     startAudio:
       path: /Audio/Announcements/attention.ogg
-    earliestStart: 15
-    minimumPlayers: 15
+    earliestStart: 8
+    minimumPlayers: 10
     weight: 5
     duration: 60
     chaos: # Goobstation
@@ -689,8 +689,8 @@
     startAnnouncement: station-event-vent-creatures-start-announcement
     startAudio:
       path: /Audio/Announcements/aliens.ogg
-    earliestStart: 20
-    minimumPlayers: 15
+    earliestStart: 10
+    minimumPlayers: 12
     weight: 5
     duration: 30 # DeltaV: was 60, used as a delay now
     chaos: # Goobstation
@@ -715,8 +715,8 @@
     startAnnouncement: station-event-vent-creatures-start-announcement
     startAudio:
       path: /Audio/Announcements/attention.ogg
-    earliestStart: 20
-    minimumPlayers: 15
+    earliestStart: 10
+    minimumPlayers: 12
     weight: 5
     duration: 30 # DeltaV: was 60, used as a delay now
     chaos: # Goobstation
@@ -741,8 +741,8 @@
     startAnnouncement: station-event-vent-creatures-start-announcement
     startAudio:
       path: /Audio/Announcements/aliens.ogg
-    earliestStart: 20
-    minimumPlayers: 15
+    earliestStart: 10
+    minimumPlayers: 12
     weight: 5
     duration: 30 # DeltaV: was 60, used as a delay now
     chaos: # Goobstation
@@ -764,8 +764,8 @@
     startAnnouncement: station-event-vent-creatures-start-announcement
     startAudio:
       path: /Audio/Announcements/attention.ogg
-    earliestStart: 45 # DeltaV - was 20
-    minimumPlayers: 30 # DeltaV - was 20
+    earliestStart: 10 # DeltaV - was 20
+    minimumPlayers: 15 # DeltaV - was 20
     weight: 1 # DeltaV - was 1.5
     duration: 30 # DeltaV: was 60, used as a delay now
     chaos: # Goobstation
@@ -785,8 +785,8 @@
   parent: BaseGameRule
   components:
   - type: StationEvent
-    earliestStart: 90
-    minimumPlayers: 40
+    earliestStart: 12
+    minimumPlayers: 17
     weight: 1 # Zombies was happening basically every single survival round, so now it's super rare
     duration: 1
     chaos: # Goobstation
@@ -827,9 +827,9 @@
   id: LoneOpsSpawn
   components:
   - type: StationEvent
-    earliestStart: 35
+    earliestStart: 8
     weight: 5.5
-    minimumPlayers: 20
+    minimumPlayers: 17
     duration: 1
     chaos: # Goobstation
       Hostile: 60
@@ -878,7 +878,7 @@
   id: SleeperAgents
   components:
   - type: StationEvent
-    earliestStart: 30
+    earliestStart: 10
     weight: 8
     minimumPlayers: 15
     maxOccurrences: 1 # can only happen once per round
@@ -952,7 +952,7 @@
   components:
   - type: StationEvent
     earliestStart: 0
-    minimumPlayers: 20
+    minimumPlayers: 15
     maxOccurrences: 1 # this event has diminishing returns on interesting-ness, so we cap it
     weight: 5
     chaos: # Goobstation
@@ -973,7 +973,7 @@
     startAudio:
       path: /Audio/Announcements/attention.ogg
     weight: 5
-    minimumPlayers: 25
+    minimumPlayers: 15
     reoccurrenceDelay: 20
     chaos: # Goobstation
       Atmos: 15
@@ -1040,10 +1040,10 @@
   parent: BaseStationEventShortDelay
   components:
   - type: StationEvent
-    earliestStart: 20
+    earliestStart: 10
     weight: 8
     duration: 10
-    minimumPlayers: 45
+    minimumPlayers: 18
     chaos: # Goobstation
       Hostile: 100
       Friend: 20
