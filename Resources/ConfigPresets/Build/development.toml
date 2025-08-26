@@ -15,10 +15,13 @@
 
 [game]
 # Straight in-game baby
-lobbyenabled = false
+lobbyenabled = true
 # Dev map for faster loading & convenience
 map = "Dev"
 role_timers = false
+
+[server]
+rules_file = "FreakyRuleset"
 
 [events]
 enabled = false
@@ -55,8 +58,3 @@ see_own_notes = true
 
 [lavaland] # Lavaland Change
 enabled = false
-
-[ic]
-random_characters = false
-random_species_weights = ""
-ssd_sleep_time = 3600
