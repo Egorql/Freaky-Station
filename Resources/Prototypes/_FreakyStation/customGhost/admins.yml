@@ -1,0 +1,63 @@
+- type: customGhost
+  id: Egorql-ghost
+  ckey: Egorql
+  sprite: /Textures/_FreakStation/Ghost/ghost_egorql.rsi
+  alpha: 0.8
+  ghostName: Egorql
+  ghostDescription: Блять че за хуйня
+
+- type: customGhost
+  id: Egorql-ghostTEST
+  ckey: localhost@Egorql
+  sprite: /Textures/_FreakStation/Ghost/ghost_egorql.rsi
+  alpha: 0.8
+  ghostName: Egorql
+  ghostDescription: Блять че за хуйня
+
+- type: customGhost
+  id: Casha-ghost
+  ckey: Casha
+  sprite: /Textures/_FreakStation/Ghost/ghost_casha.rsi
+  alpha: 0.8
+  ghostName: Casha
+  ghostDescription: ебануца
+
+- type: customGhost
+  id: kef1rOO-ghost
+  ckey: kef1r00
+  sprite: /Textures/_FreakStation/Ghost/ghost_white.rsi
+  alpha: 0.8
+  ghostName: kef1r00
+  ghostDescription: "я не придумал"
+
+- type: customGhost
+  id: ANIvarm-ghost
+  ckey: ANIvarm
+  sprite: /Textures/_FreakStation/Ghost/ghost_kaiju.rsi
+  alpha: 0.8
+  ghostName: ANIvarm
+  ghostDescription: brr brr patapim
+
+- type: customGhost
+  id: Sherlook-ghost
+  ckey: Sherlook
+  sprite: /Textures/_FreakStation/Ghost/ghost_faceless.rsi
+  alpha: 0.8
+  ghostName: Sherlook
+  ghostDescription: Моя сука пенивайз, понеслась
+
+- type: customGhost
+  id: Smesharik-ghost
+  ckey: Smesharik
+  sprite: /Textures/_FreakStation/Ghost/ghost_ice.rsi
+  alpha: 0.8
+  ghostName: Smesharik
+  ghostDescription: brr brr patapim
+
+- type: customGhost
+  id: Homyakk-ghost
+  ckey: Homyakk
+  sprite: /Textures/_FreakStation/Ghost/ghost_star.rsi
+  alpha: 0.8
+  ghostName: Homyakk
+  ghostDescription: Долбоёб, нихуя не умеет

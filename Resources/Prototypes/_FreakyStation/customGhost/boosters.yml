@@ -1,0 +1,15 @@
+#- type: customGhost
+#  id:  # сикей человека
+#  ckey: ckey
+#  sprite: /Textures/_FreakStation/Ghost/ghost_red.rsi
+#  alpha: 0.8
+#  ghostName:  # сикей человека
+#  ghostDescription:  # описание если захочет
+
+- type: customGhost
+  id: DonLite-ghost
+  ckey: DonLite
+  sprite: /Textures/_FreakStation/Ghost/ghost_red.rsi
+  alpha: 0.8
+  ghostName: DonLite
+  ghostDescription: ку
