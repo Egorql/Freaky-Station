@@ -249,6 +249,9 @@
     node: airlock
     containers:
     - board
+  - type: IconSmooth
+    key: walls
+    mode: NoSprite
   - type: PlacementReplacement
     key: walls
   - type: PaintableAirlock
