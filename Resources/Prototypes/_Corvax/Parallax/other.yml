@@ -44,7 +44,7 @@
       shader: ""
     - texture:
         !type:ImageParallaxTextureSource
-        path: "/Textures/_Corvax/Parallax/IceParallax.png"
+        path: "/Textures/Corvax/Parallax/IceParallax.png"
       slowness: 0
       scrolling: "0, 0"
       tiled: true
@@ -52,7 +52,7 @@
   layersLQ:
     - texture:
         !type:ImageParallaxTextureSource
-        path: "/Textures/_Corvax/Parallax/IceParallax.png"
+        path: "/Textures/Corvax/Parallax/IceParallax.png"
       slowness: 0
       scrolling: "0, 0"
       tiled: true
@@ -84,19 +84,19 @@
   layers:
     - texture:
         !type:ImageParallaxTextureSource
-        path: "/Textures/_Corvax/Parallax/LavaParallax.png"
+        path: "/Textures/Corvax/Parallax/LavaParallax.png"
       slowness: 0
       scrolling: "0.1, 0"
       tiled: true
       shader: ""
   layersLQUseHQ: true
-
+ 
 - type: parallax
   id: LavaLight
   layers:
     - texture:
         !type:ImageParallaxTextureSource
-        path: "/Textures/_Corvax/Parallax/LavaLightParallax.png"
+        path: "/Textures/Corvax/Parallax/LavaLightParallax.png"
       slowness: 0
       scrolling: "0.1, 0"
       tiled: true
