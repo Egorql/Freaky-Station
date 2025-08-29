@@ -137,6 +137,7 @@
     damageDivisor: 2
     trackAllDamage: true
     damageOverlay:
+      drawdepth: WallTops
       sprite: Structures/Windows/cracks.rsi
   - type: StaticPrice
     price: 100
