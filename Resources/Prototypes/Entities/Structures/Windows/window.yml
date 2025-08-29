@@ -133,6 +133,8 @@
     node: window
   - type: Appearance
   - type: DamageVisuals
+    layer:
+      - TableLayer
     thresholds: [5, 10, 20]
     damageDivisor: 2
     trackAllDamage: true
