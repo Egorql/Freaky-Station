@@ -126,6 +126,30 @@
         state: icon
 
 - type: entity
+  categories: [ HideSpawnMenu, Spawner ]
+  parent: BaseAntagSpawner
+  id: SpawnPointGhostMindParadox
+  components:
+  - type: GhostRole
+    name: парадоксальный разум
+    description: Вы - парадоксальный разум. Вас может видеть только ваш хозяин. Сведите его с ума или сотрудничайте
+    rules: ghost-role-information-antagonist-rules
+    mindRoles:
+    - MindRoleGhostRoleSoloAntagonist
+    raffle:
+      settings: default
+    requirements: # Goobstation - ghost roles requirements
+    - !type:DepartmentTimeRequirement
+      department: Security
+      time: 2200 #dohua
+  - type: Sprite
+    layers:
+    - sprite: Markers/jobs.rsi
+      state: green
+    - sprite: Mobs/Aliens/paradox_clone.rsi
+      state: preview
+
+- type: entity
   id: SpawnPointGhostRemilia
   name: ghost role spawn point
   suffix: Remilia

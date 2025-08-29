@@ -18,34 +18,36 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 # Shuttle Game Rule Tables -- If you dont add your rules to these they wont be used by the games schedulers.
 
+
+
 - type: entityTable
   id: UnknownShuttlesFriendlyTable
   table: !type:AllSelector # we need to pass a list of rules, since rules have further restrictions to consider via StationEventComp
-    children:
-    - id: UnknownShuttleCargoLost
-    - id: UnknownShuttleTravelingCuisine
-    - id: UnknownShuttleDisasterEvacPod
-    - id: UnknownShuttleHonki
-    - id: UnknownShuttleFrontierProspector  #Goobstation - Salvage shuttle event
-    - id: UnknownShuttleNTQuark
-    - id: UnknownShuttleCruiser
-    - id: UnknownShuttleCryptid
-    - id: UnknownShuttleEternal
-    - id: UnknownShuttleFlatline
-    - id: UnknownShuttleGym
-    - id: UnknownShuttleNTIncorporation
-    - id: UnknownShuttleJoe
-    - id: UnknownShuttleLambordeere
-    - id: UnknownShuttleMeatZone
-    - id: UnknownShuttleMicroshuttle
-    - id: UnknownShuttleSpacebus
-    - id: UnknownShuttleAlienTourist # Goobstation
+   children:
+#   - id: UnknownShuttleCargoLost
+#   - id: UnknownShuttleTravelingCuisine
+#   - id: UnknownShuttleDisasterEvacPod
+#   - id: UnknownShuttleHonki
+#   - id: UnknownShuttleFrontierProspector  #Goobstation - Salvage shuttle event
+#   - id: UnknownShuttleNTQuark
+#   - id: UnknownShuttleCruiser
+#   - id: UnknownShuttleCryptid
+#   - id: UnknownShuttleEternal
+#   - id: UnknownShuttleFlatline
+#   - id: UnknownShuttleGym
+#   - id: UnknownShuttleNTIncorporation
+#   - id: UnknownShuttleJoe
+#   - id: UnknownShuttleLambordeere
+#   - id: UnknownShuttleMeatZone
+#   - id: UnknownShuttleMicroshuttle
+#   - id: UnknownShuttleSpacebus
+ #  - id: UnknownShuttleAlienTourist # Goobstation
 
 - type: entityTable
   id: UnknownShuttlesFreelanceTable
   table: !type:AllSelector # we need to pass a list of rules, since rules have further restrictions to consider via StationEventComp
     children:
-    - id: UnknownShuttleSyndieEvacPod
+ #   - id: UnknownShuttleSyndieEvacPod
 
 - type: entityTable
   id: UnknownShuttlesHostileTable
@@ -53,7 +55,7 @@
     children:
     - id: LoneOpsSpawn
     #- id: UnknownShuttleManOWar # Goob - Nuke the man-o-war
-    - id: UnknownShuttleInstigator
+#    - id: UnknownShuttleInstigator
 
 # Shuttle Game Rules
 

@@ -128,6 +128,8 @@ public sealed partial class AdminVerbSystem
 
     private readonly EntProtoId _paradoxCloneRuleId = "ParadoxCloneSpawn";
 
+    private readonly EntProtoId _mindparadoxRuleId = "MindParadoxSpawn";
+
     // All antag verbs have names so invokeverb works.
     private void AddAntagVerbs(GetVerbsEvent<Verb> args)
     {
@@ -273,6 +275,41 @@ public sealed partial class AdminVerbSystem
 
         if (HasComp<HumanoidAppearanceComponent>(args.Target)) // only humanoids can be cloned
             args.Verbs.Add(paradox);
+
+
+
+
+        var mindparadoxName = Loc.GetString("admin-verb-text-make-mind-paradox");
+        Verb mindparadox = new()
+        {
+            Text = mindparadoxName,
+            Category = VerbCategory.Antag,
+            Icon = new SpriteSpecifier.Rsi(new("/Textures/Interface/Misc/job_icons.rsi"), "ParadoxClone"),
+            Act = () =>
+            {
+                var ruleEnt = _gameTicker.AddGameRule(_mindparadoxRuleId);
+
+                if (!TryComp<MindParadoxRuleComponent>(ruleEnt, out var mindparadoxRuleComp))
+                    return;
+
+                mindparadoxRuleComp.OriginalBody = args.Target; // override the target player
+
+                _gameTicker.StartGameRule(ruleEnt);
+            },
+            Impact = LogImpact.High,
+            Message = string.Join(": ", mindparadoxName, Loc.GetString("создан парадоксальный разум")),
+        };
+
+        if (HasComp<HumanoidAppearanceComponent>(args.Target)) // only humanoids can be cloned
+            args.Verbs.Add(mindparadox);
+
+
+
+
+
+
+
+
 
         // goobstation - heretics
         var hereticName = Loc.GetString("admin-verb-text-make-heretic");
