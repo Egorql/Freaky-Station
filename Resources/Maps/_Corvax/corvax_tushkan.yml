@@ -29136,14 +29136,6 @@ entities:
           - 364
           - 368
           - 365
-- proto: ClothingBackpackCE
-  entities:
-  - uid: 3716
-    components:
-    - type: Transform
-      parent: 3715
-    - type: Physics
-      canCollide: False
 - proto: ClothingBackpackDuffelSurgeryFilled
   entities:
   - uid: 3721

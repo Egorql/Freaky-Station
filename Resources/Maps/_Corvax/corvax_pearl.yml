@@ -137476,26 +137476,6 @@ entities:
     - type: Transform
       pos: 15.25835,51.600796
       parent: 2
-- proto: LetterDelivery
-  entities:
-  - uid: 14606
-    components:
-    - type: Transform
-      pos: 4.567211,48.592224
-      parent: 2
-    - type: Delivery
-      recipientJobTitle: грузчик
-      recipientName: '@#!-+'
-      isLocked: False
-      isOpened: True
-    - type: Tag
-      tags:
-      - Trash
-      - Recyclable
-    - type: SpaceGarbage
-    missingComponents:
-    - StealTarget
-    - SimpleToolUsage
 - proto: LightBulbBroken
   entities:
   - uid: 14608
@@ -150607,20 +150587,6 @@ entities:
     - type: Transform
       pos: 57.5,-5.5
       parent: 2
-- proto: ShippingContainerNakamura
-  entities:
-  - uid: 16545
-    components:
-    - type: Transform
-      pos: -13.5,52.5
-      parent: 2
-- proto: ShippingContainerNanotrasen
-  entities:
-  - uid: 16546
-    components:
-    - type: Transform
-      pos: -12.5,51.5
-      parent: 2
 - proto: ShotGunCabinetFilled
   entities:
   - uid: 16547
@@ -153620,13 +153586,6 @@ entities:
     components:
     - type: Transform
       pos: 16.5,-56.5
-      parent: 2
-- proto: SpawnMobPollyParrot
-  entities:
-  - uid: 16972
-    components:
-    - type: Transform
-      pos: 88.5,16.5
       parent: 2
 - proto: SpawnMobShiva
   entities:

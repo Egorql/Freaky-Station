@@ -86919,15 +86919,6 @@ entities:
       rot: 3.141592653589793 rad
       pos: 9.599047,53.415604
       parent: 2
-- proto: LauncherSyringe
-  entities:
-  - uid: 6637
-    components:
-    - type: Transform
-      parent: 6630
-    - type: Physics
-      canCollide: False
-    - type: InsideEntityStorage
 - proto: LeavesCannabisDried
   entities:
   - uid: 6912
@@ -89194,36 +89185,6 @@ entities:
     - type: Transform
       pos: 25.5,51.5
       parent: 2
-- proto: MiniSyringe
-  entities:
-  - uid: 6638
-    components:
-    - type: Transform
-      parent: 6630
-    - type: Physics
-      canCollide: False
-    - type: InsideEntityStorage
-  - uid: 6639
-    components:
-    - type: Transform
-      parent: 6630
-    - type: Physics
-      canCollide: False
-    - type: InsideEntityStorage
-  - uid: 6640
-    components:
-    - type: Transform
-      parent: 6630
-    - type: Physics
-      canCollide: False
-    - type: InsideEntityStorage
-  - uid: 6641
-    components:
-    - type: Transform
-      parent: 6630
-    - type: Physics
-      canCollide: False
-    - type: InsideEntityStorage
 - proto: Mirror
   entities:
   - uid: 12702
@@ -102069,20 +102030,6 @@ entities:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 28.5,-13.5
-      parent: 2
-- proto: SignDetective
-  entities:
-  - uid: 14714
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 44.5,34.5
-      parent: 2
-  - uid: 14715
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 38.5,34.5
       parent: 2
 - proto: SignDirectionalBar
   entities:

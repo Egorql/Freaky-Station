@@ -44229,17 +44229,6 @@ entities:
     - type: Transform
       pos: 18.515802,45.43524
       parent: 2
-- proto: ClothingMultipleHeadphones
-  entities:
-  - uid: 6095
-    components:
-    - type: MetaData
-      desc: Старинные наушники, у которых даже есть штекер mini-jack, идеально подходящий для компактного магнитофона.
-    - type: Transform
-      parent: 6094
-    - type: Physics
-      canCollide: False
-    - type: InsideEntityStorage
 - proto: ClothingNeckCloakAdmin
   entities:
   - uid: 6050
@@ -96818,20 +96807,6 @@ entities:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: -24.679731,63.50393
-      parent: 2
-- proto: ShippingContainerKosmologistika
-  entities:
-  - uid: 12883
-    components:
-    - type: Transform
-      pos: 36.5,2.5
-      parent: 2
-- proto: ShippingContainerNakamura
-  entities:
-  - uid: 12884
-    components:
-    - type: Transform
-      pos: 36.5,-0.5
       parent: 2
 - proto: Shiv
   entities:
