@@ -1770,3 +1770,60 @@
       - !type:AdjustReagent
         reagent: MindbreakerToxin
         amount: -3.0
+
+        - type: reagent
+  id: Marlevine
+  name: reagent-name-marlevine
+  group: Medicine
+  desc: reagent-desc-marlevine
+  physicalDesc: reagent-physical-desc-opaque
+  flavor: medicine
+  color: "#ff0000"
+  metabolisms:
+    Medicine:
+      effects:
+      - !type:SuppressPain
+        amount: 1.2
+        time: 30 # it accumulated 1.2 * quantity and then exists for 30 seconds.
+      - !type:AdjustPainFeels
+        conditions:
+        - !type:ReagentThreshold
+          min: 15
+        amount: 0.04
+      - !type:HealthChange
+        damage:
+          groups:
+            Brute: -3 # Was 2, Buffed due to limb damage changes(GoobStation)
+      - !type:HealthChange
+        conditions:
+        - !type:OrganType # Goobstation - Yowie
+          type: Yowie
+          shouldHave: false
+        - !type:ReagentThreshold
+          min: 15
+        damage:
+          types:
+            Asphyxiation: 2
+            Poison: 2
+      - !type:ChemVomit
+        conditions:
+        - !type:OrganType # Goobstation - Yowie
+          type: Yowie
+          shouldHave: false
+        - !type:ReagentThreshold
+          min: 30
+        probability: 0.02
+      - !type:Jitter
+        conditions:
+        - !type:ReagentThreshold
+          min: 15
+      - !type:Drunk
+      - !type:AdjustConsciousness
+        conditions:
+        - !type:ReagentThreshold
+          min: 10
+        allowNewModifiers: true
+        modifierType: Pain
+        identifier: Suffocation
+        amount: -1.2
+        time: 12
