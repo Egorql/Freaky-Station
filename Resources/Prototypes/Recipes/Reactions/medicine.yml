@@ -704,3 +704,15 @@
       amount: 1
   products:
     Haloperidol: 5
+
+- type: reaction
+  id: Marlevine
+  reactants:
+    Bicaridine:
+      amount: 1
+    TranexamicAcid:
+      amount: 2
+    Dexalin: 
+      amount: 2
+  products:
+    Marlevine: 5
