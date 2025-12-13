@@ -427,12 +427,8 @@ public sealed class RCDSystem : EntitySystem
     private bool IsConstructionLocationValid(EntityUid uid, RCDComponent component, EntityUid gridUid, MapGridComponent mapGrid, TileRef tile, Vector2i position, EntityUid user, bool popMsgs = true)
     {
         var prototype = _protoManager.Index(component.ProtoId);
-<<<<<<< HEAD
-       // var constructionPrototype = prototype.Prototype != null ? _protoManager.Index(prototype.Prototype) : null; // Goobstation
-=======
         if (prototype.Mode == RcdMode.ConstructObject && prototype.Prototype != null) // Goobstation
             _protoManager.Index(prototype.Prototype); // Goobstation
->>>>>>> f13eb5fed3ebdbdc1bf0e535f33e3888670532b9
 
         // Check rule: Must build on empty tile
         if (prototype.ConstructionRules.Contains(RcdConstructionRule.MustBuildOnEmptyTile) && !tile.Tile.IsEmpty)
