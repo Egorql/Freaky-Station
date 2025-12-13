@@ -15,6 +15,9 @@ using Content.Client.UserInterface.Systems.Ghost;
 using Content.Shared.Ghost;
 using Content.Client.Ghost;
 using Content.Client.UserInterface.Systems.Ghost;
+using Content.Client.ADT.Roadmap;
+using Content.Goobstation.Client.Patron;
+
 namespace Content.Client.Lobby.UI
 
 {
@@ -49,7 +52,9 @@ namespace Content.Client.Lobby.UI
             CharacterSetup.OnPressed += _ => SwitchState(LobbyGuiState.CharacterSetup);
             Rules.OnPressed += _ => new RulesAndInfoWindow().Open();
             Guidebook.OnPressed += _ => UserInterfaceManager.GetUIController<GuidebookUIController>().ToggleGuidebook();
-            Changelog.OnPressed += _ => UserInterfaceManager.GetUIController<ChangelogUIController>().ToggleWindow();
+            // Changelog.OnPressed += _ => UserInterfaceManager.GetUIController<ChangelogUIController>().ToggleWindow();
+
+            RoadmapButton.OnPressed += _ => UserInterfaceManager.GetUIController<RoadmapUIController>().ToggleRoadmap();
         }
 
         public void SwitchState(LobbyGuiState state)

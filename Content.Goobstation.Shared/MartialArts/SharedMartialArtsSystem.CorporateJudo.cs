@@ -90,12 +90,19 @@ public partial class SharedMartialArtsSystem
             || !TryComp(target, out StatusEffectsComponent? status))
             return;
 
-        _stun.TrySlowdown(target, TimeSpan.FromSeconds(5), true, 0.5f, 0.5f, status);
+        _stun.TrySlowdown(target, args.Time, true, args.SpeedMultiplier, args.SpeedMultiplier, status);
+
+        if (_newStatus.TryUpdateStatusEffectDuration(target, args.StatusEffectProto, out var effect, args.Time) &&
+            TryComp(effect, out StaminaResistanceModifierStatusEffectComponent? effectComp))
+        {
+            effectComp.Modifier *= args.StaminaResistanceModifier;
+            Dirty(effect.Value, effectComp);
+        }
 
         _stamina.TakeStaminaDamage(target, proto.StaminaDamage, applyResistances: true);
 
         _audio.PlayPvs(new SoundPathSpecifier("/Audio/Weapons/genhit3.ogg"), target);
-        ComboPopup(ent, target, proto.Name);
+        ComboPopup(ent, target, proto.ID); // CorvaxGoob-Localization // proto.Name -> proto.ID
         ent.Comp.LastAttacks.Clear();
     }
 
@@ -121,7 +128,7 @@ public partial class SharedMartialArtsSystem
         DoDamage(ent, target, proto.DamageType, proto.ExtraDamage, out _);
 
         _audio.PlayPvs(new SoundPathSpecifier("/Audio/Weapons/genhit3.ogg"), target);
-        ComboPopup(ent, target, proto.Name);
+        ComboPopup(ent, target, proto.ID); // CorvaxGoob-Localization // proto.Name -> proto.ID
         ent.Comp.LastAttacks.Clear();
     }
 
@@ -147,7 +154,7 @@ public partial class SharedMartialArtsSystem
         _pulling.TryStopPull(target, pullable, ent, true);
 
         _audio.PlayPvs(new SoundPathSpecifier("/Audio/Weapons/genhit3.ogg"), target);
-        ComboPopup(ent, target, proto.Name);
+        ComboPopup(ent, target, proto.ID); // CorvaxGoob-Localization // proto.Name -> proto.ID
         ent.Comp.LastAttacks.Clear();
     }
 
@@ -181,7 +188,7 @@ public partial class SharedMartialArtsSystem
         _stun.TryKnockdown(target, knockdownTime, true, proto.DropHeldItemsBehavior);
 
         _audio.PlayPvs(new SoundPathSpecifier("/Audio/Weapons/genhit3.ogg"), target);
-        ComboPopup(ent, target, proto.Name);
+        ComboPopup(ent, target, proto.ID); // CorvaxGoob-Localization // proto.Name -> proto.ID
         ent.Comp.LastAttacks.Clear();
     }
 
@@ -198,13 +205,17 @@ public partial class SharedMartialArtsSystem
         _stamina.TakeStaminaDamage(target, proto.StaminaDamage, applyResistances: true);
 
         _pulling.TryStopPull(target, pullable, ent, true);
-        _grabThrowing.Throw(target, ent, _transform.GetMapCoordinates(ent).Position - _transform.GetMapCoordinates(target).Position, 5);
+        _grabThrowing.Throw(target,
+            ent,
+            _transform.GetMapCoordinates(ent).Position - _transform.GetMapCoordinates(target).Position,
+            5,
+            behavior: proto.DropHeldItemsBehavior);
 
         _status.TryRemoveStatusEffect(ent, "KnockedDown");
         _standingState.Stand(ent);
 
         _audio.PlayPvs(new SoundPathSpecifier("/Audio/Weapons/genhit3.ogg"), target);
-        ComboPopup(ent, target, proto.Name);
+        ComboPopup(ent, target, proto.ID); // CorvaxGoob-Localization // proto.Name -> proto.ID
         ent.Comp.LastAttacks.Clear();
     }
 
@@ -222,7 +233,7 @@ public partial class SharedMartialArtsSystem
         _pulling.TryStopPull(target, pullable, ent, true);
 
         _audio.PlayPvs(new SoundPathSpecifier("/Audio/Weapons/genhit3.ogg"), target);
-        ComboPopup(ent, target, proto.Name);
+        ComboPopup(ent, target, proto.ID); // CorvaxGoob-Localization // proto.Name -> proto.ID
         ent.Comp.LastAttacks.Clear();
     }
 

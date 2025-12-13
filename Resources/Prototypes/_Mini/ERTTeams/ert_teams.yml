@@ -5,7 +5,7 @@
       name: ert-team-name-amber
       announcementAfterCall: ert-call-announcement-amber
       shuttle: /Maps/Shuttles/ERT/amber.yml
-      timeToSpawn: 60 # 5 min
+      timeToSpawn: 60 # 1 min
       humansList:
         RandomHumanoidSpawnerERTLeader: 1
         RandomHumanoidSpawnerERTSecurity: 1
@@ -13,12 +13,12 @@
         RandomHumanoidSpawnerERTJanitor: 1
         RandomHumanoidSpawnerERTEngineer: 1
       mustApproveAdmin: false
-      requiredRoundDuration: 10 # min
+      requiredRoundDuration: 15 # 15 min
     red:
       name: ert-team-name-red
       announcementAfterCall: ert-call-announcement-red
       shuttle: /Maps/Shuttles/ERT/red.yml
-      timeToSpawn: 60 # 5 min
+      timeToSpawn: 60 # 1 min
       humansList:
         RandomHumanoidSpawnerERTLeaderEVA: 1
         RandomHumanoidSpawnerERTSecurityEVA: 3
@@ -58,4 +58,4 @@
       humansList:
         RandomHumanoidSpawnerCBURNUnit: 8
       mustApproveAdmin: true
-      requiredRoundDuration: 10 # min
+      requiredRoundDuration: 15 # min

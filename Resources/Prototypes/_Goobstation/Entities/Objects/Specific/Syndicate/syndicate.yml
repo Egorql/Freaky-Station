@@ -12,7 +12,7 @@
   components:
   - type: Store
     balance:
-      Telecrystal: 350
+      Telecrystal: 60
   - type: Tag
     tags:
     - NukeOpsUplink

@@ -153,9 +153,6 @@
   description: uplink-c20r-bundle-desc
   icon: { sprite: /Textures/Objects/Weapons/Guns/SMGs/c20r.rsi, state: icon }
   productEntity: ClothingBackpackDuffelSyndicateFilledSMG
-  discountCategory: veryRareDiscounts
-  discountDownTo:
-    Telecrystal: 10
   cost:
     Telecrystal: 20
   categories:
@@ -212,18 +209,18 @@
   categories:
   - TypanUplinkExplosives
 
-- type: listing
-  id: TypanUplinkSingularityGrenade
-  name: uplink-singularity-grenade-name
-  description: uplink-singularity-grenade-desc
-  productEntity: SingularityGrenade
-  discountCategory: usualDiscounts
-  discountDownTo:
-    Telecrystal: 1
-  cost:
-    Telecrystal: 2
-  categories:
-    - TypanUplinkDisruption
+# - type: listing
+#   id: TypanUplinkSingularityGrenade
+#   name: uplink-singularity-grenade-name
+#   description: uplink-singularity-grenade-desc
+#   productEntity: SingularityGrenade
+#   discountCategory: usualDiscounts
+#   discountDownTo:
+#     Telecrystal: 1
+#   cost:
+#     Telecrystal: 2
+#   categories:
+#     - TypanUplinkDisruption
 
 - type: listing
   id: TypanUplinkWhiteholeGrenade
@@ -279,9 +276,9 @@
 
 - type: listing
   id: TypanUplinkPistol9mmMagazineHigh
-  name: uplink-pistol-magazine-high-name
-  description: uplink-pistol-magazine-high-desc
-  icon: { sprite: /Textures/Objects/Weapons/Guns/Ammunition/Magazine/Pistol/pistol_high_capacity_mag.rsi, state: red-icon }
+  name: uplink-highcap-pistol-mag-name
+  description: uplink-highcap-pistol-mag-desc
+  icon: { sprite: /Textures/Objects/Weapons/Guns/Ammunition/Magazine/Pistol/pistol_high_capacity_mag.rsi, state: base }
   productEntity: MagazinePistolHighCapacity
   discountCategory: usualDiscounts
   discountDownTo:
@@ -531,7 +528,7 @@
   discountDownTo:
     Telecrystal: 1
   cost:
-    Telecrystal: 20
+    Telecrystal: 4
   categories:
   - TypanUplinkDeception
 
@@ -843,20 +840,20 @@
   categories:
   - TypanUplinkDisruption
 
-- type: listing
-  id: TypanUplinkSurplusBundle
-  name: uplink-surplus-bundle-name
-  description: uplink-surplus-bundle-desc
-  productEntity: CrateSyndicateSurplusBundle
-  cost:
-    Telecrystal: 50
-  categories:
-  - TypanUplinkDisruption
-  conditions:
-  - !type:BuyerWhitelistCondition
-    blacklist:
-      components:
-      - SurplusBundle
+# - type: listing
+#   id: TypanUplinkSurplusBundle
+#   name: uplink-surplus-bundle-name
+#   description: uplink-surplus-bundle-desc
+#   productEntity: CrateSyndicateSurplusBundle
+#   cost:
+#     Telecrystal: 50
+#   categories:
+#   - TypanUplinkDisruption
+#   conditions:
+#   - !type:BuyerWhitelistCondition
+#     blacklist:
+#       components:
+#       - SurplusBundle
 
 - type: listing
   id: TypanUplinkSuperSurplusBundle
@@ -1206,6 +1203,20 @@
   - TypanUplinkWearables
 
 - type: listing
+  id: TypanUplinkMagbootsAdv1
+  name: Кроваво-чёрные магнитные ботинки
+  description: Современные магнитные ботинки, которые немного ускоряют своего владельца. Сделано горлаксом для горлакса. Имеют увеличенный обьем.
+  icon: { sprite: /Textures/_Mini/Clothing/Shoes/Boots/advanced.rsi, state: icon }
+  productEntity: ClothingShoesBootsMagAdvSynd
+  discountCategory: rareDiscounts
+  discountDownTo:
+    Telecrystal: 6
+  cost:
+    Telecrystal: 8
+  categories:
+  - UplinkWearables
+
+- type: listing
   id: TypanUplinkMagbootsAdv
   name: Кроваво-чёрные магнитные ботинки
   description: Современные магнитные ботинки, которые немного ускоряют своего владельца. Сделано горлаксом для горлакса. Имеют увеличенный обьем.
@@ -1217,14 +1228,14 @@
   cost:
     Telecrystal: 8
   categories:
-  - TypanUplinkWearables
+  - UplinkWearables
 
 - type: listing
   id: TypanUplinkHardsuitSyndie
-  name: Скафандр СБ синдиката
+  name: Скафандр патрульного Синдиката
   description: Специальный костюм для работ в самых "горячих" баталиях.
-  icon: { sprite: _Mini/Clothing/OuterClothing/syndie.rsi, state: icon }
-  productEntity: ClothingOuterHardsuitCapSindi
+  icon: { sprite: _Mini/Clothing/OuterClothing/Hardsuits/typan_patrol.rsi, state: icon }
+  productEntity: ClothingOuterHardsuitTypanPatrol
   discountCategory: veryRareDiscounts
   discountDownTo:
     Telecrystal: 4
@@ -1684,7 +1695,7 @@
   id: TypanUplinkXenoArtifact
   name: Случайный артефакт
   description: Случайный артефакт на случай, если ваши внезапно кончились.
-  productEntity: MediumXenoArtifact
+  productEntity: ComplexXenoArtifact
   discountCategory: usualDiscounts
   discountDownTo:
     Telecrystal: 8
@@ -1810,3 +1821,175 @@
     Telecrystal: 8
   categories:
   - TypanUplinkMaterials
+
+# - type: listing
+#   id: UplinkRifleAK
+#   name: АКМС
+#   description: Культовое оружие всех войн. Использует патроны калибра .30 винтовочный
+#   productEntity: WeaponRifleAK
+#   cost:
+#     Telecrystal: 12
+#   categories:
+#   - UplinkWeaponry
+
+- type: listing
+  id: UplinkMagazineRifleAK
+  name: магазин (.30 винтовочные)
+  description:  uplink-light-rifle-magazine-ak-desc
+  icon: { sprite: Objects/Weapons/Guns/Ammunition/Magazine/LightRifle/light_rifle_mag.rsi, state: base }
+  productEntity: MagazineLightRifle
+  cost:
+    Telecrystal: 1
+  categories:
+  - UplinkAmmo
+
+- type: listing
+  id: UplinkRifleAKBundle
+  name: АКМС
+  description: Культовое оружие всех войн. Использует патроны калибра .30 винтовочный
+  icon: { sprite: /Textures/Objects/Weapons/Guns/Rifles/ak.rsi, state: icon }
+  productEntity: ClothingBackpackDuffelSyndicateFilledAK
+  cost:
+    Telecrystal: 12
+  categories:
+  - UplinkWeaponry
+
+- type: entity
+  parent: ClothingBackpackDuffelSyndicateBundle
+  id: ClothingBackpackDuffelSyndicateFilledAK
+  name: Набор АКМС
+  description: "Набор, содержащий АКМС и три магазина к нему"
+  components:
+  - type: StorageFill
+    contents:
+      - id: WeaponRifleAk
+      - id: MagazineLightRifle
+        amount: 3
+
+- type: listing
+  id: UplinkC20RBundle
+  name: uplink-c20r-bundle-name
+  description: uplink-c20r-bundle-desc
+  icon: { sprite: /Textures/Objects/Weapons/Guns/SMGs/c20r.rsi, state: icon }
+  productEntity: ClothingBackpackDuffelSyndicateFilledSMG
+  cost:
+    Telecrystal: 12
+  categories:
+  - UplinkWeaponry
+
+- type: listing
+  id: TypanUplinkHardsuitCybersunStealth
+  name: uplink-hardsuit-cybersun-stealth-name
+  description: uplink-hardsuit-cybersun-stealth-desc
+  icon: { sprite: /Textures/_Goobstation/Clothing/OuterClothing/Hardsuits/cybersunstealth.rsi, state: icon }
+  productEntity: ClothingBackpackDuffelSyndicateStealthHardsuitBundle
+  cost:
+    Telecrystal: 14
+  categories:
+  - TypanUplinkWearables
+
+- type: listing
+  id: TypanUplinkWSPR
+  name: uplink-WSPR-name
+  description: uplink-WSPR-desc
+  productEntity: WeaponRifleWSPR
+  cost:
+    Telecrystal: 20
+  categories:
+  - TypanUplinkWeaponry
+
+- type: listing
+  id: TypanUplinkWeaponRifleBurner
+  name: uplink-weapon-burner-name
+  description: uplink-weapon-burner-desc
+  icon: { sprite: /Textures/_Goobstation/Objects/Weapons/Guns/Rifles/burner.rsi, state: icon }
+  productEntity: WeaponRifleBurner
+  cost:
+    Telecrystal: 32
+  categories:
+  - TypanUplinkWeaponry
+
+- type: listing
+  id: TypanUplinkDualettaBundle
+  name: uplink-dualetta-bundle-name
+  description: uplink-dualetta-bundle-desc
+  icon: { sprite: /Textures/_Goobstation/Objects/Weapons/Guns/Pistols/Dualetta.rsi, state: icon }
+  productEntity: BriefcaseSyndieDualettaBundleFilled
+  cost:
+    Telecrystal: 20
+  categories:
+  - TypanUplinkWeaponry
+
+- type: listing
+  id: TypanUplinkWeaponM7S
+  name: uplink-m7s-name
+  description: uplink-m7s-desc
+  productEntity: WeaponSubMachineGunM7S
+  cost:
+    Telecrystal: 22
+  categories:
+    -  TypanUplinkWeaponry
+
+- type: listing
+  id: TypanUplinkWeaponCombatShotgun
+  name: uplink-combat-shotgun-name
+  description: uplink-combat-shotgun-desc
+  productEntity: WeaponShotgunCombat
+  cost:
+    Telecrystal: 22
+  categories:
+    -  TypanUplinkWeaponry
+
+- type: listing
+  id: TypanUplinkCaselessRifleMag
+  name: uplink-rifle-caseless-mag-name
+  description: uplink-rifle-caseless-mag-desc
+  icon: { sprite: /Textures/Objects/Weapons/Guns/Ammunition/Magazine/CaselessRifle/caseless_rifle_mag.rsi, state: base }
+  productEntity: MagazineCaselessRifle
+  cost:
+    Telecrystal: 2 # Much more damage than C20 or M90 (780, 98 dmg per TC), but hollow-point
+  categories:
+  - TypanUplinkAmmo
+
+- type: listing
+  id: TypanUplinkMagazineM7S
+  name: uplink-m7s-mag-name
+  description: uplink-m7s-mag-desc
+  icon: { sprite: _Goobstation/Objects/Weapons/Guns/Ammunition/Magazine/M7S_magazine.rsi, state: icon }
+  productEntity: MagazineLowCaliberM7S
+  cost:
+    Telecrystal: 3 # 105 dmg per TC which seems huge, but you're missing half of your shots
+  categories:
+  - TypanUplinkAmmo
+
+- type: listing
+  id: TypanUplinkMagazineHighCaliber
+  name: uplink-high-caliber-magazine-name
+  description: uplink-high-caliber-magazine-desc
+  icon: { sprite: _Goobstation/Objects/Weapons/Guns/Ammunition/Magazine/heavy_rifle_mags.rsi, state: base }
+  productEntity: MagazineHighCaliber
+  cost:
+    Telecrystal: 2
+  categories:
+  - TypanUplinkAmmo
+
+- type: listing
+  id: TypanUplinkDartGun
+  name: uplink-dart-gun-name
+  description: uplink-dart-gun-desc
+  productEntity: DartGun
+  cost:
+    Telecrystal: 10
+  categories:
+    -  TypanUplinkWeaponry
+
+- type: listing
+  id: TypanUplinkMagazinePistolCaselessRifleSAPHE
+  name: uplink-pistol-magazine-caseless-saphe-name
+  description: uplink-pistol-magazine-caseless-saphe-desc
+  icon: { sprite: /Textures/Objects/Weapons/Guns/Ammunition/Magazine/CaselessRifle/caseless_pistol_mag.rsi, state: yellow-icon }
+  productEntity: MagazinePistolCaselessRifleSAPHE
+  cost:
+    Telecrystal: 3 # 23 damage but ~1/3 of a rifle magazine and semi armor piercing, remember the damage is 13 pierce 10.5 explosive
+  categories:
+  - TypanUplinkAmmo

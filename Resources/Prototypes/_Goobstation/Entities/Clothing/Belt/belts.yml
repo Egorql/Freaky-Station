@@ -159,6 +159,8 @@
         - Bloodpack
         - Gauze
         - Ointment
+        - CigPack
+        - Cigarette
       components:
         - Pill
         - Hypospray
@@ -185,7 +187,7 @@
   - type: ItemSlots
     slots:
       item:
-        name: Sabre
+        # name: Sabre # CorvaxGoob-Loc-in-UI
         insertVerbText: sheath-insert-verb
         ejectVerbText: sheath-eject-verb
         insertSound: /Audio/Items/sheath.ogg
@@ -234,7 +236,7 @@
   - type: ItemSlots
     slots:
       item:
-        name: Handgun
+        # name: Handgun # CorvaxGoob-Loc-in-UI
         whitelist:
           tags:
           - Sidearm

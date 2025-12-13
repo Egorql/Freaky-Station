@@ -1,0 +1,15 @@
+- type: entity
+  id: ActionHardsuitSaveDNA
+  name: Записать ДНК
+  description: Скафандр сохранит ваше ДНК и детонирует если кто-то с другим ДНК его наденет.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Action
+    itemIconStyle: BigAction
+    icon:
+      sprite: _Mini/Interface/Actions/action_hardsuit_save_dna.rsi
+      state: action_hardsuit_save_dna
+    priority: -20
+    useDelay: 10
+  - type: InstantAction
+    event: !type:StoreDNAActionEvent

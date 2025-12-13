@@ -30,7 +30,7 @@
   components:
     - type: OreVein
       oreChance: 1.0
-      currentOre: oreBSCrystal
+      currentOre: OreBSCrystal
     - type: Sprite
       layers:
         - state: rock
@@ -45,7 +45,7 @@
   components:
     - type: OreVein
       oreChance: 1.0
-      currentOre: oreBSCrystal
+      currentOre: OreBSCrystal
     - type: Sprite
       layers:
         - state: rock
@@ -60,7 +60,7 @@
   components:
     - type: OreVein
       oreChance: 1.0
-      currentOre: oreBSCrystal
+      currentOre: OreBSCrystal
     - type: Sprite
       layers:
         - state: rock
@@ -75,7 +75,7 @@
   components:
     - type: OreVein
       oreChance: 1.0
-      currentOre: oreBSCrystal
+      currentOre: OreBSCrystal
     - type: Sprite
       layers:
         - state: rock
@@ -90,7 +90,7 @@
   components:
     - type: OreVein
       oreChance: 1.0
-      currentOre: oreBSCrystal
+      currentOre: OreBSCrystal
     - type: Sprite
       layers:
         - state: rock
@@ -105,7 +105,7 @@
   components:
     - type: OreVein
       oreChance: 1.0
-      currentOre: oreBSCrystal
+      currentOre: OreBSCrystal
     - type: Sprite
       layers:
         - state: rock
@@ -120,7 +120,7 @@
   components:
     - type: OreVein
       oreChance: 1.0
-      currentOre: oreBSCrystal
+      currentOre: OreBSCrystal
     - type: Sprite
       layers:
         - state: rock
@@ -135,7 +135,7 @@
   components:
     - type: OreVein
       oreChance: 1.0
-      currentOre: oreBSCrystal
+      currentOre: OreBSCrystal
     - type: Sprite
       layers:
         - state: rock

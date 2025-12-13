@@ -18,4 +18,16 @@
   requirements:
   - !type:OverallPlaytimeRequirement
     time: 54000 # 15h
+  - !type:SpeciesRequirement # CorvaxGoob-Species
+    inverted: true
+    species:
+    - Abductor
+  guides: [ Heretics ]
+
+- type: antag
+  id: Ghoul
+  name: roles-antag-ghoul-name
+  antagonist: true
+  setPreference: false
+  objective: roles-antag-ghoul-description
   guides: [ Heretics ]

@@ -554,7 +554,7 @@ VehicleSecwayStealObjective: null
 #VehicleKeyJanicart: null Goobstation - Re-add vehicles
 #VehicleKeySecway: null Goobstation - Re-add vehicles
 #VehicleKeyATV: null Goobstation - Re-add vehicles
-VehicleKeySkeleton: null
+VehicleKeySkeleton: null 
 #VehicleKeySyndicateSegway: null Goobstation - Re-add vehicles
 #VehicleKeySkeletonMotorcycle: null Corvax Goobstation - Re-add vehicles
 #VehicleSecway: null Goobstation - Re-add vehicles
@@ -642,8 +642,9 @@ RPED: null
 TraversalDistorterMachineCircuitboard: null
 MachineTraversalDistorter: null
 # These are technically not equivalent, but it probably makes more sense to replace any existing SCAF stuff with SOME kind of armor, instead of just deleting it outright.
-ClothingHeadHelmetScaf: ClothingHeadHelmetBasic
-ClothingOuterArmorScaf: ClothingOuterArmorBasic
+# Commented by CorvaxGoob
+# ClothingHeadHelmetScaf: ClothingHeadHelmetBasic
+# ClothingOuterArmorScaf: ClothingOuterArmorBasic
 
 # 2024-03-31
 ClothingNeckFlowerWreath: ClothingHeadHatFlowerWreath

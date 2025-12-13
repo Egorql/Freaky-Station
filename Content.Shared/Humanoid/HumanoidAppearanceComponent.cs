@@ -6,6 +6,8 @@
 // SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
 // SPDX-FileCopyrightText: 2025 MarkerWicker <markerWicker@proton.me>
 // SPDX-FileCopyrightText: 2025 SlamBamActionman <83650252+SlamBamActionman@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2025 Ted Lukin <66275205+pheenty@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2025 Zekins <zekins3366@gmail.com>
 // SPDX-FileCopyrightText: 2025 gluesniffler <159397573+gluesniffler@users.noreply.github.com>
 // SPDX-FileCopyrightText: 2025 gluesniffler <linebarrelerenthusiast@gmail.com>
 // SPDX-FileCopyrightText: 2025 paige404 <59348003+paige404@users.noreply.github.com>
@@ -46,6 +48,10 @@ public sealed partial class HumanoidAppearanceComponent : Component
 
     [DataField, AutoNetworkedField]
     public int Age = 18;
+
+    // CorvaxGoob-Revert : DB conflicts
+    // [DataField] // Goob Station - Barks
+    // public ProtoId<BarkPrototype> BarkVoice { get; set; } = SharedHumanoidAppearanceSystem.DefaultBarkVoice; // Goob Station - Barks
 
     /// <summary>
     ///     Any custom base layers this humanoid might have. See:
@@ -158,11 +164,12 @@ public sealed partial class HumanoidAppearanceComponent : Component
 [Serializable, NetSerializable]
 public readonly partial struct CustomBaseLayerInfo
 {
-    public CustomBaseLayerInfo(string? id, Color? color = null)
+    public CustomBaseLayerInfo(string? id, Color? color = null, string? shader = null) // Goobstation edit
     {
         DebugTools.Assert(id == null || IoCManager.Resolve<IPrototypeManager>().HasIndex<HumanoidSpeciesSpriteLayer>(id));
         Id = id;
         Color = color;
+        Shader = shader; // Goobtation
     }
 
     /// <summary>
@@ -176,4 +183,8 @@ public readonly partial struct CustomBaseLayerInfo
     /// </summary>
     [DataField]
     public Color? Color { get; init; }
+
+    // Goobstation
+    [DataField]
+    public string? Shader { get; init; }
 }

@@ -134,6 +134,7 @@ using Content.Client.Fullscreen;
 using Content.Client.GameTicking.Managers;
 using Content.Client.GhostKick;
 using Content.Client.Guidebook;
+using Content.Client._Mini.CharacterBlock;
 using Content.Client.Launcher;
 using Content.Client.Mapping;
 using Content.Client.Parallax.Managers;
@@ -192,6 +193,7 @@ namespace Content.Client.IoC
             collection.Register<LinkAccountManager>(); // RMC14
             CorvaxGoob-Coins-end */
             collection.Register<ClientsidePlaytimeTrackingManager>();
+            collection.Register<CharacterBlockManager>(); // edit
         }
     }
 }

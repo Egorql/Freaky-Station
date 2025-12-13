@@ -104,7 +104,7 @@ public sealed class VocalSystem : EntitySystem
         args.Handled = true;
     }
 
-    private bool TryPlayScreamSound(EntityUid uid, VocalComponent component)
+    public bool TryPlayScreamSound(EntityUid uid, VocalComponent component)
     {
         // Goobstation start
         var getSoundEv = new GetEmoteSoundsEvent();

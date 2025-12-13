@@ -44,7 +44,7 @@ public sealed partial class CCVars
     ///     Link to Patreon. Not shown in the launcher currently.
     /// </summary>
     public static readonly CVarDef<string> InfoLinksPatreon =
-        CVarDef.Create("infolinks.patreon", "", CVar.SERVER | CVar.REPLICATED);
+        CVarDef.Create("infolinks.patreon", "https://boosty.to/mini-station", CVar.SERVER | CVar.REPLICATED);
 
     /// <summary>
     ///     Link to the bug report form.

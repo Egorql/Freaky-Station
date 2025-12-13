@@ -1,11 +1,19 @@
 <p align="center"> <img alt="Space Station 14" width="880" height="300" src="https://raw.githubusercontent.com/space-wizards/asset-dump/de329a7898bb716b9d5ba9a0cd07f38e61f1ed05/github-logo.svg" /></p>
 
+<<<<<<< HEAD
 Братаааан, да это же Freaky Station, который является форком Mini Station, который является форком CorvaxGoob, который является форком Goob Station, который является форком Space Station 14.
 
 ## Ссылки
 
 [Discord](https://discord.gg/euHpTeVYF8) | [Текущая Вики](https://wiki.station14.ru) | [Steam](https://store.steampowered.com/app/1255460/Space_Station_14/) | [Клиент без Steam](https://spacestation14.io/about/nightlies/) | [Официальный репозиторий](https://github.com/space-wizards/space-station-14) | [Основной репозиторий Goob Station](https://github.com/Goob-Station/Goob-Station) | [Репозиторий Mini Station](https://github.com/Goob-Station/Goob-Station)
 
+=======
+Мини-станция - это активно модифицируемый и основывающийся форк от всем изестного репозитория Goob Station, направленный на его перевод и создание собственного контента.
+
+## Ссылки
+
+[Наш Discord](https://discord.gg/mini-station) | [Наша Вики](https://mini-station-14.ru/) | [Steam](https://store.steampowered.com/app/1255460/Space_Station_14/) | [Клиент без Steam](https://spacestation14.io/about/nightlies/) | [Основной репозиторий](https://github.com/space-wizards/space-station-14) | [Основной репозиторий Goob Station](https://github.com/Goob-Station/Goob-Station)
+>>>>>>> f13eb5fed3ebdbdc1bf0e535f33e3888670532b9
 
 ## Документация
 
@@ -16,11 +24,11 @@
 Если Вы желаете помочь в улучшении репозитория, решением проблем или создания нового контента, мы рады принять вклад от любого человека. Заходите в Discord, если хотите помочь. Не бойтесь просить о помощи!
 Только убедитесь, что ваши изменения и PRы соответствуют [руководству по контрибьюту](https://docs.spacestation14.com/en/general-development/codebase-info/pull-request-guidelines.html).
 
-## Сборка
+## Запуск
 
 1. Склонируйте этот репозиторий локально
-2. Запустите `RUN_THIS.py` для инициализации подмодулей и скачивания движка.
-3. Скомпилируйте проект.
+2. Запустите `buildAllRelease.bat` из директории `Scripts/bat` для инициализации подмодулей и скачивания движка.
+3. Запустите `runQuickAll.bat` из директории `Scripts/bat` для запуска локального сервера.
 
 [Более подробная инструкция по запуску проекта.](https://docs.spacestation14.com/en/general-development/setup.html)
 

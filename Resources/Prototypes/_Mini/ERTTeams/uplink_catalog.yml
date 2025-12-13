@@ -33,19 +33,6 @@
 #    - Botanist
 #    - Bartender
 
-- type: listing
-  id: ADTUplinkSegway
-  name: uplink-segway-name
-  description: uplink-segway-desc
-  icon:
-    sprite: Objects/Vehicles/syndicatesegway.rsi
-    state: vehicle
-  productEntity: ADTVehicleSyndicateSegway
-  cost:
-    Telecrystal: 5
-  categories:
-  - UplinkPointless
-
 #- type: listing
 #  id: ADTUplinkSyndieCloak
 #  name: uplink-syndiecloak-name
@@ -110,16 +97,6 @@
 #    Telecrystal: 4
 #  categories:
 #    - UplinkPointless
-
-- type: listing
-  id: ADTUplinkSyndicateHelmet
-  name: uplink-syndicate-helmet-name
-  description: uplink-syndicate-helmet-desc
-  productEntity: ClothingHeadHelmetSwatSyndicate
-  cost:
-    Telecrystal: 2
-  categories:
-    - UplinkWearables
 
 # Отключено до починки импланта
 # - type: listing

@@ -1,147 +1,147 @@
-# Typan Selectable Battery
-- type: entity
-  id: PlayerBorgTypanBattery
-  parent: BorgChassisTypanSelectable
-  suffix: Тайпан, Батарея
-  components:
-  - type: ContainerFill
-    containers:
-      borg_brain:
-      - PositronicBrain
-  - type: ItemSlots
-    slots:
-      cell_slot:
-        name: power-cell-slot-component-slot-name-default
-        startingItem: PowerCellMedium
-  - type: StartingMindRole
-    mindRole: MindRoleSiliconBrain
-    silent: true
+# # Typan Selectable Battery
+# - type: entity
+#   id: PlayerBorgTypanBattery
+#   parent: BorgChassisTypanSelectable
+#   suffix: Тайпан, Батарея
+#   components:
+#   - type: ContainerFill
+#     containers:
+#       borg_brain:
+#       - PositronicBrain
+#   - type: ItemSlots
+#     slots:
+#       cell_slot:
+#         name: power-cell-slot-component-slot-name-default
+#         startingItem: PowerCellMedium
+#   - type: StartingMindRole
+#     mindRole: MindRoleSiliconBrain
+#     silent: true
 
-# Typan Generic Battery
-- type: entity
-  id: PlayerBorgTypanGenericBattery
-  parent: [BorgChassisTypanGeneric, BorgChassisGeneric]
-  suffix: Тайпан, Батарея
-  components:
-  - type: ItemSlots
-    slots:
-      cell_slot:
-        name: power-cell-slot-component-slot-name-default
-        startingItem: PowerCellMedium
-  - type: StartingMindRole
-    mindRole: MindRoleSiliconBrain
-    silent: true
+# # Typan Generic Battery
+# - type: entity
+#   id: PlayerBorgTypanGenericBattery
+#   parent: [BorgChassisTypanGeneric, BorgChassisGeneric]
+#   suffix: Тайпан, Батарея
+#   components:
+#   - type: ItemSlots
+#     slots:
+#       cell_slot:
+#         name: power-cell-slot-component-slot-name-default
+#         startingItem: PowerCellMedium
+#   - type: StartingMindRole
+#     mindRole: MindRoleSiliconBrain
+#     silent: true
 
-# Typan Engineer Battery
-- type: entity
-  id: PlayerBorgTypanEngineerBattery
-  parent: [BorgChassisTypanEngineer, BorgChassisEngineer]
-  suffix: Тайпан, Батарея
-  components:
-  - type: ContainerFill
-    containers:
-      borg_brain:
-      - PositronicBrain
-      borg_module:
-      - BorgModuleTool
-      - BorgModuleConstruction
-      - BorgModuleRCD
-      - BorgModuleCable
-  - type: ItemSlots
-    slots:
-      cell_slot:
-        name: power-cell-slot-component-slot-name-default
-        startingItem: PowerCellHigh
-  - type: StartingMindRole
-    mindRole: MindRoleSiliconBrain
-    silent: true
+# # Typan Engineer Battery
+# - type: entity
+#   id: PlayerBorgTypanEngineerBattery
+#   parent: [BorgChassisTypanEngineer, BorgChassisEngineer]
+#   suffix: Тайпан, Батарея
+#   components:
+#   - type: ContainerFill
+#     containers:
+#       borg_brain:
+#       - PositronicBrain
+#       borg_module:
+#       - BorgModuleTool
+#       - BorgModuleConstruction
+#       - BorgModuleRCD
+#       - BorgModuleCable
+#   - type: ItemSlots
+#     slots:
+#       cell_slot:
+#         name: power-cell-slot-component-slot-name-default
+#         startingItem: PowerCellHigh
+#   - type: StartingMindRole
+#     mindRole: MindRoleSiliconBrain
+#     silent: true
 
-# Typan Mining Battery
-- type: entity
-  id: PlayerBorgTypanMiningBattery
-  parent: [BorgChassisTypanMining, BorgChassisMining]
-  suffix: Тайпан, Батарея
-  components:
-  - type: ItemSlots
-    slots:
-      cell_slot:
-        name: power-cell-slot-component-slot-name-default
-        startingItem: PowerCellHyper
-  - type: StartingMindRole
-    mindRole: MindRoleSiliconBrain
-    silent: true
+# # Typan Mining Battery
+# - type: entity
+#   id: PlayerBorgTypanMiningBattery
+#   parent: [BorgChassisTypanMining, BorgChassisMining]
+#   suffix: Тайпан, Батарея
+#   components:
+#   - type: ItemSlots
+#     slots:
+#       cell_slot:
+#         name: power-cell-slot-component-slot-name-default
+#         startingItem: PowerCellHyper
+#   - type: StartingMindRole
+#     mindRole: MindRoleSiliconBrain
+#     silent: true
 
-# Typan Janitor Battery
-- type: entity
-  id: PlayerBorgTypanJanitorBattery
-  parent: [BorgChassisTypanJanitor, BorgChassisJanitor]
-  suffix: Тайпан, Батарея
-  components:
-  - type: ItemSlots
-    slots:
-      cell_slot:
-        name: power-cell-slot-component-slot-name-default
-        startingItem: PowerCellMedium
-  - type: StartingMindRole
-    mindRole: MindRoleSiliconBrain
-    silent: true
+# # Typan Janitor Battery
+# - type: entity
+#   id: PlayerBorgTypanJanitorBattery
+#   parent: [BorgChassisTypanJanitor, BorgChassisJanitor]
+#   suffix: Тайпан, Батарея
+#   components:
+#   - type: ItemSlots
+#     slots:
+#       cell_slot:
+#         name: power-cell-slot-component-slot-name-default
+#         startingItem: PowerCellMedium
+#   - type: StartingMindRole
+#     mindRole: MindRoleSiliconBrain
+#     silent: true
 
-# Typan Medical Battery
-- type: entity
-  id: PlayerBorgTypanMedicalBattery
-  parent: [BorgChassisTypanMedical, BorgChassisMedical]
-  suffix: Тайпан, Батарея
-  components:
-  - type: ItemSlots
-    slots:
-      cell_slot:
-        name: power-cell-slot-component-slot-name-default
-        startingItem: PowerCellHigh
-  - type: StartingMindRole
-    mindRole: MindRoleSiliconBrain
-    silent: true
+# # Typan Medical Battery
+# - type: entity
+#   id: PlayerBorgTypanMedicalBattery
+#   parent: [BorgChassisTypanMedical, BorgChassisMedical]
+#   suffix: Тайпан, Батарея
+#   components:
+#   - type: ItemSlots
+#     slots:
+#       cell_slot:
+#         name: power-cell-slot-component-slot-name-default
+#         startingItem: PowerCellHigh
+#   - type: StartingMindRole
+#     mindRole: MindRoleSiliconBrain
+#     silent: true
 
-# Typan Service Battery
-- type: entity
-  id: PlayerBorgTypanServiceBattery
-  parent: [BorgChassisTypanService, BorgChassisService]
-  suffix: Тайпан, Батарея
-  components:
-  - type: ContainerFill
-    containers:
-      borg_brain:
-      - PositronicBrain
-      borg_module:
-      - BorgModuleMusique
-      - BorgModuleService
-      - BorgModuleClowning
-  - type: ItemSlots
-    slots:
-      cell_slot:
-        name: power-cell-slot-component-slot-name-default
-        startingItem: PowerCellHigh
-  - type: StartingMindRole
-    mindRole: MindRoleSiliconBrain
-    silent: true
+# # Typan Service Battery
+# - type: entity
+#   id: PlayerBorgTypanServiceBattery
+#   parent: [BorgChassisTypanService, BorgChassisService]
+#   suffix: Тайпан, Батарея
+#   components:
+#   - type: ContainerFill
+#     containers:
+#       borg_brain:
+#       - PositronicBrain
+#       borg_module:
+#       - BorgModuleMusique
+#       - BorgModuleService
+#       - BorgModuleClowning
+#   - type: ItemSlots
+#     slots:
+#       cell_slot:
+#         name: power-cell-slot-component-slot-name-default
+#         startingItem: PowerCellHigh
+#   - type: StartingMindRole
+#     mindRole: MindRoleSiliconBrain
+#     silent: true
 
-# Typan Security Battery
-- type: entity
-  id: PlayerBorgTypanSecurityBattery
-  parent: BorgChassisTypanSecurity
-  suffix: Тайпан, Батарея
-  components:
-  - type: ContainerFill
-    containers:
-      borg_brain:
-      - PositronicBrain
-      borg_module:
-      - BorgModuleEsword
-      # - BorgModuleC20r
-  - type: ItemSlots
-    slots:
-      cell_slot:
-        name: power-cell-slot-component-slot-name-default
-        startingItem: PowerCellHyper
-  - type: StartingMindRole
-    mindRole: MindRoleSiliconBrain
-    silent: true
+# # Typan Security Battery
+# - type: entity
+#   id: PlayerBorgTypanSecurityBattery
+#   parent: BorgChassisTypanSecurity
+#   suffix: Тайпан, Батарея
+#   components:
+#   - type: ContainerFill
+#     containers:
+#       borg_brain:
+#       - PositronicBrain
+#       borg_module:
+#       - BorgModuleEsword
+#       # - BorgModuleC20r
+#   - type: ItemSlots
+#     slots:
+#       cell_slot:
+#         name: power-cell-slot-component-slot-name-default
+#         startingItem: PowerCellHyper
+#   - type: StartingMindRole
+#     mindRole: MindRoleSiliconBrain
+#     silent: true

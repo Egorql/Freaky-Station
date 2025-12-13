@@ -335,7 +335,8 @@ namespace Content.Server.PDA
                     IdOwner = id?.FullName,
                     JobTitle = id?.LocalizedJobTitle,
                     StationAlertLevel = pda.StationAlertLevel,
-                    StationAlertColor = pda.StationAlertColor
+                    StationAlertColor = pda.StationAlertColor,
+                    StationAlertInstructions = pda.StationAlertInstructions // CorvaxGoob-custom-alert-instructions-in-pda
                 },
                 pda.StationName,
                 showUplink,
@@ -430,7 +431,13 @@ namespace Content.Server.PDA
                 return;
             pda.StationAlertLevel = alertComp.CurrentLevel;
             if (alertComp.AlertLevels.Levels.TryGetValue(alertComp.CurrentLevel, out var details))
+            {
                 pda.StationAlertColor = details.Color;
+                // CorvaxGoob-custom-alert-instructions-in-pda-start
+                if (details != null)
+                    pda.StationAlertInstructions = details.AlertLevelInstruction;
+                // CorvaxGoob-custom-alert-instructions-in-pda-end
+            }
         }
 
         private string? GetDeviceNetAddress(EntityUid uid)

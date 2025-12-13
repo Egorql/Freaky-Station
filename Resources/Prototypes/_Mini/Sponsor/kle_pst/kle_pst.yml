@@ -1,0 +1,15 @@
+- type: loadout
+  id: KlePstKit
+  effects:
+  - !type:SponsorLoadoutEffect
+  equipment:
+    neck: ClothingCloakKlePst
+
+- type: entity
+  parent: ClothingNeckBase
+  id: ClothingCloakKlePst
+  name: Плащ
+  description: Белый плащ с древним рисунком.
+  components:
+  - type: Sprite
+    sprite: _Mini/Sponsor/Clothing/Kle_pst/cloak.rsi

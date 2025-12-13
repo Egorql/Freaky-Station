@@ -86,11 +86,11 @@
 - type: entity
   parent: BaseUplinkRadio
   id: BaseUplinkRadio225TC
-  suffix: 225 TC, NukeOps
+  suffix: 40 TC, NukeOps
   components:
   - type: Store
     balance:
-      Telecrystal: 225
+      Telecrystal: 40
   - type: Tag
     tags:
     - NukeOpsUplink
@@ -98,11 +98,11 @@
 - type: entity
   parent: BaseUplinkRadio
   id: BaseUplinkRadio225TCMedic
-  suffix: 225 TC, NukeOps medic
+  suffix: 40 TC, NukeOps medic
   components:
   - type: Store
     balance:
-      Telecrystal: 225
+      Telecrystal: 40
   - type: Tag
     tags:
     - NukeOpsUplink

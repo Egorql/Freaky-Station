@@ -10,7 +10,8 @@ public sealed class MiniCCVars
     /*
 	* GCF
 	*/
-
+    public static readonly CVarDef<int> MapVoteRecentBanDepth =
+        CVarDef.Create("game.map_vote_recent_ban_depth", 1, CVar.SERVER | CVar.ARCHIVE);
     /// <summary>
     ///     Whether GCF being shown is enabled at all.
     /// </summary>

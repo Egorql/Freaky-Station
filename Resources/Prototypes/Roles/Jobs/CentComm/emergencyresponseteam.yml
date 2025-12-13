@@ -68,8 +68,8 @@
     - MedkitCombatFilled # Goobstation - No reason not to.
     - BoxZiptie
     - CrowbarRed
-    - ERTSecurityUndeterminedWeapon
     # Goobstation - MagazineMagnum
+    - PinpointerNuclear
     - MagazineMagnum
     - ADTBaseUplinkBOBERT
     #- WeaponLauncherMGL
@@ -213,6 +213,7 @@
     - SheetPlasteel
     - SheetSteel
     - SheetGlass
+    - PinpointerNuclear
 
 - type: startingGear
   id: ERTEngineerGearEVA
@@ -242,6 +243,7 @@
     - SheetPlasteel
     - SheetSteel
     - SheetGlass
+    - PinpointerNuclear
 
 - type: chameleonOutfit
   id: ERTEngineerChameleonOutfit

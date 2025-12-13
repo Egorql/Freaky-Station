@@ -10,6 +10,8 @@ using Robust.Shared.ContentPack;
 using Robust.Shared.Utility;
 using Content.Shared._CorvaxGoob;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Audio.Components;
+using Robust.Shared.Spawners;
 
 namespace Content.Client._CorvaxGoob.TTS;
 
@@ -27,6 +29,8 @@ public sealed partial class TTSSystem : EntitySystem
     private ISawmill _sawmill = default!;
     private static MemoryContentRoot _contentRoot = new();
     private static readonly ResPath Prefix = ResPath.Root / "TTS";
+
+    private static readonly float MinimalPitchToPlay = 0.3f;
 
     private static bool _contentRootAdded;
 
@@ -53,6 +57,7 @@ public sealed partial class TTSSystem : EntitySystem
 
         _sawmill = Logger.GetSawmill("tts");
         _cfg.OnValueChanged(CCCVars.TTSVolume, OnTtsVolumeChanged, true);
+        _cfg.OnValueChanged(CCCVars.AnnouncementsSound, OnAnnouncementsVolumeChanged, true);
         SubscribeNetworkEvent<PlayTTSEvent>(OnPlayTTS);
         SubscribeNetworkEvent<TTSAnnouncedEvent>(OnAnnounced);
     }
@@ -61,6 +66,7 @@ public sealed partial class TTSSystem : EntitySystem
     {
         base.Shutdown();
         _cfg.UnsubValueChanged(CCCVars.TTSVolume, OnTtsVolumeChanged);
+        _cfg.UnsubValueChanged(CCCVars.AnnouncementsSound, OnAnnouncementsVolumeChanged);
     }
 
     public void RequestPreviewTTS(string voiceId)
@@ -87,18 +93,37 @@ public sealed partial class TTSSystem : EntitySystem
             .WithVolume(AdjustVolume(ev.IsWhisper))
             .WithMaxDistance(AdjustDistance(ev.IsWhisper));
 
+        if (ev.Pitch.HasValue)
+            audioParams = audioParams.WithPitchScale(ev.Pitch.Value);
+
         var soundSpecifier = new ResolvedPathSpecifier(Prefix / filePath);
+
+        (EntityUid Entity, AudioComponent Component)? audio;
 
         if (ev.SourceUid != null)
         {
             if (!TryGetEntity(ev.SourceUid.Value, out _))
+            {
+                _contentRoot.RemoveFile(filePath);
                 return;
+            }
             var sourceUid = GetEntity(ev.SourceUid.Value);
-            _audio.PlayEntity(audioResource.AudioStream, sourceUid, soundSpecifier, audioParams);
+
+            audio = _audio.PlayEntity(audioResource.AudioStream, sourceUid, soundSpecifier, audioParams);
         }
         else
         {
-            _audio.PlayGlobal(audioResource.AudioStream, soundSpecifier, audioParams);
+            audio = _audio.PlayGlobal(audioResource.AudioStream, soundSpecifier, audioParams);
+        }
+
+        // Edits TimedDespawn time property for correctly pitch appling
+        if (audio.HasValue
+            && ev.Pitch.HasValue
+            && ev.Pitch.Value != 1
+            && ev.Pitch.Value > MinimalPitchToPlay
+            && TryComp<TimedDespawnComponent>(audio.Value.Entity, out var timedDespawn))
+        {
+            timedDespawn.Lifetime = timedDespawn.Lifetime / ev.Pitch.Value;
         }
 
         _contentRoot.RemoveFile(filePath);

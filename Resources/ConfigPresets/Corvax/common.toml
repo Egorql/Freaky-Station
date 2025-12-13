@@ -6,11 +6,11 @@ limit = 25.0
 
 [infolinks]
 discord = "https://discord.ss14.ru"
-github = "https://github.com/space-syndicate/space-station-14"
+github = "https://github.com/space-syndicate/Goob-Station"
 wiki = "https://station14.ru"
 patreon = "https://boosty.to/corvax"
 appeal = "https://discord.ss14.ru"
-bug_report = "https://github.com/space-syndicate/space-station-14/issues/new/choose"
+bug_report = "https://discord.ss14.ru"
 website = "https://ss14.ru"
 
 [viewport]
@@ -20,8 +20,8 @@ maximum_width = 26
 lobbyduration = 240
 map_pool = "CorvaxMapPool"
 round_restart_time = 240
-fallbackpreset = "secretplusmid"
-defaultpreset = "secretplusmid"
+fallbackpreset = "secretpluslow"
+defaultpreset = "secretpluslow"
 
 [server]
 rules_file = "CorvaxRuleset"
@@ -31,3 +31,4 @@ rich_main_icon_id = "corvax"
 
 [admin]
 see_own_notes = true
+admins_count_in_playercount = true

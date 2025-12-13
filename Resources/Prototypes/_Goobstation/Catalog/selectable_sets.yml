@@ -82,7 +82,7 @@
   - AccessBreaker
   - Lighter
   - CigPackSyndicate
-  - Telecrystal50 # The thief cannot use them, but it may induce communication with traitors
+  - Telecrystal10 # The thief cannot use them, but it may induce communication with traitors
 
 - type: selectableSet
   id: ThiefSleeperSet
@@ -196,7 +196,7 @@
     state: std_mod
   content:
   - EncryptionKeySyndie
-  - AntimovCircuitBoard
+  - SyndicateCustomLawboard
   - AccessBreaker
   - Emag
   - RadioJammer
@@ -251,7 +251,7 @@
   - ClothingBackpackDuffelSyndicateHardsuitBundle
   - ClothingUniformJumpsuitOperative
   - SyndiPDANukie
-  - ClothingEyesNightVisionGogglesNukie
+  - ClothingEyesThermalVisionGogglesSyndie
   - ClothingShoesBootsCombatFilled
   - ClothingBeltMilitaryWebbing
 

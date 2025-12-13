@@ -143,6 +143,10 @@
       inverted: true
       species:
       - Felinid
+    - !type:SpeciesRequirement # CorvaxGoob-Species
+      inverted: true
+      species:
+      - Abductor
   weight: 10
   startingGear: QuartermasterGear
   icon: "JobIconQuarterMaster"
@@ -167,6 +171,7 @@
   - !type:AddComponentSpecial
     components:
       - type: CommandStaff
+      - type: QuartermasterTraining
 
 - type: startingGear
   id: QuartermasterGear

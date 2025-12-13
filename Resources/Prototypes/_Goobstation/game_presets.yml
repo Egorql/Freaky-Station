@@ -175,7 +175,11 @@
   name: guide-title
   description: guide-description
   showInVote: false
+<<<<<<< HEAD
   minPlayers: 5 # Freaky Station
+=======
+  minPlayers: 10
+>>>>>>> f13eb5fed3ebdbdc1bf0e535f33e3888670532b9
   rules:
     - CombatDynamic
     - SubGamemodesRule
@@ -231,33 +235,36 @@
   rules:
     - SecretPlusRampingMid
 
-# survival+ but it has roundstart abductors and maybe thieves
 - type: gamePreset
-  id: Abductors
+  id: Xenomorphs
   alias:
-  - ayylmao
-  name: abductors-title
-  description: abductors-description
+  - ayyliens
+  name: xenomorph-title
+  description: xenomorph-description
   showInVote: false
+<<<<<<< HEAD
   minPlayers: 5 # Freaky Station
+=======
+  minPlayers: 1
+>>>>>>> f13eb5fed3ebdbdc1bf0e535f33e3888670532b9
   rules:
-  - DuoAbductorRoundstart
+  - XenomorphsInfestationRoundstart
   - SubGamemodesRule
   - SecretPlusRampingMid
 
 - type: gamePreset
   id: OopsAllThieves
   alias:
-  - oopsallthieves
-  - allthieves
-  - thieves
+    - oopsallthieves
+    - allthieves
+    - thieves
   name: oops-all-thieves-title
   description: oops-all-thieves-description
   showInVote: false
   rules:
-    - OopsAllThieves
-    - TraitorSubGamemodesRule
-    - BasicStationEventScheduler
-    - MeteorSwarmScheduler
-    - SpaceTrafficControlEventScheduler
-    - BasicRoundstartVariation
+  - OopsAllThieves
+  - TraitorSubGamemodesRule
+  - BasicStationEventScheduler
+  - MeteorSwarmScheduler
+  - SpaceTrafficControlEventScheduler
+  - BasicRoundstartVariation

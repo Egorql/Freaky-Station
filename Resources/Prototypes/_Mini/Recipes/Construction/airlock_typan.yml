@@ -4,9 +4,6 @@
   startNode: start
   targetNode: airlock
   category: construction-category-structures
-  entityWhitelist:
-    tags:
-    - TypanRole
   objectType: Structure
   placementMode: SnapgridCenter
   canBuildInImpassable: false
@@ -19,9 +16,6 @@
   startNode: start
   targetNode: glassAirlock
   category: construction-category-structures
-  entityWhitelist:
-    tags:
-    - TypanRole
   objectType: Structure
   placementMode: SnapgridCenter
   canBuildInImpassable: false

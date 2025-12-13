@@ -32,7 +32,7 @@
                         <BoxContainer Orientation="Horizontal" MinSize="0 40" HorizontalAlignment="Center">
                             <Button Name="Rules" Text="{Loc 'server-info-rules-button'}" MinSize="125 10" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
                             <Button Name="Guidebook" Text="{Loc 'server-info-guidebook-button'}" MinSize="125 10" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
-                            <changelog:ChangelogButton Name="Changelog" MinSize="125 10" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
+                            <Button Access="Public" Name="RoadmapButton" MinSize="125 10" Text="{Loc 'roadmap-name'}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" StyleClasses="Caution" />
                             <vote:VoteCallMenuButton Name="CallVoteButton" MinSize="125 10" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
                             <!-- <Button Name="Wiki" Text="Вики" MinSize="125 10" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/> -->
                             <controls:VSpacer Spacing="25"/>

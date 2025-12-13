@@ -160,6 +160,7 @@
     - id: GasLeak
     - id: GreytideVirus
     - id: IonStorm # its calm like 90% of the time smh
+    - id: JobDistributionError
     - id: KudzuGrowth
     - id: MassHallucinations
     - id: MimicVendorRule
@@ -199,6 +200,11 @@
     - id: BingleSpawn #Goobstation - Bingle
     - id: SlaughterDemonMidround # Goobstation - Slaughter Demon
     - id: XenomorphsInfestation # WD EDIT
+<<<<<<< HEAD
+=======
+    #- id: WraithMidround # Goobstation - Wraith
+    #TODO When Slasher is ready- id: SlasherSpawn # Goobstation - The Slasher
+>>>>>>> f13eb5fed3ebdbdc1bf0e535f33e3888670532b9
 
 - type: entity
   id: BaseStationEvent
@@ -362,7 +368,7 @@
   - type: StationEvent
     weight: 5
     duration: 1
-    minimumPlayers: 10
+    minimumPlayers: 30 # CorvaxGoob-SpawnRebalance: Changed to from 10
     eventType: Chaotic # Goobstation
   # Goobstation
   - type: GameRule

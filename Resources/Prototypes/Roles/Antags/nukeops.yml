@@ -99,6 +99,8 @@
   name: roles-antag-nuclear-operative-name
   antagonist: true
   setPreference: true
+  skills: # CorvaxGoob-Skills
+  - All
   objective: roles-antag-nuclear-operative-objective
   requirements:
   - !type:OverallPlaytimeRequirement
@@ -110,6 +112,7 @@
     inverted: true
     species:
     - Plasmaman
+    - Abductor # CorvaxGoob-Species
   guides: [ NuclearOperatives ]
 
 - type: antag
@@ -117,6 +120,8 @@
   name: roles-antag-nuclear-operative-agent-name
   antagonist: true
   setPreference: true
+  skills: # CorvaxGoob-Skills
+  - All
   objective: roles-antag-nuclear-operative-agent-objective
   requirements:
   - !type:OverallPlaytimeRequirement
@@ -131,6 +136,7 @@
     inverted: true
     species:
     - Plasmaman
+    - Abductor # CorvaxGoob-Species
   guides: [ NuclearOperatives ]
 
 - type: antag
@@ -139,6 +145,8 @@
   antagonist: true
   setPreference: true
   objective: roles-antag-nuclear-operative-commander-objective
+  skills: # CorvaxGoob-Skills
+  - All
   requirements:
   - !type:OverallPlaytimeRequirement
     time: 90000 # 25 hours - Goobstation
@@ -153,6 +161,7 @@
     inverted: true
     species:
     - Plasmaman
+    - Abductor # CorvaxGoob-Species
   guides: [ NuclearOperatives ]
 
 - type: startingGear
@@ -161,7 +170,7 @@
     jumpsuit: ClothingUniformJumpsuitOperative
     back: ClothingBackpackDuffelSyndicate
     mask: ClothingMaskGasSyndicate
-    eyes: ClothingEyesNightVisionGogglesNukie # Goobstation
+    eyes: ClothingEyesHudSyndicate
     ears: ClothingHeadsetAltSyndicate
     gloves: ClothingHandsGlovesCombat
     #outerClothing: ClothingOuterHardsuitSyndie # goobstation - duke nukies
@@ -218,7 +227,7 @@
   parent: SyndicateOperativeGearFullNoUplink
   equipment:
     back: ClothingBackpackDuffelSyndicateMedical # Goobstation
-    eyes: ClothingEyesNightVisionGogglesNukie # Goobstation
+    eyes: ClothingEyesHudSyndicate
     #outerClothing: ClothingOuterHardsuitSyndieMedic # goobstation - duke nukies
     shoes: ClothingShoesBootsMagSyndie
     id: SyndiAgentPDA

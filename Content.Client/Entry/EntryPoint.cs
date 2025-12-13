@@ -128,6 +128,7 @@ using Content.Client.Fullscreen;
 using Content.Client.GameTicking.Managers;
 using Content.Client.GhostKick;
 using Content.Client.Guidebook;
+using Content.Client._Mini.CharacterBlock;
 using Content.Client.Input;
 using Content.Client.IoC;
 using Content.Client.Launcher;
@@ -198,6 +199,7 @@ namespace Content.Client.Entry
         [Dependency] private readonly TitleWindowManager _titleWindowManager = default!;
         [Dependency] private readonly IEntitySystemManager _entitySystemManager = default!;
         [Dependency] private readonly ClientsidePlaytimeTrackingManager _clientsidePlaytimeManager = default!;
+        [Dependency] private readonly CharacterBlockManager _characterBlock = default!; //  edit1
 
         public override void Init()
         {
@@ -306,6 +308,7 @@ namespace Content.Client.Entry
             _userInterfaceManager.SetActiveTheme(_configManager.GetCVar(CVars.InterfaceTheme));
             _documentParsingManager.Initialize();
             _titleWindowManager.Initialize();
+            _characterBlock.Initialize(); //  edit
 
             _baseClient.RunLevelChanged += (_, args) =>
             {

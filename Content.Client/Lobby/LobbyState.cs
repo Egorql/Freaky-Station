@@ -1,6 +1,7 @@
 using Content.Client._Mini.Latejoin;
 using Content.Client.Audio;
 using Content.Client.GameTicking.Managers;
+using Content.Client._Mini.CharacterBlock;
 using Content.Client.LateJoin;
 using Content.Client.Lobby.UI;
 using Content.Client.Message;
@@ -17,6 +18,7 @@ using Robust.Client.UserInterface.Controls;
 using Robust.Shared.Configuration;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
+using Content.Shared.Preferences;
 
 namespace Content.Client.Lobby
 {
@@ -36,6 +38,8 @@ namespace Content.Client.Lobby
         CorvaxGoob-Coins-end */
         [Dependency] private readonly IPrototypeManager _protoMan = default!; // Goobstation - credits
         [Dependency] private readonly ClientsidePlaytimeTrackingManager _playtimeTracking = default!;
+        [Dependency] private readonly CharacterBlockManager _characterBlockManager = default!;
+        [Dependency] private readonly IClientPreferencesManager _clientPreferences = default!;
 
         private ISawmill _sawmill = default!; // Goobstation
         private ClientGameTicker _gameTicker = default!;
@@ -118,6 +122,14 @@ namespace Content.Client.Lobby
         {
             if (!_gameTicker.IsGameStarted)
             {
+                return;
+            }
+
+            var character = (HumanoidCharacterProfile) _clientPreferences.Preferences!.SelectedCharacter;
+
+            if (_characterBlockManager.IsCharacterBlocked(character))
+            {
+                new CharacterBlockedGui().OpenCentered();
                 return;
             }
 

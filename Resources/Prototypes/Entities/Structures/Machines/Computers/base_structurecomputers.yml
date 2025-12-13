@@ -47,6 +47,9 @@
     containers:
       - board
   - type: Computer
+  # - type: TogglePower
+    # applyPowerOnSpawn: true
+    # isTurnedOn: false
   - type: ApcPowerReceiver
     powerLoad: 200
   - type: ExtensionCableReceiver
@@ -113,10 +116,10 @@
     boardName: wires-board-name-computer
     layoutId: Computer
   - type: SpamEmitSound # Goobstation - random lathe sounds
-    minInterval: 300
-    maxInterval: 900
+    minInterval: 45
+    maxInterval: 120
     sound:
-      collection: RandomComputerSounds
+      collection: MonoComputerSFX
       params:
         volume: -12 # Ambient
         maxDistance: 10

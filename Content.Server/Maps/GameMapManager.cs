@@ -22,7 +22,7 @@ using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Content.Server.GameTicking;
-using Content.Shared.ADT.CCVar;
+using Content.Shared._Mini.MiniCCVars;
 using Content.Shared.CCVar;
 using Robust.Server.Player;
 using Robust.Shared.Configuration;
@@ -53,8 +53,8 @@ public sealed class GameMapManager : IGameMapManager
     [ViewVariables(VVAccess.ReadOnly)]
     private int _mapQueueDepth = 1;
 
-    private readonly Queue<string> _recentlyPlayedMaps = new(); // ADT-Tweak: ReWork Vote Map
-    private int RecentMapBanDepth => _configurationManager.GetCVar(ADTCCVars.MapVoteRecentBanDepth); // ADT-Tweak: ReWork Vote Map.
+    private readonly Queue<string> _recentlyPlayedMaps = new(); // Mini-Tweak: ReWork Vote Map
+    private int RecentMapBanDepth => _configurationManager.GetCVar(MiniCCVars.MapVoteRecentBanDepth); // Mini-Tweak: ReWork Vote Map.
     private ISawmill _log = default!;
 
     public void Initialize()
@@ -120,11 +120,11 @@ public sealed class GameMapManager : IGameMapManager
     {
         var maps = AllVotableMaps()
             .Where(map => IsMapEligible(map) && !_recentlyPlayedMaps.Contains(map.ID))
-            .ToArray(); // ADT-Tweak: ReWork Vote Map
+            .ToArray(); // Mini-Tweak: ReWork Vote Map
 
         return maps.Length == 0
             ? AllMaps().Where(x => x.Fallback && !_recentlyPlayedMaps.Contains(x.ID))
-            : maps; // ADT-Tweak: ReWork Vote Map
+            : maps; // Mini-Tweak: ReWork Vote Map
     }
 
     public IEnumerable<GameMapPrototype> AllVotableMaps()
@@ -161,7 +161,7 @@ public sealed class GameMapManager : IGameMapManager
         return _configSelectedMap ?? _selectedMap;
     }
 
-    // ADT-Tweak-start: Добавлена функция для фильтрации последних карт
+    // Mini-Tweak-start: Добавлена функция для фильтрации последних карт
     public void RegisterPlayedMap(string mapId)
     {
         _recentlyPlayedMaps.Enqueue(mapId);
@@ -171,7 +171,7 @@ public sealed class GameMapManager : IGameMapManager
             _recentlyPlayedMaps.Dequeue();
         }
     }
-    // ADT-Tweak-end
+    // Mini-Tweak-end
     public void ClearSelectedMap()
     {
         _selectedMap = default!;

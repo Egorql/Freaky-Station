@@ -296,6 +296,7 @@
   name: скафандр патрульного
   description: Укреплённый скафандр с бронепластинами, предназначенный для работы в космосе. Немного повышает вашу скорость.
   components:
+  - type: DNALocker
   - type: Sprite
     sprite: _Mini/Clothing/OuterClothing/Hardsuits/typan_patrol.rsi
   - type: Clothing

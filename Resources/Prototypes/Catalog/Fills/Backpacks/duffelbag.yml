@@ -200,7 +200,6 @@
       - id: WeaponSubMachineGunC20r
       - id: MagazinePistolSubMachineGun
         amount: 2
-#     - id: SMGSuppressor
 
 - type: entity
   parent: ClothingBackpackDuffelSyndicateBundle

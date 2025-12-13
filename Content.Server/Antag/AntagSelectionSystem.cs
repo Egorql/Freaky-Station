@@ -348,6 +348,22 @@ public sealed partial class AntagSelectionSystem : GameRuleSystem<AntagSelection
         AssignPreSelectedSessions((uid, component));
     }
 
+    // Goobstation
+/*    public Dictionary<ICommonSession, float> ToWeightsDict(IList<ICommonSession> pool)
+    {
+        Dictionary<ICommonSession, float> weights = new();
+
+        // weight by playtime since last rolled
+        foreach (var se in pool)
+        {
+            var lastRoll = (float)(_playTime.GetOverallPlaytime(se) - _lastRolled.GetLastRolled(se.UserId)).TotalSeconds;
+            //weight clamped between 5 hours and 20 hours
+            weights[se] = float.Clamp(lastRoll, 18000.0f, 72000.0f);
+        }
+
+        return weights;
+    }*/
+
     /// <summary>
     /// Chooses antagonists from the given selection of players
     /// </summary>
@@ -570,9 +586,6 @@ public sealed partial class AntagSelectionSystem : GameRuleSystem<AntagSelection
         // The following is where we apply components, equipment, and other changes to our antagonist entity.
         EntityManager.AddComponents(player, def.Components);
 
-        if (def.Skills is not null && def.Skills.Count > 0) // CorvaxGoob-Skills
-            _skills.GrantSkill(player, def.Skills);
-
         // Equip the entity's RoleLoadout and LoadoutGroup
         List<ProtoId<StartingGearPrototype>> gear = new();
         if (def.StartingGear is not null)
@@ -604,6 +617,9 @@ public sealed partial class AntagSelectionSystem : GameRuleSystem<AntagSelection
         // goob edit - actual pacifism implant
         foreach (var special in def.Special)
             special.AfterEquip(ent);
+
+        if (def.Skills is not null && def.Skills.Count > 0) // CorvaxGoob-Skills
+            _skills.GrantSkill(player, def.Skills);
 
         var afterEv = new AfterAntagEntitySelectedEvent(session, player, ent, def);
         RaiseLocalEvent(ent, ref afterEv, true);

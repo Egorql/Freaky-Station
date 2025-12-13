@@ -322,7 +322,7 @@
   components:
     - type: Sprite
       sprite: Markers/jobs.rsi
-      state: chaplain #needs an ERT variant once a good suit it made.
+      state: ertchaplain #needs an ERT variant once a good suit it made.
     - type: RandomMetadata
       nameSegments:
       - NamesMilitaryFirst
@@ -652,6 +652,8 @@
       roleLoadout: [ RoleSurvivalExtended ]
     - type: AutoImplant
       implants: [ FreedomImplant, RadioImplantCentcomm, NutrimentPumpImplant, StypticStimulatorImplant ] # Goobstation
+    - type: SurgerySpeedModifier # CorvaxGoob-ERT-Skills
+      speedModifier: 2.5
 
 - type: entity
   id: RandomHumanoidSpawnerERTMedicalEVA
