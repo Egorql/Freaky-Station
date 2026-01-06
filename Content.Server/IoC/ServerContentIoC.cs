@@ -169,6 +169,7 @@ using Content.Server.Administration;
 using Content.Server.Administration.Logs;
 using Content.Server.Administration.Managers;
 using Content.Server.Administration.Notes;
+using Content.Server.ADT.Discord.Bans;
 using Content.Server.Afk;
 using Content.Server.Chat.Managers;
 using Content.Server.Connection;
@@ -247,6 +248,7 @@ namespace Content.Server.IoC
             // IoCManager.Register<ServerCurrencyManager>(); // Goobstation - Server Currency; Deleted by CorvaxGoob
             // IoCManager.Register<LastRolledAntagManager>(); // Goobstation - antag pity
             // IoCManager.Register<LinkAccountManager>(); // RMC - Patreon; Deleted by CorvaxGoob
+            IoCManager.Register<IDiscordBanInfoSender, DiscordBanInfoSender>(); //ADT Tweak: логи банов для диса
             IoCManager.Register<TTSManager>(); // CorvaxGoob-TTS
         }
     }

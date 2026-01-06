@@ -768,6 +768,7 @@ namespace Content.Shared.Preferences
                     continue;
                 }
 
+                loadouts.Role = roleName;
                 loadouts.EnsureValid(this, session, collection);
             }
 

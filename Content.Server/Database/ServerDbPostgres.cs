@@ -67,6 +67,7 @@ using Content.Server.IP;
 using Content.Shared.CCVar;
 using Content.Shared.Database;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Diagnostics;
 using Robust.Shared.Configuration;
 using Robust.Shared.Network;
 using Robust.Shared.Utility;
@@ -97,10 +98,10 @@ namespace Content.Server.Database
 
             _dbReadyTask = Task.Run(async () =>
             {
-                await using var ctx = new PostgresServerDbContext(_options);
+                await using var ctx = CreateDbContext();
                 try
                 {
-                    await ctx.Database.MigrateAsync();
+                    await TryMigrateDatabaseAsync(ctx);
                 }
                 finally
                 {
@@ -111,6 +112,66 @@ namespace Content.Server.Database
             cfg.OnValueChanged(CCVars.DatabasePgFakeLag, v => _msLag = v, true);
 
             InitNotificationListener(connectionString);
+        }
+
+        private PostgresServerDbContext CreateDbContext()
+        {
+            var optionsBuilder = new DbContextOptionsBuilder<PostgresServerDbContext>(_options);
+            // Отключаем предупреждение о не применённых миграциях
+            optionsBuilder.ConfigureWarnings(warnings =>
+                warnings.Ignore(RelationalEventId.PendingModelChangesWarning));
+
+            return new PostgresServerDbContext(optionsBuilder.Options);
+        }
+
+        private async Task TryMigrateDatabaseAsync(PostgresServerDbContext context)
+        {
+            try
+            {
+                // Пытаемся выполнить миграцию
+                await context.Database.MigrateAsync();
+            }
+            catch (Exception ex)
+            {
+                _notifyLog.Error($"Failed to migrate database: {ex.Message}");
+
+                // Если миграция не удалась, пытаемся проверить существование таблиц
+                try
+                {
+                    // Проверяем, существует ли таблица миграций
+                    var migrationsTableExists = await context.Database.ExecuteSqlRawAsync(@"
+                        SELECT EXISTS (
+                            SELECT FROM information_schema.tables
+                            WHERE table_schema = 'public'
+                            AND table_name = '__EFMigrationsHistory'
+                        )") == 1;
+
+                    if (!migrationsTableExists)
+                    {
+                        _notifyLog.Warning("Migrations table doesn't exist. Creating database structure...");
+
+                        // Создаём таблицу миграций вручную
+                        await context.Database.ExecuteSqlRawAsync(@"
+                            CREATE TABLE IF NOT EXISTS ""__EFMigrationsHistory"" (
+                                ""MigrationId"" character varying(150) NOT NULL,
+                                ""ProductVersion"" character varying(32) NOT NULL,
+                                CONSTRAINT ""PK___EFMigrationsHistory"" PRIMARY KEY (""MigrationId"")
+                            )");
+
+                        // Пытаемся создать остальные таблицы через EnsureCreated
+                        await context.Database.EnsureCreatedAsync();
+                    }
+                    else
+                    {
+                        _notifyLog.Warning("Migrations table exists but migration failed. Continuing with existing schema...");
+                    }
+                }
+                catch (Exception innerEx)
+                {
+                    _notifyLog.Error($"Failed to create database structure: {innerEx.Message}");
+                    throw;
+                }
+            }
         }
 
         #region Ban
@@ -182,6 +243,16 @@ namespace Content.Server.Database
 
             return bans;
         }
+        //Start-ADT-Tweak: логи банов для диса
+        public override async Task<ServerBanDef?> GetLastServerBanAsync()
+        {
+            await using var db = await GetDbImpl();
+
+            var lastServerBan = db.PgDbContext.Ban.OrderByDescending(x => x.Id).FirstOrDefault();
+
+            return ConvertBan(lastServerBan);
+        }
+        //End-ADT-Tweak
 
         private static IQueryable<ServerBan> MakeBanLookupQuery(
             IPAddress? address,
@@ -402,6 +473,16 @@ namespace Content.Server.Database
 
             return await QueryRoleBans(query);
         }
+        //Start-ADT-Tweak: логи банов для диса
+        public override async Task<ServerRoleBanDef?> GetLastServerRoleBanAsync()
+        {
+            await using var db = await GetDbImpl();
+
+            var lastServerRoleBan = db.PgDbContext.RoleBan.OrderByDescending(x => x.Id).FirstOrDefault();
+
+            return ConvertRoleBan(lastServerRoleBan);
+        }
+        //End-ADT-Tweak
 
         private static async Task<List<ServerRoleBanDef>> QueryRoleBans(IQueryable<ServerRoleBan> query)
         {
@@ -634,7 +715,7 @@ WHERE to_tsvector('english'::regconfig, a.message) @@ websearch_to_tsquery('engl
             if (_msLag > 0)
                 await Task.Delay(_msLag, cancel);
 
-            return new DbGuardImpl(this, new PostgresServerDbContext(_options));
+            return new DbGuardImpl(this, CreateDbContext());
         }
 
         protected override async Task<DbGuard> GetDb(

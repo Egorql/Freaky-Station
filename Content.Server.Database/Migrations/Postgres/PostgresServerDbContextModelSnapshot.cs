@@ -911,7 +911,15 @@ namespace Content.Server.Database.Migrations.Postgres
                         .HasColumnType("text")
                         .HasColumnName("voice");
                     // Corvax-TTS-End
-
+                    
+                    // Freaky-ERP-Start
+                    b.Property<string>("ERPS")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("erps")
+                        .HasDefaultValue("");
+                    // Freaky-ERP-End
+                        
                     b.HasKey("Id")
                         .HasName("PK_profile");
 
