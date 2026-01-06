@@ -293,7 +293,7 @@
     - SharedBoards
     - CameraBoards
     - ServiceTools
-    - ServiceBoardsGoob # goob
+#    - ServiceBoardsGoob # goob # cause lathe not working properly, waiting for fix of radiohost role [freaky-station]
     # Einstein Engines Packs
     - Translators
     # CorvaxGoob Packs
