@@ -13,7 +13,9 @@ SPDX-License-Identifier: AGPL-3.0-or-later
     xmlns:controls="clr-namespace:Content.Client.UserInterface.Systems.Chat.Controls">
     <PanelContainer Name="FilterPopupPanel" StyleClasses="BorderedWindowPanel">
         <BoxContainer Orientation="Horizontal" SeparationOverride="8" Margin="10 0">
-            <BoxContainer Name="FilterVBox" MinWidth="105" Margin="0 10" Orientation="Vertical" SeparationOverride="4"/>
+            <BoxContainer Name="FilterVBox" MinWidth="210" Margin="0 10" Orientation="Vertical" SeparationOverride="4">
+                <LineEdit Name="HighlightEdit" PlaceHolder="{Loc 'hud-chatbox-highlights-placeholder'}" ToolTip="{Loc 'hud-chatbox-highlights-tooltip'}"/>
+            </BoxContainer>
             <BoxContainer Name="HighlightsVBox" MinWidth="120" Margin="0 10" Orientation="Vertical" SeparationOverride="4">
                 <Label Text="{Loc 'hud-chatbox-highlights'}"/>
                 <PanelContainer>
@@ -22,7 +24,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
                         <gfx:StyleBoxFlat BackgroundColor="#323446"/>
                     </PanelContainer.PanelOverride>
                     <!-- End custom background -->
-                    <TextEdit Name="HighlightEdit" MinHeight="150" Margin="5 5"/>
+                    <!--<TextEdit Name="HighlightEdit" MinHeight="150" Margin="5 5"/> -->
                 </PanelContainer>
                 <Button Name="HighlightButton" Text="{Loc 'hud-chatbox-highlights-button'}" ToolTip="{Loc 'hud-chatbox-highlights-tooltip'}"/>
             </BoxContainer>

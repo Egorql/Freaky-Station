@@ -48,6 +48,7 @@ using Robust.Shared.Input.Binding;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Utility;
+using Content.Client._White.UI.Buttons;
 
 namespace Content.Client.UserInterface.Systems.Bwoink;
 
@@ -63,7 +64,7 @@ public sealed class AHelpUIController: UIController, IOnSystemChanged<BwoinkSyst
 
     private BwoinkSystem? _bwoinkSystem;
     private MenuButton? GameAHelpButton => UIManager.GetActiveUIWidgetOrNull<GameTopMenuBar>()?.AHelpButton;
-    private Button? LobbyAHelpButton => (UIManager.ActiveScreen as LobbyGui)?.AHelpButton;
+     private WhiteLobbyTextButton? LobbyAHelpButton => (UIManager.ActiveScreen as LobbyGui)?.AHelpButton; // WD EDIT
     public IAHelpUIHandler? UIHelper;
     private bool _discordRelayActive;
     private bool _hasUnreadAHelp;
