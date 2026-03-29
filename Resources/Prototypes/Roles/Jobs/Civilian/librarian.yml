@@ -65,7 +65,7 @@
 
 - type: job
   id: Librarian
-  name: job-name-librarian
+  name: РПчервь
   description: job-description-librarian
   playTimeTracker: JobLibrarian
   startingGear: LibrarianGear

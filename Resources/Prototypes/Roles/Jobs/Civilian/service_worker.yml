@@ -75,7 +75,7 @@
 
 - type: job
   id: ServiceWorker
-  name: job-name-serviceworker
+  name: Шлюха
   description: job-description-serviceworker
   playTimeTracker: JobServiceWorker
   requirements:

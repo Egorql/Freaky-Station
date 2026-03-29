@@ -135,7 +135,7 @@
 
 - type: job
   id: Captain
-  name: job-name-captain
+  name: Клоун
   description: job-description-captain
   playTimeTracker: JobCaptain
   requirements:

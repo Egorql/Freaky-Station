@@ -126,7 +126,7 @@
 
 - type: job
   id: Quartermaster
-  name: job-name-qm
+  name: Мастер квартир
   description: job-description-qm
   playTimeTracker: JobQuartermaster
   requirements:

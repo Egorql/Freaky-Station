@@ -69,7 +69,7 @@
 
 - type: job
   id: Bartender
-  name: job-name-bartender
+  name: Оружейник
   description: job-description-bartender
   playTimeTracker: JobBartender
   requirements:

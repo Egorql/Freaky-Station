@@ -133,7 +133,7 @@
 
 - type: job
   id: ResearchDirector
-  name: job-name-rd
+  name: Спидранер
   description: job-description-rd
   playTimeTracker: JobResearchDirector
   requirements:
