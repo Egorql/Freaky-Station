@@ -156,6 +156,8 @@
 using System.IO;
 using System.Linq;
 using System.Numerics;
+using Content.Client.ADT.Bark;
+using Content.Client.ADT.SpeechBarks;
 using Content.Client.Humanoid;
 using Content.Client.Lobby.UI.Loadouts;
 using Content.Client.Lobby.UI.Roles;
@@ -164,8 +166,10 @@ using Content.Client.Players.PlayTimeTracking;
 using Content.Client.Sprite;
 using Content.Client.Stylesheets;
 using Content.Client.UserInterface.Systems.Guidebook;
+using Content.Goobstation.Common.CCVar;
 using Content.Shared._CorvaxGoob.CCCVars;
 using Content.Corvax.Interfaces.Shared;
+using Content.Shared.ADT.SpeechBarks;
 using Content.Shared.CCVar;
 using Content.Shared.Clothing;
 using Content.Shared.GameTicking;
@@ -221,6 +225,8 @@ namespace Content.Client.Lobby.UI
 
         private FlavorText.FlavorText? _flavorText;
         private TextEdit? _flavorTextEdit;
+        private TextEdit? _oocNotesEdit;
+        private LineEdit? _headshotUrlEdit;
 
         // One at a time.
         private LoadoutWindow? _loadoutWindow;
@@ -390,12 +396,11 @@ namespace Content.Client.Lobby.UI
             // Goob Station
             #region Barks
 
-            // CorvaxGoob-Revert : DB conflicts
-/*            if (configurationManager.GetCVar(GoobCVars.BarksEnabled))
+            if (configurationManager.GetCVar(GoobCVars.BarksEnabled))
             {
                 BarksContainer.Visible = true;
-                InitializeBarkVoice();
-            }*/
+                InitializeBarks();
+            }
 
             #endregion
 
@@ -680,8 +685,13 @@ namespace Content.Client.Lobby.UI
                 TabContainer.AddChild(_flavorText);
                 TabContainer.SetTabTitle(TabContainer.ChildCount - 1, Loc.GetString("humanoid-profile-editor-flavortext-tab"));
                 _flavorTextEdit = _flavorText.CFlavorTextInput;
+                _oocNotesEdit = _flavorText.COOCTextInput;
+                _headshotUrlEdit = _flavorText.CHeadshotUrlInput;
+                UpdateFlavorTextEdit();
 
                 _flavorText.OnFlavorTextChanged += OnFlavorTextChange;
+                _flavorText.OnOOCNotesChanged += OnOOCNotesChange;
+                _flavorText.OnHeadshotUrlChanged += OnHeadshotUrlChange;
             }
             else
             {
@@ -690,9 +700,12 @@ namespace Content.Client.Lobby.UI
 
                 TabContainer.RemoveChild(_flavorText);
                 _flavorText.OnFlavorTextChanged -= OnFlavorTextChange;
+                _flavorText.OnOOCNotesChanged -= OnOOCNotesChange;
+                _flavorText.OnHeadshotUrlChanged -= OnHeadshotUrlChange;
                 _flavorText.Dispose();
-                _flavorTextEdit?.Dispose();
                 _flavorTextEdit = null;
+                _oocNotesEdit = null;
+                _headshotUrlEdit = null;
                 _flavorText = null;
             }
         }
@@ -1077,8 +1090,7 @@ namespace Content.Client.Lobby.UI
             UpdateSaveButton();
             UpdateMarkings();
             UpdateTTSVoicesControls(); // CorvaxGoob-TTS
-            // CorvaxGoob-Revert : DB conflicts
-            // UpdateBarkVoice(); // Goob Station - Barks
+            UpdateBarkVoicesControls(); // ADT Barks
             UpdateHairPickers();
             UpdateCMarkingsHair();
             UpdateCMarkingsFacialHair();
@@ -1390,6 +1402,24 @@ namespace Content.Client.Lobby.UI
             SetDirty();
         }
 
+        private void OnOOCNotesChange(string content)
+        {
+            if (Profile is null)
+                return;
+
+            Profile = Profile.WithOOCNotes(content);
+            SetDirty();
+        }
+
+        private void OnHeadshotUrlChange(string content)
+        {
+            if (Profile is null)
+                return;
+
+            Profile = Profile.WithHeadshotUrl(content);
+            SetDirty();
+        }
+
         private void OnMarkingChange(MarkingSet markings)
         {
             if (Profile is null)
@@ -1562,6 +1592,42 @@ namespace Content.Client.Lobby.UI
         }
         // CorvaxGoob-TTS-End
 
+        // ADT Barks start
+        private void SetBarkProto(string prototype)
+        {
+            Profile = Profile?.WithBarkProto(prototype);
+            ReloadPreview();
+            SetDirty();
+        }
+
+        private void SetBarkPitch(float pitch)
+        {
+            Profile = Profile?.WithBarkPitch(Math.Clamp(pitch, BarkDefaults.MinPitch, BarkDefaults.MaxPitch));
+            ReloadPreview();
+            SetDirty();
+        }
+
+        private void SetBarkMinVariation(float variation)
+        {
+            if (Profile == null)
+                return;
+
+            Profile = Profile.WithBarkMinVariation(Math.Clamp(variation, BarkDefaults.MinDelay, Profile.Bark.MaxVar));
+            ReloadPreview();
+            SetDirty();
+        }
+
+        private void SetBarkMaxVariation(float variation)
+        {
+            if (Profile == null)
+                return;
+
+            Profile = Profile.WithBarkMaxVariation(Math.Clamp(variation, Profile.Bark.MinVar, BarkDefaults.MaxDelay));
+            ReloadPreview();
+            SetDirty();
+        }
+        // ADT Barks end
+
         private void SetSpecies(string newSpecies)
         {
             Profile = Profile?.WithSpecies(newSpecies);
@@ -1646,6 +1712,16 @@ namespace Content.Client.Lobby.UI
             if (_flavorTextEdit != null)
             {
                 _flavorTextEdit.TextRope = new Rope.Leaf(Profile?.FlavorText ?? "");
+            }
+
+            if (_oocNotesEdit != null)
+            {
+                _oocNotesEdit.TextRope = new Rope.Leaf(Profile?.OOCNotes ?? "");
+            }
+
+            if (_headshotUrlEdit != null)
+            {
+                _headshotUrlEdit.Text = Profile?.HeadshotUrl ?? "";
             }
         }
 

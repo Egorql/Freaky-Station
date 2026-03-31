@@ -58,7 +58,7 @@
       inverted: true
       species:
       - Abductor
-  #goobcoins: 45 Corvax-Goob-coins
+  goobcoins: 45
   guides:
   # - BlueshieldOfficer SOP Hidden by CorvaxGoob
   - Command

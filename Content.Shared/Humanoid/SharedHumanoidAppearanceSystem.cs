@@ -34,6 +34,7 @@
 using System.IO;
 using System.Linq;
 using System.Numerics;
+using Content.Shared.ADT.SpeechBarks;
 using Content.Shared.CCVar;
 using Content.Shared.Decals;
 using Content.Shared.Examine;
@@ -44,7 +45,6 @@ using Content.Shared.IdentityManagement;
 using Content.Shared.Inventory;
 using Content.Shared.Preferences;
 using Content.Shared._EinsteinEngines.HeightAdjust;
-using Content.Goobstation.Common.Barks; // Goob Station - Barks
 using Robust.Shared;
 using Robust.Shared.Configuration;
 using Robust.Shared.GameObjects.Components.Localization;
@@ -58,6 +58,8 @@ using YamlDotNet.RepresentationModel;
 using Content.Shared._CorvaxGoob.TTS;
 using Content.Corvax.Interfaces.Shared;
 using Robust.Shared.Enums;
+using GoobBarkPrototype = Content.Goobstation.Common.Barks.BarkPrototype;
+using SpeechSynthesisComponent = Content.Goobstation.Common.Barks.SpeechSynthesisComponent;
 
 namespace Content.Shared.Humanoid;
 
@@ -92,7 +94,8 @@ public abstract class SharedHumanoidAppearanceSystem : EntitySystem
     };
     // CorvaxGoob-TTS-End
     public static readonly ProtoId<SpeciesPrototype> DefaultSpecies = "Human";
-    public static readonly ProtoId<BarkPrototype> DefaultBarkVoice = "Alto"; // Goob Station - Barks
+    public static readonly ProtoId<GoobBarkPrototype> DefaultBarkVoice = "Alto"; // Goob Station - Barks
+    public const string DefaultBark = "Human1"; // ADT Barks
 
     public override void Initialize()
     {
@@ -582,6 +585,7 @@ public abstract class SharedHumanoidAppearanceSystem : EntitySystem
 
         EnsureDefaultMarkings(uid, humanoid);
         SetTTSVoice(uid, profile.Voice, humanoid); // CorvaxGoob-TTS
+        SetBarkData(uid, profile.Bark); // ADT Barks
         // CorvaxGoob-Revert : DB conflicts
         // SetBarkVoice(uid, profile.BarkVoice, humanoid); // Goob Station - Barks
 
@@ -651,6 +655,16 @@ public abstract class SharedHumanoidAppearanceSystem : EntitySystem
     }
     // CorvaxGoob-TTS-End
 
+    // ADT Barks start
+    public void SetBarkData(EntityUid uid, BarkData data)
+    {
+        if (!TryComp<SpeechBarksComponent>(uid, out var comp))
+            return;
+
+        comp.Data = data.Copy();
+    }
+    // ADT Barks end
+
     private void EnsureDefaultMarkings(EntityUid uid, HumanoidAppearanceComponent? humanoid)
     {
         if (!Resolve(uid, ref humanoid))
@@ -692,14 +706,14 @@ public abstract class SharedHumanoidAppearanceSystem : EntitySystem
         var voicePrototypeId = DefaultBarkVoice;
 
         if (barkvoiceId != null &&
-            _proto.TryIndex<BarkPrototype>(barkvoiceId, out var bark) &&
+            _proto.TryIndex<GoobBarkPrototype>(barkvoiceId, out var bark) &&
             (bark.SpeciesWhitelist == null || bark.SpeciesWhitelist.Contains(humanoid.Species)))
         {
             voicePrototypeId = barkvoiceId;
         }
         else
         {
-            var barks = _proto.EnumeratePrototypes<BarkPrototype>()
+            var barks = _proto.EnumeratePrototypes<GoobBarkPrototype>()
                 .Where(o => o.RoundStart && (o.SpeciesWhitelist is null || o.SpeciesWhitelist.Contains(humanoid.Species)))
                 .ToList();
 

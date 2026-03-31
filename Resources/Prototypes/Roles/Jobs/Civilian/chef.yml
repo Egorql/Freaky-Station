@@ -88,7 +88,7 @@
   startingGear: ChefGear
   icon: "JobIconChef"
   supervisors: job-supervisors-hop
-  #goobcoins: 15 #Goob content Corvax-Goob-coins
+  goobcoins: 15 #Goob content
   skills: # CorvaxGoob-Skills
   - Butchering
   guides: # goobstation

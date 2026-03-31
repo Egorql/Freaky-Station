@@ -156,7 +156,7 @@
   icon: "JobIconChiefEngineer"
   supervisors: job-supervisors-captain
   canBeAntag: false
-  #goobcoins: 40 #Goob content Corvax-Goob-coins
+  goobcoins: 40 #Goob content
   skills: # CorvaxGoob-Skills
   - ShuttleControl
   - AdvancedBuilding

@@ -54,6 +54,16 @@ public sealed partial class VoiceMaskComponent : Component
     public string VoiceId = SharedHumanoidAppearanceSystem.DefaultVoice;
     // CorvaxGoob-TTS-End
 
+    // ADT Barks start
+    [DataField]
+    [ViewVariables(VVAccess.ReadWrite)]
+    public string BarkId = SharedHumanoidAppearanceSystem.DefaultBark;
+
+    [DataField]
+    [ViewVariables(VVAccess.ReadWrite)]
+    public float BarkPitch = 1f;
+    // ADT Barks end
+
     /// <summary>
     ///     Reference to the action.
     /// </summary>

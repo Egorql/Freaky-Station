@@ -831,10 +831,24 @@ namespace Content.Server.Database.Migrations.Postgres
                         .HasColumnType("integer")
                         .HasColumnName("age");
 
+                    b.Property<float>("BarkPitch")
+                        .HasColumnType("real")
+                        .HasColumnName("bark_pitch");
+
+                    b.Property<string>("BarkProto")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("bark_proto");
+
                     b.Property<string>("CharacterName")
                         .IsRequired()
                         .HasColumnType("text")
                         .HasColumnName("char_name");
+
+                    b.Property<string>("ERPS")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("erps");
 
                     b.Property<string>("EyeColor")
                         .IsRequired()
@@ -876,6 +890,14 @@ namespace Content.Server.Database.Migrations.Postgres
                         .HasColumnType("text")
                         .HasColumnName("headshot_url");
 
+                    b.Property<float>("HighBarkVar")
+                        .HasColumnType("real")
+                        .HasColumnName("high_bark_var");
+
+                    b.Property<float>("LowBarkVar")
+                        .HasColumnType("real")
+                        .HasColumnName("low_bark_var");
+
                     b.Property<JsonDocument>("Markings")
                         .HasColumnType("jsonb")
                         .HasColumnName("markings");
@@ -916,20 +938,10 @@ namespace Content.Server.Database.Migrations.Postgres
                         .HasColumnType("text")
                         .HasColumnName("species");
 
-                    // Corvax-TTS-Start
                     b.Property<string>("Voice")
                         .IsRequired()
                         .HasColumnType("text")
                         .HasColumnName("voice");
-                    // Corvax-TTS-End
-
-                    // Freaky-ERP-Start
-                    b.Property<string>("ERPS")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("erps")
-                        .HasDefaultValue("");
-                    // Freaky-ERP-End
 
                     b.HasKey("Id")
                         .HasName("PK_profile");

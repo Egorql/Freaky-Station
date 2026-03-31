@@ -46,11 +46,6 @@ namespace Content.Goobstation.Shared.ServerCurrency.UI
     public static class CurrencyEuiMsg
     {
         [Serializable, NetSerializable]
-        public sealed class Close : EuiMessageBase
-        {
-        }
-
-        [Serializable, NetSerializable]
         public sealed class Buy : EuiMessageBase
         {
             public ProtoId<TokenListingPrototype> TokenId;

@@ -305,7 +305,7 @@ public sealed partial class GoobCVars
     #region Goobcoins
 
     public static readonly CVarDef<int> GoobcoinsPerPlayer =
-        CVarDef.Create("servercurrency.per_player", 20, CVar.SERVERONLY);
+        CVarDef.Create("servercurrency.per_player", 10, CVar.SERVERONLY); // GO BACK, I WANT TO BE GOOB FORK
 
     public static readonly CVarDef<int> GoobcoinNonAntagMultiplier =
         CVarDef.Create("servercurrency.non_antag_multiplier", 1, CVar.SERVERONLY);
@@ -453,7 +453,7 @@ public sealed partial class GoobCVars
     /// Set to true to enable voice barks and disable default speech sounds.
     /// </summary>
     public static readonly CVarDef<bool> BarksEnabled =
-        CVarDef.Create("voice.barks_enabled", false, CVar.SERVER | CVar.REPLICATED | CVar.ARCHIVE);
+        CVarDef.Create("voice.barks_enabled", true, CVar.SERVER | CVar.REPLICATED | CVar.ARCHIVE);
 
     /// <summary>
     /// Client volume setting for barks.

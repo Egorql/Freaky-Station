@@ -157,7 +157,7 @@
   icon: "JobIconWarden"
   supervisors: job-supervisors-hos
   canBeAntag: false
-  #goobcoins: 35 #Goob content Corvax-Goob-coins
+  goobcoins: 35 #Goob content
   skills: # CorvaxGoob-Skills
   - Shooting
   guides: # goobstation

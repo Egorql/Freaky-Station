@@ -139,6 +139,7 @@ using Content.Server.Administration.Logs;
 using Content.Server.Administration.Managers;
 // using Content.Shared._RMC14.LinkAccount; // CorvaxGoob-Coins
 using Content.Shared.Administration.Logs;
+using Content.Shared.ADT.SpeechBarks;
 using Content.Shared.Construction.Prototypes;
 using Content.Shared.Database;
 using Content.Shared.Humanoid;
@@ -355,6 +356,8 @@ namespace Content.Server.Database
                 voice = SharedHumanoidAppearanceSystem.DefaultSexVoice[sex];
             // CorvaxGoob-TTS-End
 
+            var bark = new BarkData(profile.BarkProto, profile.BarkPitch, profile.LowBarkVar, profile.HighBarkVar); // ADT Barks
+
             // ReSharper disable once ConditionalAccessQualifierIsNonNullableAccordingToAPIContract
             var markingsRaw = profile.Markings?.Deserialize<List<string>>();
 
@@ -424,7 +427,8 @@ namespace Content.Server.Database
                 loadouts,
                 // ADT start
                 profile.OOCNotes,
-                profile.HeadshotUrl
+                profile.HeadshotUrl,
+                bark
                 // ADT end
                 // barkVoice // Goob Station - Barks // CorvaxGoob-Revert : DB conflicts
             );
@@ -459,6 +463,10 @@ namespace Content.Server.Database
             profile.ERPS = humanoid.ERPS.ToString();
             profile.Slot = slot;
             profile.PreferenceUnavailable = (DbPreferenceUnavailableMode) humanoid.PreferenceUnavailable;
+            profile.BarkProto = humanoid.Bark.Proto; // ADT Barks
+            profile.BarkPitch = humanoid.Bark.Pitch; // ADT Barks
+            profile.LowBarkVar = humanoid.Bark.MinVar; // ADT Barks
+            profile.HighBarkVar = humanoid.Bark.MaxVar; // ADT Barks
 
             profile.Jobs.Clear();
             profile.Jobs.AddRange(

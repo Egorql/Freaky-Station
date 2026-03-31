@@ -62,7 +62,7 @@
   startingGear: ResearchAssistantGear
   icon: "JobIconResearchAssistant"
   supervisors: job-supervisors-science
-  #goobcoins: 20 #Goob content Corvax-Goob-coins
+  goobcoins: 20 #Goob content
   skills: # CorvaxGoob-Skills
   - AdvancedBuilding
   guides: [ Science ] # goobstation

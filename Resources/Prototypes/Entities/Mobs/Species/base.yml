@@ -469,6 +469,7 @@
   - type: Puller
   - type: Speech
     speechSounds: Alto
+  - type: SpeechBarks
   - type: DamageForceSay
   - type: Vocal
     sounds:

@@ -416,6 +416,10 @@ namespace Content.Server.Database
         public string Gender { get; set; } = null!;
         public string Species { get; set; } = null!;
         public string Voice { get; set; } = null!; // Corvax-TTS
+        public string BarkProto { get; set; } = "Human1"; // ADT Barks
+        public float BarkPitch { get; set; } = 1f; // ADT Barks
+        public float LowBarkVar { get; set; } = 0.1f; // ADT Barks
+        public float HighBarkVar { get; set; } = 0.5f; // ADT Barks
         public string ERPS { get; set; } = "No";
         [Column(TypeName = "jsonb")] public JsonDocument? Markings { get; set; } = null!;
         public string HairName { get; set; } = null!;

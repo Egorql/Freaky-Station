@@ -160,7 +160,7 @@
       inverted: true
       species:
       - Abductor
-  #goobcoins: 40 #Goob content Corvax-Goob-coins
+  goobcoins: 40 #Goob content
   guides: # goobstation
   - Command
   # - Succession Hidden by CorvaxGoob

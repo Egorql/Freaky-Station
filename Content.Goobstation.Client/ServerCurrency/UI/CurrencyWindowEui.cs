@@ -18,7 +18,7 @@ namespace Content.Goobstation.Client.ServerCurrency.UI
         public CurrencyEui()
         {
             _window = new CurrencyWindow();
-            _window.OnClose += () => SendMessage(new CurrencyEuiMsg.Close());
+            _window.OnClose += () => SendMessage(new CloseEuiMessage());
             _window.OnBuy += OnBuyMsg;
             _window.OnSpinRoulette += OnSpinRouletteMsg;
         }
@@ -29,7 +29,7 @@ namespace Content.Goobstation.Client.ServerCurrency.UI
             {
                 TokenId = tokenId
             });
-            SendMessage(new CurrencyEuiMsg.Close());
+            SendMessage(new CloseEuiMessage());
         }
 
         public override void Opened()
