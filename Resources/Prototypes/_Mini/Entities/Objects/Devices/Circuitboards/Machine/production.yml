@@ -324,6 +324,19 @@
     prototype: WeaponEnergyTurretTypanCommand
 
 - type: entity
+  parent: WeaponEnergyTurretStationMachineCircuitboardBase
+  id: WeaponEnergyTurretCentralCommandMachineCircuitboard
+  name: turret machine board
+  description: A machine printed circuit board for a security turret.
+  suffix: Central Command
+  components:
+  - type: Sprite
+    sprite: _Mini/Objects/Misc/module.rsi
+    state: syndicate
+  - type: MachineBoard
+    prototype: WeaponEnergyTurretCentralCommand
+
+- type: entity
   id: MaterialSiloMachineCircuitboardTypan
   parent: BaseMachineCircuitboardTypan
   name: хранилище материалов (машинная плата)

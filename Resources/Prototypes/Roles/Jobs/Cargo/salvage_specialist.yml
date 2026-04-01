@@ -79,7 +79,7 @@
       time: 9000 # 2.5 hrs
   icon: "JobIconShaftMiner"
   startingGear: SalvageSpecialistGear
-  #goobcoins: 20 #Goob content Corvax-Goob-coins
+  goobcoins: 20 #Goob content
   guides: # goobstation
   - Salvage
   - Cargo
@@ -93,17 +93,15 @@
   - Salvage
   - Maintenance
   - External
-
 - type: startingGear
   id: SalvageSpecialistGear
   equipment:
-    jumpsuit: ClothingUniformJumpsuitSalvageSpecialist
     id: SalvagePDA
+## Goob comment out - jumpsuit: ClothingUniformJumpsuitSalvageSpecialist
     ears: ClothingHeadsetCargo
   storage: # DeltaV: Add mining voucher
     back:
     - MiningVoucher
-
 - type: chameleonOutfit
   id: SalvageSpecialistChameleonOutfit
   job: SalvageSpecialist

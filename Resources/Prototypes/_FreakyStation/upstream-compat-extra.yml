@@ -1,0 +1,126 @@
+# Additional compat prototypes for merged upstream content.
+
+# Typan mech compatibility
+- type: Tag
+  id: TypanRipleyEquipment
+
+- type: Tag
+  id: TypanRipleyLArm
+
+- type: Tag
+  id: TypanRipleyRArm
+
+- type: Tag
+  id: TypanRipleyLLeg
+
+- type: Tag
+  id: TypanRipleyRLeg
+
+- type: Tag
+  id: TypanRipleyCentralControlModule
+
+- type: Tag
+  id: TypanRipleyPeripheralsControlModule
+
+# Tag compatibility
+- type: Tag
+  id: BorgModuleSex
+
+# Play time compatibility
+- type: playTimeTracker
+  id: JobCBURNLeader
+
+- type: playTimeTracker
+  id: JobERTLeaderAmber
+
+- type: playTimeTracker
+  id: JobERTLeaderRed
+
+- type: playTimeTracker
+  id: JobERTLeaderGamma
+
+- type: playTimeTracker
+  id: JobERTSecurityAmber
+
+- type: playTimeTracker
+  id: JobERTSecurityRed
+
+- type: playTimeTracker
+  id: JobERTSecurityGamma
+
+- type: playTimeTracker
+  id: JobERTMedicalAmber
+
+- type: playTimeTracker
+  id: JobERTMedicalRed
+
+- type: playTimeTracker
+  id: JobERTMedicalGamma
+
+- type: playTimeTracker
+  id: JobERTEngineerAmber
+
+- type: playTimeTracker
+  id: JobERTEngineerRed
+
+- type: playTimeTracker
+  id: JobERTEngineerGamma
+
+- type: playTimeTracker
+  id: JobERTJanitorAmber
+
+- type: playTimeTracker
+  id: JobERTJanitorRed
+
+- type: playTimeTracker
+  id: JobERTJanitorGamma
+
+- type: playTimeTracker
+  id: TypanPatrol
+
+- type: playTimeTracker
+  id: JobTypanTechnicalOperationsSupervisor
+
+# Job icon compatibility
+- type: jobIcon
+  parent: JobIconNanotrasen
+  id: JobIconERT
+
+- type: jobIcon
+  parent: JobIconNanotrasen
+  id: JobIconERTLeader
+
+- type: jobIcon
+  parent: JobIconChiefEngineer
+  id: JobIconTypanTechnicalOperationsSupervisor
+
+# Loadout compatibility
+- type: loadout
+  id: SyndiWintercoat
+  equipment:
+    outerClothing: ClothingOuterWinterSyndie
+
+# Borg subtype compatibility
+- type: borgSubtype
+  parentBorgType: engineering
+  id: engineer_basic
+  spritePath: Mobs/Silicon/chassis.rsi
+  dummyPrototype: BorgChassisEngineer
+
+- type: borgSubtype
+  parentBorgType: janitor
+  id: janitor_basic
+  spritePath: Mobs/Silicon/chassis.rsi
+  dummyPrototype: BorgChassisJanitor
+
+- type: borgSubtype
+  parentBorgType: medical
+  id: medical_standart
+  spritePath: Mobs/Silicon/chassis.rsi
+  dummyPrototype: BorgChassisMedical
+
+- type: borgSubtype
+  parentBorgType: service
+  id: service_standart
+  spritePath: Mobs/Silicon/chassis.rsi
+  dummyPrototype: BorgChassisService

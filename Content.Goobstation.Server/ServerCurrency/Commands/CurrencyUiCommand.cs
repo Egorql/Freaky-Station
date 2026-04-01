@@ -38,6 +38,9 @@ namespace Content.Goobstation.Server.ServerCurrency.Commands
                 return;
             }
 
+            if (CurrencyEui.IsOpenFor(player))
+                return;
+
             var eui = IoCManager.Resolve<EuiManager>();
             var ui = new CurrencyEui();
             eui.OpenEui(ui, player);

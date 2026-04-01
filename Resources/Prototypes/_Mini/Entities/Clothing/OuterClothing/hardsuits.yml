@@ -205,13 +205,13 @@
   parent: SuitStorageBase
   suffix: тайпан карго
   components:
-  - type: StorageFill
-    contents:
+    - type: StorageFill
+      contents:
         - id: OxygenTankFilled
-        - id: ClothingOuterHardsuitSalvageSindi
+        - id: ClothingOuterHardsuitSalvage
         - id: ClothingMaskGasSyndicate
-  - type: AccessReader
-    access: [["TypanCargo"]]
+    - type: AccessReader
+      access: [["TypanCargo"]]
 
 - type: entity
   parent: ClothingOuterHardsuitAtmos

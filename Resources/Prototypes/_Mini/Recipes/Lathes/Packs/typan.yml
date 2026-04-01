@@ -7,17 +7,14 @@
   - WeaponPistolViper
   - WeaponRevolverPython
   - WeaponPistolCobra
-  - WeaponPistolDesertEagle
 
 - type: latheRecipePack
   id: TypanWeapons
   recipes:
   - WeaponSniperMosin
   - WeaponSniperHristov
-  - ADTWeaponRifleXC67
   - WeaponRifleAk
   - WeaponSubMachineGunC20r
-  - WeaponSMGTommyGun
   - WeaponShotgunBulldog
   - WeaponLightMachineGunL6
   - WeaponLauncherChinaLake

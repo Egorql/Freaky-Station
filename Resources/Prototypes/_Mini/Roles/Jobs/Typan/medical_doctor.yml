@@ -38,7 +38,7 @@
   id: TypanMedic
   equipment:
     eyes: ClothingEyesHudTypanMedical
-    ears: ClothingHeadsetAltSyndicate
+    ears: ClothingHeadsetAltTypan
     outerClothing: ClothingOuterTypanCoatLabMed
     shoes: ClothingShoesBootsCombat
     id: MedicalPDASyndi

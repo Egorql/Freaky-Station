@@ -26,7 +26,7 @@
   description: Консольная плата для аналитической консоли.
   components:
   - type: ComputerBoard
-    prototype: ComputerTypanAnalysisConsole
+    prototype: ComputerAnalysisConsole
 
 - type: entity
   parent: BaseComputerCircuitboardTypan
@@ -35,7 +35,7 @@
   description: Консольная плата для консоли запросов.
   components:
   - type: ComputerBoard
-    prototype: ComputerTypanCargoBounty
+    prototype: ComputerCargoBounty
 
 - type: entity
   parent: BaseComputerCircuitboardTypan
@@ -44,7 +44,7 @@
   description: Консольная плата для консоли заказа грузов.
   components:
   - type: ComputerBoard
-    prototype: ComputerTypanCargoOrders
+    prototype: ComputerCargoOrders
 
 - type: entity
   parent: BaseComputerCircuitboardTypan
@@ -53,7 +53,7 @@
   description: Консольная плата для консоли продажи товаров.
   components:
   - type: ComputerBoard
-    prototype: ComputerTypanPalletConsole
+    prototype: ComputerPalletConsole
 
 - type: entity
   parent: BaseComputerCircuitboardTypan
@@ -62,7 +62,7 @@
   description: Консольная плата для монитора камер слежения.
   components:
   - type: ComputerBoard
-    prototype: ComputerTypanSurveillanceCameraMonitor
+    prototype: ComputerSurveillanceCameraMonitor
 
 - type: entity
   parent: BaseComputerCircuitboardTypan
@@ -80,7 +80,7 @@
   description: Консольная плата для консоли мониторинга экипажа.
   components:
   - type: ComputerBoard
-    prototype: ComputerTypanCrewMonitoring
+    prototype: ComputerCrewMonitoring
 
 - type: entity
   parent: BaseComputerCircuitboardTypan
@@ -89,7 +89,7 @@
   description: Консольная плата для консоли ID карт.
   components:
   - type: ComputerBoard
-    prototype: ComputerTypanId
+    prototype: ComputerId
 
 - type: entity
   parent: BaseComputerCircuitboardTypan
@@ -98,7 +98,7 @@
   description: Позволяет управлять параметрами системы опознавания судна.
   components:
   - type: ComputerBoard
-    prototype: ComputerTypanIFF
+    prototype: ComputerIFFSyndicate
 
 - type: entity
   parent: BaseComputerCircuitboardTypan
@@ -107,7 +107,7 @@
   description: Консольная плата исследовательской консоли.
   components:
   - type: ComputerBoard
-    prototype: ComputerTypanResearchAndDevelopment
+    prototype: ComputerResearchAndDevelopment
 
 - type: entity
   parent: BaseComputerCircuitboardTypan
@@ -116,7 +116,7 @@
   description: Консольная плата для консоли управления робототехникой.
   components:
   - type: ComputerBoard
-    prototype: ComputerTypanRoboticsControl
+    prototype: ComputerRoboticsControl
 
 - type: entity
   parent: BaseComputerCircuitboardTypan
@@ -125,7 +125,7 @@
   description: Консольная плата для консоли управления шаттлом.
   components:
   - type: ComputerBoard
-    prototype: ComputerTypanShuttle
+    prototype: ComputerShuttleSyndie
 
 - type: entity
   parent: BaseComputerCircuitboardTypan
@@ -134,4 +134,4 @@
   description: Консольная плата для консоли загрузки ИИ.
   components:
   - type: ComputerBoard
-    prototype: ComputerTypanAiUpload
+    prototype: StationAiUploadComputer

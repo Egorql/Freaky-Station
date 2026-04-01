@@ -59,7 +59,7 @@
     - id: ClothingHandsGlovesNitrile
     - id: ClothingMaskSterile
     - id: HandheldGPSBasic
-    - id: SpyCrewMonitor
+    - id: HandheldCrewMonitor
     - id: MedkitFilled
       prob: 0.3
     - id: MedkitAdvancedFilled
@@ -195,10 +195,10 @@
     contents:
     - id: ClothingHandsGlovesLeather
     - id: ClothingOuterApronTypanBotanist
-    - id: ClothingMaskBandBotanyTypan
+    - id: ClothingMaskBandBotany
     - id: ChemistryBottleRobustHarvest
       prob: 0.3
-    - id: ClothingBeltPlantTypan
+    - id: ClothingBeltPlant
     - id: TypanPlantBag
     - id: BoxMouthSwab
     - id: Dropper

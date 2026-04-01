@@ -259,7 +259,7 @@
   - type: AccessReader
     access: [["TypanCommand"]]
   - type: CommunicationsConsole
-    title: НИКК Тайпан
+    title: typan-comms-console-title
     sound:
       path: /Audio/_Mini/Announcements/announce_typan.ogg
       params:

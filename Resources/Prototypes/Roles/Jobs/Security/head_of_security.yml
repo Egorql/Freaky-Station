@@ -169,7 +169,7 @@
   icon: "JobIconHeadOfSecurity"
   supervisors: job-supervisors-captain
   canBeAntag: false
-  #goobcoins: 45 #Goob content Corvax-Goob-coins
+  goobcoins: 45 #Goob content
   skills: # CorvaxGoob-Skills
   - ShuttleControl
   - Shooting

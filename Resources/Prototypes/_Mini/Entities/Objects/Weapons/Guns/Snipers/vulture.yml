@@ -26,7 +26,6 @@
     - SemiAuto
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/sniper.ogg
-    proto: CartridgeAntiMateriel
   - type: SpeedModifiedOnWield
     walkModifier: 0.7
     sprintModifier: 0.7

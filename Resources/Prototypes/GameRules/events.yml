@@ -249,7 +249,7 @@
   - type: StationEvent
     startAnnouncementColor: "#18abf5"
     startAudio:
-      path: /Audio/Corvax/Announcements/flux.ogg # Reserve new sounds
+      path: /Audio/Announcements/ion_storm.ogg # Reserve new sounds
     weight: 8
     duration: 35
     chaos: # Goobstation
@@ -272,7 +272,7 @@
   - type: StationEvent
     startAnnouncementColor: "#18abf5"
     startAudio:
-      path: /Audio/Corvax/Announcements/blusp_anomalies.ogg # Reserve new sounds
+      path: /Audio/Announcements/ion_storm.ogg # Reserve new sounds
       params:
         volume: -4
     weight: 8
@@ -662,7 +662,7 @@
     startAnnouncement: station-event-power-grid-check-start-announcement
     endAnnouncement: station-event-power-grid-check-end-announcement
     startAudio:
-      path: /Audio/Announcements/power_off.ogg
+      path: /Audio/Announcements/power_off.ogg # Reserve new sounds
       params:
         volume: -4
     duration: 60
@@ -682,7 +682,7 @@
     startAnnouncement: station-event-solar-flare-start-announcement
     endAnnouncement: station-event-solar-flare-end-announcement
     startAudio:
-      path: /Audio/Corvax/Announcements/comms_blackout.ogg # Reserve new sounds
+      path: /Audio/Announcements/attention.ogg # Reserve new sounds
       params:
         volume: -4
     duration: 120
@@ -739,7 +739,7 @@
     startAnnouncement: station-event-vent-creatures-start-announcement
   # Reserve new sounds begin
     startAudio:
-      path: /Audio/_Reserve/Announcements/lifesigns.ogg
+      path: /Audio/Announcements/aliens.ogg
       params:
         volume: -4
   # Reserve new sounds end
@@ -767,7 +767,7 @@
     startAnnouncement: station-event-vent-creatures-start-announcement
   # Reserve new sounds bgn
     startAudio:
-      path: /Audio/_Reserve/Announcements/lifesigns.ogg
+      path: /Audio/_Mini/Announcements/lifesigns.ogg
       params:
         volume: -4
   # Reserve new sounds end
@@ -797,7 +797,7 @@
     startAnnouncement: station-event-vent-creatures-start-announcement
   # Reserve new sounds bgn
     startAudio:
-      path: /Audio/_Reserve/Announcements/lifesigns.ogg
+      path: /Audio/_Mini/Announcements/lifesigns.ogg
       params:
         volume: -4
   # Reserve new sounds end
@@ -1000,7 +1000,7 @@
     startAnnouncementColor: "#18abf5"
     startAnnouncement: station-event-ion-storm-start-announcement
     startAudio:
-      path: /Audio/_Reserve/Announcements/i-storm1.ogg
+      path: /Audio/Announcements/ion_storm.ogg
       params:
         volume: -4
   # Reserve new sounds end
@@ -1043,7 +1043,7 @@
   - type: StationEvent
   # Reserve new sounds bgn
     startAudio:
-      path: /Audio/_Reserve/Announcements/greytide.ogg
+      path: /Audio/Announcements/attention.ogg
       params:
         volume: -4
   # Reserve new sounds end

@@ -5,7 +5,6 @@
   playTimeTracker: JobTypanTechnicalOperationsSupervisor
   setPreference: false
   overrideConsoleVisibility: true
-  isTypan: true
   startingGear: TypanTechnicalOperationsSupervisorGear
   icon: "JobIconTypanTechnicalOperationsSupervisor"
   supervisors: job-supervisors-syndicate

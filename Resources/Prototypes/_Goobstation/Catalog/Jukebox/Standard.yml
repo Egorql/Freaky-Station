@@ -312,3 +312,75 @@
   name: Mrjajkes - The Greytide Song
   path:
     path: /Audio/_Goobstation/Music/the_gray_tide_song.ogg
+
+- type: jukebox
+  id: future_perception
+  name: Merct - Future Perception
+  path:
+    path: /Audio/_Goobstation/Music/future_perception.ogg
+
+- type: jukebox
+  id: mind_crawler
+  name: Merct - Mind Crawler
+  path:
+    path: /Audio/_Goobstation/Music/mind_crawler.ogg
+
+- type: jukebox
+  id: the_man_who_sold_the_world
+  name: Midge Ure - The Man Who Sold The World
+  path:
+    path: /Audio/_FreakStation/Jukebox/themanwhosoldtheworld.ogg
+
+- type: jukebox
+  id: invisible
+  name: Duran Duran - Invisible
+  path:
+    path: /Audio/_FreakStation/Jukebox/invisible.ogg
+
+- type: jukebox
+  id: absolutealkogolichka
+  name: Artur Pirozhkov feat Ken Ashcorp - Absolute Alkogolichka (mashup)
+  path:
+    path: /Audio/Jukebox/absolutealkogolichka.ogg
+
+- type: jukebox
+  id: ebanutayalyaguha
+  name: Axel F - Crazy Frog
+  path:
+    path: /Audio/Jukebox/ebnutayaLyaguha.ogg
+
+- type: jukebox
+  id: podarokpina
+  name: Unknown - Podarok Pina
+  path:
+    path: /Audio/Jukebox/podarokpina.ogg
+
+- type: jukebox
+  id: evangelion
+  name: Yoko Takahashi - A Cruel Angel's Thesis
+  path:
+    path: /Audio/Jukebox/evangelion.ogg
+
+- type: jukebox
+  id: eiffel65blue
+  name: Eiffel65 - Blue (Da Ba Dee)
+  path:
+    path: /Audio/Jukebox/eiffel65_blue.ogg
+
+- type: jukebox
+  id: smeshariki
+  name: Smeshariki - Chase
+  path:
+    path: /Audio/Jukebox/smeshariki.ogg
+
+- type: jukebox
+  id: the_only_thing_i_know_for_real
+  name: MGR:R - The Only Thing I Know For Real
+  path:
+    path: /Audio/Jukebox/The_Only_Thing_I_Know_for_Real.ogg
+
+- type: jukebox
+  id: freaks
+  name: Surf Curse - Freaks
+  path:
+    path: /Audio/Jukebox/freaks.ogg

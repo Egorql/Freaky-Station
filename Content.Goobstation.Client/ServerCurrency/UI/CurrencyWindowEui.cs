@@ -18,7 +18,7 @@ namespace Content.Goobstation.Client.ServerCurrency.UI
         public CurrencyEui()
         {
             _window = new CurrencyWindow();
-            _window.OnClose += () => SendMessage(new CurrencyEuiMsg.Close());
+            _window.OnClose += () => SendMessage(new CloseEuiMessage());
             _window.OnBuy += OnBuyMsg;
             _window.OnSpinRoulette += OnSpinRouletteMsg;
         }
@@ -29,7 +29,7 @@ namespace Content.Goobstation.Client.ServerCurrency.UI
             {
                 TokenId = tokenId
             });
-            SendMessage(new CurrencyEuiMsg.Close());
+            SendMessage(new CloseEuiMessage());
         }
 
         public override void Opened()
@@ -50,12 +50,14 @@ namespace Content.Goobstation.Client.ServerCurrency.UI
             _window.SetRouletteResult(cast.LastRouletteSpinId, cast.LastRouletteBet, cast.LastRoulettePayout, cast.LastRouletteMultiplier);
         }
 
-        private void OnSpinRouletteMsg(int bet, int spinId)
+        private void OnSpinRouletteMsg(int bet, int spinId, RouletteMode mode, bool fastSpin)
         {
             SendMessage(new CurrencyEuiMsg.SpinRoulette
             {
                 Bet = bet,
-                SpinId = spinId
+                SpinId = spinId,
+                Mode = mode,
+                FastSpin = fastSpin
             });
         }
     }

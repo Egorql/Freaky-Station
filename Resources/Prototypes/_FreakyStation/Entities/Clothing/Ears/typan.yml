@@ -1,0 +1,42 @@
+- type: entity
+  parent: [ClothingHeadsetAlt, BaseSyndicateContraband]
+  id: ClothingHeadsetAltTypan
+  name: typan over-ear headset
+  description: An updated over-ear headset tuned to the Typan tactical frequency.
+  components:
+  - type: EncryptionKeyHolder
+    keySlots: 5
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - EncryptionKeyTypan
+  - type: Sprite
+    sprite: Clothing/Ears/Headsets/syndicate.rsi
+  - type: Clothing
+    sprite: Clothing/Ears/Headsets/syndicate.rsi
+  - type: Headset
+    color: "#9b2d30"
+
+- type: entity
+  parent: ClothingHeadsetAltTypan
+  id: ClothingHeadsetAltTypanCommander
+  name: typan command over-ear headset
+  description: A Typan command headset linked to both the Typan tactical frequency and the Syndicate network.
+  components:
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - EncryptionKeyTypan
+      - EncryptionKeySyndie
+
+- type: entity
+  parent: ClothingHeadsetAltTypan
+  id: ClothingHeadsetAltTypanResearchDirector
+  name: typan director over-ear headset
+  description: A Typan research director's headset linked to the Typan tactical frequency and the Syndicate network.
+  components:
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - EncryptionKeyTypan
+      - EncryptionKeySyndie

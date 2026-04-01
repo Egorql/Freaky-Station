@@ -1,0 +1,282 @@
+- type: ttsVoice
+  id: Taskmaster
+  name: Taskmaster
+  sex: Male
+  speaker: boyar
+  roundStart: false
+
+- type: ttsVoice
+  id: Dryad
+  name: Dryad
+  sex: Female
+  speaker: vika
+  roundStart: false
+
+- type: ttsVoice
+  id: Chen
+  name: Chen
+  sex: Male
+  speaker: eugene
+  roundStart: false
+
+- type: ttsVoice
+  id: Rat
+  name: Rat
+  sex: Male
+  speaker: zanud
+  roundStart: false
+
+- type: ttsVoice
+  id: Kelthuzad
+  name: Kelthuzad
+  sex: Male
+  speaker: garithos
+  roundStart: false
+
+- type: ttsVoice
+  id: TrainingRobot
+  name: TrainingRobot
+  sex: Male
+  speaker: semen
+  roundStart: false
+
+- type: ttsVoice
+  id: Gizmo
+  name: Gizmo
+  sex: Male
+  speaker: semen
+  roundStart: false
+
+- type: ttsVoice
+  id: Glados
+  name: Glados
+  sex: Female
+  speaker: xenia
+  roundStart: false
+
+- type: ttsVoice
+  id: Meepo
+  name: Meepo
+  sex: Male
+  speaker: zanud
+  roundStart: false
+
+- type: announcer
+  id: Intern
+  minDaysInMonth: 5
+  shuttleRecallSound:
+    collection: InternShuttleRecall
+  shuttleCallSound:
+    collection: InternShuttleCall
+  shuttleDockedSound:
+    path: /Audio/_CorvaxGoob/Announcements/Announcers/Intern/shattledocked.ogg
+  centcomAnnouncementSound:
+    collection: InternCommandReport
+
+- type: soundCollection
+  id: InternCommandReport
+  files:
+  - /Audio/_CorvaxGoob/Announcements/Announcers/Intern/commandreport.ogg
+  - /Audio/_CorvaxGoob/Announcements/Announcers/Intern/commandreport_2.ogg
+  - /Audio/_CorvaxGoob/Announcements/Announcers/Intern/commandreport_3.ogg
+
+- type: soundCollection
+  id: InternShuttleCall
+  files:
+  - /Audio/_CorvaxGoob/Announcements/Announcers/Intern/shattlecalled.ogg
+  - /Audio/_CorvaxGoob/Announcements/Announcers/Intern/shattlecalled_2.ogg
+  - /Audio/_CorvaxGoob/Announcements/Announcers/Intern/shattlecalled_3.ogg
+
+- type: soundCollection
+  id: InternShuttleRecall
+  files:
+  - /Audio/_CorvaxGoob/Announcements/Announcers/Intern/shuttlerecalled.ogg
+  - /Audio/_CorvaxGoob/Announcements/Announcers/Intern/shuttlerecalled_2.ogg
+
+- type: soundCollection
+  id: InternEventPowerOff
+  files:
+  - /Audio/_CorvaxGoob/Announcements/Announcers/Intern/poweroff.ogg
+  - /Audio/_CorvaxGoob/Announcements/Announcers/Intern/poweroff_2.ogg
+
+- type: soundCollection
+  id: InternAlertBlue
+  files:
+  - /Audio/_CorvaxGoob/Announcements/Announcers/Intern/blue.ogg
+  - /Audio/_CorvaxGoob/Announcements/Announcers/Intern/blue_2.ogg
+
+- type: soundCollection
+  id: InternAlertRed
+  files:
+  - /Audio/_CorvaxGoob/Announcements/Announcers/Intern/red.ogg
+  - /Audio/_CorvaxGoob/Announcements/Announcers/Intern/red_2.ogg
+
+- type: soundCollection
+  id: InternEventMeteor
+  files:
+  - /Audio/_CorvaxGoob/Announcements/Announcers/Intern/meteor.ogg
+  - /Audio/_CorvaxGoob/Announcements/Announcers/Intern/meteor_2.ogg
+
+- type: rcd
+  id: WallSolidCE
+  category: WallsAndFlooring
+  sprite: /Textures/Interface/Radial/RCD/solid_wall.png
+  mode: ConstructObject
+  prototype: WallSolid
+  cost: 4
+  delay: 2
+  collisionMask: FullTileMask
+  rotation: Fixed
+  fx: EffectRCDConstruct2
+
+- type: rcd
+  id: GrilleCE
+  category: WindowsAndGrilles
+  sprite: /Textures/Interface/Radial/RCD/grille.png
+  mode: ConstructObject
+  prototype: Grille
+  cost: 4
+  delay: 2
+  collisionMask: Impassable
+  rotation: Fixed
+  fx: EffectRCDConstruct2
+
+- type: rcd
+  id: WindowCE
+  category: WindowsAndGrilles
+  sprite: /Textures/Interface/Radial/RCD/window.png
+  mode: ConstructObject
+  prototype: Window
+  cost: 3
+  delay: 2
+  collisionMask: Impassable
+  rules:
+    - IsWindow
+  rotation: Fixed
+  fx: EffectRCDConstruct2
+
+- type: rcd
+  id: WindowDirectionalCE
+  category: WindowsAndGrilles
+  sprite: /Textures/Interface/Radial/RCD/directional.png
+  mode: ConstructObject
+  prototype: WindowDirectional
+  cost: 2
+  delay: 1
+  collisionMask: Impassable
+  collisionBounds: "-0.23,-0.49,0.23,-0.36"
+  rules:
+    - IsWindow
+  rotation: User
+  fx: EffectRCDConstruct1
+
+- type: rcd
+  id: WindowReinforcedDirectionalCE
+  category: WindowsAndGrilles
+  sprite: /Textures/Interface/Radial/RCD/directional_reinforced.png
+  mode: ConstructObject
+  prototype: WindowReinforcedDirectional
+  cost: 3
+  delay: 2
+  collisionMask: Impassable
+  collisionBounds: "-0.23,-0.49,0.23,-0.36"
+  rules:
+    - IsWindow
+  rotation: User
+  fx: EffectRCDConstruct2
+
+- type: rcd
+  id: ReinforcedWindowCE
+  category: WindowsAndGrilles
+  sprite: /Textures/Interface/Radial/RCD/window_reinforced.png
+  mode: ConstructObject
+  prototype: ReinforcedWindow
+  cost: 4
+  delay: 3
+  collisionMask: Impassable
+  rules:
+    - IsWindow
+  rotation: User
+  fx: EffectRCDConstruct3
+
+- type: rcd
+  id: AirlockCE
+  category: Airlocks
+  sprite: /Textures/Interface/Radial/RCD/airlock.png
+  mode: ConstructObject
+  prototype: Airlock
+  cost: 4
+  delay: 4
+  collisionMask: FullTileMask
+  rotation: Camera
+  fx: EffectRCDConstruct4
+
+- type: rcd
+  id: AirlockGlassCE
+  category: Airlocks
+  sprite: /Textures/Interface/Radial/RCD/glass_airlock.png
+  mode: ConstructObject
+  prototype: AirlockGlass
+  cost: 4
+  delay: 4
+  collisionMask: FullTileMask
+  rotation: Camera
+  fx: EffectRCDConstruct4
+
+- type: rcd
+  id: FirelockCE
+  category: Airlocks
+  sprite: /Textures/Interface/Radial/RCD/firelock.png
+  mode: ConstructObject
+  prototype: Firelock
+  cost: 4
+  delay: 3
+  collisionMask: FullTileMask
+  rotation: Camera
+  fx: EffectRCDConstruct3
+
+- type: rcd
+  id: TubeLightCE
+  category: Lighting
+  sprite: /Textures/Interface/Radial/RCD/tube_light.png
+  mode: ConstructObject
+  prototype: Poweredlight
+  cost: 2
+  delay: 1
+  collisionMask: TabletopMachineMask
+  collisionBounds: "-0.23,-0.49,0.23,-0.36"
+  rules:
+    - IsWallLight
+  rotation: User
+  fx: EffectRCDConstruct1
+
+- type: rcd
+  id: BulbLightCE
+  category: Lighting
+  sprite: /Textures/Interface/Radial/RCD/bulb_light.png
+  mode: ConstructObject
+  prototype: PoweredSmallLight
+  cost: 2
+  delay: 1
+  collisionMask: TabletopMachineMask
+  collisionBounds: "-0.23,-0.49,0.23,-0.36"
+  rules:
+    - IsWallLight
+  rotation: User
+  fx: EffectRCDConstruct1
+
+- type: sourcePort
+  id: ShuttleConsoleSender
+  name: signal-port-name-shuttle-console-sender
+  description: signal-port-description-shuttle-console-sender
+
+- type: radioChannel
+  id: Typan
+  name: chat-radio-typan
+  keycode: 'y'
+  frequency: 1312
+  color: "#9b2d30"
+  longRange: true
+
+- type: Tag
+  id: DockCentcommERT

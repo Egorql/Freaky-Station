@@ -1,0 +1,25 @@
+- type: entity
+  parent: [EncryptionKey, BaseSyndicateContraband]
+  id: EncryptionKeyTypan
+  name: typan encryption key
+  description: An encryption key used by the Typan crew.
+  components:
+  - type: EncryptionKey
+    channels:
+    - Typan
+    defaultChannel: Typan
+  - type: Sprite
+    layers:
+    - state: crypt_red
+    - state: synd_label
+
+- type: entity
+  parent: [BoxEncryptionKeyPassenger, BaseSyndicateContraband]
+  id: BoxEncryptionKeyTypan
+  name: typan encryption key box
+  description: A compact box with spare encryption keys for the Typan tactical frequency.
+  components:
+  - type: StorageFill
+    contents:
+    - id: EncryptionKeyTypan
+      amount: 2

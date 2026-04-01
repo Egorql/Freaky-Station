@@ -41,7 +41,9 @@ SPDX-License-Identifier: AGPL-3.0-or-later
             <targeting:TargetingControl Name="Targeting" Access="Protected"/> <!-- Shitmed Change -->
             <BoxContainer Name="TopLeftContainer" Orientation="Vertical">
                 <actions:ActionsBar Name="Actions" Access="Protected" />
-                <BoxContainer Name="VoteMenu" Access="Public" Orientation="Vertical"/>
+                <ScrollContainer HScrollEnabled="False" ReturnMeasure="True" MaxHeight="220">
+                    <BoxContainer Name="VoteMenu" Access="Public" Orientation="Vertical"/>
+                </ScrollContainer>
             </BoxContainer>
             <alerts:AlertsUI Name="Alerts" Access="Protected" />
         </LayoutContainer>

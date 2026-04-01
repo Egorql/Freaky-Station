@@ -32,7 +32,7 @@
   id: TypanAtmosTech
   equipment:
     eyes: ClothingEyesHudTypanDiagnostic
-    ears: ClothingHeadsetAltSyndicate
+    ears: ClothingHeadsetAltTypan
     shoes: ClothingShoesBootsTypan
     id: SyndiPDAEng
     outerClothing: ClothingOuterCoatAtmosWorking

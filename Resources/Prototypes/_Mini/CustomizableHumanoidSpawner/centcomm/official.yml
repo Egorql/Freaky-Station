@@ -2,8 +2,6 @@
   id: RandomHumanoidSpawnerCentralCommandOfficial
   name: Представитель ЦК
   suffix: ПЦК, Кастомизируемый персонаж
-  skills: # CorvaxGoob-Skills
-    - All
   components:
     - type: Sprite
       layers:
@@ -25,7 +23,6 @@
       name: ghost-role-information-centcom-official-name
       description: ghost-role-information-centcom-official-description
       rules: ghost-role-information-centcom-personal-rules
-      category: ghost-role-information-centcomm-category
       requirements:
         - !type:OverallPlaytimeRequirement
           time: 75h
@@ -70,7 +67,6 @@
   - CentralCommandOfficialLoadout
   - Survival
   - GroupSpeciesBreathTool
-  - CentcommOfficerUnderwear
 
 - type: loadoutGroup
   id: CentralCommandOfficialLoadout

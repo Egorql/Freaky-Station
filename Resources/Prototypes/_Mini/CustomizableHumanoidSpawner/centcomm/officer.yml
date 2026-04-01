@@ -10,18 +10,13 @@
     - sprite: Markers/jobs.rsi
       state: centcom
   - type: CustomizableHumanoidSpawner
-    jobPrototype: CentralCommandOfficer
+    jobPrototype: CentralCommandOfficial
     allowedSpecies:
     - Human
-    - Shark
-    - Demon
-    - Vulpkanin
-    - Tajaran
   - type: GhostRole
     name: ghost-role-information-centcomofficer-name
     description: ghost-role-information-centcomofficer-description
     rules: ghost-role-information-centcom-personal-rules
-    category: ghost-role-information-centcomm-category
     requirements:
       - !type:DepartmentTimeRequirement
         department: Security
@@ -36,7 +31,6 @@
   - CentralCommandOfficerLoadout
   - Survival
   - GroupSpeciesBreathTool
-  - CentcommOfficerUnderwear
 
 - type: loadoutGroup
   id: CentralCommandOfficerLoadout
@@ -55,7 +49,7 @@
     eyes: ClothingEyesGlassesHiddenSecurity
     suitstorage: WeaponEnergyShotgun
     pocket1: TelescopicShield
-    pocket2: WeaponPistolX01
+    pocket2: WeaponPistolViper
   storage:
     back:
     - BoxZiptie

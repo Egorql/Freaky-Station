@@ -1,10 +1,10 @@
 - type: ertShuttle
   id: RevSupShuttle
-  path: /Maps/Shuttles/ERT/rev_sup.yml
+  path: /Maps/Shuttles/ERT/red.yml
 
 - type: ertShuttle
   id: CriticalForceShuttle
-  path: /Maps/Shuttles/ERT/ds_cf_septofil.yml
+  path: /Maps/Shuttles/ERT/deathsquad.yml
 
 - type: ertShuttle
   id: CburnShuttle
@@ -36,4 +36,4 @@
 
 - type: ertShuttle
   id: SierraShuttle
-  path: /Maps/Shuttles/ERT/sierra.yml
+  path: /Maps/Shuttles/ERT/official.yml

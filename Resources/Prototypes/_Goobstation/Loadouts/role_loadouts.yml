@@ -167,16 +167,17 @@
 - type: roleLoadout
   id: JobRoboticist
   groups:
+  - Inventory # CorvaxGoob-loadouts
   - GroupTankHarness
-  - ScientistHead
+  - RoboticistHead
+  - RoboticistGlasses # CorvaxGoob-loadouts: Glasses > RoboticistGlasses
   - ScientistNeck
-  - ScientistJumpsuit
-  - ScientistBackpack
-  - ScientistOuterClothing
-  - ScientistGloves
-  - ScientistShoes
-  - ScientistPDA
-  - Glasses
+  - RoboticistJumpsuit
+  - RoboticistBackpack
+  - RoboticistOuterClothing
+  - RoboticistGloves
+  - RoboticistShoes
+  - RoboticistPDA
   - Survival
   - Trinkets
   - GroupSpeciesBreathTool
@@ -192,6 +193,7 @@
   - BrigmedicHead
   #- MedicalMask
   - BrigmedicMask # CorvaxGoob-Brigmedic-Loadout : Replaced from MedicalMask
+  - BrigmedicGlasses # CorvaxGoob-loadouts
   - BrigmedicJumpsuit
   - BrigmedicOuterClothing
   - MedicalGloves
@@ -212,7 +214,9 @@
 - type: roleLoadout
   id: JobRadioHost
   groups:
+  - Inventory # CorvaxGoob-loadouts
   - RadioHostJumpsuit
+  - RadiohostGlasses # CorvaxGoob-loadouts
   - CommonBackpack
   - Survival
   - Trinkets
@@ -258,6 +262,7 @@
 - type: roleLoadout
   id: JobVirologist
   groups:
+   - Inventory # CorvaxGoob-loadouts
    - GroupTankHarness
    - MedicalDoctorHead
    - MedicalMask

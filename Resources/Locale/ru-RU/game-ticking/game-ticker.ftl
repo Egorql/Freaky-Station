@@ -25,6 +25,8 @@ game-ticker-get-info-preround-text =
     Режим: [color=white]{ $gmTitle }[/color]
 game-ticker-no-map-selected = [color=red]Карта ещё не выбрана![/color]
 game-ticker-player-no-jobs-available-when-joining = При попытке присоединиться к игре ни одной роли не было доступно.
+game-ticker-player-job-spawn-invalid-station = Невозможно зайти за эту роль на выбранной станции.
+game-ticker-player-job-spawn-no-spawn-point = Невозможно зайти за эту роль: на станции нет корректной точки спавна для неё.
 # Displayed in chat to admins when a player joins
 player-join-message = Фрик { $name } залетел!
 player-first-join-message = Фрик { $name } впервые залетел.

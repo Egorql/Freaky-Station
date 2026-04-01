@@ -203,24 +203,27 @@ namespace Content.Server.GameTicking
             _stationJobs.CalcExtendedAccess(stationJobCounts);
 
             // Spawn everybody in!
+            var spawnedPlayers = new List<ICommonSession>();
             foreach (var (player, (job, station)) in assignedJobs)
             {
                 if (job == null)
                     continue;
 
-                SpawnPlayer(_playerManager.GetSessionById(player), profiles[player], station, job, false);
+                var session = _playerManager.GetSessionById(player);
+                if (SpawnPlayer(session, profiles[player], station, job, false))
+                    spawnedPlayers.Add(session);
             }
 
             RefreshLateJoinAllowed();
 
             // Allow rules to add roles to players who have been spawned in. (For example, on-station traitors)
             RaiseLocalEvent(new RulePlayerJobsAssignedEvent(
-                assignedJobs.Keys.Select(x => _playerManager.GetSessionById(x)).ToArray(),
+                spawnedPlayers.ToArray(),
                 profiles,
                 force));
         }
 
-        private void SpawnPlayer(ICommonSession player,
+        private bool SpawnPlayer(ICommonSession player,
             EntityUid station,
             string? jobId = null,
             bool lateJoin = true,
@@ -230,20 +233,20 @@ namespace Content.Server.GameTicking
 
             var jobBans = _banManager.GetJobBans(player.UserId);
             if (jobBans == null || jobId != null && jobBans.Contains(jobId))
-                return;
+                return false;
 
             if (jobId != null)
             {
                 var ev = new IsJobAllowedEvent(player, new ProtoId<JobPrototype>(jobId));
                 RaiseLocalEvent(ref ev);
                 if (ev.Cancelled)
-                    return;
+                    return false;
             }
 
-            SpawnPlayer(player, character, station, jobId, lateJoin, silent);
+            return SpawnPlayer(player, character, station, jobId, lateJoin, silent);
         }
 
-        private void SpawnPlayer(ICommonSession player,
+        private bool SpawnPlayer(ICommonSession player,
             HumanoidCharacterProfile character,
             EntityUid station,
             string? jobId = null,
@@ -252,7 +255,7 @@ namespace Content.Server.GameTicking
         {
             // Can't spawn players with a dummy ticker!
             if (DummyTicker)
-                return;
+                return false;
 
             if (station == EntityUid.Invalid)
             {
@@ -267,7 +270,7 @@ namespace Content.Server.GameTicking
             if (lateJoin && DisallowLateJoin)
             {
                 JoinAsObserver(player);
-                return;
+                return false;
             }
 
             //FREAKY EDIT START
@@ -282,7 +285,7 @@ namespace Content.Server.GameTicking
                 _chatManager.ChatMessageToOne(ChatChannel.Server, message, wrappedMessage,
                     default, false, player.Channel, Color.Red);
 
-                return;
+                return false;
             }
             //FREAKY EDIT END
 
@@ -324,7 +327,7 @@ namespace Content.Server.GameTicking
             if (bev.Handled)
             {
                 PlayerJoinGame(player, silent);
-                return;
+                return true;
             }
 
             // Figure out job restrictions
@@ -354,10 +357,19 @@ namespace Content.Server.GameTicking
 
                 _chatManager.DispatchServerMessage(player,
                     Loc.GetString("game-ticker-player-no-jobs-available-when-joining"));
-                return;
+                return false;
             }
 
-            PlayerJoinGame(player, silent);
+            var jobPrototype = _prototypeManager.Index<JobPrototype>(jobId);
+
+            var mobMaybe = _stationSpawning.SpawnPlayerCharacterOnStation(station, jobId, character, out var spawnFailureMessage);
+            if (mobMaybe is not { } mob)
+            {
+                if (spawnFailureMessage == null)
+                    Log.Error($"Failed to spawn player {player.Name} as job {jobId} on station {Name(station)}.");
+
+                return HandleFailedSpawn(player, spawnFailureMessage);
+            }
 
             var data = player.ContentData();
 
@@ -366,18 +378,12 @@ namespace Content.Server.GameTicking
             var newMind = _mind.CreateMind(data!.UserId, character.Name);
             _mind.SetUserId(newMind, data.UserId);
 
-            var jobPrototype = _prototypeManager.Index<JobPrototype>(jobId);
-
-            _playTimeTrackings.PlayerRolesChanged(player);
-
-            var mobMaybe = _stationSpawning.SpawnPlayerCharacterOnStation(station, jobId, character);
-            DebugTools.AssertNotNull(mobMaybe);
-            var mob = mobMaybe!.Value;
-
             _mind.TransferTo(newMind, mob);
+            PlayerJoinGame(player, silent);
             _admin.UpdatePlayerList(player);
 
             _roles.MindAddJobRole(newMind, silent: silent, jobPrototype:jobId);
+            _playTimeTrackings.PlayerRolesChanged(player);
             var jobName = _jobs.MindTryGetJobName(newMind);
             _admin.UpdatePlayerList(player);
 
@@ -453,6 +459,22 @@ namespace Content.Server.GameTicking
                 station,
                 character);
             RaiseLocalEvent(mob, aev, true);
+            return true;
+        }
+
+        private bool HandleFailedSpawn(ICommonSession player, string? failureMessage = null)
+        {
+            if (!LobbyEnabled)
+            {
+                JoinAsObserver(player);
+            }
+
+            var evNoJobs = new NoJobsAvailableSpawningEvent(player);
+            RaiseLocalEvent(evNoJobs);
+
+            _chatManager.DispatchServerMessage(player,
+                failureMessage ?? Loc.GetString("game-ticker-player-no-jobs-available-when-joining"));
+            return false;
         }
 
         public void Respawn(ICommonSession player)

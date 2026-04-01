@@ -21,9 +21,6 @@
       volume: 4
   - type: Jetpack
     moleUsage: 0.00850
-  - type: Construction
-    graph: JetpackImprovised
-    node: jetpack
 
 # Filled improvised
 - type: entity

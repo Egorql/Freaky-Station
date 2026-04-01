@@ -68,7 +68,7 @@
 
 - type: stack
   id: Productunit
-  name: Product unit
+  name: store-currency-display-tradeunit
   icon: ADT/Objects/Specific/tradeunit.rsi
   spawn: Productunit1
 

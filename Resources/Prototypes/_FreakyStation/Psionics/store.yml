@@ -41,7 +41,7 @@
   id: PsionicLearnKineticDash
   name: store-psionic-dash-name
   description: store-psionic-dash-desc
-  icon: { sprite: Interface/Actions/actions_slime.rsi, state: movement_boost }
+  icon: { sprite: Interface/Actions/actions_ai.rsi, state: camera_jump }
   productPsionicAbility: KineticDash
   cost:
     PsionicPoint: 2
@@ -55,7 +55,7 @@
   id: PsionicLearnGravityWell
   name: store-psionic-gravity-name
   description: store-psionic-gravity-desc
-  icon: { sprite: Interface/Actions/actions_animal.rsi, state: pull }
+  icon: { sprite: Interface/Actions/actions_ai.rsi, state: crew_monitor }
   productPsionicAbility: GravityWell
   cost:
     PsionicPoint: 1
@@ -69,7 +69,7 @@
   id: PsionicLearnCrushingPulse
   name: store-psionic-crushing-name
   description: store-psionic-crushing-desc
-  icon: { sprite: Interface/Actions/actions_ninja.rsi, state: smoke }
+  icon: { sprite: Interface/Actions/actions_ai.rsi, state: comms_console }
   productPsionicAbility: CrushingPulse
   cost:
     PsionicPoint: 2
@@ -83,7 +83,7 @@
   id: PsionicLearnMolecularBlink
   name: store-psionic-molecular-name
   description: store-psionic-molecular-desc
-  icon: { sprite: Interface/Actions/actions_borg.rsi, state: phase_shift }
+  icon: { sprite: Interface/Actions/actions_ai.rsi, state: borg_control }
   productPsionicAbility: MolecularBlink
   cost:
     PsionicPoint: 1
@@ -97,7 +97,7 @@
   id: PsionicLearnPhaseShift
   name: store-psionic-phase-name
   description: store-psionic-phase-desc
-  icon: { sprite: Interface/Actions/actions_borg.rsi, state: teleport }
+  icon: { sprite: Interface/Actions/actions_ai.rsi, state: state_laws }
   productPsionicAbility: PhaseShift
   cost:
     PsionicPoint: 2
@@ -111,7 +111,7 @@
   id: PsionicLearnBioSurge
   name: store-psionic-bio-name
   description: store-psionic-bio-desc
-  icon: { sprite: Interface/Actions/actions_revenant.rsi, state: defile }
+  icon: { sprite: Interface/Actions/actions_ai.rsi, state: manifest }
   productPsionicAbility: BioSurge
   cost:
     PsionicPoint: 1
@@ -125,7 +125,7 @@
   id: PsionicLearnNeuroshockWave
   name: store-psionic-neuroshock-name
   description: store-psionic-neuroshock-desc
-  icon: { sprite: Interface/Actions/actions_revenant.rsi, state: overload }
+  icon: { sprite: Interface/Actions/actions_ai.rsi, state: emergency_on }
   productPsionicAbility: NeuroshockWave
   cost:
     PsionicPoint: 2

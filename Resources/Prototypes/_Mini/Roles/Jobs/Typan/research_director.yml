@@ -41,7 +41,7 @@
   id: TypanResearchDirector
   equipment:
     eyes: ClothingEyesHudTypanResearch
-    ears: ClothingHeadsetAltSyndicate
+    ears: ClothingHeadsetAltTypanResearchDirector
     shoes: ClothingShoesBootsCombat
     gloves: ClothingHandsRDTypan
     id: SyndiPDARD

@@ -67,14 +67,16 @@
 
 # Fn-fal
 
-- type: entity
-  parent: [GunSafeBaseSecure, BaseSecurityContraband]
-  id: GunSafeRifleFnFAL
-  name: оружейный сейф FN FAL
-  components:
-  - type: StorageFill
-    contents:
-    - id: WeaponRifleFnFal
-      amount: 2
-    - id: MagazineRifle
-      amount: 4
+# - type: entity
+#   parent: [GunSafeBaseSecure, BaseSecurityContraband]
+#   id: GunSafeRifleFnFAL
+#   name: оружейный сейф FN FAL
+#   components:
+#   - type: StorageFill
+#     contents:
+#     - id: WeaponRifleFnFAL
+#       amount: 2
+#     - id: MagazineRifle
+#       amount: 4
+#
+# АХАХАХАХ СОСАЛИ ДА, БЫЛО ЖЕ???

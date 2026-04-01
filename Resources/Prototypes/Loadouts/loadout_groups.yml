@@ -218,6 +218,7 @@
   - FoodSnackLollypopWrappedRainbow
   - FoodSnackLollypopWrappedCarp
   # Goobstation End
+  - FoodSnackLollypopWrappedTricordrazine # CorvaxGoob-loadouts
   - TowelColorBlack
   - TowelColorDarkBlue
   - TowelColorDarkGreen
@@ -260,9 +261,9 @@
   minLimit: 0
   loadouts:
   - Glasses
+  - CheapSunglasses # Goobstation
   - GlassesJamjar
   - GlassesJensen
-  - CheapSunglasses # Goobstation
 
 - type: loadoutGroup
   id: Animals  # Goobstation
@@ -274,6 +275,12 @@
   - Mouse
   - Mothroach
   - Goldfish
+  # CorvaxGoob-loadouts-start
+  - Cockroach
+  - Butterfly
+  - Hamster
+  - Moproach
+  # CorvaxGoob-loadouts-end
 
 - type: loadoutGroup
   id: GroupTankHarness
@@ -826,17 +833,6 @@
   - EmergencyWaterVaporMime # Delta-V
   - EmergencySilicon
 
-# CorvaxGoob - Musician's Helmet - Start
-- type: loadoutGroup
-  id: MusicianHelmet
-  name: loadout-group-musician-helmet
-  minLimit: 0
-  maxLimit: 2
-  loadouts:
-  - MusicianHelmetGolden
-  - MusicianHelmetSilver
-# CorvaxGoob - Musician's Helmet - End
-
 - type: loadoutGroup
   id: MusicianJumpsuit
   name: loadout-group-musician-jumpsuit
@@ -945,6 +941,7 @@
   loadouts:
   - CargoTechnicianJumpsuit
   - CargoTechnicianJumpskirt
+  - CargoTechnicianOveralls #Goob
   - CargoTechnicianJumpsuitMail # Goob/DeltaV - Mail
   - CargoTechnicianJumpskirtMail # Goob/DeltaV - Mail
   - CargoTechMJ # goob
@@ -1177,7 +1174,9 @@
   name: loadout-group-research-director-jumpsuit
   loadouts:
   - ResearchDirectorJumpsuit
+  - ResearchDirectorJumpsuitAlt # goob
   - ResearchDirectorJumpskirt
+  - ResearchDirectorJumpskirtAlt # goob
   - ResearchDirectorMJ # goob
   # CorvaxGoob-Loadouts-Start
   - ResearchDirectorJumpsuitClassical
@@ -1318,6 +1317,7 @@
   - HeadofSecurityCloakExperimental # CorvaxGoob
   - Bodycam # Goobstation - Body cameras
   - HeadOfSecurityEnsemble # goob
+  - ClothingNeckMantleHOSShoulder #CorvaxGoob
 
 - type: loadoutGroup
   id: HeadofSecurityOuterClothing
@@ -1377,6 +1377,7 @@
   - SeniorOfficerJumpsuit
   - SeniorOfficerJumpskirt
   - TrooperUniform
+  - UniformJumpsuitDSS # _CorvaxGoob
 
 - type: loadoutGroup
   id: SecurityBackpack
@@ -1585,7 +1586,7 @@
 - type: loadoutGroup
   id: MedicalGloves
   name: loadout-group-medical-gloves
-  minLimit: 0
+  minLimit: 1 # CorvaxGoob-loadouts: 0 > 1
   loadouts:
   - LatexGloves
   - NitrileGloves
@@ -1678,6 +1679,7 @@
   - MedicalHud
   - MedicalEyePatchHud
   - Glasses
+  - CheapSunglasses # CorvaxGoob-loadouts
   - GlassesJamjar
   - GlassesJensen
 
@@ -1729,7 +1731,7 @@
 
 - type: loadoutGroup
   id: SyndicateCoat
-  name: Синдикат, верхняя одежда
+  name: loadout-group-syndicate-coat
   loadouts:
   - SyndiWintercoat
 

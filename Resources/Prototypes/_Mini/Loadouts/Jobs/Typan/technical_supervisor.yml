@@ -9,31 +9,6 @@
   equipment:
     jumpsuit: ClothingUniformJumpskirtTypanTechnicalOperationsSupervisor
 
-# Underwear
-- type: loadout
-  id: UnderwearBottomBoxersTypanTechnicalOperationsSupervisor
-  effects:
-  - !type:GroupLoadoutEffect
-    proto: MaleUnderwear
-  equipment:
-    underwearb: ClothingUnderwearBottomBoxersTypanTechnicalOperationsSupervisor
-
-- type: loadout
-  id: UnderwearBottomPantiesTypanTechnicalOperationsSupervisor
-  effects:
-  - !type:GroupLoadoutEffect
-    proto: FemaleUnderwear
-  equipment:
-    underwearb: ClothingUnderwearBottomPantiesTypanTechnicalOperationsSupervisor
-
-- type: loadout
-  id: UnderwearTopBraTypanTechnicalOperationsSupervisor
-  effects:
-  - !type:GroupLoadoutEffect
-    proto: FemaleUnderwear
-  equipment:
-    underweart: ClothingUnderwearTopBraTypanTechnicalOperationsSupervisor
-
 # Loadout Groups
 - type: loadoutGroup
   id: TypanTechnicalOperationsSupervisorUniform
@@ -43,16 +18,6 @@
   loadouts:
   - TypanTechnicalOperationsSupervisorJumpsuit
   - TypanTechnicalOperationsSupervisorJumpskirt
-
-- type: loadoutGroup
-  id: TypanTechnicalOperationsSupervisorUnderwear
-  name: loadout-group-typan-technical-supervisor-underwear
-  hidden: true
-  minLimit: 2
-  loadouts:
-  - UnderwearBottomBoxersTypanTechnicalOperationsSupervisor
-  - UnderwearBottomPantiesTypanTechnicalOperationsSupervisor
-  - UnderwearTopBraTypanTechnicalOperationsSupervisor
 
 # Role Loadout
 - type: roleLoadout

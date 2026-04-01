@@ -10,31 +10,6 @@
   equipment:
     jumpsuit: ClothingUniformJumpskirtTypanCommunicationsOfficer
 
-# Underwear
-- type: loadout
-  id: UnderwearBottomBoxersTypanCommunicationsOfficer
-  effects:
-  - !type:GroupLoadoutEffect
-    proto: MaleUnderwear
-  equipment:
-    underwearb: ClothingUnderwearBottomBoxersTypanCommunicationsOfficer
-
-- type: loadout
-  id: UnderwearBottomPantiesTypanCommunicationsOfficer
-  effects:
-  - !type:GroupLoadoutEffect
-    proto: FemaleUnderwear
-  equipment:
-    underwearb: ClothingUnderwearBottomPantiesTypanCommunicationsOfficer
-
-- type: loadout
-  id: UnderwearTopBraTypanCommunicationsOfficer
-  effects:
-  - !type:GroupLoadoutEffect
-    proto: FemaleUnderwear
-  equipment:
-    underweart: ClothingUnderwearTopBraTypanCommunicationsOfficer
-
 # Loadout Groups
 - type: loadoutGroup
   id: TypanCommunicationsOfficerUniform
@@ -45,12 +20,3 @@
   - TypanCommunicationsOfficerJumpsuit
   - TypanCommunicationsOfficerJumpskirt
 
-- type: loadoutGroup
-  id: TypanCommunicationsOfficerUnderwear
-  name: loadout-group-typan-communications-officer-underwear
-  hidden: true
-  minLimit: 2
-  loadouts:
-  - UnderwearBottomBoxersTypanCommunicationsOfficer
-  - UnderwearBottomPantiesTypanCommunicationsOfficer
-  - UnderwearTopBraTypanCommunicationsOfficer

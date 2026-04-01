@@ -1,10 +1,10 @@
 - type: reagent
   id: Monstre
-  name: энергетик монстрЕ
+  name: monster-reagent-name
   group: Narcotics
-  desc: похоже на кислоту, вы ведь такое любите?
-  physicalDesc: кислотноe
-  flavor: кислотный
+  desc: monster-reagent-desc
+  physicalDesc: monster-reagent-physical-desc
+  flavor: acid
   color: "#00FF00"
   boilingPoint: 212.0  
   meltingPoint: 170.0
@@ -111,3 +111,10 @@
     sprite: _FreakStation/monster.rsi
   - type: Item
     sprite: _FreakStation/monster.rsi
+- type: entity
+  parent: DrinkMonstreDrinkCan
+  id: DrinkMonstreAssaultDrinkCan
+
+- type: entity
+  parent: DrinkMonstreDrinkCan
+  id: DrinkMonstreWhiteDrinkCan

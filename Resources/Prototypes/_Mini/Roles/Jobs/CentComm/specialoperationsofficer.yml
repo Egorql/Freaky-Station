@@ -5,7 +5,7 @@
   playTimeTracker: JobCentralCommandSpecialOperationsOfficer
   setPreference: false
   startingGear: CentcomSpecialOperationsOfficerGear
-  icon: "JobIconNanotrasenRed"
+  icon: "JobIconNanotrasen"
   supervisors: job-supervisors-no-one
   canBeAntag: false
   accessGroups:
@@ -34,7 +34,7 @@
     gloves: ClothingHandsGlovesCombat
     outerClothing: ClothingOuterVestWeb
     neck: ClothingNeckCloakCentcomBlack
-    id: CentcomSpecialOperationsOfficerPDA
+    id: CentcomPDA
     ears: ClothingHeadsetSpecialOperationsOfficer
 
 - type: entity
@@ -46,7 +46,7 @@
     - type: StorageFill
       contents:
         - id: RubberStampCentcom
-        - id: RubberStampCentcomSpecialOperationOfficer
+        - id: RubberStampCentcom
         - id: BoxFolderBlueFilled
 
 - type: entity
@@ -91,7 +91,7 @@
       key_slots:
       - EncryptionKeyCentCom
       - EncryptionKeyStationMaster
-      - EncryptionKeyDeathSquad
+      - EncryptionKeyCentCom
   - type: Sprite
     sprite: Clothing/Ears/Headsets/base.rsi
   - type: Clothing

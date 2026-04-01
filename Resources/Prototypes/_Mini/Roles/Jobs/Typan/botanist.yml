@@ -28,7 +28,7 @@
 - type: startingGear
   id: SyndicateBotanist
   equipment:
-    ears: ClothingHeadsetAltSyndicate
+    ears: ClothingHeadsetAltTypan
     jumpsuit: ClothingUniformJumpsuitTypanBotanist
     shoes: ClothingShoesColorBlack
     id: SyndiPDABotan

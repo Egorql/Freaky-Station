@@ -34,7 +34,7 @@
   id: TypanCargotech
   equipment:
     eyes: ClothingEyesHudTypanDiagnostic
-    ears: ClothingHeadsetAltSyndicate
+    ears: ClothingHeadsetAltTypan
     jumpsuit: ClothingUniformJumpsuitTypanCargotech
     shoes: ClothingShoesBootsCombatSyndie
     id: SyndiPDACargo

@@ -1,3 +1,8 @@
+- type: entity
+  id: BorgChassisTypanSelectable
+  parent: BorgChassisSelectable
+  suffix: Typan
+
 # - type: entity
 #   id: BaseBorgChassisTypan
 #   parent: [BaseBorgChassis, BaseBorgTransponder]

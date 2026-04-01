@@ -44,7 +44,7 @@
 - type: startingGear
   id: TypanCommander
   equipment:
-    ears: ClothingHeadsetAltSyndicate
+    ears: ClothingHeadsetAltTypanCommander
     shoes: ClothingShoesBootsCombat
     gloves: ClothingHandsGlovesCombat
     id: SyndiPDACom

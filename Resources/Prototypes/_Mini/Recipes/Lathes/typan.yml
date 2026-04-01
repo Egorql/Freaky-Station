@@ -37,29 +37,11 @@
 
 - type: latheRecipe
   parent: BaseWeaponRecipe
-  id: WeaponPistolDesertEagle
-  result: WeaponPistolDesertEagle
-  materials:
-    Steel: 600
-    Plastic: 200
-    Gold: 100
-
-- type: latheRecipe
-  parent: BaseWeaponRecipe
   id: WeaponSubMachineGunC20r
   result: WeaponSubMachineGunC20r
   materials:
     Steel: 600
     Plastic: 300
-
-- type: latheRecipe
-  parent: BaseWeaponRecipe
-  id: WeaponSMGTommyGun
-  result: WeaponSMGTommyGun
-  materials:
-    Steel: 700
-    Wood: 300
-    Plastic: 200
 
 - type: latheRecipe
   parent: BaseWeaponRecipe
@@ -87,15 +69,6 @@
     Steel: 1000
     Glass: 300
     Gold: 200
-
-- type: latheRecipe
-  parent: BaseWeaponRecipeLong
-  id: ADTWeaponRifleXC67
-  result: ADTWeaponRifleXC67
-  materials:
-    Steel: 800
-    Plastic: 400
-    Gold: 100
 
 - type: latheRecipe
   parent: BaseWeaponRecipeLong

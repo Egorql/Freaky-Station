@@ -97,6 +97,11 @@
     sprite: _Mini/Clothing/Uniforms/Jumpsuit/recruit_jumpsuit.rsi
 
 - type: entity
+  parent: ClothingUniformJumpsuitTypanPatrol
+  id: ClothingUniformJumpskirtTypanPatrol
+  suffix: jumpskirt
+
+- type: entity
   parent: ClothingJumpsuitTypanBase
   id: ClothingUniformJumpsuitTypanResearchDirector
   name: комбинезон директора исследований

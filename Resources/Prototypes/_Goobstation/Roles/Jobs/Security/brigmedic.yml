@@ -23,7 +23,7 @@
   icon: "JobIconBrigmedic"
   supervisors: job-supervisors-hos
   canBeAntag: false
-  #goobcoins: 35 Corvax-Goob-coins
+  goobcoins: 35
   skills: # CorvaxGoob-Skills
   - Shooting
   - Surgery

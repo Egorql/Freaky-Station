@@ -21,7 +21,9 @@
   - CentralCommandSpecialOperationsOfficerLoadout
   - Survival
   - GroupSpeciesBreathTool
-  - CentcommOfficerUnderwear
+
+- type: playTimeTracker
+  id: JobCentralCommandSpecialOperationsOfficer
 
 - type: loadoutGroup
   id: CentralCommandSpecialOperationsOfficerLoadout

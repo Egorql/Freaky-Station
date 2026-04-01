@@ -22,6 +22,8 @@ namespace Content.Goobstation.Server.ServerCurrency.UI
 {
     public sealed class CurrencyEui : BaseEui
     {
+        private static readonly HashSet<NetUserId> OpenPlayers = new();
+
         [Dependency] private readonly ICommonCurrencyManager _currencyMan = default!;
         [Dependency] private readonly IAdminNotesManager _notesMan = default!;
         [Dependency] private readonly IPrototypeManager _protoMan = default!;
@@ -36,9 +38,11 @@ namespace Content.Goobstation.Server.ServerCurrency.UI
         private bool _spinPending;
         private int _pendingBet;
         private int _pendingSpinId;
+        private RouletteMode _pendingMode = RouletteMode.X2;
 
         private const int MinRouletteBet = 10;
-        private const float SpinResolveDelaySeconds = 2.8f;
+        private const float NormalSpinResolveDelaySeconds = 2.8f;
+        private const float FastSpinResolveDelaySeconds = 0.65f;
 
         public CurrencyEui()
         {
@@ -47,7 +51,18 @@ namespace Content.Goobstation.Server.ServerCurrency.UI
 
         public override void Opened()
         {
+            OpenPlayers.Add(Player.UserId);
             StateDirty();
+        }
+
+        public override void Closed()
+        {
+            OpenPlayers.Remove(Player.UserId);
+        }
+
+        public static bool IsOpenFor(ICommonSession player)
+        {
+            return OpenPlayers.Contains(player.UserId);
         }
 
         public override EuiStateBase GetNewState()
@@ -72,11 +87,11 @@ namespace Content.Goobstation.Server.ServerCurrency.UI
 
             if (msg is CurrencyEuiMsg.SpinRoulette spin)
             {
-                QueueSpin(spin.Bet, spin.SpinId);
+                QueueSpin(spin.Bet, spin.SpinId, spin.Mode, spin.FastSpin);
             }
         }
 
-        private void QueueSpin(int bet, int spinId)
+        private void QueueSpin(int bet, int spinId, RouletteMode mode, bool fastSpin)
         {
             if (_spinPending)
                 return;
@@ -91,8 +106,11 @@ namespace Content.Goobstation.Server.ServerCurrency.UI
             _spinPending = true;
             _pendingBet = bet;
             _pendingSpinId = spinId;
+            _pendingMode = mode;
 
-            Timer.Spawn(TimeSpan.FromSeconds(SpinResolveDelaySeconds), () =>
+            var delay = fastSpin ? FastSpinResolveDelaySeconds : NormalSpinResolveDelaySeconds;
+
+            Timer.Spawn(TimeSpan.FromSeconds(delay), () =>
             {
                 ResolveSpin(Player.UserId, Player.Name);
                 StateDirty();
@@ -107,8 +125,10 @@ namespace Content.Goobstation.Server.ServerCurrency.UI
             _spinPending = false;
             var bet = _pendingBet;
             var spinId = _pendingSpinId;
+            var mode = _pendingMode;
             _pendingBet = 0;
             _pendingSpinId = 0;
+            _pendingMode = RouletteMode.X2;
 
             var balance = _currencyMan.GetBalance(userId);
             if (balance < bet)
@@ -119,8 +139,8 @@ namespace Content.Goobstation.Server.ServerCurrency.UI
 
             _currencyMan.RemoveCurrency(userId, bet);
 
-            var multiplier = RollDynamicMultiplier(out var jackpot);
-            var payout = (int) MathF.Floor(bet * multiplier);
+            var (multiplier, payout) = ResolveModeResult(mode, bet);
+            var jackpot = Math.Abs(multiplier - 10f) < 0.001f;
 
             if (payout > 0)
                 _currencyMan.AddCurrency(userId, payout);
@@ -171,30 +191,23 @@ namespace Content.Goobstation.Server.ServerCurrency.UI
             _lastRouletteSpinId = spinId;
         }
 
-        private float RollDynamicMultiplier(out bool jackpot)
+        private (float Multiplier, int Payout) ResolveModeResult(RouletteMode mode, int bet)
         {
-            jackpot = false;
-            var roll = _random.NextFloat();
-
-            if (roll < 0.45f)
-                return 0f;
-
-            if (roll < 0.75f)
-                return RoundMultiplier(_random.NextFloat(0.15f, 1.25f));
-
-            if (roll < 0.93f)
-                return RoundMultiplier(_random.NextFloat(1.25f, 3.8f));
-
-            if (roll < 0.99f)
-                return RoundMultiplier(_random.NextFloat(3.8f, 8.8f));
-
-            jackpot = true;
-            return 10f;
+            return mode switch
+            {
+                RouletteMode.X2 => RollFixedMode(0.50f, 2f, bet),
+                RouletteMode.X5 => RollFixedMode(0.20f, 5f, bet),
+                RouletteMode.X10 => RollFixedMode(0.10f, 10f, bet),
+                _ => RollFixedMode(0.50f, 2f, bet)
+            };
         }
 
-        private static float RoundMultiplier(float value)
+        private (float Multiplier, int Payout) RollFixedMode(float chance, float multiplier, int bet)
         {
-            return MathF.Round(value * 100f) / 100f;
+            if (!_random.Prob(chance))
+                return (0f, 0);
+
+            return (multiplier, (int) MathF.Floor(bet * multiplier));
         }
 
         private async void BuyToken(ProtoId<TokenListingPrototype> tokenId, ICommonSession playerName)

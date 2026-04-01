@@ -48,6 +48,8 @@ game-ticker-get-info-preround-text = Hi and welcome to [color=white]Space Statio
                             >[color=yellow]{$desc}[/color]
 game-ticker-no-map-selected = [color=yellow]Map not yet selected![/color]
 game-ticker-player-no-jobs-available-when-joining = When attempting to join to the game, no jobs were available.
+game-ticker-player-job-spawn-invalid-station = This role cannot be spawned on the selected station.
+game-ticker-player-job-spawn-no-spawn-point = This role cannot be spawned because the station has no valid spawn point for it.
 
 # Displayed in chat to admins when a player joins
 player-join-message = Player {$name} joined.

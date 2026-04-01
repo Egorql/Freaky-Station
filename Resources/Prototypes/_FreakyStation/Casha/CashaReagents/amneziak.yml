@@ -11,9 +11,9 @@
 
 - type: reagent
   id: Afrodeziak
-  name: Афродизиак
+  name: afrodeziak-name
   group: Narcotics
-  desc: Сильно возбуждает любого, кто его выпьет
+  desc: afrodeziak-desc
   physicalDesc: reagent-physical-desc-powdery
   flavor: berry
   color: "#F19CBB"

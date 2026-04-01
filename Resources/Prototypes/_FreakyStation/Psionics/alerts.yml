@@ -2,12 +2,12 @@
   id: PsionicHeat
   category: Counter
   icons:
-  - sprite: /Textures/_FreakyStation/psy/lol.rsi
-    state: psybollblue
-  - sprite: /Textures/_FreakyStation/psy/lol.rsi
-    state: healtpsybollpinkh1
-  - sprite: /Textures/_FreakyStation/psy/lol.rsi
-    state: psybollred
+  - sprite: /Textures/Interface/Alerts/generic_counter.rsi
+    state: 0
+  - sprite: /Textures/Interface/Alerts/generic_counter.rsi
+    state: 1
+  - sprite: /Textures/Interface/Alerts/generic_counter.rsi
+    state: 2
   name: alerts-psionic-heat-name
   description: alerts-psionic-heat-desc
   minSeverity: 0

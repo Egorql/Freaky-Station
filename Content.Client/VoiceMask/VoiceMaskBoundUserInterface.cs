@@ -50,6 +50,8 @@ public sealed class VoiceMaskBoundUserInterface : BoundUserInterface
         _window.OnNameChange += OnNameSelected;
         _window.OnVerbChange += verb => SendMessage(new VoiceMaskChangeVerbMessage(verb));
         _window.OnVoiceChange += voice => SendMessage(new VoiceMaskChangeVoiceMessage(voice)); // CorvaxGoob-TTS
+        _window.OnBarkChange += bark => SendMessage(new VoiceMaskChangeBarkMessage(bark)); // ADT Barks
+        _window.OnPitchChange += pitch => SendMessage(new VoiceMaskChangeBarkPitchMessage(pitch)); // ADT Barks
         _window.OnJobIconChanged += OnJobIconChanged; // GabyStation -> Radio icons
     }
 
@@ -72,7 +74,7 @@ public sealed class VoiceMaskBoundUserInterface : BoundUserInterface
             return;
         }
 
-        _window.UpdateState(cast.Name, cast.Voice, cast.Verb); // CorvaxGoob-TTS
+        _window.UpdateState(cast.Name, cast.Voice, cast.Bark, cast.Pitch, cast.Verb); // CorvaxGoob-TTS
         _window.SetCurrentJobIcon(cast.JobIcon); // GabyStation -> Radio icons
     }
 

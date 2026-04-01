@@ -5,7 +5,7 @@
   description: A computer printed circuit board for a salvage shuttle console.
   components:
     - type: ComputerBoard
-      prototype: ADTComputerShuttleSalvage
+      prototype: ComputerShuttleSalvage
     # - type: StealTarget
     #   stealGroup: SalvageShuttleConsoleCircuitboard
 
@@ -16,7 +16,7 @@
   description: A computer printed circuit board for a sec shuttle console.
   components:
     - type: ComputerBoard
-      prototype: ADTComputerSecShuttle
+      prototype: ComputerShuttle
 
 ## Minesweeper
 - type: entity
@@ -24,7 +24,7 @@
   id: MinesweeperCircuitboard
   components:
     - type: ComputerBoard
-      prototype: MinesweeperArcade
+      prototype: BlockGameArcade
 
 - type: entity
   parent: BaseComputerCircuitboard

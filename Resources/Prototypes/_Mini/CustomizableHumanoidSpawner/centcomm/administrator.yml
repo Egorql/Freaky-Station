@@ -10,14 +10,9 @@
     - sprite: Markers/jobs.rsi
       state: centcom
   - type: CustomizableHumanoidSpawner
-    jobPrototype: CentralCommandAdministrator
+    jobPrototype: CentralCommandOfficial
     allowedSpecies:
     - Human
-    - Shark
-    - Demon
-    - Vulpkanin
-    - Tajaran
-
 - type: roleLoadout
   id: JobCentralCommandAdministrator
   groups:
@@ -25,7 +20,6 @@
   - CentralCommandAdministratorLoadout
   - Survival
   - GroupSpeciesBreathTool
-  - CentcommOfficerUnderwear
 
 - type: loadoutGroup
   id: CentralCommandAdministratorLoadout

@@ -1,6 +1,6 @@
 - type: ertShuttle
   id: Amber
-  path: /Maps/Shuttles/ERT/amber.yml
+  path: /Maps/Shuttles/ERT/blue.yml
 
 - type: ertShuttle
   id: Red

@@ -155,6 +155,11 @@ public sealed class StationSpawningSystem : SharedStationSpawningSystem
     /// </remarks>
     public EntityUid? SpawnPlayerCharacterOnStation(EntityUid? station, ProtoId<JobPrototype>? job, HumanoidCharacterProfile? profile, StationSpawningComponent? stationSpawning = null)
     {
+        return SpawnPlayerCharacterOnStation(station, job, profile, out _, stationSpawning);
+    }
+
+    public EntityUid? SpawnPlayerCharacterOnStation(EntityUid? station, ProtoId<JobPrototype>? job, HumanoidCharacterProfile? profile, out string? failureMessage, StationSpawningComponent? stationSpawning = null)
+    {
         if (station != null && !Resolve(station.Value, ref stationSpawning))
             throw new ArgumentException("Tried to use a non-station entity as a station!", nameof(station));
 
@@ -163,6 +168,7 @@ public sealed class StationSpawningSystem : SharedStationSpawningSystem
         RaiseLocalEvent(ev);
         DebugTools.Assert(ev.SpawnResult is { Valid: true } or null);
 
+        failureMessage = ev.FailureMessage;
         return ev.SpawnResult;
     }
 
@@ -337,6 +343,14 @@ public sealed class PlayerSpawningEvent : EntityEventArgs
     /// The entity spawned, if any. You should set this if you succeed at spawning the character, and leave it alone if it's not null.
     /// </summary>
     public EntityUid? SpawnResult;
+    /// <summary>
+    /// Prevent generic spawn handlers from attempting any fallback behavior after a previous handler rejected this spawn.
+    /// </summary>
+    public bool PreventFallback;
+    /// <summary>
+    /// User-facing reason shown when a spawn attempt is rejected without fallback.
+    /// </summary>
+    public string? FailureMessage;
     /// <summary>
     /// The job to use, if any.
     /// </summary>

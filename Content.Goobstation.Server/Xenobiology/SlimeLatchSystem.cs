@@ -18,6 +18,7 @@ using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Movement.Components;
 using Content.Shared.Movement.Pulling.Components;
+using Content.Shared.Movement.Pulling.Events;
 using Content.Shared.Nutrition.Components;
 using Content.Shared.Nutrition.EntitySystems;
 using Content.Shared.Popups;
@@ -47,20 +48,12 @@ public sealed partial class SlimeLatchSystem : EntitySystem
         SubscribeLocalEvent<SlimeLatchEvent>(OnLatchAttempt);
         SubscribeLocalEvent<SlimeComponent, SlimeLatchDoAfterEvent>(OnSlimeLatchDoAfter);
 
-        SubscribeLocalEvent<SlimeComponent, EntRemovedFromContainerMessage>(OnEntityEscape);
-        SubscribeLocalEvent<SlimeComponent, MobStateChangedEvent>(OnEntityDied);
-        SubscribeLocalEvent<SlimeComponent, EntInsertedIntoContainerMessage>(OnSlimeContained);
-
-        SubscribeLocalEvent<SlimeDamageOvertimeComponent, MobStateChangedEvent>(OnMobStateChangeSOD);
-    }
-
-    private void OnSlimeContained(Entity<SlimeComponent> ent, ref EntInsertedIntoContainerMessage args)
-    {
-        if (!HasComp<XenoVacuumTankComponent>(args.Container.Owner))
-            return;
-
-        if (IsLatched(ent))
-            Unlatch(ent);
+        SubscribeLocalEvent<SlimeDamageOvertimeComponent, MobStateChangedEvent>(OnMobStateChangedSOD);
+        SubscribeLocalEvent<SlimeComponent, MobStateChangedEvent>(OnMobStateChangedSlime);
+        SubscribeLocalEvent<SlimeComponent, PullAttemptEvent>(OnPullAttempt);
+        SubscribeLocalEvent<SlimeComponent, EntGotRemovedFromContainerMessage>(OnEntGotRemovedFromContainer);
+        SubscribeLocalEvent<SlimeComponent, EntGotInsertedIntoContainerMessage>(OnEntGotInsertedIntoContainer);
+        SubscribeLocalEvent<SlimeComponent, SlimeMitosisEvent>(OnSlimeMitosis);
     }
 
     public override void Update(float frameTime)
@@ -86,6 +79,48 @@ public sealed partial class SlimeLatchSystem : EntitySystem
             _hunger.ModifyHunger(source, addedHunger, hunger);
             Dirty(source, hunger);
         }
+    }
+
+    private void OnMobStateChangedSOD(Entity<SlimeDamageOvertimeComponent> ent, ref MobStateChangedEvent args)
+    {
+        if (args.NewMobState != MobState.Dead)
+            return;
+
+        var source = ent.Comp.SourceEntityUid;
+        if (source.HasValue && TryComp<SlimeComponent>(source, out var slime))
+            Unlatch((source.Value, slime));
+    }
+
+    private void OnMobStateChangedSlime(Entity<SlimeComponent> ent, ref MobStateChangedEvent args)
+    {
+        if (args.NewMobState == MobState.Dead)
+            Unlatch(ent);
+    }
+
+    private void OnPullAttempt(Entity<SlimeComponent> ent, ref PullAttemptEvent args)
+    {
+        if (IsLatched(ent) && args.PullerUid == ent.Owner) // slimes can't pull when latched
+        {
+            args.Cancelled = true;
+            return;
+        }
+
+        Unlatch(ent);
+    }
+
+    private void OnEntGotRemovedFromContainer(Entity<SlimeComponent> ent, ref EntGotRemovedFromContainerMessage args)
+    {
+        Unlatch(ent);
+    }
+
+    private void OnEntGotInsertedIntoContainer(Entity<SlimeComponent> ent, ref EntGotInsertedIntoContainerMessage args)
+    {
+        Unlatch(ent);
+    }
+
+    private void OnSlimeMitosis(Entity<SlimeComponent> ent, ref SlimeMitosisEvent args)
+    {
+        Unlatch(ent);
     }
 
     private void OnLatchAttempt(SlimeLatchEvent args)
@@ -159,34 +194,6 @@ public sealed partial class SlimeLatchSystem : EntitySystem
         args.Handled = true;
     }
 
-    private void OnMobStateChangeSOD(Entity<SlimeDamageOvertimeComponent> ent, ref MobStateChangedEvent args)
-    {
-        if (args.NewMobState != MobState.Dead)
-            return;
-
-        var source = ent.Comp.SourceEntityUid;
-        if (source.HasValue && TryComp<SlimeComponent>(source, out var slime))
-            Unlatch((source.Value, slime));
-    }
-
-    private void OnEntityDied(Entity<SlimeComponent> ent, ref MobStateChangedEvent args)
-    {
-        if (args.NewMobState != MobState.Dead)
-            return;
-
-        Unlatch(ent);
-    }
-
-    private void OnEntityEscape(Entity<SlimeComponent> ent, ref EntRemovedFromContainerMessage args)
-    {
-        if (!HasComp<SlimeDamageOvertimeComponent>(args.Entity))
-            return;
-
-        RemCompDeferred<SlimeDamageOvertimeComponent>(args.Entity);
-        RemCompDeferred<BeingLatchedComponent>(args.Entity);
-        ent.Comp.LatchedTarget = null;
-    }
-
     #region Helpers
 
     public bool IsLatched(Entity<SlimeComponent> ent)
@@ -213,7 +220,8 @@ public sealed partial class SlimeLatchSystem : EntitySystem
 
     public void Latch(Entity<SlimeComponent> ent, EntityUid target)
     {
-        RemCompDeferred<BeingLatchedComponent>(target);
+        if (IsLatched(ent))
+            Unlatch(ent);
 
         _xform.SetCoordinates(ent, Transform(target).Coordinates);
         _xform.SetParent(ent, target);
@@ -224,9 +232,6 @@ public sealed partial class SlimeLatchSystem : EntitySystem
 
         EnsureComp(target, out SlimeDamageOvertimeComponent comp);
         comp.SourceEntityUid = ent;
-
-        RemComp<PullableComponent>(ent);
-        RemComp<PullerComponent>(ent); // crutches
 
         _audio.PlayEntity(ent.Comp.EatSound, ent, ent);
         _popup.PopupEntity(Loc.GetString("slime-action-latch-success", ("slime", ent), ("target", target)), ent, PopupType.SmallCaution);
@@ -248,10 +253,10 @@ public sealed partial class SlimeLatchSystem : EntitySystem
         RemCompDeferred<BeingLatchedComponent>(target);
         RemCompDeferred<SlimeDamageOvertimeComponent>(target);
 
-        EnsureComp<PullableComponent>(ent);
-        EnsureComp<PullerComponent>(ent); // on top of crutches
+        if (TryComp<TransformComponent>(target, out var targetXform)
+            && _xform.IsParentOf(targetXform, ent.Owner))
+            _xform.SetParent(ent.Owner, _xform.GetParentUid(target));
 
-        _xform.SetParent(ent, _xform.GetParentUid(target)); // deparent it. probably.
         if (TryComp<InputMoverComponent>(ent, out var inpm))
             inpm.CanMove = true;
 

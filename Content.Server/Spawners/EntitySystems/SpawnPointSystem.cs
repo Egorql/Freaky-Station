@@ -42,7 +42,7 @@ public sealed class SpawnPointSystem : EntitySystem
 
     private void OnPlayerSpawning(PlayerSpawningEvent args)
     {
-        if (args.SpawnResult != null)
+        if (args.SpawnResult != null || args.PreventFallback)
             return;
 
         // TODO: Cache all this if it ends up important.

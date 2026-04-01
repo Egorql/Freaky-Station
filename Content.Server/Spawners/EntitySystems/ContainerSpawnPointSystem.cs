@@ -85,7 +85,7 @@ public sealed class ContainerSpawnPointSystem : EntitySystem
 
     public void HandlePlayerSpawning(PlayerSpawningEvent args)
     {
-        if (args.SpawnResult != null)
+        if (args.SpawnResult != null || args.PreventFallback)
             return;
 
         // If it's just a spawn pref check if it's for cryo (silly).

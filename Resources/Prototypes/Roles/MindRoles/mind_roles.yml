@@ -188,8 +188,6 @@
   parent: BaseMindRoleAntag
   id: MindRoleNukeops
   name: Nukeops Operative Role
-  skills: # CorvaxGoob-Skills
-  - All
   components:
   - type: MindRole
     roleType: TeamAntagonist
@@ -202,8 +200,6 @@
   parent: MindRoleNukeops
   id: MindRoleNukeopsMedic
   name: Nukeops Medic Role
-  skills: # CorvaxGoob-Skills
-  - All
   components:
   - type: MindRole
     antagPrototype: NukeopsMedic
@@ -212,8 +208,6 @@
   parent: MindRoleNukeops
   id: MindRoleNukeopsCommander
   name: Nukeops Commander role
-  skills: # CorvaxGoob-Skills
-  - All
   components:
   - type: MindRole
     antagPrototype: NukeopsCommander

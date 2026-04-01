@@ -290,9 +290,9 @@
     denyState: deny-unshaded
     initialStockQuality: 0.33
   - type: Advertise
-    pack: PantsAds
+    pack: SexAds
   - type: SpeakOnUIClosed
-    pack: Pantsbyes
+    pack: Sexbyes
   - type: Sprite
     sprite: _FreakStation/Casha/Vendomat/pantsvend.rsi
     layers:

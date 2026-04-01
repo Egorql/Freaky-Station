@@ -57,6 +57,11 @@
       board: [ DoorElectronicsTypan ]
 
 - type: entity
+  id: AirlockTypanAssembly
+  parent: AirlockAssembly
+  suffix: Typan
+
+- type: entity
   id: HighSecDoorTypan
   parent: HighSecDoor
   name: бронированная дверь

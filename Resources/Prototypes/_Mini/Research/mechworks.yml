@@ -133,29 +133,29 @@
   - TypanMechanicalCompression
   # Goobstation R&D Console rework end
 
-# - type: technology
-#   id: TypanRipley
-#   name: research-technology-bloodred-ripley
-#   icon:
-#     sprite: _Mini/Objects/Specific/Mech/mecha.rsi
-#     state: bloodredripley
-#   discipline: TypanMechworks
-#   tier: 1
-#   cost: 7500
-#   recipeUnlocks:
-#   - TypanRipleyHarness
-#   - TypanRipleyLArm
-#   - TypanRipleyRArm
-#   - TypanRipleyLLeg
-#   - TypanRipleyRLeg
-#   - TypanRipleyCentralElectronics
-#   - TypanRipleyPeripheralsElectronics
-#   - MechEquipmentTypanRipleyGrabber
-#   # Goobstation R&D Console rework start
-#   position: -1,3
-#   technologyPrerequisites:
-#   - TypanIndustrialEngineering
-#   # Goobstation R&D Console rework end
+- type: technology
+  id: TypanRipley
+  name: research-technology-bloodred-ripley
+  icon:
+    sprite: _Mini/Objects/Specific/Mech/mecha.rsi
+    state: bloodredripley
+  discipline: TypanMechworks
+  tier: 1
+  cost: 7500
+  recipeUnlocks:
+  - TypanRipleyHarness
+  - TypanRipleyLArm
+  - TypanRipleyRArm
+  - TypanRipleyLLeg
+  - TypanRipleyRLeg
+  - TypanRipleyCentralElectronics
+  - TypanRipleyPeripheralsElectronics
+  - MechEquipmentTypanRipleyGrabber
+  # Goobstation R&D Console rework start
+  position: -1,3
+  technologyPrerequisites:
+  - TypanIndustrialEngineering
+  # Goobstation R&D Console rework end
 
 - type: technology
   id: TypanHardsuitsBasic
@@ -260,7 +260,7 @@
 
 - type: technology
   id: TypanHUD
-  name: Технология визоров
+  name: research-technology-typan-hud
   icon:
     sprite: _Mini/Clothing/Eyes/Hud/typan_advhud.rsi
     state: icon

@@ -9,31 +9,6 @@
   equipment:
     jumpsuit: ClothingUniformJumpskirtTypanTechnician
 
-# Underwear
-- type: loadout
-  id: UnderwearBottomBoxersTypanTechnician
-  effects:
-  - !type:GroupLoadoutEffect
-    proto: MaleUnderwear
-  equipment:
-    underwearb: ClothingUnderwearBottomBoxersTypanTechnician
-
-- type: loadout
-  id: UnderwearBottomPantiesTypanTechnician
-  effects:
-  - !type:GroupLoadoutEffect
-    proto: FemaleUnderwear
-  equipment:
-    underwearb: ClothingUnderwearBottomPantiesTypanTechnician
-
-- type: loadout
-  id: UnderwearTopBraTypanTechnician
-  effects:
-  - !type:GroupLoadoutEffect
-    proto: FemaleUnderwear
-  equipment:
-    underweart: ClothingUnderwearTopBraTypanTechnician
-
 # Loadout Groups
 - type: loadoutGroup
   id: TypanTechnicianUniform

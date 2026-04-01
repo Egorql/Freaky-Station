@@ -190,7 +190,7 @@
       conditions:
       - !type:WirePanel {}
       steps:
-      - material: Plastitanium
+      - material: Plasteel
         amount: 2
         doAfter: 2
 
@@ -213,7 +213,7 @@
       conditions:
       - !type:WirePanel {}
       steps:
-      - material: Plastitanium
+      - material: Plasteel
         amount: 2
         doAfter: 2
 
@@ -380,7 +380,7 @@
       conditions:
       - !type:WirePanel {}
       steps:
-      - material: Plastitanium
+      - material: Plasteel
         amount: 2
         doAfter: 2
 

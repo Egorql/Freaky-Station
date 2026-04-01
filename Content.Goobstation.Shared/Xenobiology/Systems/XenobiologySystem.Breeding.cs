@@ -103,6 +103,7 @@ public partial class XenobiologySystem
         }
 
         _containerSystem.EmptyContainer(ent.Comp.Stomach);
+        RaiseLocalEvent(ent, new SlimeMitosisEvent());
         QueueDel(ent);
     }
 

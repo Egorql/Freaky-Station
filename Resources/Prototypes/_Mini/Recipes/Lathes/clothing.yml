@@ -166,11 +166,6 @@
   id: ClothingOuterApronTypanChef
   result: ClothingOuterApronTypanChef
 
-- type: latheRecipe
-  parent: BaseCoatRecipe
-  id: ClothingOuterJacketTypanChef
-  result: ClothingOuterJacketTypanChef
-
 # Backpack
 - type: latheRecipe
   id: ClothingBackpackSatchelTypan

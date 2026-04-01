@@ -31,7 +31,7 @@
   id: TypanScience
   equipment:
     eyes: ClothingEyesHudTypanResearch
-    ears: ClothingHeadsetAltSyndicate
+    ears: ClothingHeadsetAltTypan
     outerClothing: ClothingOuterTypanCoatLabResearcher
     gloves: ClothingHandsScienceTypan
     shoes: ClothingShoesBootsCombat

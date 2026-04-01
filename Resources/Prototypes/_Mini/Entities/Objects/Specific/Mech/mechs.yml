@@ -1,9 +1,9 @@
 - type: entity
   id: MechTypanRipley
   parent: BaseMech
-  name: кроваво-красный Рипли
-  description: Слабо бронированный мех в фирменной расцветке Синдиката, созданный на основе Рипли MKII. Предназначен для тяжёлой физической работы.
-  suffix: Тайпан
+  name: blood-red Ripley
+  description: A lightly armored mech in the Typan blood-red livery, built on the Ripley MK-II frame for heavy-duty work.
+  suffix: Typan
   components:
   - type: Sprite
     drawdepth: Mobs
@@ -25,7 +25,7 @@
       - HumanoidAppearance
     equipmentWhitelist:
       tags:
-      - DeathRipleyEquipment
+      - TypanRipleyEquipment
   - type: MeleeWeapon
     hidden: true
     attackRate: 1
@@ -42,7 +42,7 @@
 - type: entity
   id: MechTypanRipleyBattery
   parent: MechTypanRipley
-  suffix: Тайпан, Батарея
+  suffix: Typan, Battery
   components:
   - type: ContainerFill
     containers:

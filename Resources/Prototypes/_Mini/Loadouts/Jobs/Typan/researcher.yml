@@ -10,31 +10,6 @@
   equipment:
     jumpsuit: ClothingUniformJumpskirtTypanResearcher
 
-# Underwear
-- type: loadout
-  id: UnderwearBottomBoxersTypanResearcher
-  effects:
-  - !type:GroupLoadoutEffect
-    proto: MaleUnderwear
-  equipment:
-    underwearb: ClothingUnderwearBottomBoxersTypanResearcher
-
-- type: loadout
-  id: UnderwearBottomPantiesTypanResearcher
-  effects:
-  - !type:GroupLoadoutEffect
-    proto: FemaleUnderwear
-  equipment:
-    underwearb: ClothingUnderwearBottomPantiesTypanResearcher
-
-- type: loadout
-  id: UnderwearTopBraTypanResearcher
-  effects:
-  - !type:GroupLoadoutEffect
-    proto: FemaleUnderwear
-  equipment:
-    underweart: ClothingUnderwearTopBraTypanResearcher
-
 # Loadout Groups
 - type: loadoutGroup
   id: TypanResearcherUniform
@@ -45,12 +20,3 @@
   - TypanResearcherJumpsuit
   - TypanResearcherJumpskirt
 
-- type: loadoutGroup
-  id: TypanResearcherUnderwear
-  name: loadout-group-typan-researcher-underwear
-  hidden: true
-  minLimit: 2
-  loadouts:
-  - UnderwearBottomBoxersTypanResearcher
-  - UnderwearBottomPantiesTypanResearcher
-  - UnderwearTopBraTypanResearcher

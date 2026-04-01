@@ -26,7 +26,7 @@
             TypanBorgMedic: [ 1, 1 ]
             TypanCommander: [ 1, 1 ]
         - type: StationCargoShuttle
-          path: Maps/Shuttles/typan_cargo_shuttle.yml
+          path: /Maps/Shuttles/typan_cargo_shuttle.yml
         - type: StationGoal
           goals:
           - TypanSilentResearch

@@ -4,25 +4,25 @@
   name: plant seed DNA manipulator computer
   description: There are seeds scattered on the panel. Apparently, someone doesn't clean up after themselves.
   components:
-  # - type: SeedDnaConsole
-  #   seedSlot:
-  #     name: seed-dna-slot-component-slot-name-seeds
-  #     ejectSound: /Audio/Machines/id_swipe.ogg
-  #     insertSound: /Audio/Weapons/Guns/MagIn/batrifle_magin.ogg
-  #     ejectOnBreak: true
-  #     swap: true
-  #     whitelist:
-  #       components:
-  #       - Seed
-  #   dnaDiskSlot:
-  #     name: seed-dna-slot-component-slot-name-disk
-  #     ejectSound: /Audio/Machines/id_swipe.ogg
-  #     insertSound: /Audio/Weapons/Guns/MagIn/batrifle_magin.ogg
-  #     ejectOnBreak: true
-  #     swap: true
-  #     whitelist:
-  #       components:
-  #       - DnaDisk
+  - type: SeedDnaConsole
+    seedSlot:
+      name: seed-dna-slot-component-slot-name-seeds
+      ejectSound: /Audio/Machines/id_swipe.ogg
+      insertSound: /Audio/Weapons/Guns/MagIn/batrifle_magin.ogg
+      ejectOnBreak: true
+      swap: true
+      whitelist:
+        components:
+        - Seed
+    dnaDiskSlot:
+      name: seed-dna-slot-component-slot-name-disk
+      ejectSound: /Audio/Machines/id_swipe.ogg
+      insertSound: /Audio/Weapons/Guns/MagIn/batrifle_magin.ogg
+      ejectOnBreak: true
+      swap: true
+      whitelist:
+        components:
+        - DnaDisk
   - type: ActivatableUI
     key: enum.SeedDnaConsoleUiKey.Key
   - type: UserInterface

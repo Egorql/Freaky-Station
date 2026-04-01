@@ -15,10 +15,40 @@
         <SplitContainer State="Auto" ResizeMode="NotResizable" HorizontalExpand="True">
             <BoxContainer Name="LeftSide" Orientation="Vertical" SeparationOverride="4" HorizontalExpand="False">
                 <Control Name="DefaultState" VerticalExpand="True">
-                    <BoxContainer Name="TopLeft" Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0 8 0 0">
-                        <BoxContainer Orientation="Vertical" SeparationOverride="4" Name="VoteContainer" Access="Public"
-                                      HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0 0 0 8" />
-                        <PanelContainer HorizontalAlignment="Left" Name="LeftSideTop" VerticalAlignment="Top">
+                    <BoxContainer Orientation="Vertical" VerticalExpand="True" HorizontalExpand="True">
+                        <BoxContainer Name="TopLeft" Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0 8 0 0">
+                            <ScrollContainer HScrollEnabled="False" ReturnMeasure="True" MaxHeight="200" HorizontalAlignment="Left" VerticalAlignment="Top">
+                                <BoxContainer Orientation="Vertical" SeparationOverride="4" Name="VoteContainer" Access="Public"
+                                              HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0 0 6 0" />
+                            </ScrollContainer>
+                        </BoxContainer>
+
+                        <Control VerticalExpand="True" />
+
+                        <PanelContainer HorizontalAlignment="Left" Name="Center" VerticalAlignment="Top" Margin="0 0 0 0">
+                            <BoxContainer Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0 0 0 0">
+                                <buttons:WhiteLobbyTextButton Name="ReadyButton" Access="Public" ToggleMode="True"
+                                                              ButtonText="{Loc 'lobby-state-player-status-not-ready'}" Margin="0 16 0 10" />
+                                <buttons:WhiteUICommandButton Name="ObserveButton" WindowType="{x:Type lobbyUi:ObserveWarningWindow}" Access="Public"
+                                                              ButtonText="{Loc 'ui-lobby-observe-button'}" Margin="0 10 0 10" />
+                                <buttons:WhiteLobbyTextButton Name="CharacterSetupButton" Access="Public"
+                                                              ButtonText="{Loc 'lobby-character-preview-panel-character-setup-button'}" Margin="0 10 0 10" />
+                                <buttons:WhiteLobbyTextButton Name="OptionsButton" Access="Public"
+                                                              ButtonText="{Loc 'ui-lobby-options-button'}" Margin="0 10 0 10" />
+                                <buttons:WhiteLobbyTextButton Name="VotemenuButton" Access="Public"
+                                                              ButtonText="{Loc 'ui-lobby-open-vote-menu'}" Margin="0 10 0 10" />
+                                <buttons:WhiteLobbyTextButton Name="AHelpButton" Access="Public"
+                                                              ButtonText="{Loc 'ui-lobby-ahelp-button'}" Margin="0 10 0 10" />
+                                <buttons:WhiteLobbyTextButton Name="ChangelogButton" Access="Public"
+                                                              ButtonText="{Loc 'ui-lobby0changelog-button'}" Margin="0 10 0 10" />
+                                <buttons:WhiteLobbyTextButton Name="LeaveButton" Access="Public"
+                                                              ButtonText="{Loc 'ui-lobby-leave-button'}" Margin="0 10 0 0" />
+                            </BoxContainer>
+                        </PanelContainer>
+
+                        <Control VerticalExpand="True" />
+
+                        <PanelContainer HorizontalAlignment="Left" Name="LeftSideTop" VerticalAlignment="Bottom" Margin="0 0 0 8">
                             <BoxContainer Orientation="Vertical" HorizontalAlignment="Left" MaxWidth="320">
                                 <RichTextLabel Name="PlaytimeComment" Visible="False" Access="Public" HorizontalAlignment="Center" />
                                 <RichTextLabel Name="LobbySong" Access="Public" HorizontalAlignment="Left" Margin="0 4 0 0" />
@@ -26,28 +56,6 @@
                             </BoxContainer>
                         </PanelContainer>
                     </BoxContainer>
-
-                    <PanelContainer HorizontalAlignment="Left" Name="Center" VerticalAlignment="Center" Margin="0 0 0 0">
-                        <BoxContainer Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0 0 0 0">
-                            <buttons:WhiteLobbyTextButton Name="ReadyButton" Access="Public" ToggleMode="True"
-                                                          ButtonText="{Loc 'lobby-state-player-status-not-ready'}" Margin="0 16 0 10" />
-                            <buttons:WhiteUICommandButton Name="ObserveButton" WindowType="{x:Type lobbyUi:ObserveWarningWindow}" Access="Public"
-                                                          ButtonText="{Loc 'ui-lobby-observe-button'}" Margin="0 10 0 10" />
-                            <buttons:WhiteLobbyTextButton Name="CharacterSetupButton" Access="Public"
-                                                          ButtonText="{Loc 'lobby-character-preview-panel-character-setup-button'}" Margin="0 10 0 10" />
-                            <buttons:WhiteLobbyTextButton Name="OptionsButton" Access="Public"
-                                                          ButtonText="{Loc 'ui-lobby-options-button'}" Margin="0 10 0 10" />
-                            <buttons:WhiteLobbyTextButton Name="VotemenuButton" Access="Public"
-                                                          ButtonText="{Loc 'ui-lobby-open-vote-menu'}" Margin="0 10 0 10" />
-                            <buttons:WhiteLobbyTextButton Name="AHelpButton" Access="Public"
-                                                          ButtonText="{Loc 'ui-lobby-ahelp-button'}" Margin="0 10 0 10" />
-                            <buttons:WhiteLobbyTextButton Name="ChangelogButton" Access="Public"
-                                                          ButtonText="{Loc 'ui-lobby0changelog-button'}" Margin="0 10 0 10" />
-                            <buttons:WhiteLobbyTextButton Name="LeaveButton" Access="Public"
-                                                          ButtonText="{Loc 'ui-lobby-leave-button'}" Margin="0 10 0 0" />
-                        </BoxContainer>
-                    </PanelContainer>
-
                 </Control>
                 <Control Access="Public" Visible="False" Name="CharacterSetupState" VerticalExpand="True" />
             </BoxContainer>

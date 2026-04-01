@@ -27,7 +27,6 @@
     - Deconstruct
   - type: LimitedCharges
     maxCharges: 30
-    charges: 30
   - type: Sprite
     sprite: _Mini/Objects/Devices/rcd.rsi
     state: icon
@@ -83,6 +82,5 @@
     - Deconstruct
   - type: LimitedCharges
     maxCharges: 45
-    charges: 45
   - type: Sprite
     sprite: _Mini/Objects/Devices/rpd.rsi

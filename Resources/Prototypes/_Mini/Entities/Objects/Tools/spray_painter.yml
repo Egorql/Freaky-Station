@@ -25,11 +25,6 @@
       distro: '#0055cc'
       air: '#03fcd3'
       mix: '#947507'
-    allowedCategories:
-    - TypanAirlocks
-    - TypanCanisters
-    - TypanCrates
-    - TypanLockers
 
 - type: entity
   parent: SprayPainterTypan

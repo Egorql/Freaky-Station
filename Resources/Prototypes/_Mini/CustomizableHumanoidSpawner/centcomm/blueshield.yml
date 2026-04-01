@@ -10,7 +10,6 @@
   - CentralCommandBlueShieldOfficerLoadout
   - Survival
   - GroupSpeciesBreathTool
-  - BlueShieldOfficerUnderwear
 
 - type: loadoutGroup
   id: CentralCommandBlueShieldOfficerLoadout
@@ -22,4 +21,4 @@
 - type: loadout
   id: CentralCommandBlueShieldOfficerLoadout
   equipment:
-    back: ClothingBackpackBlueShield
+    back: ClothingBackpackBlueshield

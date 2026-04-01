@@ -5,5 +5,7 @@
   parent: [PinpointerBase, BaseCommandContraband]
   components:
   - type: Pinpointer
-    component: Monument
+    whitelist:
+      components:
+      - Monument
     targetName: монумент культистов

@@ -71,7 +71,7 @@
   startingGear: AtmosphericTechnicianGear
   icon: "JobIconAtmosphericTechnician"
   supervisors: job-supervisors-ce
-  #goobcoins: 20 #Goob content Corvax-Goob-coins
+  goobcoins: 20 #Goob content
   skills: # CorvaxGoob-Skills
   - ShuttleControl
   - AdvancedBuilding

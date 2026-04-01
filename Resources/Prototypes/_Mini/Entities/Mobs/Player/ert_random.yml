@@ -4,8 +4,6 @@
 - type: entity
   id: RandomHumanoidSpawnerERTLeaderAmber
   name: ERT leader amber
-  skills: # CorvaxGoob-Skills
-    - All
   components:
     - type: Sprite
       sprite: Markers/jobs.rsi
@@ -21,8 +19,6 @@
 - type: randomHumanoidSettings
   id: ERTLeaderAmber
   parent: EventHumanoidERT
-  skills: # CorvaxGoob-Skills
-    - All
   components:
     - type: GhostRole
       skills: # CorvaxGoob-Skills
@@ -30,7 +26,6 @@
       name: ghost-role-information-ert-leader-name
       description: ghost-role-information-ert-leader-description
       rules: ghost-role-information-nonantagonist-rules
-      category: ghost-role-information-centcomm-category
       requirements:
         - !type:DepartmentTimeRequirement
           department: Medical
@@ -57,8 +52,6 @@
   id: RandomHumanoidSpawnerERTLeaderRed
   parent: RandomHumanoidSpawnerERTLeaderAmber
   name: ERT leader red
-  skills: # CorvaxGoob-Skills
-    - All
   components:
     - type: Sprite
       sprite: Markers/jobs.rsi
@@ -76,7 +69,6 @@
       name: ghost-role-information-ert-leader-name
       description: ghost-role-information-ert-leader-description
       rules: ghost-role-information-nonantagonist-rules
-      category: ghost-role-information-centcomm-category
       requirements:
         - !type:DepartmentTimeRequirement
           department: Medical
@@ -103,8 +95,6 @@
   id: RandomHumanoidSpawnerERTLeaderGamma
   parent: RandomHumanoidSpawnerERTLeaderAmber
   name: ERT leader gamma
-  skills: # CorvaxGoob-Skills
-    - All
   components:
     - type: Sprite
       sprite: Markers/jobs.rsi
@@ -122,7 +112,6 @@
       name: ghost-role-information-ert-leader-name
       description: ghost-role-information-ert-leader-description
       rules: ghost-role-information-nonantagonist-rules
-      category: ghost-role-information-centcomm-category
       requirements:
         - !type:DepartmentTimeRequirement
           department: Medical
@@ -149,8 +138,6 @@
   id: RandomHumanoidSpawnerCBURNLeader
   parent: RandomHumanoidSpawnerERTLeaderAmber
   name: CBURN leader
-  skills: # CorvaxGoob-Skills
-  - All
   components:
     - type: Sprite
       sprite: Markers/jobs.rsi
@@ -168,7 +155,6 @@
       name: ghost-role-information-cburn-leader-name
       description: ghost-role-information-cburn-leader-description
       rules: ghost-role-information-nonantagonist-rules
-      category: ghost-role-information-centcomm-category
       requirements:
         - !type:DepartmentTimeRequirement
           department: Medical
@@ -197,8 +183,6 @@
   id: RandomHumanoidSpawnerERTSecurityAmber
   parent: RandomHumanoidSpawnerERTLeaderAmber
   name: ERT security amber
-  skills: # CorvaxGoob-Skills
-  - All
   components:
     - type: Sprite
       sprite: Markers/jobs.rsi
@@ -221,7 +205,6 @@
       name: ghost-role-information-ert-security-name
       description: ghost-role-information-ert-security-description
       rules: ghost-role-information-nonantagonist-rules
-      category: ghost-role-information-centcomm-category
       requirements:
         - !type:DepartmentTimeRequirement
           department: Medical
@@ -245,8 +228,6 @@
   id: RandomHumanoidSpawnerERTSecurityRed
   parent: RandomHumanoidSpawnerERTSecurityAmber
   name: ERT security red
-  skills: # CorvaxGoob-Skills
-  - All
   components:
     - type: RandomHumanoidSpawner
       settings: ERTSecurityRed
@@ -261,7 +242,6 @@
       name: ghost-role-information-ert-security-name
       description: ghost-role-information-ert-security-description
       rules: ghost-role-information-nonantagonist-rules
-      category: ghost-role-information-centcomm-category
       requirements:
         - !type:DepartmentTimeRequirement
           department: Medical
@@ -280,8 +260,6 @@
   id: RandomHumanoidSpawnerERTSecurityGamma
   parent: RandomHumanoidSpawnerERTSecurityAmber
   name: ERT security gamma
-  skills: # CorvaxGoob-Skills
-  - All
   components:
     - type: RandomHumanoidSpawner
       settings: ERTSecurityGamma
@@ -294,7 +272,6 @@
       name: ghost-role-information-ert-security-name
       description: ghost-role-information-ert-security-description
       rules: ghost-role-information-nonantagonist-rules
-      category: ghost-role-information-centcomm-category
       requirements:
         - !type:DepartmentTimeRequirement
           department: Medical
@@ -314,8 +291,6 @@
   id: RandomHumanoidSpawnerERTMedicalAmber
   parent: RandomHumanoidSpawnerERTLeaderAmber
   name: ERT medic amber
-  skills: # CorvaxGoob-Skills
-  - All
   components:
     - type: Sprite
       sprite: Markers/jobs.rsi
@@ -336,7 +311,6 @@
       name: ghost-role-information-ert-medical-name
       description: ghost-role-information-ert-medical-description
       rules: ghost-role-information-nonantagonist-rules
-      category: ghost-role-information-centcomm-category
       requirements:
         - !type:DepartmentTimeRequirement
           department: Medical
@@ -360,8 +334,6 @@
   id: RandomHumanoidSpawnerERTMedicalRed
   parent: RandomHumanoidSpawnerERTMedicalAmber
   name: ERT medic red
-  skills: # CorvaxGoob-Skills
-  - All
   components:
     - type: RandomHumanoidSpawner
       settings: ERTMedicalRed
@@ -376,7 +348,6 @@
       name: ghost-role-information-ert-medical-name
       description: ghost-role-information-ert-medical-description
       rules: ghost-role-information-nonantagonist-rules
-      category: ghost-role-information-centcomm-category
       requirements:
         - !type:DepartmentTimeRequirement
           department: Medical
@@ -395,8 +366,6 @@
   id: RandomHumanoidSpawnerERTMedicalGamma
   parent: RandomHumanoidSpawnerERTMedicalAmber
   name: ERT medic gamma
-  skills: # CorvaxGoob-Skills
-  - All
   components:
     - type: RandomHumanoidSpawner
       settings: ERTMedicalGamma
@@ -411,7 +380,6 @@
       name: ghost-role-information-ert-medical-name
       description: ghost-role-information-ert-medical-description
       rules: ghost-role-information-nonantagonist-rules
-      category: ghost-role-information-centcomm-category
       requirements:
         - !type:DepartmentTimeRequirement
           department: Medical
@@ -431,8 +399,6 @@
   id: RandomHumanoidSpawnerERTJanitorAmber
   parent: RandomHumanoidSpawnerERTLeaderAmber
   name: ERT janitor amber
-  skills: # CorvaxGoob-Skills
-  - All
   components:
     - type: Sprite
       sprite: Markers/jobs.rsi
@@ -455,7 +421,6 @@
       name: ghost-role-information-ert-janitor-name
       description: ghost-role-information-ert-janitor-description
       rules: ghost-role-information-nonantagonist-rules
-      category: ghost-role-information-centcomm-category
       requirements:
         - !type:DepartmentTimeRequirement
           department: Security
@@ -476,8 +441,6 @@
   id: RandomHumanoidSpawnerERTJanitorRed
   parent: RandomHumanoidSpawnerERTJanitorAmber
   name: ERT janitor red
-  skills: # CorvaxGoob-Skills
-  - All
   components:
     - type: RandomHumanoidSpawner
       settings: ERTJanitorRed
@@ -492,7 +455,6 @@
       name: ghost-role-information-ert-janitor-name
       description: ghost-role-information-ert-janitor-description
       rules: ghost-role-information-nonantagonist-rules
-      category: ghost-role-information-centcomm-category
       requirements:
         - !type:DepartmentTimeRequirement
           department: Security
@@ -508,8 +470,6 @@
   id: RandomHumanoidSpawnerERTJanitorGamma
   parent: RandomHumanoidSpawnerERTJanitorAmber
   name: ERT janitor gamma
-  skills: # CorvaxGoob-Skills
-  - All
   components:
     - type: RandomHumanoidSpawner
       settings: ERTJanitorGamma
@@ -524,7 +484,6 @@
       name: ghost-role-information-ert-janitor-name
       description: ghost-role-information-ert-janitor-description
       rules: ghost-role-information-nonantagonist-rules
-      category: ghost-role-information-centcomm-category
       requirements:
         - !type:DepartmentTimeRequirement
           department: Security
@@ -541,8 +500,6 @@
   id: RandomHumanoidSpawnerERTEngineerAmber
   parent: RandomHumanoidSpawnerERTLeaderAmber
   name: ERT engineer amber
-  skills: # CorvaxGoob-Skills
-  - All
   components:
     - type: Sprite
       sprite: Markers/jobs.rsi
@@ -565,7 +522,6 @@
       name: ghost-role-information-ert-engineer-name
       description: ghost-role-information-ert-engineer-description
       rules: ghost-role-information-nonantagonist-rules
-      category: ghost-role-information-centcomm-category
       requirements:
         - !type:DepartmentTimeRequirement
           department: Engineering
@@ -589,8 +545,6 @@
   id: RandomHumanoidSpawnerERTEngineerRed
   parent: RandomHumanoidSpawnerERTEngineerAmber
   name: ERT engineer red
-  skills: # CorvaxGoob-Skills
-  - All
   components:
     - type: RandomHumanoidSpawner
       settings: ERTEngineerRed
@@ -605,7 +559,6 @@
       name: ghost-role-information-ert-engineer-name
       description: ghost-role-information-ert-engineer-description
       rules: ghost-role-information-nonantagonist-rules
-      category: ghost-role-information-centcomm-category
       requirements:
         - !type:DepartmentTimeRequirement
           department: Engineering
@@ -624,8 +577,6 @@
   id: RandomHumanoidSpawnerERTEngineerGamma
   parent: RandomHumanoidSpawnerERTEngineerAmber
   name: ERT engineer gamma
-  skills: # CorvaxGoob-Skills
-  - All
   components:
     - type: RandomHumanoidSpawner
       settings: ERTEngineerGamma
@@ -640,7 +591,6 @@
       name: ghost-role-information-ert-engineer-name
       description: ghost-role-information-ert-engineer-description
       rules: ghost-role-information-nonantagonist-rules
-      category: ghost-role-information-centcomm-category
       requirements:
         - !type:DepartmentTimeRequirement
           department: Engineering
@@ -659,8 +609,6 @@
   id: RandomHumanoidSpawnerCBURNAgent
   parent: RandomHumanoidSpawnerCBURNLeader
   name: CBURN Agent
-  skills: # CorvaxGoob-Skills
-  - All
   components:
     - type: Sprite
       sprite: Markers/jobs.rsi
@@ -683,7 +631,6 @@
       name: ghost-role-information-cburn-agent-name
       description: ghost-role-information-cburn-agent-description
       rules: ghost-role-information-nonantagonist-rules
-      category: ghost-role-information-centcomm-category
       requirements:
         - !type:DepartmentTimeRequirement
           department: Medical
@@ -693,7 +640,7 @@
           time: 50400 # 14 hours
       raffle:
         settings: short
-      job: CBURNAgent
+      job: CBURNLeader
     - type: RandomMetadata
       nameSegments:
       - NamesFirstERT

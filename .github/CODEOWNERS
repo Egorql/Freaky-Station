@@ -1,13 +1,20 @@
 # Last match in file takes precedence.
 
-# Хост, пинговать на все пры
+# Host
 * @Egorql
 
-# Владелец
+# Owner
 * @Casha
 
-# Маппинг, спрайтинг
+# Mapping, Spriting
 * @Sherlook
 
-# Разработка
+# Locale
+#/Resources/Locale @
+#/Resources/ServerInfo @
+
+# Textures
+#/Resources/Textures @
+
+# Development
 * @ANIvarm

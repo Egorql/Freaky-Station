@@ -9,6 +9,7 @@
   - type: Produce
   - type: PotencyVisuals
   - type: Appearance
+  - type: Extractable
     grindableSolutionName: food
 
 - type: entity
@@ -31,7 +32,7 @@
         Blunt: 0
         Holy: 25
     soundHit:
-        path: /Audio/Weapons/cropilo1.ogg
+        path: /Audio/Weapons/Xeno/alien_claw_flesh3.ogg
   - type: MeleeChemicalInjector
     transferAmount: 5
     solution: food

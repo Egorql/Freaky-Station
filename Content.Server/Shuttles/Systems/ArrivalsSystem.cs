@@ -402,7 +402,7 @@ public sealed class ArrivalsSystem : EntitySystem
 
     public void HandlePlayerSpawning(PlayerSpawningEvent ev)
     {
-        if (ev.SpawnResult != null)
+        if (ev.SpawnResult != null || ev.PreventFallback)
             return;
 
         // We use arrivals as the default spawn so don't check for job prio.

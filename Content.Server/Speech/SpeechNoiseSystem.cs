@@ -18,6 +18,7 @@
 using Content.Goobstation.Common.Speech;
 using Robust.Shared.Audio;
 using Content.Server.Chat.Systems;
+using Content.Shared.ADT.SpeechBarks;
 using Content.Shared.Speech;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Prototypes;
@@ -98,7 +99,7 @@ namespace Content.Server.Speech
             if (component.SpeechSounds == null
                 || !args.Language.SpeechOverride.RequireSpeech
                 || _cfg.GetCVar(GoobCVars.BarksEnabled) // Goob Station - Barks
-                && HasComp<SpeechSynthesisComponent>(uid))
+                && (HasComp<SpeechSynthesisComponent>(uid) || HasComp<SpeechBarksComponent>(uid)))
                 return;
             // END
 

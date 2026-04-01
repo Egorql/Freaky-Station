@@ -38,6 +38,6 @@
     netsync: false
   - type: TimerTriggerVisuals
     primingSound:
-      path: /Audio/Weapons/holysmoke.ogg
+      path: /Audio/Items/smoke_grenade_prime.ogg
   - type: TimerTrigger
     delay: 4.5

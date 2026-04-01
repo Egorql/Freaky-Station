@@ -23,3 +23,9 @@ voice-mask-popup-failure = Name could not be set.
 voice-mask-icon-label = Job (for your radio icon)
 voice-mask-name-current-name = Current name
 
+voice-mask-voice-change-info = Choose a voice to imitate.
+voice-mask-voice-popup-success = Voice changed successfully.
+voice-mask-pitch-change-info = Voice pitch:
+voice-mask-voice-popup-invalid = Invalid voice.
+voice-mask-voice-popup-invalid-pitch = Invalid pitch value.
+

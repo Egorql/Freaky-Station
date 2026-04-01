@@ -194,7 +194,8 @@
   - type: RadarConsole
     followEntity: false
   - type: CommunicationsConsole
-    canShuttle: false
+    canCallShuttle: false
+    canRecallShuttle: false
     title: comms-console-announcement-title-station-ai
     color: "#5ed7aa"
     sound: /Audio/_CorvaxGoob/Announcements/aiannounce.ogg # CorvaxGoob-Announcements
@@ -429,6 +430,48 @@
       state: ai_female
   - type: NameIdentifier
     group: StationAi
+  - type: LanguageKnowledge
+    speaks:
+    - TauCetiBasic
+    - Canilunzt
+    - Bubblish
+    - Nekomimetic
+    - Draconic
+    - SolCommon
+    - RootSpeak
+    - Moffic
+    - ValyrianStandard
+    - Chittin
+    - SiikMaas
+    - RobotTalk
+    - DroneTalk
+    - Marish
+    - Elyran
+    - Freespeak
+    - Tradeband
+    - Schechi
+    - NewKinPidgin
+    understands:
+    - TauCetiBasic
+    - Canilunzt
+    - Bubblish
+    - Nekomimetic
+    - Draconic
+    - SolCommon
+    - RootSpeak
+    - Moffic
+    - ValyrianStandard
+    - Chittin
+    - SiikMaas
+    - RobotTalk
+    - DroneTalk
+    - Marish
+    - Elyran
+    - Freespeak
+    - Tradeband
+    - Sign
+    - Schechi
+    - NewKinPidgin
   - type: TTS # CorvaxGoob-TTS
     voice: Glados
   # CorvaxGoob-Revert : DB conflicts
@@ -580,15 +623,16 @@
   id: Mimicry
   name: action-name-mimicry
   description: action-description-mimicry
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
-  - type: InstantAction
+  - type: Action
     itemIconStyle: NoItem
     icon:
       sprite: _Mini/Interface/Actions/borgs.rsi
       state: mimicry
-    event: !type:MimicryEvent
     useDelay: 4
+  - type: InstantAction
+    event: !type:MimicryEvent
 
 - type: entity
   id: PlayerBorgSyndicateSaboteurGhostRole

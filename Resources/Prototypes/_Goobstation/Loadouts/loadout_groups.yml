@@ -1003,7 +1003,7 @@
 
 - type: loadoutGroup
   id: BlueshieldOfficerBelt
-  name: ОСЩ, пояс
+  name: loadout-group-bso-belt
   loadouts:
   - BeltAssault
   - MilitaryWebbingBlueShield
@@ -1080,7 +1080,7 @@
 
 - type: loadoutGroup
   id: BlueshieldOfficerEyes
-  name: ОСЩ, очки
+  name: loadout-group-bso-eyes
   minLimit: 1
   maxLimit: 1
   loadouts:
@@ -1089,7 +1089,7 @@
 
 - type: loadoutGroup
   id: BlueshieldOfficerPDA
-  name: ОСЩ, КПК
+  name: loadout-group-bso-pda
   minLimit: 1
   maxLimit: 1
   loadouts:
@@ -1625,3 +1625,21 @@
   - JumpsuitHawaiBlue
   - JumpsuitHawaiRed
   - JumpsuitHawaiYellow
+
+# Salvage/Shaft Miner
+
+- type: loadoutGroup
+  id: SalvageSpecialistJumpsuit
+  name: loadout-group-salvage-specialist-jumpsuit
+  loadouts:
+  - SalvageSpecialistJumpsuit
+  - SalvageSpecialistJumpskirt
+  - SalvageSpecialistOveralls
+
+- type: loadoutGroup
+  id: ShaftMinerJumpsuit
+  name: loadout-group-shaft-miner-jumpsuit
+  loadouts:
+  - ShaftMinerJumpsuit
+  - ShaftMinerJumpskirt
+  - ShaftMinerOveralls

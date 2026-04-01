@@ -3,7 +3,6 @@ using Content.Server._CorvaxGoob.Objectives.Components;
 using Content.Server.Actions;
 using Content.Server.Antag.Components;
 using Content.Server.GameTicking;
-using Content.Server.GameTicking.Events;
 using Content.Server.Ghost.Roles;
 using Content.Server.Mind;
 using Content.Server.Station.Systems;
@@ -14,19 +13,14 @@ using Content.Shared.Mindshield.Components;
 using Content.Shared.Players;
 using Content.Shared.Roles;
 using Robust.Server.Player;
-using Robust.Shared.EntitySerialization;
-using Robust.Shared.EntitySerialization.Systems;
 using Robust.Shared.Map;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
-using Robust.Shared.Utility;
 
 namespace Content.Server._CorvaxGoob.Ghostbar;
 
 public sealed class GhostBarSystem : EntitySystem
 {
-    [Dependency] private readonly SharedMapSystem _mapSystem = default!;
-    [Dependency] private readonly MapLoaderSystem _mapLoader = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly GameTicker _ticker = default!;
     [Dependency] private readonly StationSpawningSystem _spawningSystem = default!;
@@ -43,19 +37,9 @@ public sealed class GhostBarSystem : EntitySystem
 
     public override void Initialize()
     {
-        SubscribeLocalEvent<RoundStartingEvent>(OnRoundStart);
         SubscribeNetworkEvent<GhostBarSpawnEvent>(SpawnPlayer);
 
         SubscribeLocalEvent<GhostBarPlayerComponent, OpenGhostRolesListActionEvent>(OnActionOpenGhostRoles);
-    }
-
-    const string MapPath = "Maps/_Goobstation/Nonstations/ghostbar.yml";
-    private void OnRoundStart(RoundStartingEvent ev)
-    {
-        var resPath = new ResPath(MapPath);
-
-        if (_mapLoader.TryLoadMap(resPath, out var map, out _, new DeserializationOptions { InitializeMaps = true }))
-            _mapSystem.SetPaused(map.Value.Comp.MapId, false);
     }
 
     public void SpawnPlayer(GhostBarSpawnEvent msg, EntitySessionEventArgs args)

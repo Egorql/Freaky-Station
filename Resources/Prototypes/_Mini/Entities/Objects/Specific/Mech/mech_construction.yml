@@ -3,7 +3,7 @@
 - type: entity
   id: BaseTypanRipleyPart
   parent: BaseMechPart
-  suffix: Тайпан
+  suffix: Typan
   abstract: true
   components:
   - type: Sprite
@@ -22,8 +22,8 @@
 - type: entity
   parent: BaseTypanRipleyPart
   id: TypanRipleyHarness
-  name: каркас кроваво-красного Рипли
-  description: Ядро кроваво-красного Рипли.
+  name: blood-red Ripley harness
+  description: The core frame of the blood-red Ripley.
   components:
   - type: Appearance
   - type: ItemMapper
@@ -69,8 +69,8 @@
 - type: entity
   parent: BaseTypanRipleyPartItem
   id: TypanRipleyLArm
-  name: левая рука кроваво-красного Рипли
-  description: Левая рука кроваво-красного Рипли. Устанавливается на каркас меха.
+  name: blood-red Ripley left arm
+  description: The left arm of the blood-red Ripley. It belongs on the mech chassis.
   components:
   - type: Sprite
     state: ripley_l_arm
@@ -81,8 +81,8 @@
 - type: entity
   parent: BaseTypanRipleyPartItem
   id: TypanRipleyLLeg
-  name: левая нога кроваво-красного Рипли
-  description: Левая нога кроваво-красного Рипли. Устанавливается на каркас меха.
+  name: blood-red Ripley left leg
+  description: The left leg of the blood-red Ripley. It belongs on the mech chassis.
   components:
   - type: Sprite
     state: ripley_l_leg
@@ -93,8 +93,8 @@
 - type: entity
   parent: BaseTypanRipleyPartItem
   id: TypanRipleyRLeg
-  name: правая нога кроваво-красного Рипли
-  description: Правая нога кроваво-красного Рипли. Устанавливается на каркас меха.
+  name: blood-red Ripley right leg
+  description: The right leg of the blood-red Ripley. It belongs on the mech chassis.
   components:
   - type: Sprite
     state: ripley_r_leg
@@ -105,8 +105,8 @@
 - type: entity
   parent: BaseTypanRipleyPartItem
   id: TypanRipleyRArm
-  name: правая рука кроваво-красного Рипли
-  description: Правая рука кроваво-красного Рипли. Устанавливается на каркас меха.
+  name: blood-red Ripley right arm
+  description: The right arm of the blood-red Ripley. It belongs on the mech chassis.
   components:
   - type: Sprite
     state: ripley_r_arm

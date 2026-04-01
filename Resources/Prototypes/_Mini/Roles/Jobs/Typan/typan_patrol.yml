@@ -40,7 +40,7 @@
 - type: startingGear
   id: TypanPatrol
   equipment:
-    ears: ClothingHeadsetAltSyndicate
+    ears: ClothingHeadsetAltTypan
     shoes: ClothingShoesBootsCombat
     gloves: ClothingHandsGlovesCombat
     id: SyndiPDAOff

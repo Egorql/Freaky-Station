@@ -1,10 +1,10 @@
 - type: reagent
   id: Sperma
-  name: семя
+  name: sperma-name
   group: Foods
-  desc: Не пробуйте на вкус..
-  physicalDesc: липкое
-  flavor: sperma
+  desc: sperma-desc
+  physicalDesc: sperma-physical-desc
+  flavor: semen
   color: white
   recognizable: true
 

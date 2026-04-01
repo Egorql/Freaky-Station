@@ -1,12 +1,12 @@
 - type: entity
   id: BoxBrigmedic
   name: box of mini syringes
-  desc: Oh yes! Inject the assistants with poison!
+  description: Oh yes! Inject the assistants with poison!
   parent: BoxCardboard
   components:
     - type: StorageFill
       contents:
-        - id: MiniSyringe
+        - id: Syringe
           amount: 15  # 15 шприца, если коробка 16 на 16
     - type: Item
       size: Small
@@ -20,6 +20,3 @@
       layers:
       - state: box_medical # Corvax-Resprite
       - state: syringe
-      whitelist:
-        tags:
-        - SyringeGunAmmo

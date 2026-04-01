@@ -187,6 +187,7 @@
         - Hammer # Goobstation
         - Nailgun # Goobstation
         - MagazineNailgun # Goobstation
+        - HandHeldMassScanner # CorvaxGoob
       components:
         - SprayPainter
         - SprayPainterAmmo
@@ -274,6 +275,7 @@
         - Hammer # Goobstation
         - Nailgun # Goobstation
         - MagazineNailgun # Goobstation
+        - HandHeldMassScanner # CorvaxGoob
       components:
         - SprayPainter
         - SprayPainterAmmo
@@ -902,6 +904,7 @@
         - LavalandJaunter # CorvaxGoob
         - FlashlightSeclite # CorvaxGoob
         - MineralScanner # CorvaxGoob
+        - HandHeldMassScanner # CorvaxGoob
       components:
         - StationMap
         - SprayPainter

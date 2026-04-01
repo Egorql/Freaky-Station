@@ -1,7 +1,7 @@
 - type: gameMap
   id: LegacyCluster
   mapName: 'Legacy Cluster'
-  mapPath: /_FreakyStation/legacy_cluster.yml
+  mapPath: /Maps/_FreakyStation/legacy_cluster.yml
   maxRandomOffset: 0
   randomRotation: false
   minPlayers: 0
@@ -19,7 +19,6 @@
           availableJobs:
             # command
             Captain: [ 1, 1 ]
-            IAA: [ 1, 1 ]
             # cargo
             Quartermaster: [ 1, 1 ]
             SalvageSpecialist: [ 3, 3 ]
@@ -58,6 +57,7 @@
             Musician: [ 1, 1 ]
             ServiceWorker: [ 1, 1 ]
             Passenger: [ -1, -1 ]
+            Lawyer: [ 1, 1 ]
             # silicon
             StationAi: [ 1, 1 ]
             Borg: [ 1, 2 ]

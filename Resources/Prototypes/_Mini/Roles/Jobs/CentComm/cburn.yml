@@ -34,7 +34,7 @@
     gloves: ClothingHandsGlovesCombat
     outerClothing: ClothingOuterHardsuitCBURNLeader
     shoes: ClothingShoesBootsCombatFilled
-    id: CBURNLeaderPDA
+    id: CBURNPDA
     pocket1: DoubleEmergencyOxygenTankFilled
     pocket2: DoorRemoteAll
 

@@ -1,8 +1,8 @@
 - type: entity
   id: MechEquipmentTypanRipleyGrabber
   parent: BaseMechEquipment
-  name: синди-клешня
-  description: Гидравлическая клешня, созданная с применением редспейс-технологий. Имеет повышенную вместимость и стильную кроваво-красную расцветку.
+  name: blood-red hydraulic clamp
+  description: A hydraulic clamp adapted for the blood-red Ripley. It trades finesse for hauling capacity.
   components:
   - type: Sprite
     sprite: _Mini/Objects/Specific/Mech/mecha_equipment.rsi

@@ -231,40 +231,9 @@ public sealed partial class RadioSystem : EntitySystem
             ? FormattedMessage.EscapeText(message)
             : message;
 
-        var headsetColor = TryComp(radioSource, out HeadsetComponent? headset) ? headset.Color : channel.Color;
-
-        var job = String.Empty;
-        if (_inventory.HasSlot(messageSource, "id"))
-        {
-            job = Loc.GetString("chat-radio-source-unknown");
-
-            if (_inventory.TryGetSlotEntity(messageSource, "id", out var idSlotEntity))
-            {
-                if (TryComp(idSlotEntity, out PdaComponent? pda))
-                    idSlotEntity = pda.ContainedId;
-
-                job = TryComp(idSlotEntity, out IdCardComponent? idCard) && !string.IsNullOrEmpty(idCard.LocalizedJobTitle)
-                    ? _chat.SanitizeMessageCapital(idCard.LocalizedJobTitle)
-                    : Loc.GetString("chat-radio-source-unknown");
-            }
-
-            job = $"\\[{job}\\] ";
-        }
-
         content = Highlight(content);
 
-        var wrappedMessage = Loc.GetString(speech.Bold ? "chat-radio-message-wrap-bold" : "chat-radio-message-wrap",
-            ("channel-color", channel.Color),
-            ("fontType", speech.FontId),
-            ("fontSize", speech.FontSize),
-            ("verb", Loc.GetString(_random.Pick(speech.SpeechVerbStrings))),
-            ("channel", $"\\[{channel.LocalizedName}\\]"),
-            ("name", name),
-            ("message", content),
-            ("headset-color", headsetColor),
-            ("job", job));
-        // ("language", language));
-        // var wrappedMessage = WrapRadioMessage(messageSource, channel, name, content, language); // Einstein Engines - Language
+        var wrappedMessage = WrapRadioMessage(messageSource, channel, name, content, language, jobIcon, jobName);
 
         // most radios are relayed to chat, so lets parse the chat message beforehand
         // var chat = new ChatMessage(
