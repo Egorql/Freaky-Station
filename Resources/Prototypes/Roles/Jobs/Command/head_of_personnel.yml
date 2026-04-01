@@ -133,7 +133,7 @@
 
 - type: job
   id: HeadOfPersonnel
-  name: job-name-hop
+  name: Таярка капитана
   description: job-description-hop
   playTimeTracker: JobHeadOfPersonnel
   requirements:

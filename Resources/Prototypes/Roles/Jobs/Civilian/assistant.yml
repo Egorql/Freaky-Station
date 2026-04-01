@@ -78,7 +78,7 @@
 
 - type: job # goob edit
   id: Passenger
-  name: job-name-passenger
+  name: МанчМонстр
   description: job-description-passenger
   playTimeTracker: JobPassenger
   startingGear: PassengerGear

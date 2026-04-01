@@ -61,7 +61,7 @@
 
 - type: job
   id: AtmosphericTechnician
-  name: job-name-atmostech
+  name: Лимиткодел
   description: job-description-atmostech
   playTimeTracker: JobAtmosphericTechnician
   requirements:

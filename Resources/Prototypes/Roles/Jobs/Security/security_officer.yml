@@ -85,7 +85,7 @@
 
 - type: job
   id: SecurityOfficer
-  name: job-name-security
+  name: Маленький лутбокс
   description: job-description-security
   playTimeTracker: JobSecurityOfficer
   requirements:

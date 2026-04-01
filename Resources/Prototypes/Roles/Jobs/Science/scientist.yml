@@ -70,7 +70,7 @@
 
 - type: job
   id: Scientist
-  name: job-name-scientist
+  name: Спидранермеха
   description: job-description-scientist
   playTimeTracker: JobScientist
   requirements:

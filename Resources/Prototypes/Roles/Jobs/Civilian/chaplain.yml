@@ -65,7 +65,7 @@
 
 - type: job
   id: Chaplain
-  name: job-name-chaplain
+  name: Валидхантер
   description: job-description-chaplain
   playTimeTracker: JobChaplain
   requirements:

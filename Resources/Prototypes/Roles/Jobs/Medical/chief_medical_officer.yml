@@ -132,7 +132,7 @@
 
 - type: job
   id: ChiefMedicalOfficer
-  name: job-name-cmo
+  name: Метовар
   description: job-description-cmo
   playTimeTracker: JobChiefMedicalOfficer
   requirements:

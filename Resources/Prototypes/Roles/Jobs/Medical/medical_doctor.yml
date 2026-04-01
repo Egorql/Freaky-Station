@@ -74,7 +74,7 @@
 
 - type: job
   id: MedicalDoctor
-  name: job-name-doctor
+  name: Доктор Менгеле
   description: job-description-doctor
   playTimeTracker: JobMedicalDoctor
   requirements:

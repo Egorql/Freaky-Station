@@ -57,7 +57,7 @@
 
 - type: job
   id: Musician
-  name: job-name-musician
+  name: Мидимансер
   description: job-description-musician
   playTimeTracker: JobMusician
   startingGear: MusicianGear

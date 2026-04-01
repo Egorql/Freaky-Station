@@ -131,7 +131,7 @@
 
 - type: job
   id: Warden
-  name: job-name-warden
+  name: Бесплатные кравмаги
   description: job-description-warden
   playTimeTracker: JobWarden
   requirements:

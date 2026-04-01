@@ -62,7 +62,7 @@
 
 - type: job
   id: Chemist
-  name: job-name-chemist
+  name: Взорвалхимку
   description: job-description-chemist
   playTimeTracker: JobChemist
   requirements:

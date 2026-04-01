@@ -96,7 +96,7 @@
 
 - type: antag
   id: Traitor
-  name: roles-antag-syndicate-agent-name
+  name: НеСамооантаг
   antagonist: true
   setPreference: true
   objective: roles-antag-syndicate-agent-objective
