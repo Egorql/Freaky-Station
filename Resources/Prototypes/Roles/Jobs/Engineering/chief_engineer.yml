@@ -130,7 +130,7 @@
 
 - type: job
   id: ChiefEngineer
-  name: Крутые магнитки
+  name: job-name-ce
   description: job-description-ce
   playTimeTracker: JobChiefEngineer
   requirements:

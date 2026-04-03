@@ -101,7 +101,7 @@
 
 - type: department
   id: Cargo
-  name: Каргония
+  name: department-Cargo
   description: department-Cargo-description
   color: "#9E6A34" # Mini edit
   roles:
@@ -112,7 +112,7 @@
 
 - type: department
   id: Civilian
-  name: Сервисократия
+  name: department-Civilian
   description: department-Civilian-description
   color: "#4e7c22" # Mini edit
   weight: -10
@@ -138,7 +138,7 @@
 
 - type: department
   id: CentralCommand
-  name: Дауны
+  name: department-CentralCommand
   description: department-CentralCommand-description
   color: "#0c344d"
   roles:
@@ -166,7 +166,7 @@
 
 - type: department
   id: Command
-  name: Отдел Анонистов
+  name: department-Command
   description: department-Command-description
   color: "#334E6D"
   roles:
@@ -196,7 +196,7 @@
 
 - type: department
   id: Engineering
-  name: МанчФулаза5минут
+  name: department-Engineering
   description: department-Engineering-description
   color: "#EFB341"
   weight: 10  # Mini-weights
@@ -208,7 +208,7 @@
 
 - type: department
   id: Medical
-  name: Метоварня
+  name: department-Medical
   description: department-Medical-description
   color: "#3b627a" # Mini edit
   roles:
@@ -223,7 +223,7 @@
 
 - type: department
   id: Security
-  name: 1984curity
+  name: department-Security
   description: department-Security-description
   color: "#770101" # Mini edit
   weight: 20
@@ -240,7 +240,7 @@
 
 - type: department
   id: Science
-  name: Спидранеры
+  name: department-Science
   description: department-Science-description
   color: "#984EB4" # Mini edit
   roles:
@@ -251,7 +251,7 @@
 
 - type: department
   id: Silicon
-  name: Сексботы
+  name: department-Silicon
   description: department-Silicon-description
   color: "#61738d" # Mini edit
   roles:

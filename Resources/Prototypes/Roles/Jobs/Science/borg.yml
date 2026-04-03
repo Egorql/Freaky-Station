@@ -31,7 +31,7 @@
 # Why is this one file?
 - type: job
   id: StationAi
-  name: ЧатГПТ
+  name: job-name-station-ai
   description: job-description-station-ai
   playTimeTracker: JobStationAi
   requirements:
@@ -51,7 +51,7 @@
 
 - type: job
   id: Borg
-  name: Сексбот
+  name: job-name-borg
   description: job-description-borg
   playTimeTracker: JobBorg
   requirements:

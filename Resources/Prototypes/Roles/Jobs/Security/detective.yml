@@ -65,7 +65,7 @@
 
 - type: job
   id: Detective
-  name: ЧувствуетСебяКрутым
+  name: job-name-detective
   description: job-description-detective
   playTimeTracker: JobDetective
   requirements:

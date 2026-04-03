@@ -121,7 +121,7 @@
 
 - type: job
   id: Clown
-  name: Капитан
+  name: job-name-clown
   description: job-description-clown
   playTimeTracker: JobClown
   startingGear: ClownGear

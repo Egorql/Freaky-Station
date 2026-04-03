@@ -63,7 +63,7 @@
 
 - type: job
   id: Botanist
-  name: Выращеватель яблок
+  name: job-name-botanist
   description: job-description-botanist
   playTimeTracker: JobBotanist
   startingGear: BotanistGear

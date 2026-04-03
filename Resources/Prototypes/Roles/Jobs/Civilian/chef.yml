@@ -79,7 +79,7 @@
 
 - type: job
   id: Chef
-  name: СикусиМастер
+  name: job-name-chef
   description: job-description-chef
   playTimeTracker: JobChef
   requirements:

@@ -96,7 +96,7 @@
 
 - type: job
   id: SecurityCadet
-  name: Мишень
+  name: job-name-cadet
   description: job-description-cadet
   playTimeTracker: JobSecurityCadet
   requirements:
