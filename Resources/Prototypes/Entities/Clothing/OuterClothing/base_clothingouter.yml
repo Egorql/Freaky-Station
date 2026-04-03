@@ -164,6 +164,9 @@
     - outerClothing
     equipSound:
       collection: GenericEquip
+  - type: ClothingStain
+    itemState: coat
+    equippedState: equipped-coat
   # Goobstation edit end
   - type: Sprite
     state: icon
@@ -364,6 +367,9 @@
   - type: HideClothingLayerClothing # Goobstation
     hiddenSlots:
     - jumpsuit
+  - type: ClothingStain
+    itemState: hardsuit
+    equippedState: equipped-hardsuit
 
 - type: entity
   abstract: true
@@ -409,6 +415,9 @@
   - type: Tag
     tags:
     - PlasmamanSafe # EE Plasmeme Change
+  - type: ClothingStain
+    itemState: evasuit
+    equippedState: equipped-evasuit
 
 - type: entity
   parent: ClothingOuterBase

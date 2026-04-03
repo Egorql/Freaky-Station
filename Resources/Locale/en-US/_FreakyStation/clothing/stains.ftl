@@ -1,0 +1,10 @@
+clothing-stain-examine-blood-light = There are blood stains on it.
+clothing-stain-examine-blood-heavy = It is heavily soaked in blood.
+clothing-stain-examine-bio-light = There is biological residue on it.
+clothing-stain-examine-bio-heavy = It is heavily soiled with biological residue.
+clothing-cleaning-shower-on = The shower turns on.
+clothing-cleaning-shower-off = The shower turns off.
+clothing-cleaning-washer-start = Start wash cycle
+clothing-cleaning-washer-running = Washer running
+clothing-cleaning-washer-empty = The washer is empty.
+clothing-cleaning-washer-begin = The washing cycle begins.

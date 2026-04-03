@@ -100,6 +100,9 @@
       path: /Audio/_Goobstation/Items/handling/generic_equip2.ogg
       params:
         volume: -4
+  - type: ClothingStain
+    itemState: gloves
+    equippedState: equipped-gloves
   # Goobstation edit end
   - type: Food
     requiresSpecialDigestion: true

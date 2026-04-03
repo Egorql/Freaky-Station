@@ -50,6 +50,9 @@
     slots: [innerclothing]
     equipSound:
       path: /Audio/Items/jumpsuit_equip.ogg
+  - type: ClothingStain
+    itemState: jumpsuit
+    equippedState: equipped-jumpsuit
   - type: Butcherable
     butcheringType: Knife
     spawned:
@@ -82,6 +85,9 @@
   - type: Clothing
     slots: [innerclothing]
     femaleMask: UniformTop
+  - type: ClothingStain
+    itemState: jumpskirt
+    equippedState: equipped-jumpskirt
 
 
 - type: entity

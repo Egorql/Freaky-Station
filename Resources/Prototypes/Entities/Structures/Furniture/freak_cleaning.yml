@@ -1,0 +1,89 @@
+- type: entity
+  id: ShowerFreak
+  parent: BaseStructure
+  name: shower
+  description: Useful for washing blood and other residue off your clothes.
+  components:
+  - type: Sprite
+    sprite: _FreakStation/Furniture/shower.rsi
+    layers:
+    - state: shower
+    - state: water
+      visible: false
+      map: [ "water" ]
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.CleaningFixtureVisuals.Active:
+        water:
+          True: { visible: true }
+          False: { visible: false }
+  - type: Shower
+  - type: Clickable
+  - type: InteractionOutline
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.45,-0.45,0.45,0.45"
+        density: 100
+        mask:
+        - TableMask
+  - type: Transform
+    anchored: true
+  - type: Anchorable
+
+- type: entity
+  id: WashingMachineFreak
+  parent: BaseStructure
+  name: washing machine
+  description: Runs a short cleaning cycle for stained clothing.
+  components:
+  - type: Sprite
+    sprite: _FreakStation/Machines/washingmachine.rsi
+    noRot: true
+    layers:
+    - state: base
+    - state: door_closed
+    - state: washing
+      visible: false
+      map: [ "washing" ]
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.CleaningFixtureVisuals.Active:
+        washing:
+          True: { visible: true }
+          False: { visible: false }
+  - type: WashingMachine
+  - type: Storage
+    grid:
+    - 0,0,4,3
+    maxItemSize: Huge
+  - type: ContainerContainer
+    containers:
+      storagebase: !type:Container
+  - type: UserInterface
+    interfaces:
+      enum.StorageUiKey.Key:
+        type: StorageBoundUserInterface
+  - type: Clickable
+  - type: InteractionOutline
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.45,-0.45,0.45,0.45"
+        density: 100
+        mask:
+        - TableMask
+  - type: Transform
+    anchored: true
+    noRot: true
+  - type: Anchorable

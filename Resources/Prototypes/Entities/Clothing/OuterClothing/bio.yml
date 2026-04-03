@@ -59,6 +59,9 @@
         Blood: -1 # immune to plague mice
       chanceMultipliers:
         Blood: 0.5
+  - type: ClothingStain
+    itemState: bio
+    equippedState: equipped-bio
 
 - type: entity
   parent: ClothingOuterBioGeneral

@@ -1,4 +1,5 @@
 // SPDX-FileCopyrightText: 2019 CatTheSystem <pogorelov950@gmail.com>
+// SPDX-FileCopyrightText: 2026 Casha
 // SPDX-FileCopyrightText: 2019 Peter Wedder <burneddi@gmail.com>
 // SPDX-FileCopyrightText: 2019 Pieter-Jan Briers <pieterjan.briers@gmail.com>
 // SPDX-FileCopyrightText: 2019 Remie Richards <remierichards@gmail.com>
@@ -342,6 +343,20 @@ namespace Content.Client.Stylesheets
                 return Color.InterpolateBetween(original, tonedAccent, tonedMix).WithAlpha(alpha);
             }
 
+            var legacyWindowTint = Accent("#353A43F2", 0.26f);
+            var legacyBorderedWindowTint = Accent("#404651F2", 0.30f);
+            var legacyTransparentWindowTint = Accent("#2A3240CC", 0.42f);
+            var legacyContextMenuTint = Accent("#2F3744F2", 0.34f);
+            var legacyInventoryTint = Accent("#4B5360F2", 0.20f);
+            var legacyHighlightTint = Accent("#AFC9FFF2", 0.62f);
+            var legacySearchTint = Accent("#252B33F2", 0.28f);
+            var legacyTabTint = Accent("#3A404AF2", 0.24f);
+            var legacyTooltipTint = Accent("#343B46F2", 0.22f);
+            var legacyWhisperTint = Accent("#2E3540F2", 0.22f);
+            var legacyListTint = Accent("#39414CF2", 0.22f);
+            var legacyHeadingTint = Accent("#313A45F2", 0.28f);
+            var legacyStripeTint = Accent("#29313CF2", 0.32f);
+
             var notoSans8 = resCache.NotoStack(size: 8);
             var notoSans10 = resCache.NotoStack(size: 10);
             var notoSansItalic10 = resCache.NotoStack(variation: "Italic", size: 10);
@@ -382,6 +397,7 @@ namespace Content.Client.Stylesheets
             var windowBackground = new StyleBoxTexture
             {
                 Texture = windowBackgroundTex,
+                Modulate = legacyWindowTint,
             };
             windowBackground.SetPatchMargin(StyleBox.Margin.Horizontal | StyleBox.Margin.Bottom, 2);
             windowBackground.SetExpandMargin(StyleBox.Margin.Horizontal | StyleBox.Margin.Bottom, 2);
@@ -390,12 +406,14 @@ namespace Content.Client.Stylesheets
             var borderedWindowBackground = new StyleBoxTexture
             {
                 Texture = borderedWindowBackgroundTex,
+                Modulate = legacyBorderedWindowTint,
             };
             borderedWindowBackground.SetPatchMargin(StyleBox.Margin.All, 2);
 
             var contextMenuBackground = new StyleBoxTexture
             {
                 Texture = borderedWindowBackgroundTex,
+                Modulate = legacyContextMenuTint,
             };
             contextMenuBackground.SetPatchMargin(StyleBox.Margin.All, ContextMenuElement.ElementMargin);
 
@@ -403,6 +421,7 @@ namespace Content.Client.Stylesheets
             var invSlotBg = new StyleBoxTexture
             {
                 Texture = invSlotBgTex,
+                Modulate = legacyInventoryTint,
             };
             invSlotBg.SetPatchMargin(StyleBox.Margin.All, 2);
             invSlotBg.SetContentMarginOverride(StyleBox.Margin.All, 0);
@@ -411,6 +430,7 @@ namespace Content.Client.Stylesheets
             var handSlotHighlight = new StyleBoxTexture
             {
                 Texture = handSlotHighlightTex,
+                Modulate = legacyHighlightTint,
             };
             handSlotHighlight.SetPatchMargin(StyleBox.Margin.All, 2);
 
@@ -418,6 +438,7 @@ namespace Content.Client.Stylesheets
             var borderedTransparentWindowBackground = new StyleBoxTexture
             {
                 Texture = borderedTransparentWindowBackgroundTex,
+                Modulate = legacyTransparentWindowTint,
             };
             borderedTransparentWindowBackground.SetPatchMargin(StyleBox.Margin.All, 2);
 
@@ -568,6 +589,7 @@ namespace Content.Client.Stylesheets
             var actionSearchBox = new StyleBoxTexture
             {
                 Texture = actionSearchBoxTex,
+                Modulate = legacySearchTint,
             };
             actionSearchBox.SetPatchMargin(StyleBox.Margin.All, 3);
             actionSearchBox.SetContentMarginOverride(StyleBox.Margin.Horizontal, 5);
@@ -576,6 +598,7 @@ namespace Content.Client.Stylesheets
             var tabContainerPanel = new StyleBoxTexture
             {
                 Texture = tabContainerPanelTex,
+                Modulate = legacyTabTint,
             };
             tabContainerPanel.SetPatchMargin(StyleBox.Margin.All, 2);
 
@@ -656,6 +679,7 @@ namespace Content.Client.Stylesheets
             var tooltipBox = new StyleBoxTexture
             {
                 Texture = tooltipTexture,
+                Modulate = legacyTooltipTint,
             };
             tooltipBox.SetPatchMargin(StyleBox.Margin.All, 2);
             tooltipBox.SetContentMarginOverride(StyleBox.Margin.Horizontal, 7);
@@ -665,6 +689,7 @@ namespace Content.Client.Stylesheets
             var whisperBox = new StyleBoxTexture
             {
                 Texture = whisperTexture,
+                Modulate = legacyWhisperTint,
             };
             whisperBox.SetPatchMargin(StyleBox.Margin.All, 2);
             whisperBox.SetContentMarginOverride(StyleBox.Margin.Horizontal, 7);
@@ -693,6 +718,7 @@ namespace Content.Client.Stylesheets
             var listContainerButton = new StyleBoxTexture
             {
                 Texture = squareTex,
+                Modulate = legacyListTint,
                 ContentMarginLeftOverride = 10
             };
 
@@ -701,6 +727,7 @@ namespace Content.Client.Stylesheets
             var nanoHeadingBox = new StyleBoxTexture
             {
                 Texture = nanoHeadingTex,
+                Modulate = legacyHeadingTint,
                 PatchMarginRight = 10,
                 PatchMarginTop = 10,
                 ContentMarginTopOverride = 2,
@@ -715,6 +742,7 @@ namespace Content.Client.Stylesheets
             var stripeBack = new StyleBoxTexture
             {
                 Texture = stripeBackTex,
+                Modulate = legacyStripeTint,
                 Mode = StyleBoxTexture.StretchMode.Tile
             };
 
