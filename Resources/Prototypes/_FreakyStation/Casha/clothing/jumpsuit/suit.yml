@@ -1,10 +1,45 @@
 - type: entity
   parent: ClothingUniformBase
-  id: pizdecSherlook
-  name: Костюм извращенца
-  description: Очень открытый БДСМ костюм который сшили обкуренные зеки в пермабриге
+  id: ERPJumpsuitBodyopen
+  name: костюм извращенца
+  description: Черные обтягивающие кожанные джинсы на лямках. Сшито грубо, пахнет мочой и перегаром.
   components:
   - type: Sprite
     sprite: _FreakStation/Casha/clothing/jumpsuit/Sherlookpizdec.rsi
   - type: Clothing
     sprite: _FreakStation/Casha/clothing/jumpsuit/Sherlookpizdec.rsi
+
+# from lust station
+
+- type: entity
+  parent: ClothingUniformBase
+  id: ERPBunnysuitUniform
+  name: костюм кролика
+  description: Обтягивающий костюм кролика. Одевается исключительно с тонкими чулками.
+  components:
+  - type: Sprite
+    sprite: _FreakStation/Casha/clothing/uniforms/bunny_uniform.rsi
+  - type: Clothing
+    sprite: _FreakStation/Casha/clothing/uniforms/bunny_uniform.rsi
+
+- type: entity
+  parent: ClothingUniformBase
+  id: ERPElegantTacticalMaidUniform
+  name: элегантная тактическая форма горничной
+  description: Агент Хоутел к вашим услугам, мастер!
+  components:
+  - type: Sprite
+    sprite: _FreakStation/Casha/clothing/uniforms/elegant_hos.rsi
+  - type: Clothing
+    sprite: _FreakStation/Casha/clothing/uniforms/elegant_hos.rsi
+
+- type: entity
+  parent: ClothingUniformBase
+  id: PivozavrShirt
+  name: майка 'Пивозавр'
+  description: К вашему сожалению, альтушки в комплекте не предусмотрено.
+  components:
+  - type: Sprite
+    sprite: _FreakStation/Casha/clothing/uniforms/pivozavr_tshirt.rsi
+  - type: Clothing
+    sprite: _FreakStation/Casha/clothing/uniforms/pivozavr_tshirt.rsi

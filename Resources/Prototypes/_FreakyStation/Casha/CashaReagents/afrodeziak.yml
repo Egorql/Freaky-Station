@@ -27,6 +27,7 @@
          messages: ["effect-erp-afrodeziak", "effect-erp-afrodeziak1", "effect-erp-afrodeziak2", "effect-erp-afrodeziak3", "effect-erp-afrodeziak4", "effect-erp-afrodeziak5", "effect-erp-afrodeziak6", "effect-erp-afrodeziak7",]
          type: Local
          probability: 0.35
+      - !type:Jitter # shaking effect
 
 #byCashaforSindicate
 
@@ -47,3 +48,5 @@
   - type: Sprite
     sprite: _FreakStation/Casha/reagent/afrodeziak.rsi
   - type: Sealable
+
+# todo: добавить реакции. @omitronlarexxx

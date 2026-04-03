@@ -1,0 +1,20 @@
+- type: entity
+  parent: [BaseItem]
+  id: ERPBasedDildo
+  name: резиновая хуяка
+  description: Розовый и длинный резиновый дилдак. Я думаю ты знаешь что и куда.
+  components:
+  - type: Sprite
+    sprite: _FreakStation/Casha/ERPtoys/basedildo.rsi
+    state: icon
+  - type: Item
+    size: Small
+    sprite: _FreakStation/Casha/ERPtoys/basedildo.rsi
+  - type: StaminaDamageOnHit
+    damage: 4
+  - type: MeleeWeapon
+    soundHit:
+     path: /Audio/_FreakStation/ERP/whip.ogg
+    damage:
+      types:
+        Blunt: 0

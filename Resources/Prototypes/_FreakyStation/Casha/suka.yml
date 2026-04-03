@@ -42,9 +42,9 @@
 
 - type: entity
   parent: InnerClothingFoldableBase
-  id: prikol
-  name: Юбка с топом
-  description: Короткая юбка с коротким топом сильно открывающим грудь.
+  id: ClothingCashaFoldableTopSkirt
+  name: юбка с топом
+  description: Темная юбка с белым коротким топом, сильно открывающим грудь. Можно полностью расстегнуть.
   components:
   - type: Sprite
     sprite: _FreakStation/Casha/clothing/jumpsuit/Sherlookkaif.rsi
@@ -52,6 +52,6 @@
     sprite: _FreakStation/Casha/clothing/jumpsuit/Sherlookkaif.rsi
 
 - type: entity
-  parent: [InnerClothingFoldableBaseOpened, prikol]
-  id: prikol-open
-  name: Юбка с топом
+  parent: [InnerClothingFoldableBaseOpened, ClothingCashaFoldableTopSkirt]
+  id: ClothingCashaFoldableTopSkirtOpen
+  name: юбка с топом
