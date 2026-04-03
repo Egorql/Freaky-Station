@@ -67,7 +67,7 @@
 
 - type: job
   id: Lawyer
-  name: СоулГудман
+  name: job-name-lawyer
   description: job-description-lawyer
   playTimeTracker: JobLawyer
   requirements:

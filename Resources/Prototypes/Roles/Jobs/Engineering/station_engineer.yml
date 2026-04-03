@@ -70,7 +70,7 @@
 
 - type: job
   id: StationEngineer
-  name: ИнжТФ2
+  name: job-name-engineer
   description: job-description-engineer
   playTimeTracker: JobStationEngineer
   requirements:

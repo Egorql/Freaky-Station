@@ -73,7 +73,7 @@
 
 - type: job
   id: CargoTechnician
-  name: Мальчик на побегушках
+  name: job-name-cargotech
   description: job-description-cargotech
   playTimeTracker: JobCargoTechnician
   startingGear: CargoTechGear

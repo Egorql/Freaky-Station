@@ -59,7 +59,7 @@
 
 - type: job
   id: TechnicalAssistant
-  name: Недоинж
+  name: job-name-technical-assistant
   description: job-description-technical-assistant
   playTimeTracker: JobTechnicalAssistant
   requirements:

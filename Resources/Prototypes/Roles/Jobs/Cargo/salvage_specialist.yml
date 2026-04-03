@@ -70,7 +70,7 @@
 
 - type: job
   id: SalvageSpecialist
-  name: РокЭндСтоунер
+  name: job-name-salvagespec
   description: job-description-salvagespec
   playTimeTracker: JobSalvageSpecialist
   requirements:

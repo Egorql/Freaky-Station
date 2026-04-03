@@ -135,7 +135,7 @@
 
 - type: job
   id: HeadOfSecurity
-  name: Лутбокс
+  name: job-name-hos
   description: job-description-hos
   playTimeTracker: JobHeadOfSecurity
   requirements:
