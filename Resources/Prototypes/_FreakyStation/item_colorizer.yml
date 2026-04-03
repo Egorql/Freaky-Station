@@ -1,0 +1,123 @@
+# SPDX-FileCopyrightText: 2026 Casha
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  parent: [BaseMachinePowered, ConstructibleMachine]
+  id: ItemColorizer
+  name: item colorizer
+  description: Repaints clothes and other items to any RGB color.
+  components:
+  - type: Sprite
+    sprite: _CorvaxGoob/Structures/Machines/medipen_refiller.rsi
+    noRot: true
+    layers:
+    - state: icon
+    - state: active
+      shader: unshaded
+      map: [ "enum.PowerDeviceVisualLayers.Powered" ]
+    - state: open
+      map: ["enum.WiresVisualLayers.MaintenancePanel"]
+      visible: false
+  - type: WiresPanel
+  - type: WiresVisuals
+  - type: Appearance
+  - type: Construction
+    graph: Machine
+    node: machine
+    containers:
+    - machine_board
+    - machine_parts
+  - type: EmptyOnMachineDeconstruct
+    containers:
+    - itemSlot
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.25,-0.25,0.25,0.25"
+        density: 190
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalGlassBreak
+      - !type:ChangeConstructionNodeBehavior
+        node: machineFrame
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: ItemSlots
+    slots:
+      itemSlot:
+        priority: 1
+        whitelist:
+          components:
+          - Item
+  - type: ActivatableUI
+    key: enum.ItemColorizerUiKey.Key
+  - type: ActivatableUIRequiresPower
+  - type: UserInterface
+    interfaces:
+      enum.ItemColorizerUiKey.Key:
+        type: ItemColorizerUserInterface
+  - type: ApcPowerReceiver
+    powerLoad: 200
+  - type: Machine
+    board: ItemColorizerMachineCircuitboard
+  - type: GenericVisualizer
+    visuals:
+      enum.PowerDeviceVisuals.Powered:
+        enum.PowerDeviceVisualLayers.Powered:
+          True: { visible: true }
+          False: { visible: false }
+  - type: ContainerContainer
+    containers:
+      machine_board: !type:Container
+        showEnts: False
+        occludes: True
+        ents: []
+      machine_parts: !type:Container
+        showEnts: False
+        occludes: True
+        ents: []
+      itemSlot: !type:ContainerSlot
+        showEnts: False
+        occludes: True
+        ent: null
+  - type: ItemColorizer
+
+- type: entity
+  parent: BaseMachineCircuitboard
+  id: ItemColorizerMachineCircuitboard
+  name: item colorizer board
+  description: A machine board for an item colorizer.
+  components:
+  - type: Sprite
+    state: service
+  - type: MachineBoard
+    prototype: ItemColorizer
+    stackRequirements:
+      Steel: 8
+      Glass: 5
+      Manipulator: 2
+      Cable: 5
+  - type: Item
+    size: Normal
+
+- type: latheRecipe
+  parent: BaseCircuitboardRecipe
+  id: ItemColorizerMachineCircuitboard
+  result: ItemColorizerMachineCircuitboard
+  icon:
+    sprite: _CorvaxGoob/Structures/Machines/medipen_refiller.rsi
+    state: icon

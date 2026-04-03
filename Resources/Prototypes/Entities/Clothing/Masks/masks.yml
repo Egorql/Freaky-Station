@@ -197,6 +197,9 @@
         Aerial: -0.2
       chanceMultipliers:
         Aerial: 0.5
+  - type: ClothingStain
+    itemState: gasmask
+    equippedState: equipped-gasmask
 
 - type: entity
   parent: [ClothingMaskGas, BaseSecurityContraband]
@@ -371,6 +374,9 @@
         Aerial: -0.6
       chanceMultipliers:
         Aerial: 0.5
+  - type: ClothingStain
+    itemState: sterile
+    equippedState: equipped-sterile
 
 - type: entity
   parent: ClothingMaskBreathMedical
@@ -470,6 +476,9 @@
   - type: HideLayerClothing
     slots:
     - Snout
+  - type: ClothingStain
+    itemState: clown
+    equippedState: equipped-clown
 
 - type: entity
   parent: ClothingMaskClown
@@ -545,6 +554,9 @@
   - type: HideLayerClothing
     slots:
     - Snout
+  - type: ClothingStain
+    itemState: mime
+    equippedState: equipped-mime
 
 - type: entity
   parent: ClothingMaskPullableBase
@@ -580,6 +592,9 @@
         Aerial: -0.6
       chanceMultipliers:
         Aerial: 0.4
+  - type: ClothingStain
+    itemState: sterile
+    equippedState: equipped-sterile
 
 - type: entity
   parent: ClothingMaskBase
@@ -957,6 +972,9 @@
     tags:
     - WhitelistChameleon
     - IPCMaskWearable # EE - IPCs
+  - type: ClothingStain
+    itemState: gaiter
+    equippedState: equipped-gaiter
 
 - type: entity
   parent: ClothingMaskNeckGaiter

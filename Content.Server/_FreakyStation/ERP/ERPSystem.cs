@@ -1,5 +1,6 @@
 using Content.Server.Chat.Systems;
 using Content.Server.EUI;
+using Content.Server._FreakyStation.Clothing;
 using Content.Shared.Containers.ItemSlots;
 using Content.Shared.Database;
 using Content.Shared.ERP;
@@ -16,6 +17,7 @@ using Robust.Shared.Random;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 using Content.Shared.Alert;
+using System.IO;
 namespace Content.Server.ERP
 {
     public sealed class ERPSystem : EntitySystem
@@ -27,6 +29,7 @@ namespace Content.Server.ERP
         [Dependency] protected readonly IGameTiming _gameTiming = default!;
         [Dependency] protected readonly ChatSystem _chat = default!;
         [Dependency] protected readonly IRobustRandom _random = default!;
+        [Dependency] private readonly ClothingStainSystem _clothingStains = default!;
         public override void Initialize()
         {
             base.Initialize();
@@ -79,14 +82,26 @@ namespace Content.Server.ERP
                     if (humanoid.Sex == Sex.Male)
                     {
                         Spawn("PuddleSperma", Transform(ent).Coordinates);
-                        _audioSystem.PlayPvs("/Audio/ERP/male_orgasm.ogg", ent);
+                        TryPlayErpSound("/Audio/ERP/male_orgasm.ogg", ent);
+                        _clothingStains.ApplyStainsToEquippedClothing(ent, bio: true);
                     }
                     else if (humanoid.Sex == Sex.Female)
                     {
                         Spawn("EffectSquirt", Transform(ent).Coordinates);
-                        _audioSystem.PlayPvs("/Audio/ERP/female_orgasm.ogg", ent);
+                        TryPlayErpSound("/Audio/ERP/female_orgasm.ogg", ent);
                     }
                 }
+            }
+        }
+        private void TryPlayErpSound(string path, EntityUid uid)
+        {
+            try
+            {
+                _audioSystem.PlayPvs(path, uid);
+            }
+            catch (FileNotFoundException)
+            {
+                Log.Warning($"Missing ERP sound file: {path}");
             }
         }
         private void AddVerbs(GetVerbsEvent<Verb> args)
