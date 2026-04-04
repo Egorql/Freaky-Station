@@ -338,7 +338,7 @@ namespace Content.Server.Database
         {
             var jobs = profile.Jobs.ToDictionary(j => new ProtoId<JobPrototype>(j.JobName), j => (JobPriority) j.Priority);
             var antags = profile.Antags.Select(a => new ProtoId<AntagPrototype>(a.AntagName));
-            var traits = profile.Traits.Select(t => new ProtoId<TraitPrototype>(t.TraitName));
+            var traits = profile.Traits.Select(t => new ProtoId<TraitPrototype>(t.TraitName)).ToHashSet();
 
             var sex = Sex.Male;
             if (Enum.TryParse<Sex>(profile.Sex, true, out var sexVal))
@@ -357,6 +357,16 @@ namespace Content.Server.Database
             // CorvaxGoob-TTS-End
 
             var bark = new BarkData(profile.BarkProto, profile.BarkPitch, profile.LowBarkVar, profile.HighBarkVar); // ADT Barks
+            var consent = ParseERPConsent(profile.ERPConsent);
+
+            var legacyErpTrait = new ProtoId<TraitPrototype>("ERP");
+            if (traits.Contains(legacyErpTrait))
+            {
+                if (consent == ERPConsent.Disabled)
+                    consent = ERPConsent.Enabled;
+
+                traits.Remove(legacyErpTrait);
+            }
 
             // ReSharper disable once ConditionalAccessQualifierIsNonNullableAccordingToAPIContract
             var markingsRaw = profile.Markings?.Deserialize<List<string>>();
@@ -423,8 +433,10 @@ namespace Content.Server.Database
                 jobs,
                 (PreferenceUnavailableMode) profile.PreferenceUnavailable,
                 antags.ToHashSet(),
-                traits.ToHashSet(),
+                traits,
                 loadouts,
+                consent,
+                profile.NonCon,
                 // ADT start
                 profile.OOCNotes,
                 profile.HeadshotUrl,
@@ -460,7 +472,10 @@ namespace Content.Server.Database
             profile.SkinColor = appearance.SkinColor.ToHex();
             profile.SpawnPriority = (int) humanoid.SpawnPriority;
             profile.Markings = markings;
-            profile.ERPS = humanoid.ERPS.ToString();
+            profile.ERPConsent = humanoid.ERPConsent == ERPConsent.Enabled
+                ? nameof(ERPConsent.Enabled)
+                : nameof(ERPConsent.Disabled);
+            profile.NonCon = humanoid.NonCon;
             profile.Slot = slot;
             profile.PreferenceUnavailable = (DbPreferenceUnavailableMode) humanoid.PreferenceUnavailable;
             profile.BarkProto = humanoid.Bark.Proto; // ADT Barks
@@ -524,6 +539,23 @@ namespace Content.Server.Database
             profile.OOCNotes = humanoid.OOCNotes;
             profile.HeadshotUrl = humanoid.HeadshotUrl;
             return profile;
+        }
+
+        private static ERPConsent ParseERPConsent(string? value)
+        {
+            if (string.IsNullOrWhiteSpace(value))
+                return ERPConsent.Disabled;
+
+            return value.Trim() switch
+            {
+                var legacy when legacy.Equals("No", StringComparison.OrdinalIgnoreCase) => ERPConsent.Disabled,
+                var legacy when legacy.Equals("Disabled", StringComparison.OrdinalIgnoreCase) => ERPConsent.Disabled,
+                var legacy when legacy.Equals("Partial", StringComparison.OrdinalIgnoreCase) => ERPConsent.Enabled,
+                var legacy when legacy.Equals("Full", StringComparison.OrdinalIgnoreCase) => ERPConsent.Enabled,
+                var legacy when legacy.Equals("Yes", StringComparison.OrdinalIgnoreCase) => ERPConsent.Enabled,
+                var legacy when legacy.Equals("Enabled", StringComparison.OrdinalIgnoreCase) => ERPConsent.Enabled,
+                _ => ERPConsent.Disabled,
+            };
         }
         #endregion
 

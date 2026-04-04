@@ -28,7 +28,6 @@ using System.Collections.Generic;
 using System.Linq;
 using Content.Server.Database;
 using Content.Shared.GameTicking;
-using Content.Shared.Humanoid;
 using Content.Shared.Preferences;
 using Content.Shared.Preferences.Loadouts;
 using Content.Shared.Preferences.Loadouts.Effects;
@@ -72,6 +71,7 @@ namespace Content.IntegrationTests.Tests.Preferences
                 Species = "Human",
                 Voice = "Eugene", // CorvaxGoob-TTS
                 Age = 21,
+                ERPConsent = ERPConsent.Disabled,
                 Appearance = new(
                     "Afro",
                     Color.Aqua,
@@ -85,13 +85,19 @@ namespace Content.IntegrationTests.Tests.Preferences
 
         private static ServerDbSqlite GetDb(RobustIntegrationTest.ServerIntegrationInstance server)
         {
+            return GetDbWithOptions(server).Db;
+        }
+
+        private static (ServerDbSqlite Db, DbContextOptions<SqliteServerDbContext> Options) GetDbWithOptions(RobustIntegrationTest.ServerIntegrationInstance server)
+        {
             var cfg = server.ResolveDependency<IConfigurationManager>();
             var opsLog = server.ResolveDependency<ILogManager>().GetSawmill("db.ops");
             var builder = new DbContextOptionsBuilder<SqliteServerDbContext>();
             var conn = new SqliteConnection("Data Source=:memory:");
             conn.Open();
             builder.UseSqlite(conn);
-            return new ServerDbSqlite(() => builder.Options, true, cfg, true, opsLog);
+            var options = builder.Options;
+            return (new ServerDbSqlite(() => options, true, cfg, true, opsLog), options);
         }
 
         [Test]
@@ -132,6 +138,99 @@ namespace Content.IntegrationTests.Tests.Preferences
             await db.SaveCharacterSlotAsync(username, null, 1);
             var prefs = await db.GetPlayerPreferencesAsync(username);
             Assert.That(!prefs.Characters.Any(p => p.Key != 0));
+            await pair.CleanReturnAsync();
+        }
+
+        [Test]
+        public async Task TestERPConsentRoundTrip()
+        {
+            var pair = await PoolManager.GetServerClient();
+            var (db, _) = GetDbWithOptions(pair.Server);
+            var username = new NetUserId(new Guid("640bd619-fc8d-4fe2-bf3c-4a5fb17d6dd1"));
+
+            var originalProfile = CharlieCharlieson()
+                .WithERPConsent(ERPConsent.Enabled)
+                .WithNonCon(true);
+            await db.InitPrefsAsync(username, originalProfile);
+
+            var prefs = await db.GetPlayerPreferencesAsync(username);
+            var loaded = (HumanoidCharacterProfile) prefs!.Characters.Single(p => p.Key == 0).Value;
+
+            Assert.That(loaded.ERPConsent, Is.EqualTo(ERPConsent.Enabled));
+            Assert.That(loaded.NonCon, Is.True);
+
+            originalProfile = originalProfile
+                .WithERPConsent(ERPConsent.Disabled)
+                .WithNonCon(false);
+            await db.SaveCharacterSlotAsync(username, originalProfile, 0);
+
+            prefs = await db.GetPlayerPreferencesAsync(username);
+            loaded = (HumanoidCharacterProfile) prefs!.Characters.Single(p => p.Key == 0).Value;
+
+            Assert.That(loaded.ERPConsent, Is.EqualTo(ERPConsent.Disabled));
+            Assert.That(loaded.NonCon, Is.False);
+            await pair.CleanReturnAsync();
+        }
+
+        [Test]
+        public async Task TestLegacyERPConsentMigration()
+        {
+            var pair = await PoolManager.GetServerClient();
+            var (db, options) = GetDbWithOptions(pair.Server);
+            var username = new NetUserId(new Guid("640bd619-fc8d-4fe2-bf3c-4a5fb17d6dd2"));
+
+            await db.InitPrefsAsync(username, CharlieCharlieson());
+
+            await using (var context = new SqliteServerDbContext(options))
+            {
+                var profile = await context.Profile.Include(p => p.Traits).SingleAsync();
+                profile.ERPConsent = "Yes";
+                profile.Traits.Clear();
+                profile.Traits.Add(new Trait { TraitName = "ERP" });
+                await context.SaveChangesAsync();
+            }
+
+            var prefs = await db.GetPlayerPreferencesAsync(username);
+            var loaded = (HumanoidCharacterProfile) prefs!.Characters.Single(p => p.Key == 0).Value;
+
+            Assert.That(loaded.ERPConsent, Is.EqualTo(ERPConsent.Enabled));
+            Assert.That(loaded.TraitPreferences.Any(t => t.Id == "ERP"), Is.False);
+            await pair.CleanReturnAsync();
+        }
+
+        [Test]
+        public async Task TestLegacyBinaryMappings()
+        {
+            var pair = await PoolManager.GetServerClient();
+            var (db, options) = GetDbWithOptions(pair.Server);
+            var username = new NetUserId(new Guid("640bd619-fc8d-4fe2-bf3c-4a5fb17d6dd3"));
+
+            await db.InitPrefsAsync(username, CharlieCharlieson());
+
+            var expectations = new Dictionary<string, ERPConsent>
+            {
+                ["No"] = ERPConsent.Disabled,
+                ["Disabled"] = ERPConsent.Disabled,
+                ["Partial"] = ERPConsent.Enabled,
+                ["Full"] = ERPConsent.Enabled,
+                ["Yes"] = ERPConsent.Enabled,
+                ["Enabled"] = ERPConsent.Enabled,
+            };
+
+            foreach (var (rawValue, expected) in expectations)
+            {
+                await using (var context = new SqliteServerDbContext(options))
+                {
+                    var profile = await context.Profile.SingleAsync();
+                    profile.ERPConsent = rawValue;
+                    await context.SaveChangesAsync();
+                }
+
+                var prefs = await db.GetPlayerPreferencesAsync(username);
+                var loaded = (HumanoidCharacterProfile) prefs!.Characters.Single(p => p.Key == 0).Value;
+                Assert.That(loaded.ERPConsent, Is.EqualTo(expected), $"Failed to map {rawValue}.");
+            }
+
             await pair.CleanReturnAsync();
         }
 

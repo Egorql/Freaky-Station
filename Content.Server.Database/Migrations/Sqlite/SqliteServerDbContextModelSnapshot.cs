@@ -796,10 +796,14 @@ namespace Content.Server.Database.Migrations.Sqlite
                         .HasColumnType("TEXT")
                         .HasColumnName("char_name");
 
-                    b.Property<string>("ERPS")
+                    b.Property<string>("ERPConsent")
                         .IsRequired()
                         .HasColumnType("TEXT")
-                        .HasColumnName("erps");
+                        .HasColumnName("erp_consent");
+
+                    b.Property<bool>("NonCon")
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("non_con");
 
                     b.Property<string>("EyeColor")
                         .IsRequired()

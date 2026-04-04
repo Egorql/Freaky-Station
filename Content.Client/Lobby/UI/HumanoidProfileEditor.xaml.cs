@@ -578,6 +578,37 @@ namespace Content.Client.Lobby.UI
 
             #endregion SpawnPriority
 
+            #region ERPConsent
+
+            // Keep legacy enum aliases for profile/database compatibility,
+            // but only expose the binary model in the profile editor UI.
+            ERPConsentButton.AddItem(
+                Loc.GetString("humanoid-profile-editor-erp-consent-disabled"),
+                (int) ERPConsent.Disabled);
+            ERPConsentButton.AddItem(
+                Loc.GetString("humanoid-profile-editor-erp-consent-enabled"),
+                (int) ERPConsent.Enabled);
+
+            ERPConsentButton.OnItemSelected += args =>
+            {
+                ERPConsentButton.SelectId(args.Id);
+                SetERPConsent((ERPConsent) args.Id);
+            };
+
+            #endregion ERPConsent
+
+            #region NonCon
+
+            NonConButton.AddItem(Loc.GetString("humanoid-profile-editor-non-con-off"), 0);
+            NonConButton.AddItem(Loc.GetString("humanoid-profile-editor-non-con-on"), 1);
+            NonConButton.OnItemSelected += args =>
+            {
+                NonConButton.SelectId(args.Id);
+                SetNonCon(args.Id == 1);
+            };
+
+            #endregion NonCon
+
             #region Eyes
 
             EyeColorPicker.OnEyeColorPicked += newColor =>
@@ -1075,6 +1106,8 @@ namespace Content.Client.Lobby.UI
             UpdateGenderControls();
             UpdateSkinColor();
             UpdateSpawnPriorityControls();
+            UpdateERPConsentControls();
+            UpdateNonConControls();
             UpdateAgeEdit();
             UpdateEyePickers();
             UpdateSaveButton();
@@ -1639,6 +1672,18 @@ namespace Content.Client.Lobby.UI
             SetDirty();
         }
 
+        private void SetERPConsent(ERPConsent newConsent)
+        {
+            Profile = Profile?.WithERPConsent(newConsent);
+            SetDirty();
+        }
+
+        private void SetNonCon(bool nonCon)
+        {
+            Profile = Profile?.WithNonCon(nonCon);
+            SetDirty();
+        }
+
         /*// begin Goobstation: port EE height/width sliders // CorvaxGoob-Clearing
         private void SetProfileHeight(float height)
         {
@@ -1873,6 +1918,26 @@ namespace Content.Client.Lobby.UI
             }
 
             SpawnPriorityButton.SelectId((int) Profile.SpawnPriority);
+        }
+
+        private void UpdateERPConsentControls()
+        {
+            if (Profile == null)
+            {
+                return;
+            }
+
+            ERPConsentButton.SelectId((int) Profile.ERPConsent);
+        }
+
+        private void UpdateNonConControls()
+        {
+            if (Profile == null)
+            {
+                return;
+            }
+
+            NonConButton.SelectId(Profile.NonCon ? 1 : 0);
         }
 
         /*// begin Goobstation: port EE height/width sliders // CorvaxGoob-Clearing

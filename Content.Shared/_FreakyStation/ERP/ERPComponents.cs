@@ -3,22 +3,28 @@
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Robust.Shared.GameStates;
-using Robust.Shared.Serialization;
-namespace Content.Shared.ERP;
+using Content.Shared.Preferences;
 
-[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
+namespace Content.Shared._FreakyStation.ERP;
+
+[RegisterComponent]
 public sealed partial class ERPComponent : Component
 {
-    [DataField, AutoNetworkedField] public bool Erp = true;
-    [DataField, AutoNetworkedField] public float ActualLove = 0;
-    [DataField, AutoNetworkedField] public float Love = 0;
-    [DataField, AutoNetworkedField] public TimeSpan LoveDelay;
-    [DataField, AutoNetworkedField] public TimeSpan TimeFromLastErp;
-}
+    [DataField]
+    public ERPConsent Consent = ERPConsent.Disabled;
 
-[Serializable, NetSerializable]
-public enum InteractionKey
-{
-    Key
+    [DataField]
+    public bool NonCon;
+
+    [DataField]
+    public float Arousal;
+
+    [DataField]
+    public float TargetArousal;
+
+    [DataField]
+    public TimeSpan CooldownUntil;
+
+    [DataField]
+    public TimeSpan LastInteractionAt;
 }

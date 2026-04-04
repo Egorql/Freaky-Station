@@ -7,7 +7,8 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 using Robust.Shared.Audio;
 using Content.Shared.Humanoid;
-namespace Content.Shared.ERP;
+
+namespace Content.Shared._FreakyStation.ERP;
 
 [Prototype("interaction")]
 public sealed partial class ERPPrototype : IPrototype
@@ -33,7 +34,10 @@ public sealed partial class ERPPrototype : IPrototype
     [DataField]
     public bool TargetWithoutCloth = false;
 
-    [DataField] public bool Erp = false;
-
-    [DataField] public int LovePercent = 0;
+    [DataField("arousalDelta")] public int ArousalDelta = 0;
+    [DataField("lovePercent", readOnly: true, priority: 0)] public int LegacyLovePercent
+    {
+        get => ArousalDelta;
+        set => ArousalDelta = value;
+    }
 }

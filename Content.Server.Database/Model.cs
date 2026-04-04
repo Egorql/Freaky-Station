@@ -43,7 +43,6 @@ namespace Content.Server.Database
         public DbSet<AdminNote> AdminNotes { get; set; } = null!;
         public DbSet<AdminWatchlist> AdminWatchlists { get; set; } = null!;
         public DbSet<AdminMessage> AdminMessages { get; set; } = null!;
-        public string ERPS { get; set; } = null!;
         public DbSet<RoleWhitelist> RoleWhitelists { get; set; } = null!;
         public DbSet<BanTemplate> BanTemplate { get; set; } = null!;
         public DbSet<IPIntelCache> IPIntelCache { get; set; } = null!;
@@ -420,7 +419,8 @@ namespace Content.Server.Database
         public float BarkPitch { get; set; } = 1f; // ADT Barks
         public float LowBarkVar { get; set; } = 0.1f; // ADT Barks
         public float HighBarkVar { get; set; } = 0.5f; // ADT Barks
-        public string ERPS { get; set; } = "No";
+        [Column("erp_consent")] public string ERPConsent { get; set; } = "Disabled";
+        [Column("non_con")] public bool NonCon { get; set; }
         [Column(TypeName = "jsonb")] public JsonDocument? Markings { get; set; } = null!;
         public string HairName { get; set; } = null!;
         public string HairColor { get; set; } = null!;

@@ -4,94 +4,72 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Shared.Eui;
-using Content.Shared.GameTicking;
 using Content.Shared.Humanoid;
 using Content.Shared.Preferences;
-using Robust.Shared.Serialization;
 using Robust.Shared.Player;
-namespace Content.Shared.ERP;
+using Robust.Shared.Prototypes;
+using Robust.Shared.Serialization;
 
-public abstract class SharedERPSystem : EntitySystem
-{
-    public override void Initialize()
-    {
-        base.Initialize();
-    }
-}
+namespace Content.Shared._FreakyStation.ERP;
 
+public abstract class SharedERPSystem : EntitySystem;
 
 [Serializable, NetSerializable]
-public sealed class SetInteractionEuiState : EuiStateBase
+public enum ERPPanelMode : byte
 {
-    public NetEntity TargetNetEntity;
-    public Sex UserSex;
-    public Sex TargetSex;
-    public bool UserHasClothing;
-    public bool TargetHasClothing;
-    public bool ErpAllowed;
+    Self,
+    Target,
 }
 
-
-[NetSerializable, Serializable]
-public sealed class AddLoveMessage : EuiMessageBase
+[Flags]
+[Serializable, NetSerializable]
+public enum ERPInteractionDeniedReason : byte
 {
-    public NetEntity User;
+    None = 0,
+    NeedUserUncovered = 1 << 0,
+    NeedTargetUncovered = 1 << 1,
+    WrongUserSex = 1 << 2,
+    WrongTargetSex = 1 << 3,
+    TargetUnavailable = 1 << 4,
+    DeadOrSsd = 1 << 5,
+    OutOfRange = 1 << 6,
+    Cooldown = 1 << 7,
+}
+
+[Serializable, NetSerializable]
+public sealed class ERPInteractionEntryState
+{
+    public ProtoId<ERPPrototype> InteractionId;
+    public bool Enabled;
+    public ERPInteractionDeniedReason DeniedReason;
+}
+
+[Serializable, NetSerializable]
+public sealed class ERPInteractionEuiState : EuiStateBase
+{
+    public ERPPanelMode Mode;
     public NetEntity Target;
-    public int Percent;
-
-    public AddLoveMessage(NetEntity user, NetEntity target, int percent)
-    {
-        User = user;
-        Target = target;
-        Percent = percent;
-    }
-}
-
-[NetSerializable, Serializable]
-public sealed class RequestInteractionState : EuiMessageBase
-{
-    private NetEntity _netEntity;
-    private NetEntity _value;
-
-    public RequestInteractionState(NetEntity netEntity, NetEntity value)
-    {
-        _netEntity = netEntity;
-        _value = value;
-    }
-}
-
-[NetSerializable, Serializable]
-public sealed class ResponseLoveMessage : EuiMessageBase
-{
-    public float Percent;
-
-    public ResponseLoveMessage(float percent)
-    {
-        Percent = percent;
-    }
-}
-
-[Serializable, NetSerializable]
-public sealed class ResponseInteractionState : EuiMessageBase
-{
+    public TimeSpan CooldownEndTime;
     public Sex UserSex;
     public Sex TargetSex;
     public bool UserHasClothing;
     public bool TargetHasClothing;
-    public bool ErpAllowed;
-    public HashSet<string> UserTags;
-    public HashSet<string> TargetTags;
-    public float UserLovePercent;
+    public ERPConsent UserConsent;
+    public ERPConsent TargetConsent;
+    public bool UserNonCon;
+    public bool TargetNonCon;
+    public float UserArousal;
+    public float TargetArousal;
+    public List<ERPInteractionEntryState> Interactions = new();
+}
 
-    public ResponseInteractionState(Sex userSex, Sex targetSex, bool userHasClothing, bool targetHasClothing, bool erp, HashSet<string> userTags, HashSet<string> targetTags, float userLovePercent)
+[NetSerializable, Serializable]
+public sealed class PerformInteractionMessage : EuiMessageBase
+{
+    public ProtoId<ERPPrototype> InteractionId;
+
+    public PerformInteractionMessage(ProtoId<ERPPrototype> interactionId)
     {
-        UserSex = userSex;
-        TargetSex = targetSex;
-        UserHasClothing = userHasClothing;
-        TargetHasClothing = targetHasClothing;
-        ErpAllowed = erp;
-        UserTags = userTags;
-        TargetTags = targetTags;
-        UserLovePercent = userLovePercent;
+        InteractionId = interactionId;
     }
 }

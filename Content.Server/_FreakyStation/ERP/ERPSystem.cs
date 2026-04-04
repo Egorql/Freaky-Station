@@ -1,179 +1,240 @@
-using Content.Server.Chat.Systems;
+// SPDX-FileCopyrightText: 2025 Egorql <Egorkashilkin@gmail.com>
+// SPDX-FileCopyrightText: 2025 ReserveBot <211949879+ReserveBot@users.noreply.github.com>
+//
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
+using System.Collections.Generic;
 using Content.Server.EUI;
-using Content.Shared.Containers.ItemSlots;
+using Content.Shared._FreakyStation.ERP;
 using Content.Shared.Database;
-using Content.Shared.ERP;
 using Content.Shared.Examine;
 using Content.Shared.GameTicking;
 using Content.Shared.Humanoid;
 using Content.Shared.Preferences;
 using Content.Shared.Verbs;
 using Robust.Server.GameObjects;
-using Robust.Shared.Audio.Systems;
-using Robust.Shared.Containers;
 using Robust.Shared.Player;
-using Robust.Shared.Random;
-using Robust.Shared.Timing;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
-using Content.Shared.Alert;
-namespace Content.Server.ERP
+
+namespace Content.Server._FreakyStation.ERP
 {
     public sealed class ERPSystem : EntitySystem
     {
-        [Dependency] private readonly AlertsSystem _alerts = default!;
-        [Dependency] private readonly SharedAudioSystem _audioSystem = default!;
+        private static readonly SpriteSpecifier VerbIcon =
+            new SpriteSpecifier.Texture(new("/Textures/_FreakStation/Casha/ERPicon/erp.svg.192dpi.png"));
+
+        [Dependency] private readonly ERPArousalSystem _arousal = default!;
         [Dependency] private readonly EuiManager _eui = default!;
-        [Dependency] protected readonly ItemSlotsSystem ItemSlotsSystem = default!;
-        [Dependency] protected readonly IGameTiming _gameTiming = default!;
-        [Dependency] protected readonly ChatSystem _chat = default!;
-        [Dependency] protected readonly IRobustRandom _random = default!;
+        [Dependency] private readonly ERPExposureSystem _exposure = default!;
+        [Dependency] private readonly ERPInteractionPolicySystem _policy = default!;
+        [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
+
+        private readonly HashSet<ERPEUI> _openEuis = new();
+
         public override void Initialize()
         {
             base.Initialize();
-            SubscribeLocalEvent<ERPComponent, ComponentInit>(OnComponentInit);
+            SubscribeLocalEvent<ERPComponent, ExaminedEvent>(OnExamined);
             SubscribeLocalEvent<GetVerbsEvent<Verb>>(AddVerbs);
             SubscribeLocalEvent<PlayerSpawnCompleteEvent>(OnPlayerSpawned);
-            SubscribeLocalEvent<ERPComponent, ExaminedEvent>(OnExamine);
         }
-        private void OnExamine(EntityUid uid, ERPComponent component, ExaminedEvent args)
-        {
-            if (component.Erp)
-            {
-                args.PushMarkup("[color=#FF1488][bold]ERP статус — ВКЛЮЧЕНО.[/color][/bold]"); //klyanus slychayno takoy hex postavil
-            }
-        }
+
         private void OnPlayerSpawned(PlayerSpawnCompleteEvent ev)
         {
             if (ev.Profile is not HumanoidCharacterProfile profile)
                 return;
-            if (profile.ERPS == ERPS.Yes)
-            {
-                var component = EnsureComp<ERPComponent>(ev.Mob);
-                component.Erp = true;
-                Dirty(ev.Mob, component);
-            }
-        }
-        public void AddLove(NetEntity entity, NetEntity target, int percent)
-        {
-            List<EntityUid> ents = new() { GetEntity(entity), GetEntity(target) };
 
-            foreach (var ent in ents)
-            {
-                if (!TryComp<HumanoidAppearanceComponent>(ent, out var humanoid))
-                    continue;
+            var component = EnsureComp<ERPComponent>(ev.Mob);
+            component.Consent = profile.ERPConsent;
+            component.NonCon = profile.NonCon;
+            component.Arousal = 0f;
+            component.TargetArousal = 0f;
+            component.CooldownUntil = TimeSpan.Zero;
+            component.LastInteractionAt = TimeSpan.Zero;
 
-                if (!TryComp<ERPComponent>(ent, out var comp))
-                    continue;
-                if (percent != 0 && comp.Erp && _gameTiming.CurTime > comp.LoveDelay)
-                {
-                    float added = (percent + _random.Next(-percent / 2, percent / 2)) / 100f;
-                    comp.ActualLove += added;
-                    comp.TimeFromLastErp = _gameTiming.CurTime;
-                    Spawn("EffectHearts", Transform(ent).Coordinates);
-                }
-                if (comp.Love >= 1f)
-                {
-                    comp.ActualLove = 0f;
-                    comp.Love = 0f;
-                    comp.LoveDelay = _gameTiming.CurTime + TimeSpan.FromMinutes(1);
-                    if (humanoid.Sex == Sex.Male)
-                    {
-                        Spawn("PuddleSperma", Transform(ent).Coordinates);
-                        _audioSystem.PlayPvs("/Audio/ERP/male_orgasm.ogg", ent);
-                    }
-                    else if (humanoid.Sex == Sex.Female)
-                    {
-                        Spawn("EffectSquirt", Transform(ent).Coordinates);
-                        _audioSystem.PlayPvs("/Audio/ERP/female_orgasm.ogg", ent);
-                    }
-                }
-            }
+            DirtyRelevantEuis(ev.Mob);
         }
+
         private void AddVerbs(GetVerbsEvent<Verb> args)
         {
-            if (!EntityManager.TryGetComponent(args.User, out ActorComponent? actor))
+            if (!TryComp<ActorComponent>(args.User, out var actor))
                 return;
 
+            if (!TryComp<ERPComponent>(args.User, out _))
+                return;
 
-            var player = actor.PlayerSession;
-            if (args.User != args.Target)
+            if (!_policy.CanOpenPanel(args.User))
+                return;
+
+            if (args.User == args.Target)
             {
-                if (!args.CanInteract || !args.CanAccess) return;
+                if (_policy.GetInteractionEntries(args.User, args.User, ERPPanelMode.Self).Count == 0)
+                    return;
+
                 args.Verbs.Add(new Verb
                 {
                     Priority = -1,
-                    Text = "ЕРП",
-                    Icon = new SpriteSpecifier.Texture(new("/Textures/_FreakStation/Casha/ERPicon/erp.svg.192dpi.png")),
-                    Act = () =>
-                    {
-                        if (!args.CanInteract || !args.CanAccess) return;
-                        if (TryComp<ERPComponent>(args.Target, out var targetInteraction) && TryComp<ERPComponent>(args.User, out var userInteraction))
-                        {
-                            if (TryComp<HumanoidAppearanceComponent>(args.Target, out var targetHumanoid) && TryComp<HumanoidAppearanceComponent>(args.User, out var userHumanoid))
-                            {
-                                bool erp = true;
-                                bool userClothing = false;
-                                bool targetClothing = false;
-                                if (!targetInteraction.Erp || !userInteraction.Erp) erp = false;
-                                if (TryComp<ContainerManagerComponent>(args.User, out var container))
-                                {
-                                    if (container.Containers["jumpsuit"].ContainedEntities.Count != 0) userClothing = true;
-                                    if (container.Containers["outerClothing"].ContainedEntities.Count != 0) userClothing = true;
-                                    if (container.Containers["breast"].ContainedEntities.Count != 0) userClothing = true;
-                                    if (container.Containers["underwear"].ContainedEntities.Count != 0) userClothing = true;
-                                }
-
-                                if (TryComp<ContainerManagerComponent>(args.Target, out var targetContainer))
-                                {
-                                    if (targetContainer.Containers["jumpsuit"].ContainedEntities.Count != 0) targetClothing = true;
-                                    if (targetContainer.Containers["outerClothing"].ContainedEntities.Count != 0) targetClothing = true;
-                                    if (targetContainer.Containers["breast"].ContainedEntities.Count != 0) targetClothing = true;
-                                    if (targetContainer.Containers["underwear"].ContainedEntities.Count != 0) targetClothing = true;
-                                }
-
-                                _eui.OpenEui(new ERPEUI(GetNetEntity(args.Target), userHumanoid.Sex, userClothing, targetHumanoid.Sex, targetClothing, erp), player);
-                            }
-                        }
-                    },
+                    Text = "ERP",
+                    Icon = VerbIcon,
+                    Act = () => OpenPanel(actor.PlayerSession, args.User, ERPPanelMode.Self),
                     Impact = LogImpact.Low,
                 });
+                return;
             }
+
+            if (!args.CanInteract || !args.CanAccess)
+                return;
+
+            if (!TryComp<ERPComponent>(args.Target, out _))
+                return;
+
+            if (!TryComp<HumanoidAppearanceComponent>(args.User, out _)
+                || !TryComp<HumanoidAppearanceComponent>(args.Target, out _))
+                return;
+
+            var hasEnabledTargetInteractions = false;
+            foreach (var interaction in _policy.GetInteractionEntries(args.User, args.Target, ERPPanelMode.Target))
+            {
+                if (!interaction.Enabled)
+                    continue;
+
+                hasEnabledTargetInteractions = true;
+                break;
+            }
+
+            if (!hasEnabledTargetInteractions)
+                return;
+
+            args.Verbs.Add(new Verb
+            {
+                Priority = -1,
+                Text = "ERP",
+                Icon = VerbIcon,
+                Act = () =>
+                {
+                    if (!CanKeepPanelOpen(args.User, args.Target, ERPPanelMode.Target))
+                        return;
+
+                    OpenPanel(actor.PlayerSession, args.Target, ERPPanelMode.Target);
+                },
+                Impact = LogImpact.Low,
+            });
         }
 
         public override void Update(float frameTime)
         {
             base.Update(frameTime);
-            var query = EntityQueryEnumerator<ERPComponent>();
-            while (query.MoveNext(out var uid, out var comp))
-            {
-                comp.Love -= ((comp.Love - comp.ActualLove) / 1) * frameTime;
-                if (_gameTiming.CurTime - comp.TimeFromLastErp > TimeSpan.FromSeconds(15) && comp.Love > 0)
-                {
-                    comp.ActualLove -= 0.001f;
-                }
-                if (comp.Love < 0) comp.Love = 0;
-                if (comp.ActualLove < 0) comp.ActualLove = 0;
-                comp.Love -= ((comp.Love - comp.ActualLove) / 1) * frameTime;
-                if (_gameTiming.CurTime - comp.TimeFromLastErp > TimeSpan.FromSeconds(15) && comp.Love > 0)
-                {
-                    comp.ActualLove -= 0.001f;
-                }
-                comp.Love = MathHelper.Clamp(comp.Love, 0f, 1f);
-                comp.ActualLove = MathHelper.Clamp(comp.ActualLove, 0f, 1f);
-                float progress = comp.Love;
-
-                if (!comp.Erp || progress < 0.1f)
-                {
-                    _alerts.ClearAlert(uid, "Arousal");
-                    continue;
-                }
-                short severity = (short) Math.Clamp(Math.Floor(progress * 10) + 1, 1, 10);
-                _alerts.ShowAlert(uid, "Arousal", severity);
-            }
+            _arousal.UpdateAll(frameTime, DirtyRelevantEuis);
         }
 
-        private void OnComponentInit(EntityUid uid, ERPComponent component, ComponentInit args)
+        public bool CanKeepPanelOpen(EntityUid user, EntityUid target, ERPPanelMode mode)
         {
+            return _policy.CanKeepPanelOpen(user, target, mode);
+        }
+
+        public ERPInteractionEuiState BuildState(EntityUid user, EntityUid target, ERPPanelMode mode)
+        {
+            var state = new ERPInteractionEuiState
+            {
+                Mode = mode,
+                Target = GetNetEntity(target),
+            };
+
+            if (!_policy.CanKeepPanelOpen(user, target, mode))
+                return state;
+
+            if (!TryComp<ERPComponent>(user, out var userComp)
+                || !TryComp<ERPComponent>(target, out var targetComp)
+                || !TryComp<HumanoidAppearanceComponent>(user, out var userHumanoid)
+                || !TryComp<HumanoidAppearanceComponent>(target, out var targetHumanoid))
+            {
+                return state;
+            }
+
+            state.UserSex = userHumanoid.Sex;
+            state.TargetSex = targetHumanoid.Sex;
+            state.UserHasClothing = _exposure.HasRelevantCoverage(user);
+            state.TargetHasClothing = _exposure.HasRelevantCoverage(target);
+            state.UserConsent = userComp.Consent;
+            state.TargetConsent = targetComp.Consent;
+            state.UserNonCon = userComp.NonCon;
+            state.TargetNonCon = targetComp.NonCon;
+            state.UserArousal = userComp.Arousal;
+            state.TargetArousal = targetComp.Arousal;
+            state.CooldownEndTime = _arousal.GetVisibleCooldownEndTime(userComp, targetComp);
+            state.Interactions = _policy.GetInteractionEntries(user, target, mode);
+
+            return state;
+        }
+
+        public bool TryPerformInteraction(EntityUid user, EntityUid target, ERPPanelMode mode, ProtoId<ERPPrototype> interactionId)
+        {
+            if (!_policy.CanKeepPanelOpen(user, target, mode))
+                return false;
+
+            if (!_prototypeManager.TryIndex(interactionId, out var interaction))
+                return false;
+
+            var interactionEnabled = false;
+            foreach (var entry in _policy.GetInteractionEntries(user, target, mode))
+            {
+                if (entry.InteractionId != interactionId)
+                    continue;
+
+                interactionEnabled = entry.Enabled;
+                break;
+            }
+
+            if (!interactionEnabled)
+                return false;
+
+            if (!_arousal.TryApplyInteraction(user, target, interaction))
+                return false;
+
+            DirtyRelevantEuis(user, target);
+            return true;
+        }
+
+        public void RegisterEui(ERPEUI eui)
+        {
+            _openEuis.Add(eui);
+        }
+
+        public void UnregisterEui(ERPEUI eui)
+        {
+            _openEuis.Remove(eui);
+        }
+
+        private void OpenPanel(ICommonSession player, EntityUid target, ERPPanelMode mode)
+        {
+            _eui.OpenEui(new ERPEUI(this, GetNetEntity(target), mode), player);
+        }
+
+        private void OnExamined(EntityUid uid, ERPComponent component, ref ExaminedEvent args)
+        {
+            if (!args.IsInDetailsRange)
+                return;
+
+            args.PushMarkup(Loc.GetString("erp-examine-consent", ("consent", ERPFormatting.FormatConsentMarkup(component.Consent))));
+            args.PushMarkup(Loc.GetString("erp-examine-non-con", ("nonCon", ERPFormatting.FormatNonConMarkup(component.NonCon))));
+        }
+
+        private void DirtyRelevantEuis(EntityUid first, EntityUid? second = null)
+        {
+            var openEuis = new List<ERPEUI>(_openEuis);
+
+            foreach (var eui in openEuis)
+            {
+                if (eui.IsShutDown)
+                {
+                    _openEuis.Remove(eui);
+                    continue;
+                }
+
+                if (eui.TracksEntity(first) || second != null && eui.TracksEntity(second.Value))
+                    eui.StateDirty();
+            }
         }
     }
 }
