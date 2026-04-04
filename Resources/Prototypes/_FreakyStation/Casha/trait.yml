@@ -1,8 +1,0 @@
-- type: trait
-  id: ERP
-  name: trait-erp-name
-  description: trait-erp-desc
-  category: Quirks
-  components:
-  - type: ERP
-    erp: true

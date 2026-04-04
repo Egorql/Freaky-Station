@@ -8,7 +8,7 @@
   targetSex: Unsexed
   userWithoutCloth: false
   targetWithoutCloth: false
-  erp: false
+  arousalDelta: 0
 
 - type: interaction
   id: RPPAT
@@ -22,7 +22,7 @@
   targetSex: Unsexed
   userWithoutCloth: false
   targetWithoutCloth: false
-  erp: false
+  arousalDelta: 0
 
 - type: interaction
   id: ERPzad
@@ -38,7 +38,7 @@
   targetSex: Unsexed
   userWithoutCloth: false
   targetWithoutCloth: false
-  erp: true
+  arousalDelta: 15
 
 - type: interaction
   id: ERPkiss1
@@ -54,7 +54,7 @@
   targetSex: Unsexed
   userWithoutCloth: false
   targetWithoutCloth: false
-  erp: false
+  arousalDelta: 0
 
 - type: interaction
   id: ERPkiss2
@@ -72,9 +72,212 @@
   targetSex: Unsexed
   userWithoutCloth: false
   targetWithoutCloth: false
-  erp: true
+  arousalDelta: 15
 
-#действия с мужчиной
+#действия с собой
+- type: interaction
+  id: ERPSelfMasturbateMale
+  name: Подрочить
+  icon: /Textures/_FreakStation/Casha/ERPemote/hearticon.png
+  emotes:
+  - Опускает руку к паху и начинает медленно водить ладонью по своему члену
+  - Обнажает головку и неторопливо поглаживает свой член по всей длине
+  - Сжимает член в ладони и задаёт размеренный ритм движений, тихо постанывая
+  - Проводит пальцами по стволу своего члена, наслаждаясь каждым прикосновением
+  - Медленно дрочит себе, не отрывая взгляда от собственного тела
+  sound:
+  - path: /Audio/Effects/Footsteps/meatslap.ogg
+  userSex: Male
+  targetSex: Male
+  userWithoutCloth: true
+  useSelf: true
+  targetWithoutCloth: false
+  arousalDelta: 15
+
+- type: interaction
+  id: ERPSelfStrokeHeadMale
+  name: Ласкать головку
+  icon: /Textures/_FreakStation/Casha/ERPemote/hearticon.png
+  emotes:
+  - Обводит пальцами головку своего члена, задерживаясь на самых чувствительных местах
+  - Медленно ласкает уздечку, заставляя себя вздрагивать от приятных ощущений
+  - Приоткрывает головку и дразнит её мягкими круговыми движениями пальцев
+  - Поглаживает головку большим пальцем, время от времени сжимая ствол в кулаке
+  - Дразняще проводит ладонью по головке своего члена, срываясь на тихий стон
+  sound:
+  - path: /Audio/Effects/Footsteps/meatslap.ogg
+  userSex: Male
+  targetSex: Male
+  userWithoutCloth: true
+  useSelf: true
+  targetWithoutCloth: false
+  arousalDelta: 20
+
+- type: interaction
+  id: ERPSelfJerkOffHardMale
+  name: Жёстко дрочить
+  icon: /Textures/_FreakStation/Casha/ERPemote/hearticon.png
+  emotes:
+  - С силой сжимает свой член и начинает быстро дрочить, едва сдерживая стоны
+  - Резко водит кулаком по стволу, сбивая дыхание собственным темпом
+  - Жадно трахает собственный кулак, всё сильнее ускоряя движения
+  - Напрягает бёдра и яростно дрочит себе, доводя себя почти до дрожи
+  - Срывается на грубый ритм, жёстко водя ладонью по своему члену
+  sound:
+  - path: /Audio/Effects/Footsteps/meatslap.ogg
+  userSex: Male
+  targetSex: Male
+  userWithoutCloth: true
+  useSelf: true
+  targetWithoutCloth: false
+  arousalDelta: 25
+
+- type: interaction
+  id: ERPSelfAnalTeaseMale
+  name: Дразнить анус
+  icon: /Textures/_FreakStation/Casha/ERPemote/hearticon.png
+  emotes:
+  - Проводит пальцами между ягодиц и дразнит собственный анус осторожными круговыми касаниями
+  - Медленно массирует вход в свой анус, замирая от каждого нового прикосновения
+  - Раздвигает ягодицы и неторопливо гладит себя у ануса, распаляя ожидание
+  - Кончиками пальцев трётся о собственный анус, едва слышно выдыхая сквозь зубы
+  sound:
+  - path: /Audio/Effects/Footsteps/meatslap.ogg
+  userSex: Male
+  targetSex: Male
+  userWithoutCloth: true
+  useSelf: true
+  targetWithoutCloth: false
+  arousalDelta: 15
+
+- type: interaction
+  id: ERPSelfAnalFingerMale
+  name: Разрабатывать анус
+  icon: /Textures/_FreakStation/Casha/ERPemote/hearticon.png
+  emotes:
+  - Осторожно вводит в себя палец и начинает медленно двигать им внутри
+  - Разрабатывает собственный анус пальцами, стараясь поймать самый приятный ритм
+  - Вводит палец глубже и плавно трахает себя, напрягая бёдра от удовольствия
+  - Жадно играет со своим анусом пальцами, всё смелее и глубже проникая внутрь
+  sound:
+  - path: /Audio/Effects/Footsteps/meatslap.ogg
+  userSex: Male
+  targetSex: Male
+  userWithoutCloth: true
+  useSelf: true
+  targetWithoutCloth: false
+  arousalDelta: 20
+
+- type: interaction
+  id: ERPSelfRubClitFemale
+  name: Ласкать клитор
+  icon: /Textures/_FreakStation/Casha/ERPemote/hearticon.png
+  emotes:
+  - Опускает руку к паху и начинает медленно тереть свой клитор круговыми движениями
+  - Дразнит клитор кончиками пальцев, заставляя себя тихо вздрагивать
+  - Нежно поглаживает свой клитор, задерживаясь на самых чувствительных касаниях
+  - Медленно массирует клитор, прикрывая глаза от накатывающего удовольствия
+  - Ласкает себя между ног, уделяя всё внимание своему клитору
+  sound:
+  - path: /Audio/Effects/Footsteps/meatslap.ogg
+  userSex: Female
+  targetSex: Female
+  userWithoutCloth: true
+  useSelf: true
+  targetWithoutCloth: false
+  arousalDelta: 15
+
+- type: interaction
+  id: ERPSelfRubPussyFemale
+  name: Тереть киску
+  icon: /Textures/_FreakStation/Casha/ERPemote/hearticon.png
+  emotes:
+  - Проводит ладонью по своим половым губам, постепенно усиливая нажим
+  - Медленно трёт свою киску, раздвигая бёдра навстречу собственным пальцам
+  - Массирует свою киску ладонью, срываясь на тихий томный стон
+  - Ласкает себя между ног, скользя пальцами по влажным складкам
+  - Ритмично трётся пальцами о свою киску, наслаждаясь каждым движением
+  sound:
+  - path: /Audio/Effects/Footsteps/meatslap.ogg
+  userSex: Female
+  targetSex: Female
+  userWithoutCloth: true
+  useSelf: true
+  targetWithoutCloth: false
+  arousalDelta: 20
+
+- type: interaction
+  id: ERPSelfFingerFemale
+  name: Ввести пальцы
+  icon: /Textures/_FreakStation/Casha/ERPemote/hearticon.png
+  emotes:
+  - Медленно вводит в себя два пальца и начинает двигать ими внутри
+  - Осторожно проникает пальцами в свою киску, выгибаясь от удовольствия
+  - Плавно трахает себя пальцами, подбирая всё более глубокий ритм
+  - Вводит пальцы глубже и сгибает их внутри, срываясь на дрожащий вдох
+  - Жадно играет со своей киской пальцами, всё сильнее распаляя себя
+  sound:
+  - path: /Audio/Effects/Footsteps/meatslap.ogg
+  userSex: Female
+  targetSex: Female
+  userWithoutCloth: true
+  useSelf: true
+  targetWithoutCloth: false
+  arousalDelta: 25
+
+- type: interaction
+  id: ERPSelfAnalTeaseFemale
+  name: Дразнить анус
+  icon: /Textures/_FreakStation/Casha/ERPemote/hearticon.png
+  emotes:
+  - Проводит пальцами между ягодиц и мягко дразнит собственный анус круговыми движениями
+  - Неторопливо массирует вход в свой анус, прерывисто выдыхая от новых ощущений
+  - Раздвигает ягодицы и дразняще гладит себя у ануса, распаляя ожидание
+  - Кончиками пальцев трётся о собственный анус, вздрагивая от каждого касания
+  sound:
+  - path: /Audio/Effects/Footsteps/meatslap.ogg
+  userSex: Female
+  targetSex: Female
+  userWithoutCloth: true
+  useSelf: true
+  targetWithoutCloth: false
+  arousalDelta: 15
+
+- type: interaction
+  id: ERPSelfAnalFingerFemale
+  name: Ввести пальцы в анус
+  icon: /Textures/_FreakStation/Casha/ERPemote/hearticon.png
+  emotes:
+  - Осторожно вводит в свой анус палец и начинает медленно двигать им внутри
+  - Разрабатывает собственный анус пальцами, выгибаясь от непривычно сладких ощущений
+  - Вводит палец глубже и плавно трахает себя, напрягая бёдра от удовольствия
+  - Жадно играет со своим анусом пальцами, всё увереннее проникая внутрь
+  sound:
+  - path: /Audio/Effects/Footsteps/meatslap.ogg
+  userSex: Female
+  targetSex: Female
+  userWithoutCloth: true
+  useSelf: true
+  targetWithoutCloth: false
+  arousalDelta: 20
+
+- type: interaction
+  id: ERPSelfFondleBreastsFemale
+  name: Ласкать грудь
+  icon: /Textures/_FreakStation/Casha/ERPemote/hearticon.png
+  emotes:
+  - Мягко сжимает свою грудь ладонями и медленно массирует соски большими пальцами
+  - Нежно проводит пальцами по своей груди, задерживаясь на чувствительных сосках
+  - Игриво мнёт собственную грудь, лаская соски круговыми движениями
+  - Поглаживает свою грудь снизу вверх, тихо постанывая от приятных ощущений
+  sound:
+  - path: /Audio/Effects/Footsteps/meatslap.ogg
+  userSex: Female
+  targetSex: Female
+  userWithoutCloth: true
+  useSelf: true
+  targetWithoutCloth: false
+  arousalDelta: 15
 - type: interaction
   id: ERPMasturbirovat
   name: Мастурбировать
@@ -90,8 +293,7 @@
   targetSex: Male
   userWithoutCloth: false
   targetWithoutCloth: true
-  erp: true
-  lovePercent: 5
+  arousalDelta: 15
 #Действия с женщиной
 - type: interaction
   id: ERPMasturbirovatt
@@ -110,8 +312,7 @@
   targetSex: Female
   userWithoutCloth: false
   targetWithoutCloth: true
-  erp: true
-  lovePercent: 5
+  arousalDelta: 15
 #Мужчина с женщиной
 - type: interaction
   id: ERPanal
@@ -129,8 +330,7 @@
   targetSex: Unsexed
   userWithoutCloth: true
   targetWithoutCloth: true
-  erp: true
-  lovePercent: 10
+  arousalDelta: 20
 
 - type: interaction
   id: ERPvaginal
@@ -148,8 +348,7 @@
   targetSex: Female
   userWithoutCloth: true
   targetWithoutCloth: true
-  erp: true
-  lovePercent: 10
+  arousalDelta: 20
 - type: interaction
   id: ERPminetM
   name: Трахнуть рот
@@ -166,9 +365,8 @@
   targetSex: Unsexed
   userWithoutCloth: true
   targetWithoutCloth: false
-  erp: true
-  lovePercent: 10
-
+  arousalDelta: 20
+  
 - type: interaction
   id: ERPkuninakanuni
   name: Сесть на лицо
@@ -183,8 +381,7 @@
   targetSex: Unsexed
   userWithoutCloth: true
   targetWithoutCloth: false
-  erp: true
-  lovePercent: 10
+  arousalDelta: 20
 
 - type: interaction
   id: ERPkuninakanunim
@@ -200,8 +397,7 @@
   targetSex: Female
   userWithoutCloth: false
   targetWithoutCloth: true
-  erp: true
-  lovePercent: 10
+  arousalDelta: 20
 - type: interaction
   id: ERPsoso
   name: Отсосать член
@@ -218,9 +414,8 @@
   targetSex: Male
   userWithoutCloth: false
   targetWithoutCloth: true
-  erp: true
-  lovePercent: 10
-
+  arousalDelta: 20
+  
 - type: interaction
   id: ERPHug
   name: Обнять
@@ -234,7 +429,7 @@
   targetSex: Unsexed
   userWithoutCloth: false
   targetWithoutCloth: false
-  erp: false
+  arousalDelta: 0
 
 - type: interaction
   id: ERPTouchChest
@@ -251,8 +446,7 @@
   targetSex: Female
   userWithoutCloth: false
   targetWithoutCloth: false
-  erp: true
-  lovePercent: 5
+  arousalDelta: 15
 
 - type: interaction
   id: ERPTouchChestM
@@ -266,8 +460,7 @@
   targetSex: Male
   userWithoutCloth: false
   targetWithoutCloth: false
-  erp: true
-  lovePercent: 5
+  arousalDelta: 15
 
 - type: interaction
   id: ERPLickNipples
@@ -284,8 +477,7 @@
   targetSex: Unsexed
   userWithoutCloth: false
   targetWithoutCloth: true
-  erp: true
-  lovePercent: 5
+  arousalDelta: 15
 
 - type: interaction
   id: ERPGrind
@@ -302,8 +494,7 @@
   targetSex: Unsexed
   userWithoutCloth: false
   targetWithoutCloth: false
-  erp: true
-  lovePercent: 5
+  arousalDelta: 15
 
 - type: interaction
   id: ERPSitOnLap
@@ -318,9 +509,8 @@
   targetSex: Unsexed
   userWithoutCloth: false
   targetWithoutCloth: false
-  erp: true
-  lovePercent: 5
-
+  arousalDelta: 15
+  
 - type: interaction
   id: ERPRide
   name: Оседлать
@@ -335,8 +525,7 @@
   targetSex: Male
   userWithoutCloth: true
   targetWithoutCloth: true
-  erp: true
-  lovePercent: 15
+  arousalDelta: 25
 
 - type: interaction
   id: ERPDoggy
@@ -352,9 +541,8 @@
   targetSex: Unsexed
   userWithoutCloth: true
   targetWithoutCloth: true
-  erp: true
-  lovePercent: 15
-
+  arousalDelta: 25
+  
 - type: interaction
   id: ERP69Female
   name: 69
@@ -369,9 +557,8 @@
   targetSex: Female
   userWithoutCloth: true
   targetWithoutCloth: true
-  erp: true
-  lovePercent: 15
-
+  arousalDelta: 25
+  
 - type: interaction
   id: ERP69Male
   name: 69
@@ -386,9 +573,8 @@
   targetSex: Male
   userWithoutCloth: true
   targetWithoutCloth: true
-  erp: true
-  lovePercent: 15
-
+  arousalDelta: 25
+  
 - type: interaction
   id: ERPCumInside
   name: Кончить внутрь
@@ -404,8 +590,7 @@
   targetSex: Female
   userWithoutCloth: true
   targetWithoutCloth: true
-  erp: true
-  lovePercent: 30
+  arousalDelta: 40
 
 - type: interaction
   id: ERPCumMouth
@@ -422,8 +607,7 @@
   targetSex: Unsexed
   userWithoutCloth: true
   targetWithoutCloth: false
-  erp: true
-  lovePercent: 25
+  arousalDelta: 35
 
 - type: interaction
   id: ERPCumFace
@@ -439,8 +623,7 @@
   targetSex: Unsexed
   userWithoutCloth: true
   targetWithoutCloth: false
-  erp: true
-  lovePercent: 20
+  arousalDelta: 30
 
 - type: interaction
   id: ERPCumChest
@@ -456,9 +639,8 @@
   targetSex: Unsexed
   userWithoutCloth: true
   targetWithoutCloth: true
-  erp: true
-  lovePercent: 20
-
+  arousalDelta: 30
+  
 - type: interaction
   id: ERPTitjob
   name: Трахнуть грудь
@@ -473,9 +655,8 @@
   targetSex: Female
   userWithoutCloth: true
   targetWithoutCloth: true
-  erp: true
-  lovePercent: 10
-
+  arousalDelta: 20
+  
 - type: interaction
   id: ERPFootjob
   name: Футджоб
@@ -489,11 +670,10 @@
   - path: /Audio/Effects/Footsteps/meatslap.ogg
   userSex: Unsexed
   targetSex: Male
-  userWithoutCloth: false
-  targetWithoutCloth: false
-  erp: true
-  lovePercent: 5
-
+  userWithoutCloth: true
+  targetWithoutCloth: true
+  arousalDelta: 15
+  
 - type: interaction
   id: ERPMissionary
   name: Трахнуть в миссионерской позе
@@ -508,9 +688,8 @@
   targetSex: Female
   userWithoutCloth: true
   targetWithoutCloth: true
-  erp: true
-  lovePercent: 15
-
+  arousalDelta: 25
+  
 - type: interaction
   id: ERPStanding
   name: Трахнуть стоя
@@ -525,7 +704,6 @@
   targetSex: Unsexed
   userWithoutCloth: true
   targetWithoutCloth: true
-  erp: true
-  lovePercent: 25
+  arousalDelta: 35
 
 

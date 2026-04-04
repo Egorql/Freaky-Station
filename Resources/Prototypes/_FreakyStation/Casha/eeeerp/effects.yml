@@ -1,0 +1,19 @@
+- type: entity
+  id: EffectSquirt
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: TimedDespawn
+    lifetime: 0.75
+  - type: Sprite
+    sprite: Effects/chempuff.rsi
+    rotation: 180
+    drawdepth: Effects
+    layers:
+    - state: chempuff
+      map: [ "enum.VaporVisualLayers.Base" ]
+  - type: Appearance
+  - type: VaporVisuals
+  - type: Tag
+    tags:
+      - HideContextMenu
+  - type: AnimationPlayer

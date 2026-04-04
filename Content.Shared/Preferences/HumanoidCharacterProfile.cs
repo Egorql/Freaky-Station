@@ -83,6 +83,7 @@ namespace Content.Shared.Preferences
     {
         private static readonly Regex RestrictedNameRegex = new("[^А-Яа-яёЁ0-9' -]"); // CorvaxGoob-Localization
         private static readonly Regex ICNameCaseRegex = new(@"^(?<word>\w)|\b(?<word>\w)(?=\w*$)");
+        private static readonly ProtoId<TraitPrototype> LegacyErpTraitId = "ERP";
 
         /// <summary>
         /// Job preferences for initial spawn.
@@ -137,7 +138,10 @@ namespace Content.Shared.Preferences
         public string HeadshotUrl { get; set; } = string.Empty;
         //ADT-tweak-end
         [DataField]
-        public ERPS ERPS { get; set; } = ERPS.No;
+        public ERPConsent ERPConsent { get; set; } = ERPConsent.Disabled;
+
+        [DataField]
+        public bool NonCon { get; set; }
 
         /// <summary>
         /// Associated <see cref="SpeciesPrototype"/> for this profile.
@@ -222,6 +226,8 @@ namespace Content.Shared.Preferences
             HashSet<ProtoId<AntagPrototype>> antagPreferences,
             HashSet<ProtoId<TraitPrototype>> traitPreferences,
             Dictionary<string, RoleLoadout> loadouts,
+            ERPConsent erpConsent,
+            bool nonCon,
             //ADT Start
             string oocNotes,
             string headshotUrl,
@@ -244,6 +250,8 @@ namespace Content.Shared.Preferences
             _antagPreferences = antagPreferences;
             _traitPreferences = traitPreferences;
             _loadouts = loadouts;
+            ERPConsent = erpConsent;
+            NonCon = nonCon;
             // ADT start
             OOCNotes = oocNotes;
             HeadshotUrl = headshotUrl;
@@ -282,6 +290,8 @@ namespace Content.Shared.Preferences
                 new HashSet<ProtoId<AntagPrototype>>(other.AntagPreferences),
                 new HashSet<ProtoId<TraitPrototype>>(other.TraitPreferences),
                 new Dictionary<string, RoleLoadout>(other.Loadouts),
+                other.ERPConsent,
+                other.NonCon,
                 // ADT start
                 other.OOCNotes,
                 other.HeadshotUrl,
@@ -422,9 +432,14 @@ namespace Content.Shared.Preferences
             return new(this) { Sex = sex };
         }
 
-        public HumanoidCharacterProfile WithERP(ERPS erp)
+        public HumanoidCharacterProfile WithERPConsent(ERPConsent consent)
         {
-            return new(this) { ERPS = erp };
+            return new(this) { ERPConsent = consent };
+        }
+
+        public HumanoidCharacterProfile WithNonCon(bool nonCon)
+        {
+            return new(this) { NonCon = nonCon };
         }
 
         public HumanoidCharacterProfile WithGender(Gender gender)
@@ -651,6 +666,8 @@ namespace Content.Shared.Preferences
             // if (Width != other.Width) return false; // Goobstation: port EE height/width sliders // CorvaxGoob-Clearing
             // if (BarkVoice != other.BarkVoice) return false; // Goob Station - Barks // CorvaxGoob-Clearing
             if (!Bark.MemberwiseEquals(other.Bark)) return false; // ADT Barks
+            if (ERPConsent != other.ERPConsent) return false;
+            if (NonCon != other.NonCon) return false;
             if (PreferenceUnavailable != other.PreferenceUnavailable) return false;
             if (SpawnPriority != other.SpawnPriority) return false;
             if (!_jobPriorities.SequenceEqual(other._jobPriorities)) return false;
@@ -669,6 +686,7 @@ namespace Content.Shared.Preferences
         {
             var configManager = collection.Resolve<IConfigurationManager>();
             var prototypeManager = collection.Resolve<IPrototypeManager>();
+            var hasLegacyErpTrait = TraitPreferences.Contains(LegacyErpTraitId);
 
             if (!prototypeManager.TryIndex(Species, out var speciesPrototype) || speciesPrototype.RoundStart == false)
             {
@@ -787,6 +805,16 @@ namespace Content.Shared.Preferences
                 _ => SpawnPriorityPreference.None // Invalid enum values.
             };
 
+            var erpConsent = ERPConsent switch
+            {
+                ERPConsent.Enabled => ERPConsent.Enabled,
+                ERPConsent.Disabled => ERPConsent.Disabled,
+                _ => ERPConsent.Disabled
+            };
+
+            if (erpConsent == ERPConsent.Disabled && hasLegacyErpTrait)
+                erpConsent = ERPConsent.Enabled;
+
             var priorities = new Dictionary<ProtoId<JobPrototype>, JobPriority>(JobPriorities
                 .Where(p => prototypeManager.TryIndex<JobPrototype>(p.Key, out var job) && job.SetPreference && p.Value switch
                 {
@@ -813,7 +841,7 @@ namespace Content.Shared.Preferences
                 .ToList();
 
             var traits = TraitPreferences
-                         .Where(prototypeManager.HasIndex)
+                         .Where(id => id != LegacyErpTraitId && prototypeManager.HasIndex(id))
                          .ToList();
 
             Name = name;
@@ -826,6 +854,7 @@ namespace Content.Shared.Preferences
             Sex = sex;
             Gender = gender;
             Appearance = appearance;
+            ERPConsent = erpConsent;
             SpawnPriority = spawnPriority;
 
             _jobPriorities.Clear();
@@ -885,6 +914,9 @@ namespace Content.Shared.Preferences
             foreach (var trait in traits)
             {
                 if (!protoManager.TryIndex(trait, out var traitProto))
+                    continue;
+
+                if (trait == LegacyErpTraitId)
                     continue;
 
                 //Sponsor think
@@ -974,7 +1006,8 @@ namespace Content.Shared.Preferences
             // hashCode.Add(BarkVoice); // Goob Station - Barks // CorvaxGoob-Revert : DB conflicts
             hashCode.Add((int) SpawnPriority);
             hashCode.Add((int) PreferenceUnavailable);
-            hashCode.Add((int) ERPS); // Добавлено в HashCode
+            hashCode.Add((int) ERPConsent);
+            hashCode.Add(NonCon);
             return hashCode.ToHashCode();
         }
 

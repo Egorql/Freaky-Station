@@ -112,6 +112,16 @@ SPDX-License-Identifier: AGPL-3.0-or-later
                                     <Control HorizontalExpand="True"/>
                                     <OptionButton Name="SpawnPriorityButton" HorizontalAlignment="Right" />
                                 </BoxContainer>
+                                <BoxContainer HorizontalExpand="True">
+                                    <Label Text="{Loc 'humanoid-profile-editor-erp-consent-label'}" />
+                                    <Control HorizontalExpand="True"/>
+                                    <OptionButton Name="ERPConsentButton" HorizontalAlignment="Right" />
+                                </BoxContainer>
+                                <BoxContainer HorizontalExpand="True">
+                                    <Label Text="{Loc 'humanoid-profile-editor-non-con-label'}" />
+                                    <Control HorizontalExpand="True"/>
+                                    <OptionButton Name="NonConButton" HorizontalAlignment="Right" />
+                                </BoxContainer>
                                 <!-- Height Slider --> <!-- begin Goobstation: port EE height/width sliders -->
                                 <BoxContainer HorizontalExpand="True">
                                     <Label Name="HeightLabel" MinWidth="110" />

@@ -67,7 +67,9 @@ public abstract class SharedRottingSystem : EntitySystem
 
         var isMob = HasComp<MobStateComponent>(perishable);
         var description = "perishable-" + stage + (!isMob ? "-nonmob" : string.Empty);
-        args.PushMarkup(Loc.GetString(description, ("target", Identity.Entity(perishable, EntityManager))));
+        args.PushMarkup(
+            Loc.GetString(description, ("target", Identity.Entity(perishable, EntityManager))),
+            ExaminePriorities.CharacterStateFooter);
     }
 
     private void OnShutdown(EntityUid uid, RottingComponent component, ComponentShutdown args)
@@ -103,7 +105,9 @@ public abstract class SharedRottingSystem : EntitySystem
         if (!HasComp<MobStateComponent>(uid))
             description += "-nonmob";
 
-        args.PushMarkup(Loc.GetString(description, ("target", Identity.Entity(uid, EntityManager))));
+        args.PushMarkup(
+            Loc.GetString(description, ("target", Identity.Entity(uid, EntityManager))),
+            ExaminePriorities.CharacterStateFooter);
     }
 
     /// <summary>

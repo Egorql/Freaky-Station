@@ -42,11 +42,15 @@ public sealed class PermanentBlindnessSystem : EntitySystem
     {
         if (args.IsInDetailsRange && blindness.Comp.Blindness == 0)
         {
-            args.PushMarkup(Loc.GetString("permanent-blindness-trait-examined", ("target", Identity.Entity(blindness, EntityManager))));
+            args.PushMarkup(
+                Loc.GetString("permanent-blindness-trait-examined", ("target", Identity.Entity(blindness, EntityManager))),
+                ExaminePriorities.CharacterStateFooter);
         }
         else if (args.IsInDetailsRange && !_net.IsClient && blindness.Comp.Blindness == 4) /// Goobstation
         {
-            args.PushMarkup(Loc.GetString("poor-vision-trait-examined", ("target", Identity.Entity(blindness, EntityManager))));
+            args.PushMarkup(
+                Loc.GetString("poor-vision-trait-examined", ("target", Identity.Entity(blindness, EntityManager))),
+                ExaminePriorities.CharacterStateFooter);
         }  
     }
 
