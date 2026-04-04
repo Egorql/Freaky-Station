@@ -216,8 +216,12 @@ namespace Content.Server._FreakyStation.ERP
             if (!args.IsInDetailsRange)
                 return;
 
-            args.PushMarkup(Loc.GetString("erp-examine-consent", ("consent", ERPFormatting.FormatConsentMarkup(component.Consent))));
-            args.PushMarkup(Loc.GetString("erp-examine-non-con", ("nonCon", ERPFormatting.FormatNonConMarkup(component.NonCon))));
+            args.PushMarkup(
+                Loc.GetString("erp-examine-consent", ("consent", ERPFormatting.FormatConsentMarkup(component.Consent))),
+                ExaminePriorities.FeatureStatus);
+            args.PushMarkup(
+                Loc.GetString("erp-examine-non-con", ("nonCon", ERPFormatting.FormatNonConMarkup(component.NonCon))),
+                ExaminePriorities.FeatureStatus);
         }
 
         private void DirtyRelevantEuis(EntityUid first, EntityUid? second = null)

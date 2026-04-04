@@ -230,7 +230,9 @@ public sealed partial class SleepingSystem : EntitySystem
     {
         if (args.IsInDetailsRange)
         {
-            args.PushMarkup(Loc.GetString("sleep-examined", ("target", Identity.Entity(ent, EntityManager))));
+            args.PushMarkup(
+                Loc.GetString("sleep-examined", ("target", Identity.Entity(ent, EntityManager))),
+                ExaminePriorities.CharacterStateFooter);
         }
     }
 
