@@ -54,6 +54,9 @@
       collection: GenericEquip
       params:
         volume: -5
+  - type: ClothingStain
+    itemState: shoes
+    equippedState: equipped-shoes
   # Goobstation edit end
   - type: Sprite
     state: icon
@@ -104,6 +107,9 @@
   id: ClothingShoesMilitaryBase
   components:
   - type: Matchbox
+  - type: ClothingStain
+    itemState: boots
+    equippedState: equipped-shoes
   - type: ItemSlots
     slots:
       item:

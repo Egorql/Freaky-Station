@@ -1053,7 +1053,12 @@ public sealed partial class BiomeSystem : SharedBiomeSystem
         seed ??= _random.Next();
         SetSeed(mapUid, biome, seed.Value, false);
         SetTemplate(mapUid, biome, biomeTemplate, false);
-        AddComp(mapUid, biome, true);
+
+        if (!HasComp<BiomeComponent>(mapUid))
+        {
+            AddComp(mapUid, biome, true);
+        }
+
         Dirty(mapUid, biome, metadata);
 
         var gravity = EnsureComp<GravityComponent>(mapUid);

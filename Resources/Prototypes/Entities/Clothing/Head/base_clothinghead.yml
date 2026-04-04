@@ -111,6 +111,9 @@
   # Goobstation edit start
     equipSound:
       collection: GenericEquip
+  - type: ClothingStain
+    itemState: hat
+    equippedState: equipped-hat
   # Goobstation edit end
   - type: Sprite
     state: icon
@@ -166,6 +169,9 @@
       map: [ "light" ]
   - type: Clothing
     equippedPrefix: off
+  - type: ClothingStain
+    itemState: hardhat
+    equippedState: off-equipped-hardhat
   - type: Item
     heldPrefix: off
     size: Normal
@@ -252,6 +258,9 @@
     - Snout
     - HeadTop
     - HeadSide
+  - type: ClothingStain
+    itemState: helmet
+    equippedState: equipped-helmet
 
 - type: entity
   abstract: true
@@ -315,6 +324,9 @@
     - HeadTop
     - HeadSide
   - type: FaceHuggerBlocker # Goobstation
+  - type: ClothingStain
+    itemState: helmet
+    equippedState: equipped-helmet
 
 - type: entity
   abstract: true
@@ -334,6 +346,9 @@
       map: [ "light" ]
   - type: Clothing
     equippedPrefix: off
+  - type: ClothingStain
+    itemState: hardhat
+    equippedState: off-equipped-hardhat
   - type: ToggleableVisuals
     spriteLayer: light
   - type: ItemTogglePointLight
@@ -402,3 +417,6 @@
     - Hair
     - HeadTop
     - HeadSide
+  - type: ClothingStain
+    itemState: winterhood
+    equippedState: equipped-winterhood

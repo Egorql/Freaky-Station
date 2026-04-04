@@ -4,6 +4,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Server.Chat.Systems;
+using Content.Server._FreakyStation.Clothing;
 using Content.Shared.Alert;
 using Content.Shared._FreakyStation.ERP;
 using Content.Shared.Chat;
@@ -36,6 +37,7 @@ namespace Content.Server._FreakyStation.ERP
         [Dependency] private readonly SharedAudioSystem _audio = default!;
         [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
         [Dependency] private readonly ChatSystem _chat = default!;
+        [Dependency] private readonly ClothingStainSystem _clothingStains = default!;
         [Dependency] private readonly IGameTiming _gameTiming = default!;
         [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
         [Dependency] private readonly IResourceManager _resources = default!;
@@ -139,6 +141,7 @@ namespace Content.Server._FreakyStation.ERP
             {
                 Spawn("PuddleSperma", Transform(uid).Coordinates);
                 TryPlayOptionalSound(MaleOrgasmSound, uid);
+                _clothingStains.ApplyStainsToEquippedClothing(uid, bio: true);
             }
             else if (humanoid.Sex == Sex.Female)
             {

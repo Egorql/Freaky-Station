@@ -27,6 +27,9 @@
   id: ClothingHeadHeadHatBaseFlippable
   abstract: true
   components:
+  - type: ClothingStain
+    itemState: soft
+    equippedState: equipped-soft
   - type: Appearance
   - type: Foldable
     canFoldInsideContainer: true

@@ -146,6 +146,9 @@
         Aerial: -0.8
       chanceMultipliers:
         Aerial: 0.5
+  - type: ClothingStain
+    itemState: biohead
+    equippedState: equipped-biohead
 
 - type: entity
   parent: ClothingHeadHatHoodBioGeneral

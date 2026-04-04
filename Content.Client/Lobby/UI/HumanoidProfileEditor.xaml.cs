@@ -225,6 +225,8 @@ namespace Content.Client.Lobby.UI
 
         private FlavorText.FlavorText? _flavorText;
         private TextEdit? _flavorTextEdit;
+        private TextEdit? _oocNotesEdit;
+        private LineEdit? _headshotUrlEdit;
 
         // One at a time.
         private LoadoutWindow? _loadoutWindow;
@@ -714,8 +716,13 @@ namespace Content.Client.Lobby.UI
                 TabContainer.AddChild(_flavorText);
                 TabContainer.SetTabTitle(TabContainer.ChildCount - 1, Loc.GetString("humanoid-profile-editor-flavortext-tab"));
                 _flavorTextEdit = _flavorText.CFlavorTextInput;
+                _oocNotesEdit = _flavorText.COOCTextInput;
+                _headshotUrlEdit = _flavorText.CHeadshotUrlInput;
+                UpdateFlavorTextEdit();
 
                 _flavorText.OnFlavorTextChanged += OnFlavorTextChange;
+                _flavorText.OnOOCNotesChanged += OnOOCNotesChange;
+                _flavorText.OnHeadshotUrlChanged += OnHeadshotUrlChange;
             }
             else
             {
@@ -724,9 +731,12 @@ namespace Content.Client.Lobby.UI
 
                 TabContainer.RemoveChild(_flavorText);
                 _flavorText.OnFlavorTextChanged -= OnFlavorTextChange;
+                _flavorText.OnOOCNotesChanged -= OnOOCNotesChange;
+                _flavorText.OnHeadshotUrlChanged -= OnHeadshotUrlChange;
                 _flavorText.Dispose();
-                _flavorTextEdit?.Dispose();
                 _flavorTextEdit = null;
+                _oocNotesEdit = null;
+                _headshotUrlEdit = null;
                 _flavorText = null;
             }
         }
@@ -1425,6 +1435,24 @@ namespace Content.Client.Lobby.UI
             SetDirty();
         }
 
+        private void OnOOCNotesChange(string content)
+        {
+            if (Profile is null)
+                return;
+
+            Profile = Profile.WithOOCNotes(content);
+            SetDirty();
+        }
+
+        private void OnHeadshotUrlChange(string content)
+        {
+            if (Profile is null)
+                return;
+
+            Profile = Profile.WithHeadshotUrl(content);
+            SetDirty();
+        }
+
         private void OnMarkingChange(MarkingSet markings)
         {
             if (Profile is null)
@@ -1729,6 +1757,16 @@ namespace Content.Client.Lobby.UI
             if (_flavorTextEdit != null)
             {
                 _flavorTextEdit.TextRope = new Rope.Leaf(Profile?.FlavorText ?? "");
+            }
+
+            if (_oocNotesEdit != null)
+            {
+                _oocNotesEdit.TextRope = new Rope.Leaf(Profile?.OOCNotes ?? "");
+            }
+
+            if (_headshotUrlEdit != null)
+            {
+                _headshotUrlEdit.Text = Profile?.HeadshotUrl ?? "";
             }
         }
 

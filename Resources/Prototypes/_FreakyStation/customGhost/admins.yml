@@ -69,3 +69,11 @@
   alpha: 0.8
   ghostName: 'EraNebulla'
   ghostDescription: "Been spendin' most their bans, Livin' in a admin's paradise"
+
+- type: customGhost
+  id: TimurDomaNetGhost
+  ckey: TimurDomaNet
+  sprite: /Textures/_FreakStation/Ghost/GhostTimur.rsi
+  alpha: 0.8
+  ghostName: 'TimurDomaNet'
+  ghostDescription: "Могущество мыла сильно, но преувеличено, реальная сила таится в том что летит в лицо нам. Самый 'адекватный' админ"

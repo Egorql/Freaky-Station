@@ -1,7 +1,9 @@
+# from freaky station
+
 - type: entity
   parent: ClothingScarfBase
-  id: dog-collar
-  name: Ошейник
+  id: OriginalDogCollar
+  name: жесткий ошейник
   description: Крепкий ошейник немного сжимающий шею носителя и придушивая его. Кому то такое даже нравится.
   components:
     - type: Sprite
@@ -11,8 +13,8 @@
 
 - type: entity
   parent: ClothingScarfBase
-  id: dog-collar-e
-  name: Ошейник
+  id: OriginalDogCollarElectrical
+  name: шоковый ошейник
   description: Крепкий ошейник который выдаёт разряд тока по сигналу, кто то и такое любит.
   components:
     - type: Sprite
@@ -23,9 +25,59 @@
       equipDelay: 5
     - type: SelfUnremovableClothing
     - type: ShockOnTrigger
-      damage: 3
+      damage: 1
       duration: 3
     - type: TriggerOnSignal
     - type: DeviceLinkSink
       ports:
         - Trigger
+
+# from lust station
+
+- type: entity
+  parent: ClothingScarfBase
+  id: DogCollarCross
+  name: ошейник с крестом
+  description: Красивый серебрянный крестик звенит и украшает этот ошейник.
+  components:
+    - type: Sprite
+      sprite: _FreakStation/Casha/clothing/neck/collar_cross.rsi
+      scale: 0.6,0.6
+    - type: Clothing
+      sprite: _FreakStation/Casha/clothing/neck/collar_cross.rsi
+
+- type: entity
+  parent: ClothingScarfBase
+  id: DogCollarStar
+  name: ошейник с звездой
+  description: Красивая серебренная звездочка звенит и украшает этот ошейник.
+  components:
+    - type: Sprite
+      sprite: _FreakStation/Casha/clothing/neck/collar_star.rsi
+      scale: 0.6,0.6
+    - type: Clothing
+      sprite: _FreakStation/Casha/clothing/neck/collar_star.rsi
+
+- type: entity
+  parent: ClothingScarfBase
+  id: DogCollarNet
+  name: сетчатый ошейник
+  description: Красивый сетчатый ошейник. Позволяет вашей прекрасной шее дышать и при этом не портить вид.
+  components:
+    - type: Sprite
+      sprite: _FreakStation/Casha/clothing/neck/collar2.rsi
+      scale: 0.6,0.6
+    - type: Clothing
+      sprite: _FreakStation/Casha/clothing/neck/collar2.rsi
+
+- type: entity
+  parent: ClothingScarfBase
+  id: DogCollarNormal
+  name: ошейник с кольцом
+  description: Ошейник с металлическим кольцом по центру. Классика.
+  components:
+    - type: Sprite
+      sprite: _FreakStation/Casha/clothing/neck/collar3.rsi
+      scale: 0.6,0.6
+    - type: Clothing
+      sprite: _FreakStation/Casha/clothing/neck/collar3.rsi

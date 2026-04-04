@@ -1,0 +1,47 @@
+- type: entity
+  id: ERPShibariRope
+  abstract: true
+  name: верёвка шибари
+  description: Эта верёвка была сделана специально для японского искусства связывания. Некоторым нравится и такое.
+  components:
+  - type: Item
+    size: Small
+    storedRotation: 90
+  - type: Handcuff
+    cuffedRSI: _FreakStation/Casha/ERPtoys/cuffs/shibari_white.rsi
+    bodyIconState: body-overlay
+    breakoutTime: 4 # Keep in mind that's a toy
+    uncuffTime: 4 # /\
+  - type: Sprite
+    sprite: _FreakStation/Casha/ERPtoys/cuffs/shibari_white.rsi
+    state: handcuff
+  - type: Tag
+    tags:
+    - Handcuffs
+  - type: MeleeWeapon
+    wideAnimationRotation: 90
+    animation: WeaponArcDisarm
+    damage:
+      types:
+        Blunt: 0
+  - type: UseDelay
+    delay: 4
+  - type: Clickable
+
+- type: entity
+  id: ERPShibariRopeWhite
+  parent: ERPShibariRope
+  components:
+  - type: Handcuff
+    cuffedRSI: _FreakStation/Casha/ERPtoys/cuffs/shibari_white.rsi
+  - type: Sprite
+    sprite: _FreakStation/Casha/ERPtoys/cuffs/shibari_white.rsi
+
+- type: entity
+  id: ERPShibariRopeRed
+  parent: ERPShibariRope
+  components:
+  - type: Handcuff
+    cuffedRSI: _FreakStation/Casha/ERPtoys/cuffs/shibari_red.rsi
+  - type: Sprite
+    sprite: _FreakStation/Casha/ERPtoys/cuffs/shibari_red.rsi

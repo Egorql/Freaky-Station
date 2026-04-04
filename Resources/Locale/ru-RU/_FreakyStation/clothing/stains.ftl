@@ -1,0 +1,10 @@
+clothing-stain-examine-blood-light = На одежде видны пятна крови.
+clothing-stain-examine-blood-heavy = Одежда сильно пропитана кровью.
+clothing-stain-examine-bio-light = На одежде остались биологические следы.
+clothing-stain-examine-bio-heavy = Одежда сильно загрязнена биологическими следами.
+clothing-cleaning-shower-on = Душ включён.
+clothing-cleaning-shower-off = Душ выключен.
+clothing-cleaning-washer-start = Запустить стирку
+clothing-cleaning-washer-running = Стиралка работает
+clothing-cleaning-washer-empty = В стиралке пусто.
+clothing-cleaning-washer-begin = Стиралка начала цикл очистки.

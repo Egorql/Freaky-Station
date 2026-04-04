@@ -5,6 +5,7 @@
 using System.Globalization;
 using System.Numerics;
 using System.Threading;
+using System.Linq; // Added for LINQ support
 using Content.Goobstation.Common.ServerCurrency;
 using Content.Goobstation.Shared.ServerCurrency.UI;
 using Robust.Client.ResourceManagement;
@@ -159,24 +160,35 @@ public sealed class RouletteWindow : DefaultWindow
         UpdateBalanceLabel();
     }
 
-    private List<TextureResource> GetOrLoadSlotTextures()
-    {
-        if (_sharedSlotTextures != null)
-            return _sharedSlotTextures;
-
-        var textures = new List<TextureResource>(SlotTexturePaths.Length);
-        foreach (var path in SlotTexturePaths)
-        {
-            if (_resources.TryGetResource(path, out TextureResource? texture))
-                textures.Add(texture);
-        }
-
-        if (textures.Count == 0)
-            throw new InvalidOperationException("Failed to load roulette slot textures.");
-
-        _sharedSlotTextures = textures;
+private List<TextureResource> GetOrLoadSlotTextures()
+{
+    if (_sharedSlotTextures != null)
         return _sharedSlotTextures;
+
+    var textures = new List<TextureResource>(SlotTexturePaths.Length);
+    foreach (var path in SlotTexturePaths)
+    {
+        if (_resources.TryGetResource(path, out TextureResource? texture))
+            textures.Add(texture);
     }
+
+    // If no slot textures are available, fall back to built-in UI textures.
+    if (textures.Count == 0)
+    {
+        if (_resources.TryGetResource("/Textures/Interface/white.png", out TextureResource? fallbackTexture))
+        {
+            textures = Enumerable.Repeat(fallbackTexture, 8).ToList();
+        }
+        else
+        {
+            var noSpriteTexture = _resources.GetResource<TextureResource>("/Textures/noSprite.png");
+            textures = Enumerable.Repeat(noSpriteTexture, 8).ToList();
+        }
+    }
+
+    _sharedSlotTextures = textures;
+    return _sharedSlotTextures;
+}
 
     private BoxContainer BuildModeRow(IEnumerable<RouletteMode> modes)
     {

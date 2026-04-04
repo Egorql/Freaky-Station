@@ -1,0 +1,21 @@
+- type: entity
+  parent: [BaseItem]
+  id: ERPWhip
+  name: плетка
+  description: Черная плетка для эротических игр в кровати, или просто избить кого нибудь.
+  components:
+  - type: Sprite
+    sprite: _FreakStation/Casha/ERPtoys/whip.rsi
+    state: icon
+    scale: 0.8,0.8
+  - type: Item
+    size: Normal
+    sprite: FreakStation/Casha/ERPtoys/whip.rsi
+  - type: StaminaDamageOnHit
+    damage: 8
+  - type: MeleeWeapon
+    soundHit:
+     path: /Audio/_FreakStation/ERP/whip.ogg
+    damage:
+      types:
+        Blunt: 0
