@@ -3,8 +3,13 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using System.Linq;
+using Content.Goobstation.Maths.FixedPoint;
+using Content.Server.Fluids.EntitySystems;
 using Content.Shared._FreakyStation.Clothing;
+using Content.Shared._Shitmed.Medical.Surgery.Wounds.Components;
 using Content.Shared.Body.Components;
+using Content.Shared.Body.Part;
+using Content.Shared.Body.Systems;
 using Content.Shared.Chemistry;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.Components.SolutionManager;
@@ -14,6 +19,7 @@ using Content.Shared.Clothing.Components;
 using Content.Shared.Examine;
 using Content.Shared.Fluids.Components;
 using Content.Shared.Inventory;
+using Content.Shared.Maps;
 using Content.Shared.Standing;
 using Content.Shared.Weapons.Melee;
 using Content.Shared.Weapons.Melee.Events;
@@ -29,16 +35,20 @@ public sealed class ClothingStainSystem : EntitySystem
 {
     [Dependency] private readonly InventorySystem _inventory = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly EntityLookupSystem _lookup = default!;
     [Dependency] private readonly IPrototypeManager _prototype = default!;
     [Dependency] private readonly SharedSolutionContainerSystem _solutions = default!;
     [Dependency] private readonly StandingStateSystem _standing = default!;
+    [Dependency] private readonly SharedBodySystem _body = default!;
+    [Dependency] private readonly PuddleSystem _puddles = default!;
+    [Dependency] private readonly TurfSystem _turf = default!;
 
     private readonly Dictionary<EntityUid, TimeSpan> _nextBloodStain = new();
     private readonly Dictionary<EntityUid, TimeSpan> _nextShoePuddleStain = new();
     private readonly Dictionary<EntityUid, TimeSpan> _nextBodyPuddleStain = new();
     private readonly Dictionary<EntityUid, EntityCoordinates> _lastCoordinates = new();
-    private static readonly TimeSpan BloodStainInterval = TimeSpan.FromSeconds(1.5);
+    private static readonly FixedPoint2 PassiveBloodStainThreshold = 2f;
+    private static readonly FixedPoint2 BloodPuddleStainThreshold = 20f;
+    private static readonly TimeSpan BloodStainInterval = TimeSpan.FromSeconds(4);
     private static readonly TimeSpan ShoePuddleStainInterval = TimeSpan.FromSeconds(0.5);
     private static readonly TimeSpan BodyPuddleStainInterval = TimeSpan.FromSeconds(1.2);
     private static readonly ProtoId<ReagentPrototype>[] BloodReagents =
@@ -68,6 +78,25 @@ public sealed class ClothingStainSystem : EntitySystem
         "head",
     ];
 
+    private static readonly string[] PassiveBloodDirtySlots =
+    [
+        "jumpsuit",
+        "outerClothing",
+        "breast",
+        "gloves",
+    ];
+
+    private static readonly string[] PassiveHeadBloodDirtySlots =
+    [
+        "mask",
+        "head",
+    ];
+
+    private static readonly string[] PassiveFootBloodDirtySlots =
+    [
+        "shoes",
+    ];
+
     private static readonly string[] DefaultCleaningSlots =
     [
         "underwear",
@@ -86,6 +115,7 @@ public sealed class ClothingStainSystem : EntitySystem
     {
         base.Initialize();
 
+        SubscribeLocalEvent<InventoryComponent, ReactionEntityEvent>(OnInventoryReaction);
         SubscribeLocalEvent<ClothingStainComponent, ReactionEntityEvent>(OnReaction);
         SubscribeLocalEvent<ClothingStainComponent, ExaminedEvent>(OnExamined);
         SubscribeLocalEvent<MeleeWeaponComponent, MeleeHitEvent>(OnMeleeHit);
@@ -99,7 +129,7 @@ public sealed class ClothingStainSystem : EntitySystem
         var query = EntityQueryEnumerator<BloodstreamComponent>();
         while (query.MoveNext(out var uid, out var bloodstream))
         {
-            if (bloodstream.BleedAmount <= 0)
+            if (bloodstream.BleedAmount < PassiveBloodStainThreshold)
             {
                 _nextBloodStain.Remove(uid);
                 continue;
@@ -109,7 +139,7 @@ public sealed class ClothingStainSystem : EntitySystem
                 continue;
 
             _nextBloodStain[uid] = now + BloodStainInterval;
-            ApplyStainsToEquippedClothing(uid, blood: true);
+            ApplyStainsToEquippedClothing(uid, ResolvePassiveBloodSlots(uid), blood: true);
         }
 
         var movers = EntityQueryEnumerator<InventoryComponent, TransformComponent>();
@@ -149,6 +179,14 @@ public sealed class ClothingStainSystem : EntitySystem
                 bodyStain,
                 1);
         }
+    }
+
+    private void OnInventoryReaction(EntityUid uid, InventoryComponent component, ref ReactionEntityEvent args)
+    {
+        if (args.Method != ReactionMethod.Touch || args.Reagent.ID != "SpaceCleaner")
+            return;
+
+        CleanEquippedClothing(uid);
     }
 
     private void OnReaction(Entity<ClothingStainComponent> ent, ref ReactionEntityEvent args)
@@ -337,25 +375,53 @@ public sealed class ClothingStainSystem : EntitySystem
         return Array.Empty<string>();
     }
 
-    private bool TryGetPuddleStainAt(EntityCoordinates coords, out StainData stain)
+    private IReadOnlyList<string> ResolvePassiveBloodSlots(EntityUid wearer)
     {
-        stain = default;
+        var slots = new List<string>(PassiveBloodDirtySlots.Length + PassiveHeadBloodDirtySlots.Length + PassiveFootBloodDirtySlots.Length);
+        slots.AddRange(PassiveBloodDirtySlots);
 
-        foreach (var puddleUid in _lookup.GetEntitiesInRange<PuddleComponent>(coords, 0.2f, LookupFlags.Static | LookupFlags.Sundries))
+        if (!TryComp<BodyComponent>(wearer, out var body))
+            return slots;
+
+        if (HasBleedingPart(wearer, BodyPartType.Head, body))
+            slots.AddRange(PassiveHeadBloodDirtySlots);
+
+        if (HasBleedingPart(wearer, BodyPartType.Foot, body))
+            slots.AddRange(PassiveFootBloodDirtySlots);
+
+        return slots;
+    }
+
+    private bool HasBleedingPart(EntityUid wearer, BodyPartType partType, BodyComponent body)
+    {
+        foreach (var (_, _, woundable) in _body.GetBodyChildrenOfTypeWithComponent<WoundableComponent>(wearer, partType, body))
         {
-            if (!TryComp<PuddleComponent>(puddleUid, out var puddle))
-                continue;
-
-            if (!_solutions.ResolveSolution(puddleUid.Owner, puddle.SolutionName, ref puddle.Solution, out var solution) ||
-                solution.Volume <= 0)
-                continue;
-
-            stain = new StainData(ContainsBlood(solution), GetSolutionLikePuddleColor(solution));
-            if (stain.Color.A > 0)
+            if (woundable.Bleeds > FixedPoint2.Zero)
                 return true;
         }
 
         return false;
+    }
+
+    private bool TryGetPuddleStainAt(EntityCoordinates coords, out StainData stain)
+    {
+        stain = default;
+
+        if (!_turf.TryGetTileRef(coords, out var tileRef) ||
+            !_puddles.TryGetPuddle(tileRef.Value, out var puddleUid) ||
+            !TryComp<PuddleComponent>(puddleUid, out var puddle) ||
+            !_solutions.ResolveSolution(puddleUid, puddle.SolutionName, ref puddle.Solution, out var solution) ||
+            solution.Volume <= 0)
+        {
+            return false;
+        }
+
+        var bloodQuantity = GetBloodQuantity(solution);
+        if (bloodQuantity > 0 && bloodQuantity < BloodPuddleStainThreshold)
+            return false;
+
+        stain = new StainData(bloodQuantity > 0, GetSolutionLikePuddleColor(solution));
+        return stain.Color.A > 0;
     }
 
     private bool TryBlendBloodColors(IReadOnlyList<EntityUid> targets, out Color color)
@@ -393,13 +459,19 @@ public sealed class ClothingStainSystem : EntitySystem
 
     private bool ContainsBlood(Solution solution)
     {
+        return GetBloodQuantity(solution) > 0;
+    }
+
+    private FixedPoint2 GetBloodQuantity(Solution solution)
+    {
+        var total = FixedPoint2.Zero;
+
         foreach (var reagent in BloodReagents)
         {
-            if (solution.GetTotalPrototypeQuantity(reagent) > 0)
-                return true;
+            total += solution.GetTotalPrototypeQuantity(reagent);
         }
 
-        return false;
+        return total;
     }
 
     private Color GetSolutionLikePuddleColor(Solution solution)

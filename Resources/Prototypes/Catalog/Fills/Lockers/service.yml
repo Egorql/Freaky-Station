@@ -137,6 +137,10 @@
     - id: LightReplacer
     - id: BoxLightMixed
     - id: Holoprojector
+    - id: ShowerFreakFlatpack # freak change start
+      amount: 2
+    - id: WashingMachineFreakFlatpack
+      amount: 2 # freak change end
     - !type:AllSelector
       rolls: 2
       children:

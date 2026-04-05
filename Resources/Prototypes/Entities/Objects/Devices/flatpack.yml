@@ -256,6 +256,24 @@
   - type: Flatpack
     entity: SpaceHeaterAnchored
 
+- type: entity # freak change start
+  parent: BaseFlatpack
+  id: ShowerFreakFlatpack
+  name: shower flatpack
+  description: A flatpack used for constructing a shower.
+  components:
+  - type: Flatpack
+    entity: ShowerFreak
+
+- type: entity
+  parent: BaseFlatpack
+  id: WashingMachineFreakFlatpack
+  name: washing machine flatpack
+  description: A flatpack used for constructing a washing machine.
+  components:
+  - type: Flatpack
+    entity: WashingMachineFreak # freak change end
+
 - type: entity
   parent: BaseFlatpack
   id: FaxMachineFlatpack
