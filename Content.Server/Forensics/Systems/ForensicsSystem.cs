@@ -91,6 +91,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Server._EinsteinEngines.Forensics.Components;
+using Content.Server._FreakyStation.Clothing;
 using Content.Server.Body.Components;
 using Content.Server.Body.Systems;
 using Content.Server.DoAfter;
@@ -98,6 +99,7 @@ using Content.Server.Fluids.EntitySystems;
 using Content.Server.Forensics.Components;
 using Content.Server.Popups;
 using Content.Shared.Body.Events;
+using Content.Shared._FreakyStation.Clothing;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Popups;
 using Content.Shared.Chemistry.Components;
@@ -127,6 +129,7 @@ namespace Content.Server.Forensics
         [Dependency] private readonly DoAfterSystem _doAfterSystem = default!;
         [Dependency] private readonly PopupSystem _popupSystem = default!;
         [Dependency] private readonly SharedSolutionContainerSystem _solutionContainerSystem = default!;
+        [Dependency] private readonly ClothingStainSystem _clothingStains = default!;
         [Dependency] private readonly IGameTiming _timing = default!; // Goobstation
 
         public override void Initialize()
@@ -338,16 +341,21 @@ namespace Content.Server.Forensics
         /// <returns>True if the target can be cleaned and has some sort of DNA or fingerprints / fibers and false otherwise.</returns>
         public bool TryStartCleaning(Entity<CleansForensicsComponent> cleanForensicsEntity, EntityUid user, EntityUid target)
         {
-            if (!TryComp<ForensicsComponent>(target, out var forensicsComp))
+            var hasStains = TryComp<ClothingStainComponent>(target, out var stainsComp) &&
+                (stainsComp.BloodLevel > 0 || stainsComp.BioLevel > 0);
+
+            if (!TryComp<ForensicsComponent>(target, out var forensicsComp) && !hasStains)
             {
                 _popupSystem.PopupEntity(Loc.GetString("forensics-cleaning-cannot-clean", ("target", target)), user, user, PopupType.MediumCaution);
                 return false;
             }
 
+            forensicsComp ??= EnsureComp<ForensicsComponent>(target);
+
             var totalPrintsAndFibers = forensicsComp.Fingerprints.Count + forensicsComp.Fibers.Count;
             var hasRemovableDNA = forensicsComp.DNAs.Count > 0 && forensicsComp.CanDnaBeCleaned;
 
-            if (hasRemovableDNA || totalPrintsAndFibers > 0)
+            if (hasRemovableDNA || totalPrintsAndFibers > 0 || hasStains)
             {
                 var cleanDelay = cleanForensicsEntity.Comp.CleanDelay;
                 if (HasComp<ScentComponent>(target)) // EinsteinEngines
@@ -397,6 +405,9 @@ namespace Content.Server.Forensics
 
             if (TryComp<ResidueComponent>(args.Used, out var residue))
                 targetComp.Residues.Add(string.IsNullOrEmpty(residue.ResidueColor) ? Loc.GetString("forensic-residue", ("adjective", residue.ResidueAdjective)) : Loc.GetString("forensic-residue-colored", ("color", residue.ResidueColor), ("adjective", residue.ResidueAdjective)));
+
+            if (args.Target is { Valid: true } stainTarget)
+                _clothingStains.CleanStains(stainTarget);
 
             if (TryComp<ScentComponent>(args.Target, out var scentComp)) // Einstein Engines - Start
             {
