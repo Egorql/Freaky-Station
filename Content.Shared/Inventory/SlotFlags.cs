@@ -24,9 +24,9 @@ public enum SlotFlags
 {
     NONE = 0,
     PREVENTEQUIP = 1 << 0,
-    SOCKSS = 1 << 1,
-    UNDERWEAR = 1 << 2,
-    BREAST = 1 << 3,
+    SOCKSS = 1 << 16,
+    UNDERWEAR = 1 << 17,
+    BREAST = 1 << 18,
     HEAD = 1 << 1,
     EYES = 1 << 2,
     EARS = 1 << 3,
