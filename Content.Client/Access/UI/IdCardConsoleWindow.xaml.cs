@@ -52,6 +52,7 @@ namespace Content.Client.Access.UI
 
         private AccessLevelControl _accessButtons = new();
         private readonly List<string> _jobPrototypeIds = new();
+        private readonly List<ProtoId<AccessLevelPrototype>> _targetAccessList = new();
         private readonly HashSet<ProtoId<AccessLevelPrototype>> _allowedModifyAccess = new();
         private readonly HashSet<ProtoId<AccessLevelPrototype>> _extendedAccessExclusions = new();
 
@@ -136,6 +137,7 @@ namespace Content.Client.Access.UI
             ExtendedAccessButton.Visible = showExtendedAccessButton;
             FullAccessButton.OnPressed += _ => ApplyAccessPreset(fullAccess: true);
             ExtendedAccessButton.OnPressed += _ => ApplyAccessPreset(fullAccess: false);
+            ClearAccessButton.OnPressed += _ => ClearAccessPreset();
 
             foreach (var access in extendedAccessExclusions)
             {
@@ -148,15 +150,90 @@ namespace Content.Client.Access.UI
             }
         }
 
-        private void ClearAllAccess()
+        private HashSet<ProtoId<AccessLevelPrototype>> GetConsoleModifiableAccess()
         {
-            foreach (var button in _accessButtons.ButtonsList.Values)
+            return _allowedModifyAccess
+                .Where(id => _accessButtons.ButtonsList.ContainsKey(id))
+                .ToHashSet();
+        }
+
+        private void ApplyManagedAccessSet(
+            HashSet<ProtoId<AccessLevelPrototype>> modifiableAccess,
+            HashSet<ProtoId<AccessLevelPrototype>> desiredAccess)
+        {
+            var newAccessList = new List<ProtoId<AccessLevelPrototype>>(_targetAccessList.Count);
+            var preservedDesiredAccess = new HashSet<ProtoId<AccessLevelPrototype>>();
+
+            foreach (var id in _targetAccessList)
             {
-                if (button.Pressed)
+                if (!modifiableAccess.Contains(id))
                 {
-                    button.Pressed = false;
+                    newAccessList.Add(id);
+                    continue;
+                }
+
+                if (desiredAccess.Contains(id) && preservedDesiredAccess.Add(id))
+                    newAccessList.Add(id);
+            }
+
+            foreach (var (id, button) in _accessButtons.ButtonsList)
+            {
+                if (!modifiableAccess.Contains(id))
+                    continue;
+
+                var shouldHaveAccess = desiredAccess.Contains(id);
+                button.Pressed = shouldHaveAccess;
+
+                if (shouldHaveAccess && preservedDesiredAccess.Add(id))
+                    newAccessList.Add(id);
+            }
+
+            SubmitData(newAccessList);
+        }
+
+        private HashSet<ProtoId<AccessLevelPrototype>> GetJobAccesses(ProtoId<JobPrototype> jobId)
+        {
+            var jobAccesses = new HashSet<ProtoId<AccessLevelPrototype>>();
+
+            if (!_prototypeManager.TryIndex(jobId, out JobPrototype? job))
+                return jobAccesses;
+
+            foreach (var access in job.Access)
+            {
+                jobAccesses.Add(access);
+            }
+
+            foreach (var group in job.AccessGroups)
+            {
+                if (!_prototypeManager.TryIndex(group, out AccessGroupPrototype? groupPrototype))
+                    continue;
+
+                foreach (var access in groupPrototype.Tags)
+                {
+                    jobAccesses.Add(access);
                 }
             }
+
+            return jobAccesses;
+        }
+
+        private HashSet<ProtoId<AccessLevelPrototype>> GetCurrentCardJobAccesses()
+        {
+            if (_lastJobProto != null && _prototypeManager.HasIndex<JobPrototype>(_lastJobProto))
+                return GetJobAccesses(_lastJobProto);
+
+            if (string.IsNullOrWhiteSpace(_lastJobTitle))
+                return new HashSet<ProtoId<AccessLevelPrototype>>();
+
+            foreach (var job in _prototypeManager.EnumeratePrototypes<JobPrototype>())
+            {
+                if (!string.Equals(job.LocalizedName, _lastJobTitle, StringComparison.CurrentCultureIgnoreCase))
+                    continue;
+
+                return GetJobAccesses(job.ID);
+            }
+
+            return new HashSet<ProtoId<AccessLevelPrototype>>();
         }
 
         private void SelectJobPreset(OptionButton.ItemSelectedEventArgs args)
@@ -180,47 +257,42 @@ namespace Content.Client.Access.UI
             }
 
             JobTitleLineEdit.Text = Loc.GetString(job.Name);
-            var jobAccesses = new HashSet<ProtoId<AccessLevelPrototype>>();
-            foreach (var access in job.Access)
-            {
-                jobAccesses.Add(access);
-            }
+            var jobAccesses = GetJobAccesses(selectedJob);
 
-            foreach (var group in job.AccessGroups)
-            {
-                if (!_prototypeManager.TryIndex(group, out AccessGroupPrototype? groupPrototype))
-                    continue;
-
-                foreach (var access in groupPrototype.Tags)
-                {
-                    jobAccesses.Add(access);
-                }
-            }
-
-            foreach (var (accessId, button) in _accessButtons.ButtonsList)
-            {
-                button.Pressed = !button.Disabled && jobAccesses.Contains(accessId);
-            }
-
-            SubmitData();
+            var modifiableAccess = GetConsoleModifiableAccess();
+            jobAccesses.IntersectWith(modifiableAccess);
+            ApplyManagedAccessSet(modifiableAccess, jobAccesses);
         }
 
         private void ApplyAccessPreset(bool fullAccess)
         {
-            ClearAllAccess();
+            var modifiableAccess = GetConsoleModifiableAccess();
+            if (modifiableAccess.Count == 0)
+                return;
 
-            foreach (var (id, button) in _accessButtons.ButtonsList)
+            var desiredAccess = modifiableAccess.ToHashSet();
+
+            if (!fullAccess)
             {
-                if (button.Disabled || !_allowedModifyAccess.Contains(id))
-                    continue;
+                desiredAccess.ExceptWith(_extendedAccessExclusions);
 
-                if (!fullAccess && _extendedAccessExclusions.Contains(id))
-                    continue;
-
-                button.Pressed = true;
+                var preservedJobAccess = GetCurrentCardJobAccesses();
+                preservedJobAccess.IntersectWith(_targetAccessList);
+                preservedJobAccess.IntersectWith(modifiableAccess);
+                desiredAccess.UnionWith(preservedJobAccess);
             }
 
-            SubmitData();
+            ApplyManagedAccessSet(modifiableAccess, desiredAccess);
+        }
+
+        private void ClearAccessPreset()
+        {
+            var removableAccess = GetConsoleModifiableAccess();
+
+            if (removableAccess.Count == 0)
+                return;
+
+            ApplyManagedAccessSet(removableAccess, new HashSet<ProtoId<AccessLevelPrototype>>());
         }
 
         public void UpdateState(IdCardConsoleBoundUserInterfaceState state)
@@ -264,8 +336,13 @@ namespace Content.Client.Access.UI
             JobPresetOptionButton.Disabled = !interfaceEnabled;
             ApplyJobAccessButton.Disabled = !interfaceEnabled;
 
-            _accessButtons.UpdateState(state.TargetIdAccessList?.ToList() ??
-                                       new List<ProtoId<AccessLevelPrototype>>(),
+            _targetAccessList.Clear();
+            if (state.TargetIdAccessList != null)
+            {
+                _targetAccessList.AddRange(state.TargetIdAccessList);
+            }
+
+            _accessButtons.UpdateState(_targetAccessList,
                                        state.AllowedModifyAccessList?.ToList() ??
                                        new List<ProtoId<AccessLevelPrototype>>());
 
@@ -281,6 +358,7 @@ namespace Content.Client.Access.UI
             var canUsePresetButtons = interfaceEnabled && _allowedModifyAccess.Count > 0;
             FullAccessButton.Disabled = !canUsePresetButtons;
             ExtendedAccessButton.Disabled = !canUsePresetButtons;
+            ClearAccessButton.Disabled = !canUsePresetButtons;
 
             var jobIndex = _jobPrototypeIds.IndexOf(state.TargetIdJobPrototype);
             // If the job index is < 0 that means they don't have a job registered in the station records
@@ -298,7 +376,7 @@ namespace Content.Client.Access.UI
             _lastJobProto = state.TargetIdJobPrototype;
         }
 
-        private void SubmitData()
+        private void SubmitData(List<ProtoId<AccessLevelPrototype>>? accessList = null)
         {
             // Don't send this if it isn't dirty.
             var jobProtoDirty = _lastJobProto != null &&
@@ -307,6 +385,7 @@ namespace Content.Client.Access.UI
             _owner.SubmitData(
                 FullNameLineEdit.Text,
                 JobTitleLineEdit.Text,
+                accessList ??
                 // Iterate over the buttons dictionary, filter by `Pressed`, only get key from the key/value pair
                 _accessButtons.ButtonsList.Where(x => x.Value.Pressed).Select(x => x.Key).ToList(),
                 jobProtoDirty ? _jobPrototypeIds[JobPresetOptionButton.SelectedId] : string.Empty);
