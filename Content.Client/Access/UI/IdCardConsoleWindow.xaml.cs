@@ -217,6 +217,25 @@ namespace Content.Client.Access.UI
             return jobAccesses;
         }
 
+        private HashSet<ProtoId<AccessLevelPrototype>> GetCurrentCardJobAccesses()
+        {
+            if (_lastJobProto != null && _prototypeManager.HasIndex<JobPrototype>(_lastJobProto))
+                return GetJobAccesses(_lastJobProto);
+
+            if (string.IsNullOrWhiteSpace(_lastJobTitle))
+                return new HashSet<ProtoId<AccessLevelPrototype>>();
+
+            foreach (var job in _prototypeManager.EnumeratePrototypes<JobPrototype>())
+            {
+                if (!string.Equals(job.LocalizedName, _lastJobTitle, StringComparison.CurrentCultureIgnoreCase))
+                    continue;
+
+                return GetJobAccesses(job.ID);
+            }
+
+            return new HashSet<ProtoId<AccessLevelPrototype>>();
+        }
+
         private void SelectJobPreset(OptionButton.ItemSelectedEventArgs args)
         {
             args.Button.SelectId(args.Id);
@@ -257,13 +276,10 @@ namespace Content.Client.Access.UI
             {
                 desiredAccess.ExceptWith(_extendedAccessExclusions);
 
-                if (_lastJobProto != null && _prototypeManager.HasIndex<JobPrototype>(_lastJobProto))
-                {
-                    var preservedJobAccess = GetJobAccesses(_lastJobProto);
-                    preservedJobAccess.IntersectWith(_targetAccessList);
-                    preservedJobAccess.IntersectWith(modifiableAccess);
-                    desiredAccess.UnionWith(preservedJobAccess);
-                }
+                var preservedJobAccess = GetCurrentCardJobAccesses();
+                preservedJobAccess.IntersectWith(_targetAccessList);
+                preservedJobAccess.IntersectWith(modifiableAccess);
+                desiredAccess.UnionWith(preservedJobAccess);
             }
 
             ApplyManagedAccessSet(modifiableAccess, desiredAccess);
