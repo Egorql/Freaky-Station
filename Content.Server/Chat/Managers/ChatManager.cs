@@ -181,6 +181,7 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Runtime.InteropServices;
+using System.Threading.Tasks;
 using Content.Server.Administration.Logs;
 using Content.Server.Administration.Managers;
 using Content.Server.Administration.Systems;
@@ -303,7 +304,7 @@ internal sealed partial class ChatManager : IChatManager
         ChatMessageToAll(ChatChannel.Server, message, wrappedMessage, EntityUid.Invalid, hideChat: false, recordReplay: true, colorOverride: colorOverride);
         Logger.InfoS("SERVER", message);
 
-        _adminLogger.Add(LogType.Chat, LogImpact.Low, $"Server announcement: {message}");
+        _adminLogger.Add(LogType.Chat, LogImpact.Low, $"{message}");
     }
 
     public void DispatchServerMessage(ICommonSession player, string message, bool suppressLog = false)
@@ -315,29 +316,33 @@ internal sealed partial class ChatManager : IChatManager
             _adminLogger.Add(LogType.Chat, LogImpact.Low, $"Server message to {player:Player}: {message}");
     }
 
-    public void SendAdminAnnouncement(string message, AdminFlags? flagBlacklist, AdminFlags? flagWhitelist)
+    public void SendAdminAnnouncement(string message, AdminFlags? flagBlacklist = null, AdminFlags? flagWhitelist = null, bool sendToChat = true)
     {
-        var clients = _adminManager.ActiveAdmins.Where(p =>
+        if (sendToChat)
         {
-            var adminData = _adminManager.GetAdminData(p);
+            var clients = _adminManager.ActiveAdmins.Where(p =>
+            {
+                var adminData = _adminManager.GetAdminData(p);
 
-            DebugTools.AssertNotNull(adminData);
+                DebugTools.AssertNotNull(adminData);
 
-            if (adminData == null)
-                return false;
+                if (adminData == null)
+                    return false;
 
-            if (flagBlacklist != null && adminData.HasFlag(flagBlacklist.Value))
-                return false;
+                if (flagBlacklist != null && adminData.HasFlag(flagBlacklist.Value))
+                    return false;
 
-            return flagWhitelist == null || adminData.HasFlag(flagWhitelist.Value);
+                return flagWhitelist == null || adminData.HasFlag(flagWhitelist.Value);
 
-        }).Select(p => p.Channel);
+            }).Select(p => p.Channel);
 
-        var wrappedMessage = Loc.GetString("chat-manager-send-admin-announcement-wrap-message",
-            ("adminChannelName", Loc.GetString("chat-manager-admin-channel-name")), ("message", FormattedMessage.EscapeText(message)));
+            var wrappedMessage = Loc.GetString("chat-manager-send-admin-announcement-wrap-message",
+                ("adminChannelName", Loc.GetString("chat-manager-admin-channel-name")), ("message", FormattedMessage.EscapeText(message)));
 
-        ChatMessageToMany(ChatChannel.Admin, message, wrappedMessage, default, false, true, clients);
-        _adminLogger.Add(LogType.Chat, LogImpact.Low, $"Admin announcement: {message}");
+            ChatMessageToMany(ChatChannel.Admin, message, wrappedMessage, default, false, true, clients);
+            _adminLogger.Add(LogType.Chat, LogImpact.Low, $"{message}");
+        }
+        _ = SendAdminWebhookMessage(message);
     }
 
     public void SendAdminAnnouncementMessage(ICommonSession player, string message, bool suppressLog = true)
@@ -543,27 +548,26 @@ internal sealed partial class ChatManager : IChatManager
         }
 
         _adminLogger.Add(LogType.Chat, $"Admin chat from {player:Player}: {message}");
-        // ADT-Tweak-start: Постит в дис весь админчат, если есть данный вебхук
-        if (!string.IsNullOrEmpty(_configurationManager.GetCVar(CCVars.DiscordAdminchatWebhook)))
+        var senderAdmin = _adminManager.GetAdminData(player);
+        var role = senderAdmin?.Title ?? "Admin";
+        _ = SendAdminWebhookMessage($"{player.Name} [{role}]:\n{message}");
+    }
+
+    private async Task SendAdminWebhookMessage(string message)
+    {
+        var webhookUrl = _configurationManager.GetCVar(CCVars.DiscordAdminchatWebhook);
+        if (string.IsNullOrWhiteSpace(webhookUrl))
+            return;
+
+        if (await _discord.GetWebhook(webhookUrl) is not { } webhookData)
+            return;
+
+        var payload = new WebhookPayload
         {
-            var webhookUrl = _configurationManager.GetCVar(CCVars.DiscordAdminchatWebhook);
+            Content = $"{message}"
+        };
 
-            if (webhookUrl == null)
-                return;
-
-            if (await _discord.GetWebhook(webhookUrl) is not { } webhookData)
-                return;
-
-            var senderAdmin = _adminManager.GetAdminData(player);
-
-            var payload = new WebhookPayload
-            {
-                Content = $"{player.Name} [{(senderAdmin?.Title ?? "Admin")}]:\n{message}" //Reserve edit
-            };
-            var identifier = webhookData.ToIdentifier();
-            await _discord.CreateMessage(identifier, payload);
-        }
-        // ADT-Tweak-end
+        await _discord.CreateMessage(webhookData.ToIdentifier(), payload);
     }
 
     #endregion

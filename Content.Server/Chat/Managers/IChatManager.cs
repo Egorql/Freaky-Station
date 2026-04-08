@@ -125,7 +125,7 @@ namespace Content.Server.Chat.Managers
         void TrySendOOCMessage(ICommonSession player, string message, OOCChatType type);
 
         void SendHookOOC(string sender, string message);
-        void SendAdminAnnouncement(string message, AdminFlags? flagBlacklist = null, AdminFlags? flagWhitelist = null);
+        void SendAdminAnnouncement(string message, AdminFlags? flagBlacklist = null, AdminFlags? flagWhitelist = null, bool sendToChat = true);
         void SendAdminAnnouncementMessage(ICommonSession player, string message, bool suppressLog = true);
 
         void ChatMessageToOne(ChatChannel channel, string message, string wrappedMessage, EntityUid source, bool hideChat,

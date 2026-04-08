@@ -401,14 +401,11 @@ namespace Content.Server.Database
                 loadouts[role.RoleName] = loadout;
             }
 
-            // CorvaxGoob-Revert : DB conflicts
-            // var barkVoice = profile.BarkVoice ?? SharedHumanoidAppearanceSystem.DefaultBarkVoice; // Goob Station - Barks
-
             return new HumanoidCharacterProfile(
                 profile.CharacterName,
                 profile.FlavorText,
                 profile.Species,
-                voice, // CorvaxGoob-TTS
+                voice,
                 profile.Age,
                 sex,
                 gender,
@@ -433,7 +430,6 @@ namespace Content.Server.Database
                 profile.OOCNotes,
                 profile.HeadshotUrl,
                 bark
-                // barkVoice // Goob Station - Barks // CorvaxGoob-Revert : DB conflicts
             );
         }
 
@@ -441,17 +437,12 @@ namespace Content.Server.Database
         {
             profile ??= new Profile();
             var appearance = (HumanoidCharacterAppearance) humanoid.CharacterAppearance;
-            List<string> markingStrings = new();
-            foreach (var marking in appearance.Markings)
-            {
-                markingStrings.Add(marking.ToString());
-            }
-            var markings = JsonSerializer.SerializeToDocument(markingStrings);
+            var markings = JsonSerializer.SerializeToDocument(appearance.Markings);
 
             profile.CharacterName = humanoid.Name;
             profile.FlavorText = humanoid.FlavorText;
             profile.Species = humanoid.Species;
-            profile.Voice = humanoid.Voice; // CorvaxGoob-TTS
+            profile.Voice = humanoid.Voice;
             profile.Age = humanoid.Age;
             profile.Sex = humanoid.Sex.ToString();
             profile.Gender = humanoid.Gender.ToString();
@@ -465,58 +456,53 @@ namespace Content.Server.Database
             profile.Markings = markings;
             profile.Slot = slot;
             profile.PreferenceUnavailable = (DbPreferenceUnavailableMode) humanoid.PreferenceUnavailable;
+            profile.HeadshotUrl = humanoid.HeadshotUrl;
+            profile.OOCNotes = humanoid.OOCNotes ?? string.Empty; // Добавлено: установка OOC заметок
 
+            // Очищаем существующие коллекции
             profile.Jobs.Clear();
-            profile.Jobs.AddRange(
-                humanoid.JobPriorities
-                    .Where(j => j.Value != JobPriority.Never)
-                    .Select(j => new Job { JobName = j.Key, Priority = (DbJobPriority) j.Value })
-            );
-
             profile.Antags.Clear();
-            profile.Antags.AddRange(
-                humanoid.AntagPreferences
-                    .Select(a => new Antag { AntagName = a })
-            );
-
             profile.Traits.Clear();
-            profile.Traits.AddRange(
-                humanoid.TraitPreferences
-                        .Select(t => new Trait { TraitName = t })
-            );
-
-            // CorvaxGoob-Revert : DB conflicts
-            // profile.BarkVoice = humanoid.BarkVoice; // Goob Station - Barks
-
             profile.Loadouts.Clear();
 
-            foreach (var (role, loadouts) in humanoid.Loadouts)
+            // Добавляем новые значения
+            foreach (var job in humanoid.JobPriorities.Where(j => j.Value != JobPriority.Never))
             {
-                var dz = new ProfileRoleLoadout()
+                profile.Jobs.Add(new Job { JobName = job.Key, Priority = (DbJobPriority) job.Value });
+            }
+
+            foreach (var antag in humanoid.AntagPreferences)
+            {
+                profile.Antags.Add(new Antag { AntagName = antag });
+            }
+
+            foreach (var trait in humanoid.TraitPreferences)
+            {
+                profile.Traits.Add(new Trait { TraitName = trait });
+            }
+
+            // Обработка Loadouts
+            foreach (var roleLoadout in humanoid.Loadouts)
+            {
+                var profileRoleLoadout = new ProfileRoleLoadout
                 {
-                    RoleName = role,
-                    EntityName = loadouts.EntityName ?? string.Empty,
+                    RoleName = roleLoadout.Key,
+                    EntityName = roleLoadout.Value.EntityName ?? string.Empty,
+                    Groups = new List<ProfileLoadoutGroup>()
                 };
 
-                foreach (var (group, groupLoadouts) in loadouts.SelectedLoadouts)
+                foreach (var groupLoadout in roleLoadout.Value.SelectedLoadouts)
                 {
-                    var profileGroup = new ProfileLoadoutGroup()
+                    var group = new ProfileLoadoutGroup
                     {
-                        GroupName = group,
+                        GroupName = groupLoadout.Key,
+                        Loadouts = groupLoadout.Value.Select(l => new ProfileLoadout { LoadoutName = l.Prototype }).ToList()
                     };
 
-                    foreach (var loadout in groupLoadouts)
-                    {
-                        profileGroup.Loadouts.Add(new ProfileLoadout()
-                        {
-                            LoadoutName = loadout.Prototype,
-                        });
-                    }
-
-                    dz.Groups.Add(profileGroup);
+                    profileRoleLoadout.Groups.Add(group);
                 }
 
-                profile.Loadouts.Add(dz);
+                profile.Loadouts.Add(profileRoleLoadout);
             }
 
             return profile;
@@ -2200,4 +2186,3 @@ INSERT INTO player_round (players_id, rounds_id) VALUES ({players[player]}, {id}
         }
     }
 }
-

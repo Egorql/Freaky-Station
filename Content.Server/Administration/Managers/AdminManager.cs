@@ -114,7 +114,7 @@ namespace Content.Server.Administration.Managers
                 return;
             }
 
-            _chat.SendAdminAnnouncement(Loc.GetString("admin-manager-self-de-admin-message", ("exAdminName", session.Name)));
+            _chat.SendAdminAnnouncement(Loc.GetString("admin-manager-self-de-admin-message", ("exAdminName", session.Name)), sendToChat: false);
             _chat.DispatchServerMessage(session, Loc.GetString("admin-manager-became-normal-player-message"));
 
             UpdateDatabaseDeadminnedState(session, true);
@@ -122,22 +122,6 @@ namespace Content.Server.Administration.Managers
 
             SendPermsChangedEvent(session);
             UpdateAdminStatus(session);
-            // ADT-Tweak-start: Постит сообщение в чат при деадмине
-            if (!string.IsNullOrEmpty(_cfg.GetCVar(CCVars.DiscordAdminchatWebhook)))
-            {
-                var webhookUrl = _cfg.GetCVar(CCVars.DiscordAdminchatWebhook);
-                if (webhookUrl == null)
-                    return;
-                if (await _discord.GetWebhook(webhookUrl) is not { } webhookData)
-                    return;
-                var payload = new WebhookPayload
-                {
-                    Content = $"{session.Name} **снял** с себя админ-права."
-                };
-                var identifier = webhookData.ToIdentifier();
-                await _discord.CreateMessage(identifier, payload);
-            }
-            // ADT-Tweak-end
         }
 
         private async void UpdateDatabaseDeadminnedState(ICommonSession player, bool newState)
@@ -247,7 +231,7 @@ namespace Content.Server.Administration.Managers
             {
                 // No longer admin.
                 _admins.Remove(player);
-                _chat.DispatchServerMessage(player, Loc.GetString("admin-manager-no-longer-admin-message"));
+                _chat.SendAdminAnnouncement(Loc.GetString("admin-manager-no-longer-admin-message"));
             }
             else
             {
@@ -262,7 +246,7 @@ namespace Content.Server.Administration.Managers
                         RankId = rankId
                     };
                     _admins.Add(player, reg);
-                    _chat.DispatchServerMessage(player, Loc.GetString("admin-manager-became-admin-message"));
+                    _chat.SendAdminAnnouncement(Loc.GetString("admin-manager-became-admin-message"));
                 }
                 else
                 {
@@ -275,7 +259,7 @@ namespace Content.Server.Administration.Managers
                     {
                         aData.Active = true;
 
-                        _chat.DispatchServerMessage(player, Loc.GetString("admin-manager-admin-permissions-updated-message"));
+                        _chat.SendAdminAnnouncement(Loc.GetString("admin-manager-admin-permissions-updated-message"));
                     }
                 }
 
@@ -405,40 +389,13 @@ namespace Content.Server.Administration.Managers
             }
             else if (e.NewStatus == SessionStatus.Disconnected)
             {
-                if (_admins.Remove(e.Session, out var reg) && _cfg.GetCVar(CCVars.AdminAnnounceLogout))
+                if (_admins.Remove(e.Session, out var reg))
                 {
-                    if (reg.Data.Stealth)
-                    {
-                        _chat.SendAdminAnnouncement(Loc.GetString("admin-manager-admin-logout-message",
-                            ("name", e.Session.Name)), flagWhitelist: AdminFlags.Stealth);
-
-                    }
-                    else
-                    {
-                        _chat.SendAdminAnnouncement(Loc.GetString("admin-manager-admin-logout-message",
-                            ("name", e.Session.Name)));
-                    }
+                    _chat.SendAdminAnnouncement(Loc.GetString("admin-manager-admin-logout-message",
+                        ("name", e.Session.Name)));
                 }
             }
         }
-        // ADT-Tweak-start: Кидает инфу в дис если админ вышел из игры
-        private async Task DisconnectedAdminMaybe(ICommonSession session)
-        {
-            if (!string.IsNullOrEmpty(_cfg.GetCVar(CCVars.DiscordAdminchatWebhook)))
-            {
-                var webhookUrl = _cfg.GetCVar(CCVars.DiscordAdminchatWebhook);
-                var senderName = session.Name;
-                if (await _discord.GetWebhook(webhookUrl) is not { } webhookData)
-                    return;
-                var payload = new WebhookPayload
-                {
-                    Content = $"Фрик **вышел**: {senderName}"
-                };
-                var identifier = webhookData.ToIdentifier();
-                await _discord.CreateMessage(identifier, payload);
-            }
-        }
-        // ADT-Tweak-end
 
         private async Task LoginAdminMaybe(ICommonSession session)
         {
@@ -464,41 +421,8 @@ namespace Content.Server.Administration.Managers
 
             if (reg.Data.Active)
             {
-                if (_cfg.GetCVar(CCVars.AdminAnnounceLogin))
-                {
-                    if (reg.Data.Stealth)
-                    {
-
-                        _chat.DispatchServerMessage(session, Loc.GetString("admin-manager-stealthed-message"));
-                        _chat.SendAdminAnnouncement(Loc.GetString("admin-manager-admin-login-message",
-                            ("name", session.Name)), flagWhitelist: AdminFlags.Stealth);
-                    }
-                    else
-                    {
-                        _chat.SendAdminAnnouncement(Loc.GetString("admin-manager-admin-login-message",
-                            ("name", session.Name)));
-                        // ADT-Tweak-start: Кидает инфу в дис если админ зашёл
-                        if (!string.IsNullOrEmpty(_cfg.GetCVar(CCVars.DiscordAdminchatWebhook)))
-                        {
-                            var webhookUrl = _cfg.GetCVar(CCVars.DiscordAdminchatWebhook);
-                            var senderAdmin = GetAdminData(session);
-                            if (senderAdmin == null)
-                                return;
-                            var senderName = session.Name;
-                            if (!string.IsNullOrEmpty(senderAdmin.Title))
-                                senderName += $" \\[{senderAdmin.Title}\\]";
-                            if (await _discord.GetWebhook(webhookUrl) is not { } webhookData)
-                                return;
-                            var payload = new WebhookPayload
-                            {
-                                Content = $"Фрик **зашёл**: {senderName}"
-                            };
-                            var identifier = webhookData.ToIdentifier();
-                            await _discord.CreateMessage(identifier, payload);
-                        }
-                        // ADT-Tweak-end
-                    }
-                }
+                _chat.SendAdminAnnouncement(Loc.GetString("admin-manager-admin-login-message",
+                    ("name", session.Name)));
 
                 SendPermsChangedEvent(session);
             }

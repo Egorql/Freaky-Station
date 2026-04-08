@@ -4,14 +4,16 @@
 
 using System.Globalization;
 using System.Numerics;
+using System.Linq;
 using System.Threading;
-using System.Linq; // Added for LINQ support
 using Content.Goobstation.Common.ServerCurrency;
 using Content.Goobstation.Shared.ServerCurrency.UI;
+using Robust.Client.Graphics;
 using Robust.Client.ResourceManagement;
 using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
 using Robust.Client.UserInterface.CustomControls;
+using Robust.Shared.Graphics.RSI;
 using Robust.Shared.Utility;
 using Timer = Robust.Shared.Timing.Timer;
 
@@ -20,16 +22,16 @@ namespace Content.Goobstation.Client.ServerCurrency.UI;
 public sealed class RouletteWindow : DefaultWindow
 {
     private const int MinBet = 10;
-    private static readonly ResPath[] SlotTexturePaths =
+    private static readonly (ResPath RsiPath, string StateId)[] SlotSprites =
     {
-        new("/Textures/Clothing/Head/Misc/fancycrown.rsi/icon.png"),
-        new("/Textures/Objects/Misc/coins.rsi/coin_gold.png"),
-        new("/Textures/Objects/Misc/coins.rsi/coin_diamond.png"),
-        new("/Textures/_Goobstation/Objects/Specific/Hydroponics/cherry.rsi/produce.png"),
-        new("/Textures/Structures/Wallmounts/signs.rsi/seven.png"),
-        new("/Textures/Objects/Misc/coins.rsi/coin_iron.png"),
-        new("/Textures/Objects/Misc/coins.rsi/coin_silver.png"),
-        new("/Textures/Objects/Misc/books.rsi/icon_skull.png"),
+        (new("/Textures/Clothing/Head/Misc/fancycrown.rsi"), "icon"),
+        (new("/Textures/Objects/Misc/coins.rsi"), "coin_gold"),
+        (new("/Textures/Objects/Misc/coins.rsi"), "coin_diamond"),
+        (new("/Textures/_Goobstation/Objects/Specific/Hydroponics/cherry.rsi"), "produce"),
+        (new("/Textures/Structures/Wallmounts/signs.rsi"), "seven"),
+        (new("/Textures/Objects/Misc/coins.rsi"), "coin_iron"),
+        (new("/Textures/Objects/Misc/coins.rsi"), "coin_silver"),
+        (new("/Textures/Objects/Misc/books.rsi"), "icon_skull"),
     };
 
     [Dependency] private readonly ICommonCurrencyManager _currency = default!;
@@ -47,10 +49,10 @@ public sealed class RouletteWindow : DefaultWindow
     private readonly Label _modeLabel;
     private readonly CheckBox _fastSpinCheck;
 
-    private static List<TextureResource>? _sharedSlotTextures;
+    private static List<Texture>? _sharedSlotTextures;
 
     private readonly Dictionary<RouletteMode, Button> _modeButtons = new();
-    private readonly List<TextureResource> _slotTextures;
+    private readonly List<Texture> _slotTextures;
     private RouletteMode _selectedMode = RouletteMode.X2;
 
     private bool _isSpinning;
@@ -160,35 +162,40 @@ public sealed class RouletteWindow : DefaultWindow
         UpdateBalanceLabel();
     }
 
-private List<TextureResource> GetOrLoadSlotTextures()
-{
-    if (_sharedSlotTextures != null)
+    private List<Texture> GetOrLoadSlotTextures()
+    {
+        if (_sharedSlotTextures != null)
+            return _sharedSlotTextures;
+
+        var textures = new List<Texture>(SlotSprites.Length);
+        foreach (var (rsiPath, stateId) in SlotSprites)
+        {
+            if (!_resources.TryGetResource(rsiPath, out RSIResource? rsiResource))
+                continue;
+
+            if (!rsiResource.RSI.TryGetState(stateId, out var state))
+                continue;
+
+            textures.Add(state.GetFrame(RsiDirection.South, 0));
+        }
+
+        // If no slot textures are available, fall back to built-in UI textures.
+        if (textures.Count == 0)
+        {
+            if (_resources.TryGetResource("/Textures/Interface/white.png", out TextureResource? fallbackTexture))
+            {
+                textures = Enumerable.Repeat<Texture>(fallbackTexture, 8).ToList();
+            }
+            else
+            {
+                var noSpriteTexture = _resources.GetResource<TextureResource>("/Textures/noSprite.png");
+                textures = Enumerable.Repeat<Texture>(noSpriteTexture, 8).ToList();
+            }
+        }
+
+        _sharedSlotTextures = textures;
         return _sharedSlotTextures;
-
-    var textures = new List<TextureResource>(SlotTexturePaths.Length);
-    foreach (var path in SlotTexturePaths)
-    {
-        if (_resources.TryGetResource(path, out TextureResource? texture))
-            textures.Add(texture);
     }
-
-    // If no slot textures are available, fall back to built-in UI textures.
-    if (textures.Count == 0)
-    {
-        if (_resources.TryGetResource("/Textures/Interface/white.png", out TextureResource? fallbackTexture))
-        {
-            textures = Enumerable.Repeat(fallbackTexture, 8).ToList();
-        }
-        else
-        {
-            var noSpriteTexture = _resources.GetResource<TextureResource>("/Textures/noSprite.png");
-            textures = Enumerable.Repeat(noSpriteTexture, 8).ToList();
-        }
-    }
-
-    _sharedSlotTextures = textures;
-    return _sharedSlotTextures;
-}
 
     private BoxContainer BuildModeRow(IEnumerable<RouletteMode> modes)
     {
