@@ -14,7 +14,6 @@ spawner-loadout-centcomm-soo = Офицер спецопераций
 construction-graph-tag-typan-ripley-central-control-module = Центральный модуль управления Ripley Тайпана
 construction-graph-tag-typan-ripley-peripherals-control-module = Модуль периферийного управления Ripley Тайпана
 construction-recipe-mining-window-diagonal = диагональное шахтёрское окно
-construction-recipe-shuttle-window-diagonal = диагональное шаттловое окно
 lathe-category-shuttle = Шаттлы
 lathe-category-plastic = Пластик
 lathe-category-circuits = Схемы

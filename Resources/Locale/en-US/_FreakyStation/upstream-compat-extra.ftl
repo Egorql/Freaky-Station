@@ -14,7 +14,6 @@ spawner-loadout-centcomm-soo = Special operations officer
 construction-graph-tag-typan-ripley-central-control-module = Typan Ripley central control module
 construction-graph-tag-typan-ripley-peripherals-control-module = Typan Ripley peripherals control module
 construction-recipe-mining-window-diagonal = diagonal mining window
-construction-recipe-shuttle-window-diagonal = diagonal shuttle window
 lathe-category-shuttle = Shuttle
 lathe-category-plastic = Plastic
 lathe-category-circuits = Circuits

@@ -6,7 +6,7 @@
   description: Ключ карта 0 уровня доступа
   components:
   - type: Sprite
-    sprite: _mini/Objects/Misc/lvl-0.rsi
+    sprite: _Mini/Objects/Misc/lvl-0.rsi
     layers:
     - state: icon
   - type: Access
@@ -72,7 +72,7 @@
   description: Ключ карта 3+ уровня доступа
   components:
   - type: Sprite
-    sprite: _Mini/Objects/Misc/lvl-3+.rsi
+    sprite: _Mini/Objects/Misc/lvl-3plus.rsi
     layers:
     - state: icon
   - type: Access
@@ -91,7 +91,7 @@
   description: Ключ карта 3+ уровня доступа
   components:
   - type: Sprite
-    sprite: _Mini/Objects/Misc/lvl-3+.rsi
+    sprite: _Mini/Objects/Misc/lvl-3plus.rsi
     layers:
     - state: icon
   - type: Access
