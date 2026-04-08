@@ -19,6 +19,7 @@
   id: CentralCommandOfficial
   parent: EventHumanoidERT
   components:
+    - type: IgnoreSkills
     - type: GhostRole
       name: ghost-role-information-centcom-official-name
       description: ghost-role-information-centcom-official-description
@@ -56,9 +57,14 @@
     shoes: ClothingShoesBootsLaceup
     mask: ClothingMaskGasCentcom
     id: CentcomPDA
+    pocket1: WeaponDisablerAdvanced
   storage:
     back:
     - DoorRemoteAll
+    - HandheldFaxOfficial
+    - MedkitCombatFilled
+    - CentCommFlippo
+    - BoxSurvivalSlotsEngineering
 
 - type: roleLoadout
   id: JobCentralCommandOfficial

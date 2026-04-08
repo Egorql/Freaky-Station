@@ -913,12 +913,17 @@ public sealed partial class ServerApi : IPostInjectInit
                 return;
             }
 
-            var lastServerBan = await _dbManager.GetLastServerBanAsync();
-            var newServerBanId = lastServerBan is not null ? lastServerBan.Id + 1 : 1;
-
             try
             {
-                _bans.CreateServerBan(targetUid, target, adminUserId, null, targetHWid, minutes, severity, reason);
+                var createBanInfo = new CreateServerBanInfo(reason);
+                createBanInfo.WithBanningAdmin(adminUserId);
+                createBanInfo.AddUser(targetUid, target);
+                createBanInfo.AddHWId(targetHWid);
+                if (minutes > 0)
+                    createBanInfo.WithMinutes(minutes);
+                createBanInfo.WithSeverity(severity);
+
+                _bans.CreateServerBan(createBanInfo);
             }
             catch (Exception ex)
             {
@@ -928,12 +933,12 @@ public sealed partial class ServerApi : IPostInjectInit
 
             var banInfo = new BanInfo
             {
-                BanId = newServerBanId.ToString()!,
+                BanId = string.Empty,
                 Target = target,
                 AdminName = adminName,
                 Minutes = minutes,
                 Reason = reason,
-                Expires = DateTimeOffset.Now + TimeSpan.FromMinutes(minutes)
+                Expires = minutes > 0 ? DateTimeOffset.Now + TimeSpan.FromMinutes(minutes) : null
             };
 
             await _discordBanInfoSender.SendBanInfoAsync<ServerBanPayloadGenerator>(banInfo);

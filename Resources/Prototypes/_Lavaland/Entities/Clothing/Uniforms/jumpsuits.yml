@@ -1,0 +1,10 @@
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpsuitShaftMiner
+  name: шахтёрский комбинезон
+  description: Прочный комбинезон, предназначенный для работы в шахтах Лаваленда.
+  components:
+  - type: Sprite
+    sprite: _Goobstation/Clothing/Uniforms/Other/Overalls/Cargo/shaft_miner.rsi
+  - type: Clothing
+    sprite: _Goobstation/Clothing/Uniforms/Other/Overalls/Cargo/shaft_miner.rsi

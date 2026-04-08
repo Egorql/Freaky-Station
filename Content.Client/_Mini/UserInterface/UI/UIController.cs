@@ -12,7 +12,7 @@
 
 //     private DonateShopWindow? _donateShopWindow;
 
-//     private MenuButton? DonateButton => UIManager.GetActiveUIWidgetOrNull<GameTopMenuBar>()?.DonateButton;
+//     // private MenuButton? DonateButton => UIManager.GetActiveUIWidgetOrNull<GameTopMenuBar>()?.DonateButton;
 
 //     public void UnloadButton()
 //     {

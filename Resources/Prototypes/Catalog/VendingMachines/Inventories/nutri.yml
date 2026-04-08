@@ -44,9 +44,7 @@
     Bucket: 3
     BoxMouthSwab: 1
     BoxAgrichem: 1
-    # ADT tweak Start
     ADTBotanicalSeedDNADisk: 10
-    # ADT tweak End
   contrabandInventory:
     ChemistryBottleUnstableMutagen: 1
     Chainsaw: 1 #Goob

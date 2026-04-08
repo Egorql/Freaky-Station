@@ -42,8 +42,7 @@ using Content.Client.Changelog;
 using Content.Client._RMC14.LinkAccount; CorvaxGoob-Coins
 using Content.Client.Stylesheets;
 CorvaxGoob-Coins-end */
-using Content.Client.Stylesheets; // ADT ROADMAP TWEAK
-using Content.Client.ADT.Roadmap; // ADT ROADMAP TWEAK
+using Content.Client.Stylesheets;
 using Content.Client.Changelog;
 using Content.Client.UserInterface.Systems.EscapeMenu;
 using Content.Client.UserInterface.Systems.Guidebook;
@@ -105,15 +104,15 @@ namespace Content.Client.Info
             changelogButton.OnPressed += args => UserInterfaceManager.GetUIController<ChangelogUIController>().ToggleWindow();
             buttons.AddChild(changelogButton);
 
-            // ADT ROADMAP TWEAK
-            var roadmapButton = new Button
-            {
-                Text = Loc.GetString("roadmap-name"),
-                StyleClasses = { StyleBase.ButtonCaution }
-            };
-            roadmapButton.OnPressed += _ => UserInterfaceManager.GetUIController<RoadmapUIController>().ToggleRoadmap();
-            buttons.AddChild(roadmapButton);
-            // ADT ROADMAP TWEAK
+            // // ADT ROADMAP TWEAK
+            // var roadmapButton = new Button
+            // {
+            //     Text = Loc.GetString("roadmap-name"),
+            //     StyleClasses = { StyleBase.ButtonCaution }
+            // };
+            // roadmapButton.OnPressed += _ => UserInterfaceManager.GetUIController<RoadmapUIController>().ToggleRoadmap();
+            // buttons.AddChild(roadmapButton);
+            // // ADT ROADMAP TWEAK
 
             void AddInfoButton(string loc, CVarDef<string> cVar)
             {

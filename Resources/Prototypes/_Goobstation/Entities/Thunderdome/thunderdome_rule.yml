@@ -21,6 +21,21 @@
           description: thunderdome-desc-smg
           category: thunderdome-category-smgs
           sprite: WeaponSubMachineGunDrozd
+        - gear: ThunderdomeSmg2
+          name: thunderdome-loadout-smg2
+          description: thunderdome-desc-smg2
+          category: thunderdome-category-smgs
+          sprite: WeaponSubMachineGunC20r
+        - gear: ThunderdomeSmg3
+          name: thunderdome-loadout-smg3
+          description: thunderdome-desc-smg3
+          category: thunderdome-category-smgs
+          sprite: WeaponRifleWSPR
+        - gear: ThunderdomeEstoc
+          name: thunderdome-loadout-estoc
+          description: thunderdome-desc-estoc
+          category: thunderdome-category-rifles
+          sprite: WeaponRifleEstoc
         - gear: ThunderdomeWt550
           name: thunderdome-loadout-wt550
           description: thunderdome-desc-wt550
@@ -46,11 +61,11 @@
           description: thunderdome-desc-inspector
           category: thunderdome-category-revolvers
           sprite: WeaponRevolverInspector
-#        - gear: ThunderdomeHristov
-#          name: thunderdome-loadout-hristov
-#          description: thunderdome-desc-hristov
-#          category: thunderdome-category-snipers
-#          sprite: WeaponSniperHristov
+        - gear: ThunderdomeHristov
+          name: thunderdome-loadout-hristov
+          description: thunderdome-desc-hristov
+          category: thunderdome-category-snipers
+          sprite: WeaponSniperHristov
         - gear: ThunderdomeEsword
           name: thunderdome-loadout-esword
           description: thunderdome-desc-esword

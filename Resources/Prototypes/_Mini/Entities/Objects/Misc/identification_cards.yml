@@ -17,7 +17,8 @@
     - TypanMaint
     - SyndicateAgent
     - TypanExternal
-
+  - type: IdCard
+    jobIcon: JobIconTypanCargotech
 
 - type: entity
   parent: IDCardStandard
@@ -26,9 +27,9 @@
   suffix: Тайпан
   components:
   - type: Sprite
-    sprite: _Mini/Objects/Misc/typansec.rsi
+    sprite: _Mini/Objects/Misc/typanotk.rsi
     layers:
-    - state: typancardcom
+    - state: typancardotk
   - type: Access
     tags:
     - TypanArmory
@@ -47,6 +48,8 @@
     - TypanVault
     - TypanExternal
     - NuclearOperative
+  - type: IdCard
+    jobIcon: JobIconSyndicateFormal
 
 - type: entity
   parent: IDCardStandard
@@ -64,6 +67,8 @@
     - TypanAtmospherics
     - TypanMaint
     - SyndicateAgent
+  - type: IdCard
+    jobIcon: JobIconSyndicateAtmos
 
 - type: entity
   parent: IDCardStandard
@@ -80,6 +85,8 @@
     - TypanMedical
     - SyndicateAgent
     - TypanMaint
+  - type: IdCard
+    jobIcon: JobIconSyndicateParamedic
 
 - type: entity
   parent: IDCardStandard
@@ -128,6 +135,8 @@
     - TypanExternal
     - TypanEngineering
     - TypanMaint
+  - type: IdCard
+    jobIcon: JobIconSyndicateRD
 
 - type: entity
   parent: IDCardStandard
@@ -146,6 +155,8 @@
     - TypanScience
     - SyndicateAgent
     - TypanMaint
+  - type: IdCard
+    jobIcon: JobIconSyndicateScience
 
 - type: entity
   parent: IDCardStandard
@@ -163,6 +174,8 @@
     tags:
     - TypanService
     - SyndicateAgent
+  - type: IdCard
+    jobIcon: JobIconTypanBotanist
 
 - type: entity
   parent: IDCardStandard
@@ -181,6 +194,8 @@
     - TypanService
     - SyndicateAgent
     - TypanMaint
+  - type: IdCard
+    jobIcon: JobIconTypanChef
 
 - type: entity
   parent: IDCardStandard
@@ -205,6 +220,8 @@
     - TypanVault
     - TypanExternal
     - SyndicateAgent
+  - type: IdCard
+    jobIcon: JobIconSyndicateOfficer
 
 - type: entity
   parent: Emag

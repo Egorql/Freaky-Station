@@ -47,13 +47,23 @@ public sealed partial class SlimeLatchSystem : EntitySystem
 
         SubscribeLocalEvent<SlimeLatchEvent>(OnLatchAttempt);
         SubscribeLocalEvent<SlimeComponent, SlimeLatchDoAfterEvent>(OnSlimeLatchDoAfter);
-
+        SubscribeLocalEvent<SlimeComponent, EntRemovedFromContainerMessage>(OnEntityEscape);
+        SubscribeLocalEvent<SlimeComponent, EntInsertedIntoContainerMessage>(OnSlimeContained);
         SubscribeLocalEvent<SlimeDamageOvertimeComponent, MobStateChangedEvent>(OnMobStateChangedSOD);
         SubscribeLocalEvent<SlimeComponent, MobStateChangedEvent>(OnMobStateChangedSlime);
         SubscribeLocalEvent<SlimeComponent, PullAttemptEvent>(OnPullAttempt);
         SubscribeLocalEvent<SlimeComponent, EntGotRemovedFromContainerMessage>(OnEntGotRemovedFromContainer);
         SubscribeLocalEvent<SlimeComponent, EntGotInsertedIntoContainerMessage>(OnEntGotInsertedIntoContainer);
         SubscribeLocalEvent<SlimeComponent, SlimeMitosisEvent>(OnSlimeMitosis);
+    }
+
+    private void OnSlimeContained(Entity<SlimeComponent> ent, ref EntInsertedIntoContainerMessage args)
+    {
+        if (!HasComp<XenoVacuumTankComponent>(args.Container.Owner))
+            return;
+
+        if (IsLatched(ent))
+            Unlatch(ent);
     }
 
     public override void Update(float frameTime)
@@ -122,7 +132,6 @@ public sealed partial class SlimeLatchSystem : EntitySystem
     {
         Unlatch(ent);
     }
-
     private void OnLatchAttempt(SlimeLatchEvent args)
     {
         if (TerminatingOrDeleted(args.Target)
@@ -194,6 +203,16 @@ public sealed partial class SlimeLatchSystem : EntitySystem
         args.Handled = true;
     }
 
+    private void OnEntityEscape(Entity<SlimeComponent> ent, ref EntRemovedFromContainerMessage args)
+    {
+        if (!HasComp<SlimeDamageOvertimeComponent>(args.Entity))
+            return;
+
+        RemCompDeferred<SlimeDamageOvertimeComponent>(args.Entity);
+        RemCompDeferred<BeingLatchedComponent>(args.Entity);
+        ent.Comp.LatchedTarget = null;
+    }
+
     #region Helpers
 
     public bool IsLatched(Entity<SlimeComponent> ent)
@@ -220,8 +239,7 @@ public sealed partial class SlimeLatchSystem : EntitySystem
 
     public void Latch(Entity<SlimeComponent> ent, EntityUid target)
     {
-        if (IsLatched(ent))
-            Unlatch(ent);
+        RemCompDeferred<BeingLatchedComponent>(target);
 
         _xform.SetCoordinates(ent, Transform(target).Coordinates);
         _xform.SetParent(ent, target);
@@ -232,6 +250,9 @@ public sealed partial class SlimeLatchSystem : EntitySystem
 
         EnsureComp(target, out SlimeDamageOvertimeComponent comp);
         comp.SourceEntityUid = ent;
+
+        RemComp<PullableComponent>(ent);
+        RemComp<PullerComponent>(ent); // crutches
 
         _audio.PlayEntity(ent.Comp.EatSound, ent, ent);
         _popup.PopupEntity(Loc.GetString("slime-action-latch-success", ("slime", ent), ("target", target)), ent, PopupType.SmallCaution);
@@ -253,10 +274,12 @@ public sealed partial class SlimeLatchSystem : EntitySystem
         RemCompDeferred<BeingLatchedComponent>(target);
         RemCompDeferred<SlimeDamageOvertimeComponent>(target);
 
+        EnsureComp<PullableComponent>(ent);
+        EnsureComp<PullerComponent>(ent); // on top of crutches
+
         if (TryComp<TransformComponent>(target, out var targetXform)
             && _xform.IsParentOf(targetXform, ent.Owner))
             _xform.SetParent(ent.Owner, _xform.GetParentUid(target));
-
         if (TryComp<InputMoverComponent>(ent, out var inpm))
             inpm.CanMove = true;
 

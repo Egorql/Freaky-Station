@@ -1045,6 +1045,7 @@
   - JackBoots
   - BlackCowboyBoots
   - SnowjacksBso
+  - ClothingShoesSwatBoots # corvaxgoob
 
 - type: loadoutGroup
   id: BlueshieldOfficerEnvirohelm

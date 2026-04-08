@@ -1,3 +1,4 @@
+# SPDX-FileCopyrightText: 2026 Casha
 # SPDX-FileCopyrightText: 2024 Errant <35878406+Errant-4@users.noreply.github.com>
 # SPDX-FileCopyrightText: 2024 Piras314 <p1r4s@proton.me>
 # SPDX-FileCopyrightText: 2024 username <113782077+whateverusername0@users.noreply.github.com>
@@ -23,7 +24,7 @@
   components:
   - type: HereticRule
   - type: GameRule
-    minPlayers: 15
+    minPlayers: 0
   - type: AntagObjectives
     objectives:
     - HereticKnowledgeObjective

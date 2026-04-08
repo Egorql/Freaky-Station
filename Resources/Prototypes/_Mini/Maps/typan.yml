@@ -18,9 +18,9 @@
             TypanBotanist: [ 1, 1 ]
             TypanCargotech: [ 2, 2 ]
             TypanChef: [ 1, 1 ]
-            TypanMedic: [ 3, 3 ]
+            TypanMedic: [ 2, 2 ]
             TypanResearchDirector: [ 1, 1 ]
-            TypanScience: [ 3, 3 ]
+            TypanScience: [ 2, 2 ]
             TypanPatrol: [ 2, 2 ]
             TypanBorg: [ 2, 2 ]
             TypanBorgMedic: [ 1, 1 ]
@@ -32,3 +32,8 @@
           - TypanSilentResearch
           - TypanGhostLogistics
           - TypanDeepCover
+          - SyndicateAi
+          - SyndicateCargo
+          - SyndicateMaid
+          - SyndicateMedical
+          - SyndicateEngineering

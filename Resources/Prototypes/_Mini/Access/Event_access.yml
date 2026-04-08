@@ -1,0 +1,38 @@
+- type: accessGroup
+  id: TuroAccess
+  tags:
+  - lvl-0
+  - lvl-1
+  - lvl-2
+  - lvl-3
+  - lvl-3+
+  - lvl-4
+  - lvl-5
+
+- type: accessLevel
+  id: lvl-0
+  name: 0 Уровень доступа
+
+- type: accessLevel
+  id: lvl-1
+  name: 1 Уровень доступа
+
+- type: accessLevel
+  id: lvl-2
+  name: 2 Уровень доступа
+
+- type: accessLevel
+  id: lvl-3
+  name: 3 Уровень доступа
+
+- type: accessLevel
+  id: lvl-3+
+  name: 3+ Уровень доступа
+
+- type: accessLevel
+  id: lvl-4
+  name: 4 Уровень доступа
+
+- type: accessLevel
+  id: lvl-5
+  name: 5 Уровень доступа

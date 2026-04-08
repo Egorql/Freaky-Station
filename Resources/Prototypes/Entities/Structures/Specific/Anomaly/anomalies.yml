@@ -1029,7 +1029,7 @@
     - BuzzochloricBees
     - RobustHarvest
     # Goobstation - Start
-    - Triclor 
+    - Triclor
     - Cyanide
     - Genecide
     - NitricAcid
@@ -1269,7 +1269,6 @@
         maxAmount: 5
         maxRange: 5
       spawns:
-      - PresentRandomUnsafe
       - PresentRandom
       - PresentRandomCoal
       - PresentRandomCash
@@ -1281,7 +1280,7 @@
         maxAmount: 20
         maxRange: 6
       spawns:
-      - PresentRandomInsane
+      - PresentRandom
   - type: ProjectileAnomaly
     projectilePrototype: DrinkLemonLimeCranberryCan
     minProjectiles: 1

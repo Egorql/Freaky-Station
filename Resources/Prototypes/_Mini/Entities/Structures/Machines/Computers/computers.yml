@@ -37,7 +37,6 @@
       "TypanResearchDirector",
       "TypanScience",
       "TypanService",
-      "TypanTechnicalOperationsSupervisor",
       "TypanVault",
       "TypanExternal",
       "SyndicateAgent",
@@ -96,7 +95,7 @@
       state: generic_panel_open
 
 - type: entity
-  parent: [BaseComputer, StorePresetUplinkTypan, BaseSyndicateContraband]
+  parent: [BaseComputer, BaseSyndicateContraband, StorePresetUplinkTypan,]
   id: UplinkConsole
   name: консоль заказов Синдиката
   description:

@@ -27,37 +27,36 @@
     - id: RandomHumanoidSpawnerCBURNUnit
       amount: 1
 
-# - type: ertTeam
-#   id: Engineers
-#   name: ОБР Инженеры
-#   startAnnouncement: station-event-response-team-arrival
-#   startAudio:
-#     path: /Audio/_Mini/Announcements/ERT/spawn.ogg
-#   description:
-#     Отряд инженеров NanoTrasen, специализирующихся на ремонте и техническом обслуживании
-#     космических станций и кораблей. Они обладают обширными знаниями в области
-#     инженерии, систем жизнеобеспечения и ремонта оборудования.
-#     4 инженера прибывают на инженерном шаттле, оснащённом всем необходимым оборудованием
-#     для выполнения их миссии.
-#     Время прибытия отряда от 5 до 10 минут.
-#   rule: SpawnEngineersShuttle
-#   cooldown:
-#     min: 10m
-#     max: 10m
-#   spawnWindow:
-#     min: 5m
-#     max: 10m
-#   price: 2
-#   codeBlackList:
-#   - red
-#   - delta
-#   - epsilon
-#   - gamma
-#   spawns:
-#     - id: RandomHumanoidSpawnerERTLeaderAmber
-#       amount: 1
-#     - id: RandomHumanoidSpawnerERTEngineerAmber
-#       amount: 3
+- type: ertTeam
+  id: Chaplains
+  name: ОБР экзорцистов
+  startAnnouncement: station-event-response-team-arrival
+  startAudio:
+    path: /Audio/_Mini/Announcements/ERT/spawn.ogg
+  description:
+    Элитный духовный отряд NanoTrasen, специализирующийся на борьбе с космическим культом,
+    оккультными угрозами и нематериальными сущностями. Эти священники прошли специальную
+    подготовку по обнаружению и нейтрализации культистской активности, очищению скверны
+    и защите экипажа от тлетворного влияния Нар-Си, Космобога и Ратвара.
+    Отряд состоит из лидера и трёх святых паладинов, вооружённых благословлённым
+    оружием, кропилами и святой водой. Каждый член отряда владеет искусством
+    изгнания демонов, распознавания культистских символов и проведения экстренных обрядов очищения.
+
+    Время прибытия отряда от 5 до 10 минут. При вызове этого отряда все члены экипажа получают
+    временную защиту от ментальных атак культа.
+  rule: SpawnRedShuttle
+  cooldown:
+    min: 15m
+    max: 15m
+  spawnWindow:
+    min: 5m
+    max: 10m
+  price: 6
+  spawns:
+    - id: RandomHumanoidSpawnerERTLeaderEVA
+      amount: 1
+    - id: RandomHumanoidSpawnerERTChaplainEVA
+      amount: 3
 
 - type: ertTeam
   id: Blue
@@ -106,7 +105,7 @@
     космических станциях и кораблях. Они обучены для выполнения различных
     задач, включая борьбу с пиратами, спасательные операции и обеспечение
     безопасности персонала.
-    7 членов отряда прибывают на шаттле типа Гамма, который оснащён всем
+    5 членов отряда прибывают на шаттле типа Красный, который оснащён всем
     необходимым оборудованием для выполнения их миссии.
     Время прибытия отряда от 10 до 15 минут.
   sender: ert-responce-cso-sender
@@ -128,8 +127,6 @@
       amount: 3
     - id: RandomHumanoidSpawnerERTMedicalEVA
       amount: 1
-    - id: RandomHumanoidSpawnerERTEngineerEVA
-      amount: 1
 
 - type: ertTeam
   id: Gamma
@@ -142,7 +139,7 @@
     быстрого реагирования на чрезвычайные ситуации и угрозы безопасности на
     космических станциях и кораблях. Они обучены для выполнения различных
     задач. В основе их деятельности лежит защита станций от вторжения извне.
-    8 членов отряда и их лидер прибывают на шаттле Гамма, который оснащён всем
+    7 членов отряда и их лидер прибывают на шаттле Гамма, который оснащён всем
     необходимым оборудованием для выполнения их миссии.
     Время прибытия отряда 20 минут.
   rule: SpawnGammaShuttle
@@ -165,7 +162,7 @@
     - id: RandomHumanoidSpawnerERTSecurityEVA
       amount: 4
     - id: RandomHumanoidSpawnerERTMedicalEVA
-      amount: 2
+      amount: 1
 
 - type: ertTeam
   id: CentralCommandOfficial
@@ -199,7 +196,6 @@
   - delta
   - epsilon
   - gamma
-  special: RandomHumanoidSpawnerCentralCommandOfficial
   spawns:
     - id: RandomHumanoidSpawnerCentralCommandOfficial
       amount: 1

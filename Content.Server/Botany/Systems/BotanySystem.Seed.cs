@@ -180,21 +180,7 @@ public sealed partial class BotanySystem : EntitySystem
 
     public IEnumerable<EntityUid> GenerateProduct(SeedData proto, EntityCoordinates position, int yieldMod = 1)
     {
-    // CorvaxGoob-Plant-Analyzer-Start
-    /*
-        var totalYield = 0;
-        if (proto.Yield > -1)
-        {
-            if (yieldMod < 0)
-                totalYield = proto.Yield;
-            else
-                totalYield = proto.Yield * yieldMod;
-
-            totalYield = Math.Max(1, totalYield);
-        }
-    */
         var totalYield = CalculateTotalYield(proto.Yield, yieldMod);
-    // CorvaxGoob-Plant-Analyzer-End
         var products = new List<EntityUid>();
 
         if (totalYield > 1 || proto.HarvestRepeat != HarvestType.NoRepeat)
@@ -233,7 +219,6 @@ public sealed partial class BotanySystem : EntitySystem
         return !proto.Ligneous || proto.Ligneous && held != null && HasComp<SharpComponent>(held);
     }
 
-    // CorvaxGoob-Plant-Analyzer-Start
     public static int CalculateTotalYield(int yield, int yieldMod)
     {
         var totalYield = 0;
@@ -248,7 +233,6 @@ public sealed partial class BotanySystem : EntitySystem
         }
         return totalYield;
     }
-    // CorvaxGoob-Plant-Analyzer-End
 
     #endregion
 }

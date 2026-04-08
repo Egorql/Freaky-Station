@@ -2,6 +2,7 @@
 # SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
 # SPDX-FileCopyrightText: 2025 Solstice <solsticeofthewinter@gmail.com>
 # SPDX-FileCopyrightText: 2025 SolsticeOfTheWinter <solsticeofthewinter@gmail.com>
+# SPDX-FileCopyrightText: 2026 Casha
 #
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
@@ -12,6 +13,7 @@
   components:
   - type: StationEvent
     isSelectable: false
+    minimumPlayers: 0
   - type: AntagSelection
     agentName: ninja-round-end-agent-name
     definitions:
@@ -57,6 +59,7 @@
       - MindRoleDragon
   - type: StationEvent
     isSelectable: false
+    minimumPlayers: 0
 
 - type: entity
   parent: RevenantSpawn
@@ -67,6 +70,7 @@
   - type: StationEvent
     isSelectable: false
     weight: 3
+    minimumPlayers: 0
 
 - type: entity
   parent: LoneOpsSpawn
@@ -95,6 +99,7 @@
       - MindRoleNukeops
   - type: StationEvent
     isSelectable: false
+    minimumPlayers: 0
 
 - type: entity
   parent: DerelictCyborgSyndicateSpawn
@@ -110,6 +115,7 @@
       pickPlayer: false
   - type: StationEvent
     isSelectable: false
+    minimumPlayers: 0
 
 - type: entity
   parent: BingleSpawn
@@ -119,6 +125,7 @@
     prototype: SpawnPointGhostBinglePrimeToken
   - type: StationEvent
     isSelectable: false
+    minimumPlayers: 0
 
 - type: entity
   parent: SpawnPointGhostAncientRogueKing
@@ -132,6 +139,7 @@
       pickPlayer: false
   - type: StationEvent
     isSelectable: false
+    minimumPlayers: 0
 
 - type: entity
   parent: BlobMidround
@@ -144,6 +152,7 @@
     maxCarrierBlob: 1
   - type: StationEvent
     isSelectable: false
+    minimumPlayers: 0
   - type: Tag
     tags:
     - MidroundAntag
@@ -154,6 +163,7 @@
   components:
   - type: StationEvent
     isSelectable: false
+    minimumPlayers: 0
   - type: AntagSelection
     definitions:
     - spawnerPrototype: LoneAbductorSpawnerToken
@@ -231,6 +241,7 @@
     - MidroundAntag
   - type: StationEvent
     isSelectable: false
+    minimumPlayers: 0
 
 - type: entity
   parent: SlaughterDemonMidround
@@ -260,7 +271,7 @@
   - type: StationEvent
     weight: 2
     earliestStart: 75
-    minimumPlayers: 40
+    minimumPlayers: 0
     duration: null
     maxOccurrences: 1
     chaos: # todo: adjust all this

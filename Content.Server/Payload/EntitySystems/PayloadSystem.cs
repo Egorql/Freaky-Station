@@ -85,6 +85,28 @@ public sealed class PayloadSystem : EntitySystem
         // Pass trigger event onto all contained payloads. Payload capacity configurable by construction graphs.
         foreach (var ent in GetAllPayloads(uid, contMan))
         {
+            // CorvaxGoob-AnomalyGrenade-Start
+            if (TryComp<UseDelayComponent>(ent, out var payloadUseDelayComp))
+            {
+                if (!HasComp<UseDelayComponent>(uid))
+                    EnsureComp<UseDelayComponent>(uid);
+
+                if (_useDelay.IsDelayed((ent, payloadUseDelayComp), id: DefaultUseDelayId))
+                {
+                    _useDelay.SetLength(uid, payloadUseDelayComp.Delays[DefaultUseDelayId].EndTime - _timing.CurTime);
+                }
+                else
+                {
+                    _useDelay.SetLength(ent, payloadUseDelayComp.Delay, id: DefaultUseDelayId);
+                    _useDelay.TryResetDelay((ent, payloadUseDelayComp), id: DefaultUseDelayId);
+
+                    _useDelay.SetLength(uid, payloadUseDelayComp.Delay, id: DefaultUseDelayId);
+                }
+
+                _useDelay.TryResetDelay(uid, id: DefaultUseDelayId);
+            }
+            // CorvaxGoob-AnomalyGrenade-End
+
             RaiseLocalEvent(ent, ref args, false);
         }
     }

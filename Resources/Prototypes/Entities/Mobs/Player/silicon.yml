@@ -309,6 +309,10 @@
   - AiHolder
   suffix: Empty
   components:
+  - type: Anchorable
+    flags:
+    - Anchorable
+  - type: Rotatable
   - type: WarpPoint
   - type: ContainerComp
     proto: AiHeld
@@ -576,6 +580,7 @@
       rules: ghost-role-information-silicon-rules
       raffle:
         settings: default
+      job: Borg
     - type: GhostTakeoverAvailable
 
 - type: entity
@@ -645,6 +650,7 @@
       rules: ghost-role-information-silicon-rules
       raffle:
         settings: default
+      job: Borg
     - type: GhostTakeoverAvailable
 
 - type: entity
@@ -694,8 +700,6 @@
       rules: ghost-role-information-silicon-rules
       raffle:
         settings: default
-      requirements: # Goobstation - ghost roles requirements
-      - !type:RoleTimeRequirement
-        role: JobBorg
-        time: 3600 #1 hour
+      reregister: false
+      job: Borg
     - type: GhostTakeoverAvailable

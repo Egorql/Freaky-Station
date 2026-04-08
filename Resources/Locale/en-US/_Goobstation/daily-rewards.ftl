@@ -1,0 +1,23 @@
+# SPDX-FileCopyrightText: 2026 Casha
+daily-reward-window-title = Daily rewards
+daily-reward-window-subtitle = Log in every day, play the round, and move along the reward track.
+daily-reward-window-streak = Current streak
+daily-reward-window-streak-value = {$current} / {$max} days
+daily-reward-window-active-progress = Played today: {$current} / {$required}
+daily-reward-window-active-ready = Today's playtime is complete and the reward is available.
+daily-reward-window-active-needed = You still need 15 minutes of round play before claiming.
+daily-reward-window-cooldown-ready = Today's reward is ready to claim.
+daily-reward-window-cooldown-wait = Next claim unlocks in {$time}
+daily-reward-window-expiry = Streak resets in {$time}
+daily-reward-window-expiry-idle = Streak expiry starts after the first claimed reward.
+daily-reward-window-road-title = Reward track
+daily-reward-window-claim = Claim reward
+daily-reward-window-claim-ready = Claim today
+daily-reward-window-claim-locked = Play 15 minutes first
+daily-reward-window-claim-panel-title = Login reward
+daily-reward-card-day = Day {$day}
+daily-reward-card-claimed = Claimed
+daily-reward-card-current = Today
+daily-reward-card-future = Soon
+daily-reward-card-token = Reward: {$name}
+daily-reward-card-step = Reward for this day

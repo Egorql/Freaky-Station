@@ -11,7 +11,7 @@
     pocket2: MagazinePistol
   storage:
     back:
-      - MedkitFilled
+      - MedkitCombatFilled
 
 - type: startingGear
   id: ThunderdomeShotgun
@@ -111,3 +111,30 @@
     back:
     - BruteAutoInjector
     - BurnAutoInjector
+
+- type: startingGear
+  id: ThunderdomeSmg2
+  equipment:
+    suitstorage: WeaponSubMachineGunC20r
+  storage:
+    back:
+      - MagazinePistolSubMachineGun
+      - MagazinePistolSubMachineGun
+
+- type: startingGear
+  id: ThunderdomeSmg3
+  equipment:
+    suitstorage: WeaponRifleWSPR
+  storage:
+    back:
+      - MagazineCaselessRifle
+      - MagazineCaselessRifle
+
+- type: startingGear
+  id: ThunderdomeEstoc
+  equipment:
+    suitstorage: WeaponRifleEstoc
+  storage:
+    back:
+      - MagazineLightRifle
+      - MagazineLightRifle

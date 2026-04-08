@@ -1,0 +1,23 @@
+# SPDX-FileCopyrightText: 2026 Casha
+daily-reward-window-title = Р•Р¶РµРґРЅРµРІРЅС‹Рµ РЅР°РіСЂР°РґС‹
+daily-reward-window-subtitle = Р—Р°С…РѕРґРё РєР°Р¶РґС‹Р№ РґРµРЅСЊ, РёРіСЂР°Р№ РІ СЂР°СѓРЅРґРµ Рё РґРІРёРіР°Р№СЃСЏ РїРѕ С†РµРїРѕС‡РєРµ РЅР°РіСЂР°Рґ.
+daily-reward-window-streak = РўРµРєСѓС‰РёР№ СЃС‚СЂРёРє
+daily-reward-window-streak-value = {$current} / {$max} РґРЅРµР№
+daily-reward-window-active-progress = РЎС‹РіСЂР°РЅРѕ СЃРµРіРѕРґРЅСЏ: {$current} / {$required}
+daily-reward-window-active-ready = РЎРµРіРѕРґРЅСЏС€РЅРµРµ РІСЂРµРјСЏ РЅР°Р±СЂР°РЅРѕ, РЅР°РіСЂР°РґР° РґРѕСЃС‚СѓРїРЅР°.
+daily-reward-window-active-needed = Р”Рѕ РїРѕР»СѓС‡РµРЅРёСЏ РЅР°РіСЂР°РґС‹ РЅСѓР¶РЅРѕ РґРѕРёРіСЂР°С‚СЊ 15 РјРёРЅСѓС‚ РІ СЂР°СѓРЅРґРµ.
+daily-reward-window-cooldown-ready = РЎРµРіРѕРґРЅСЏС€РЅСЏСЏ РЅР°РіСЂР°РґР° РіРѕС‚РѕРІР° Рє РїРѕР»СѓС‡РµРЅРёСЋ.
+daily-reward-window-cooldown-wait = РЎР»РµРґСѓСЋС‰Р°СЏ РІС‹РґР°С‡Р° РѕС‚РєСЂРѕРµС‚СЃСЏ С‡РµСЂРµР· {$time}
+daily-reward-window-expiry = РЎР±СЂРѕСЃ СЃС‚СЂРёРєР° С‡РµСЂРµР· {$time}
+daily-reward-window-expiry-idle = РЎР±СЂРѕСЃ СЃС‚СЂРёРєР° РЅР°С‡РЅС‘С‚СЃСЏ РїРѕСЃР»Рµ РїРµСЂРІРѕРіРѕ РїРѕР»СѓС‡РµРЅРёСЏ РЅР°РіСЂР°РґС‹.
+daily-reward-window-road-title = Р¦РµРїРѕС‡РєР° РЅР°РіСЂР°Рґ
+daily-reward-window-claim = Р—Р°Р±СЂР°С‚СЊ РЅР°РіСЂР°РґСѓ
+daily-reward-window-claim-ready = Р—Р°Р±СЂР°С‚СЊ СЃРµРіРѕРґРЅСЏ
+daily-reward-window-claim-locked = РЎРЅР°С‡Р°Р»Р° РґРѕРёРіСЂР°Р№ 15 РјРёРЅСѓС‚
+daily-reward-window-claim-panel-title = РќР°РіСЂР°РґР° Р·Р° РІС…РѕРґ
+daily-reward-card-day = Р”РµРЅСЊ {$day}
+daily-reward-card-claimed = Р—Р°Р±СЂР°РЅРѕ
+daily-reward-card-current = РЎРµРіРѕРґРЅСЏ
+daily-reward-card-future = РЎРєРѕСЂРѕ
+daily-reward-card-token = РќР°РіСЂР°РґР°: {$name}
+daily-reward-card-step = РќР°РіСЂР°РґР° СЌС‚РѕРіРѕ РґРЅСЏ

@@ -1,0 +1,60 @@
+- type: construction
+  id: GirderDiagonal
+  name: construction-recipe-diagonal-girder
+  graph: GirderDiagonal
+  startNode: start
+  targetNode: girderDiagonal
+  category: construction-category-structures
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canRotate: true
+  canBuildInImpassable: false
+  conditions:
+    - !type:TileNotBlocked
+      failIfSpace: false
+
+- type: construction
+  id: ReinforcedGirderDiagonal
+  name: construction-recipe-diagonal-reinforced-girder
+  graph: GirderDiagonal
+  startNode: start
+  targetNode: reinforcedGirderDiagonal
+  category: construction-category-structures
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canRotate: true
+  canBuildInImpassable: false
+  conditions:
+    - !type:TileNotBlocked
+      failIfSpace: false
+
+- type: construction
+  id: WallSolidDiagonal
+  name: construction-recipe-diagonal-wall
+  graph: GirderDiagonal
+  startNode: start
+  targetNode: wallDiagonal
+  category: construction-category-structures
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canRotate: true
+  canBuildInImpassable: false
+  conditions:
+    - !type:TileNotBlocked
+      failIfSpace: false
+
+- type: construction
+  id: WallReinforcedDiagonal
+  name: construction-recipe-diagonal-reinforced-wall
+  graph: GirderDiagonal
+  startNode: start
+  targetNode: reinforcedWallDiagonal
+  category: construction-category-structures
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canRotate: true
+  canBuildInImpassable: false
+  conditions:
+    - !type:TileNotBlocked
+      failIfSpace: false
+

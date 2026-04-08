@@ -234,7 +234,7 @@ internal sealed class TimeTransferGroupCalculator
 
     private void AddAllJobRequirements(JobPrototype job, TimeTransferGrantPlan plan)
     {
-        var requirements = _roleSystem.GetJobRequirement(job);
+        var requirements = _roleSystem.GetRoleRequirements(job);
         if (requirements == null)
             return;
 

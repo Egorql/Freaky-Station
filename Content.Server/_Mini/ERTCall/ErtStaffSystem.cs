@@ -1,4 +1,3 @@
-
 using Content.Server._Mini.ERT.Components;
 using Content.Server.Mind;
 using Content.Shared.Mind.Components;

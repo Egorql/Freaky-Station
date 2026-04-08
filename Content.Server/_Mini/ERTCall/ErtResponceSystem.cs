@@ -62,7 +62,7 @@ public sealed class ErtResponceSystem : SharedErtResponceSystem
     /// <summary>
     ///     Сумма очков для заказа обр, доступная в начале каждого раунда.
     /// </summary>
-    private const int DefaultPoints = 8;
+    private const int DefaultPoints = 10;
     /// <summary>
     ///     Текущий баланс очков.
     /// </summary>

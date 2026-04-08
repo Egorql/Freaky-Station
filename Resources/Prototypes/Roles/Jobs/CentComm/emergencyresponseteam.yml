@@ -68,6 +68,7 @@
     - ADTBaseUplinkBOBERT
     #- WeaponLauncherMGL
     #- ADTertMechUplink
+
 # Chaplain
 - type: job
   id: ERTChaplain
@@ -79,6 +80,8 @@
   icon: "JobIconNanotrasen"
   supervisors: job-supervisors-centcom
   canBeAntag: false
+  skills: # CorvaxGoob-Skills
+  - All
   accessGroups:
   - AllAccess
   access:
@@ -168,6 +171,8 @@
   icon: "JobIconNanotrasen"
   supervisors: job-supervisors-centcom
   canBeAntag: false
+  skills: # CorvaxGoob-Skills
+  - All
   accessGroups:
   - AllAccess
   access:
@@ -252,6 +257,8 @@
   id: ERTSecurity
   name: job-name-ertsecurity
   description: job-description-ertsecurity
+  skills: # CorvaxGoob-Skills
+  - All
   playTimeTracker: JobERTSecurity
   setPreference: false
   startingGear: ERTSecurityGearEVA
@@ -288,7 +295,7 @@
     back:
     - MedkitCombatFilled # Goobstation - No reason not to.
     - CrowbarRed
-    - ADTBaseUplinkBOBERT
+    - CombatKnife
     - PinpointerNuclear
 
 - type: startingGear
@@ -333,6 +340,8 @@
   icon: "JobIconNanotrasen"
   supervisors: job-supervisors-centcom
   canBeAntag: false
+  skills: # CorvaxGoob-Skills
+  - All
   accessGroups:
   - AllAccess
   access:
@@ -415,6 +424,8 @@
   description: job-description-ertjanitor
   playTimeTracker: JobERTJanitor
   setPreference: false
+  skills: # CorvaxGoob-Skills
+  - All
   startingGear: ERTJanitorGearEVA
   icon: "JobIconNanotrasen"
   supervisors: job-supervisors-centcom

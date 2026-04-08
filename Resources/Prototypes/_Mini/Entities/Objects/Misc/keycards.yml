@@ -1,0 +1,146 @@
+- type: entity
+  id: EventKeycard
+  parent: IDCardStandard
+  suffix: TuroИвeнт
+  name: Карта доступа
+  description: Ключ карта 0 уровня доступа
+  components:
+  - type: Sprite
+    sprite: _mini/Objects/Misc/lvl-0.rsi
+    layers:
+    - state: icon
+  - type: Access
+    tags:
+    - lvl-0
+
+- type: entity
+  id: EventKeycard1
+  parent: IDCardStandard
+  suffix: TuroИвeнт
+  name: Карта доступа
+  description: Ключ карта 1 уровня доступа
+  components:
+  - type: Sprite
+    sprite: _Mini/Objects/Misc/lvl-1.rsi
+    layers:
+    - state: icon
+  - type: Access
+    tags:
+    - lvl-0
+    - lvl-1
+
+- type: entity
+  id: EventKeycard2
+  parent: IDCardStandard
+  suffix: TuroИвeнт
+  name: Карта доступа
+  description: Ключ карта 2 уровня доступа
+  components:
+  - type: Sprite
+    sprite: _Mini/Objects/Misc/lvl-2.rsi
+    layers:
+    - state: icon
+  - type: Access
+    tags:
+    - lvl-0
+    - lvl-1
+    - lvl-2
+
+- type: entity
+  id: EventKeycard3
+  parent: IDCardStandard
+  suffix: TuroИвeнт
+  name: Карта доступа
+  description: Ключ карта 3 уровня доступа
+  components:
+  - type: Sprite
+    sprite: _Mini/Objects/Misc/lvl-3.rsi
+    layers:
+    - state: icon
+  - type: Access
+    tags:
+    - lvl-0
+    - lvl-1
+    - lvl-2
+    - lvl-3
+
+- type: entity
+  id: EventKeycard4
+  parent: IDCardStandard
+  suffix: TuroИвeнт
+  name: Карта доступа
+  description: Ключ карта 3+ уровня доступа
+  components:
+  - type: Sprite
+    sprite: _Mini/Objects/Misc/lvl-3+.rsi
+    layers:
+    - state: icon
+  - type: Access
+    tags:
+    - lvl-0
+    - lvl-1
+    - lvl-2
+    - lvl-3
+    - lvl-3+
+
+- type: entity
+  id: EventKeycard5
+  parent: IDCardStandard
+  suffix: TuroИвeнт
+  name: Карта доступа
+  description: Ключ карта 3+ уровня доступа
+  components:
+  - type: Sprite
+    sprite: _Mini/Objects/Misc/lvl-3+.rsi
+    layers:
+    - state: icon
+  - type: Access
+    tags:
+    - lvl-0
+    - lvl-1
+    - lvl-2
+    - lvl-3
+    - lvl-3+
+
+- type: entity
+  id: EventKeycard6
+  parent: IDCardStandard
+  suffix: TuroИвeнт
+  name: Карта доступа
+  description: Ключ карта 4 уровня доступа
+  components:
+  - type: Sprite
+    sprite: _Mini/Objects/Misc/lvl-4.rsi
+    layers:
+    - state: icon
+  - type: Access
+    tags:
+    - lvl-0
+    - lvl-1
+    - lvl-2
+    - lvl-3
+    - lvl-3+
+    - lvl-4
+
+- type: entity
+  id: EventKeycard7
+  parent: IDCardStandard
+  suffix: TuroИвeнт
+  name: Карта доступа
+  description: Ключ карта 5 уровня доступа
+  components:
+  - type: Sprite
+    sprite: _Mini/Objects/Misc/lvl-5.rsi
+    layers:
+    - state: icon
+  - type: Access
+    tags:
+    - lvl-0
+    - lvl-1
+    - lvl-2
+    - lvl-3
+    - lvl-3+
+    - lvl-4
+    - lvl-5
+
+  

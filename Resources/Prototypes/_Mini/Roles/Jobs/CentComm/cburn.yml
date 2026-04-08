@@ -7,7 +7,7 @@
   name: job-name-cburn-leader
   description: job-description-cburnleader
   skills: # CorvaxGoob-Skills
-    - All
+  - All
   playTimeTracker: JobCBURNLeader
   setPreference: false
   startingGear: CBURNLeaderGear
@@ -41,24 +41,26 @@
 
 # Agent
 
-# ## CBURN
-# - type: job
-#   id: CBURNAgent
-#   name: job-name-cburn-agent
-#   description: job-description-cburnagent
-#   playTimeTracker: JobCBURNAgent
-#   setPreference: false
-#   startingGear: CBURNAgentGear
-#   icon: "JobIconERT"
-#   supervisors: job-supervisors-centcom
-#   canBeAntag: false
-#   accessGroups:
-#   - AllAccess
-#   access:
-#   - CentralCommand
-#   special:
-#   - !type:AddImplantSpecial
-#     implants: [ MindShieldImplant, TrackingImplant ]
+## CBURN
+- type: job
+  id: CBURNAgent
+  name: job-name-cburn-agent
+  description: job-description-cburnagent
+  playTimeTracker: JobCBURNAgent
+  setPreference: false
+  startingGear: CBURNAgentGear
+  icon: "JobIconERT"
+  skills: # CorvaxGoob-Skills
+  - All
+  supervisors: job-supervisors-centcom
+  canBeAntag: false
+  accessGroups:
+  - AllAccess
+  access:
+  - CentralCommand
+  special:
+  - !type:AddImplantSpecial
+    implants: [ MindShieldImplant, TrackingImplant ]
 
 - type: startingGear
   id: CBURNAgentGear

@@ -185,6 +185,7 @@
   parent: EventHumanoidMindShielded
   randomizeName: false
   components:
+  - type: IgnoreSkills # CorvaxGoob-Skills
   - type: AutoImplant
     implants:
     - MindShieldImplant
@@ -212,6 +213,7 @@
   id: DeathSquad
   parent: CentcommHumanoid # Goobstation
   components:
+    - type: IgnoreSkills # CorvaxGoob-Skills
     - type: AutoImplant
       implants: [ FreedomImplant, BluespaceLifelineImplant, RadioImplantCentcomm, NutrimentPumpImplant, StypticStimulatorImplant, DeathRattleImplantCentcomm] # Goobstation
     - type: DeathSquadMember # Goobstation
@@ -260,6 +262,7 @@
   id: ERTLeader
   parent: CentcommHumanoid # Goobstation
   components:
+    - type: IgnoreSkills # CorvaxGoob-Skills
     - type: GhostRole
       name: ghost-role-information-ert-leader-name
       description: ghost-role-information-ert-leader-description
@@ -301,6 +304,7 @@
   id: ERTLeaderEVA
   parent: ERTLeader
   components:
+    - type: IgnoreSkills # CorvaxGoob-Skills
     - type: GhostRole
       name: ghost-role-information-ert-leader-name
       description: ghost-role-information-ert-leader-description
@@ -335,6 +339,7 @@
   id: ERTChaplain
   parent: ERTLeader
   components:
+    - type: IgnoreSkills # CorvaxGoob-Skills
     - type: BibleUser
     - type: GhostRole
       name: ghost-role-information-ert-chaplain-name
@@ -368,6 +373,7 @@
   id: ERTChaplainEVA
   parent: ERTChaplain
   components:
+    - type: IgnoreSkills # CorvaxGoob-Skills
     - type: GhostRole
       name: ghost-role-information-ert-chaplain-name
       description: ghost-role-information-ert-chaplain-description
@@ -402,6 +408,7 @@
   id: ERTJanitor
   parent: ERTLeader
   components:
+    - type: IgnoreSkills # CorvaxGoob-Skills
     - type: GhostRole
       name: ghost-role-information-ert-janitor-name
       description: ghost-role-information-ert-janitor-description
@@ -434,6 +441,7 @@
   id: ERTJanitorEVA
   parent: ERTJanitor
   components:
+    - type: IgnoreSkills # CorvaxGoob-Skills
     - type: GhostRole
       name: ghost-role-information-ert-janitor-name
       description: ghost-role-information-ert-janitor-description
@@ -468,6 +476,7 @@
   id: ERTEngineer
   parent: ERTLeader
   components:
+    - type: IgnoreSkills # CorvaxGoob-Skills
     - type: GhostRole
       name: ghost-role-information-ert-engineer-name
       description: ghost-role-information-ert-engineer-description
@@ -507,6 +516,7 @@
   id: ERTEngineerEVA
   parent: ERTEngineer
   components:
+    - type: IgnoreSkills # CorvaxGoob-Skills
     - type: GhostRole
       name: ghost-role-information-ert-engineer-name
       description: ghost-role-information-ert-engineer-description
@@ -542,6 +552,7 @@
   parent: ERTLeader
   components:
     - type: GhostRole
+    - type: IgnoreSkills # CorvaxGoob-Skills
       name: ghost-role-information-ert-security-name
       description: ghost-role-information-ert-security-description
       rules: ghost-role-information-nonantagonist-rules
@@ -575,6 +586,7 @@
   id: ERTSecurityEVA
   parent: ERTSecurity
   components:
+    - type: IgnoreSkills # CorvaxGoob-Skills
     - type: GhostRole
       name: ghost-role-information-ert-security-name
       description: ghost-role-information-ert-security-description
@@ -635,6 +647,7 @@
   id: ERTMedical
   parent: ERTLeader
   components:
+    - type: IgnoreSkills # CorvaxGoob-Skills
     - type: GhostRole
       name: ghost-role-information-ert-medical-name
       description: ghost-role-information-ert-medical-description
@@ -671,6 +684,7 @@
   id: ERTMedicalEVA
   parent: ERTMedical
   components:
+    - type: IgnoreSkills # CorvaxGoob-Skills
     - type: GhostRole
       name: ghost-role-information-ert-medical-name
       description: ghost-role-information-ert-medical-description
@@ -748,6 +762,7 @@
   id: CentcomOfficial
   parent: EventHumanoidCentcomm
   components:
+    - type: IgnoreSkills # CorvaxGoob-Skills
     - type: AutoImplant
       implants: [ FreedomImplant, RadioImplantCentcomm, NutrimentPumpImplant, StypticStimulatorImplant ] # Goobstation
     - type: GhostRole

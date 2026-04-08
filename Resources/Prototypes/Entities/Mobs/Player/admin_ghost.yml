@@ -114,14 +114,11 @@
   - type: Speech # Goobstation
     speechVerb: HolierThanThou
   - type: Eye
-    visMask: # Goob edit
-      - Normal
+    visMask:
       - Ghost
-      - Abductor
+      - Normal
       - CosmicCultMonument # DeltaV - Cosmic Cult
-      - EldritchInfluence
-      - EldritchInfluenceSpent
-      - Admin
+      - Abductor
   - type: AghostColor
   - type: IgnoreSkills # CorvaxGoob-Skills
   # Corvax-Goob-start

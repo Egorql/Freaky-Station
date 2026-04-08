@@ -40,6 +40,7 @@ using Robust.Shared.Random;
 using Robust.Shared.Containers;
 using Robust.Shared.Spawners;
 using Robust.Shared.Timing;
+using Content.Server._CorvaxGoob.Skills;
 
 namespace Content.Goobstation.Server.MisandryBox.Thunderdome;
 
@@ -274,6 +275,8 @@ public sealed class ThunderdomeRuleSystem : EntitySystem
         var mob = _stationSpawning.SpawnPlayerMob(spawnCoords.Value, null, profile, null);
         _stationSpawning.EquipStartingGear(mob, rule.Gear);
         SpawnLoadoutItems(mob, weaponIdx, rule);
+
+        EnsureComp<IgnoreSkillsComponent>(mob);
 
         var tdPlayer = EnsureComp<ThunderdomePlayerComponent>(mob);
         tdPlayer.RuleEntity = ruleEntity;

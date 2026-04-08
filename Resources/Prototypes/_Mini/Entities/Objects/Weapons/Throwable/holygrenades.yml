@@ -8,11 +8,17 @@
   - type: Sprite
     sprite: Objects/Weapons/Grenades/smoke.rsi
   - type: SmokeOnTrigger
+    keysIn:
+    - timer
     duration: 30
     spreadAmount: 50
   - type: EmitSoundOnTrigger
+    keysIn:
+    - timer
     sound: /Audio/Items/smoke_grenade_smoke.ogg
   - type: DeleteOnTrigger
+    keysIn:
+    - timer
   - type: TimerTriggerVisuals
     primingSound:
       path: /Audio/Items/smoke_grenade_prime.ogg
@@ -26,6 +32,8 @@
   - type: Sprite
     sprite: _Mini/Objects/Weapons/Throwable/holysmokegrenade.rsi
   - type: SmokeOnTrigger
+    keysIn:
+    - timer
     duration: 20
     spreadAmount: 50
     solution:

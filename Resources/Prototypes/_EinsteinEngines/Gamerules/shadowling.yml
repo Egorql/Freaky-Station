@@ -1,10 +1,11 @@
+# SPDX-FileCopyrightText: 2026 Casha
 - type: entity
   parent: BaseGameRule
   id: Shadowling
   components:
   - type: ShadowlingRule
   - type: GameRule
-    minPlayers: 15
+    minPlayers: 0
   - type: AntagSelection
     definitions:
     - prefRoles: [ Shadowling ]

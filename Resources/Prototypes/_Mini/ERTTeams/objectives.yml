@@ -1,7 +1,6 @@
-# Objective для миссии ERT отряда
 - type: entity
   id: ErtMissionObjective
-  parent: BaseObjective
+  parent: BaseFreeObjective
   components:
   - type: Objective
     difficulty: 0
@@ -10,3 +9,10 @@
     icon:
       sprite: Objects/Weapons/Guns/Pistols/viper.rsi
       state: icon
+
+- type: entity
+  abstract: true
+  parent: BaseObjective
+  id: BaseFreeObjective
+  components:
+  - type: FreeObjective

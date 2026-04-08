@@ -1,3 +1,4 @@
+# SPDX-FileCopyrightText: 2026 Casha
 # SPDX-FileCopyrightText: 2022 Jesse Rougeau <jmaster9999@gmail.com>
 # SPDX-FileCopyrightText: 2022 Morbo <exstrominer@gmail.com>
 # SPDX-FileCopyrightText: 2024 dffdff2423 <dffdff2423@gmail.com>

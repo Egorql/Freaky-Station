@@ -284,7 +284,7 @@
   id: ERTMedicalAmber
   name: job-name-ertmedic-amber
   skills: # CorvaxGoob-Skills
-    - All
+  - All
   description: job-description-ertmedic
   playTimeTracker: JobERTMedicalAmber
   setPreference: false
@@ -331,8 +331,6 @@
 ## Red
 - type: job
   id: ERTMedicalRed
-  skills: # CorvaxGoob-Skills
-    - All
   name: job-name-ertmedic-red
   description: job-description-ertmedic
   playTimeTracker: JobERTMedicalRed
@@ -341,6 +339,8 @@
   icon: "JobIconERT"
   supervisors: job-supervisors-centcom
   canBeAntag: false
+  skills: # CorvaxGoob-Skills
+  - All
   accessGroups:
   - AllAccess
   access:
@@ -384,7 +384,7 @@
   name: job-name-ertmedic-gamma
   description: job-description-ertmedic
   skills: # CorvaxGoob-Skills
-    - All
+  - All
   playTimeTracker: JobERTMedicalGamma
   setPreference: false
   startingGear: ERTMedicalGearGamma
@@ -440,7 +440,7 @@
   name: job-name-ertengineer-amber
   description: job-description-ertengineer
   skills: # CorvaxGoob-Skills
-    - All
+  - All
   playTimeTracker: JobERTEngineerAmber
   setPreference: false
   startingGear: ERTEngineerGearAmber
@@ -491,7 +491,7 @@
   supervisors: job-supervisors-centcom
   canBeAntag: false
   skills: # CorvaxGoob-Skills
-    - All
+  - All
   accessGroups:
   - AllAccess
   access:
@@ -522,7 +522,6 @@
     - ADTBaseUplinkBOBERT
     - EmergencyMedipen
     - RemoteSignaller
-
     - WeaponDisabler
 
 ## Gamma
@@ -574,7 +573,6 @@
     - RemoteSignallerAdvanced
     - ADTBaseUplinkBOBERT
     - EmergencyMedipen
-
     - PinpointerNuclear
     - ClothingEyesNightVisionGoggles
 

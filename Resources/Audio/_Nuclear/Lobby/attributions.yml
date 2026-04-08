@@ -1,0 +1,54 @@
+﻿- files: ["vibe_ace.ogg"]
+  license: "CC-BY-3.0"
+  copyright: "Vibe Ace by Kevin MacLeod. Converted from MP3 to OGG."
+  source: "https://freemusicarchive.org/music/Kevin_MacLeod/Jazz_Sampler/Vibe_Ace"
+
+- files: ["midnight.ogg"]
+  license: "CC-BY-3.0"
+  copyright: "Midnight by Nomyn"
+  source: "https://www.toneden.io/nomyn/post/nomyn-midnight"
+
+- files: ["neutral03.ogg"]
+  license: "Custom"
+  copyright: "Lobotomy Corporation OST - Neutral 03. There is no any license found for that music or other content of this game"
+  source: "https://store.steampowered.com/app/568220"
+
+- files: ["we-are-finally-landing.ogg"]
+  license: "CC-BY-3.0"
+  copyright: "We're finally landing by HOME"
+  source: "https://soundcloud.com/home-2001/home-before-the-night-01-were"
+
+- files: ["cascade.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Cascade by Kubbi"
+  source: "https://kubbi.bandcamp.com/album/ember"
+
+- files: ["shitsuboo-shita.ogg"]
+  license: "CC-BY-3.0"
+  copyright: "失望した by EVA"
+  source: "https://joshlis.bandcamp.com/album/rear-view"
+
+- files: ["insomnia.ogg"]
+  license: "CC-BY-3.0"
+  copyright: "Insomnia by Nomyn"
+  source: "https://www.toneden.io/nomyn/post/nomyn-insomnia"
+
+- files: ["we_will_fly.ogg"]
+  license: "Custom"
+  copyright: "Песня Мы улетим из Космические рейнджеры 2 от Василий Шестовец и Ксения Ларионова. Лицензия для этой песни была не найдена или отсутствует"
+  source: "https://www.youtube.com/watch?v=CwlB5P-rMGc"
+
+- files: ["aurora_caelus.ogg"]
+  license: "CC-BY-3.0"
+  copyright: "Music for Manatees by Kevin MacLeod. Taken from tgstation Aurora Caelus event"
+  source: "https://github.com/tgstation/tgstation/commit/4a6e0c6b00a6e7a172637d93039ec9bef23caa5b"
+
+- files: ["lightness.ogg"]
+  license: "CC-BY-3.0"
+  copyright: "Lightness by Nomyn"
+  source: "https://soundcloud.com/nomyn/lightness"
+
+- files: ["stellar.ogg"]
+  license: "CC-BY-3.0"
+  copyright: "Stellar by Nomyn"
+  source: "https://soundcloud.com/nomyn/stellar"

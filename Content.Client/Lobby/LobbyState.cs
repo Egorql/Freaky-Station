@@ -181,7 +181,6 @@ namespace Content.Client.Lobby
             Lobby!.CharacterSetupButton.OnPressed -= OnSetupPressed;
             Lobby!.ReadyButton.OnPressed -= OnReadyPressed;
             Lobby!.ReadyButton.OnToggled -= OnReadyToggled;
-
             Lobby = null;
         }
 

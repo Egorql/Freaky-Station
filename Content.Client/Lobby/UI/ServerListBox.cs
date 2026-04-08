@@ -36,7 +36,7 @@ public sealed class ServerListBox : BoxContainer
         scrollContainer.AddChild(serverContainer);
         AddChild(scrollContainer);
 
-        AddServers(serverContainer);
+        // AddServers(serverContainer);
     }
 
     private void AddServers(BoxContainer container)

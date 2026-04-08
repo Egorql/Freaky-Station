@@ -215,6 +215,7 @@
     - Blue
     - Red
     - Gamma
+    - Chaplains
     - Cburn
 
 - type: entity
@@ -256,5 +257,5 @@
   - type: ErtResponceConsole
     teams:
     - Blue
-    - Red
     - Cburn
+    - Chaplains

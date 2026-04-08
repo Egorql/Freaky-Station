@@ -10,7 +10,7 @@
   requirements:
     - !type:DepartmentTimeRequirement
       department: Typan
-      time: 72000
+      time: 36000
     - !type:AgeRequirement
       requiredAge: 24
   access:
