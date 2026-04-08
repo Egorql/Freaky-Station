@@ -64,5 +64,4 @@ random_characters = false
 random_species_weights = ""
 ssd_sleep_time = 3600
 
-[discord]
-adminchat_webhook = "https://discord.com/api/webhooks/1394625416341229589/xISLrxdfp3d3frH6ZMYtruvYFUf5cygnVmR2-ZGUqpUq25CZxE-sQsj4MnBlCKVgtKSg"
+# тут ничего не было отвечаю
