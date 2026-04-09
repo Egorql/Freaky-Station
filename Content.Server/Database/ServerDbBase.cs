@@ -302,7 +302,7 @@ namespace Content.Server.Database
             await db.DbContext.SaveChangesAsync();
         }
 
-        private static List<Marking> DeserializeProfileMarkings(JsonDocument? markingsDocument)
+        private static List<Marking> dDeserializeProfileMarkings(JsonDocument? markingsDocument)
         {
             if (markingsDocument is null)
             {
@@ -534,7 +534,7 @@ namespace Content.Server.Database
             // CorvaxGoob-TTS-End
 
             // ReSharper disable once ConditionalAccessQualifierIsNonNullableAccordingToAPIContract
-            var markingsRaw = DeserializeProfileMarkings(profile.Markings);
+            var markingsRaw = DeserializeProfileMarkings(profile.Markings?.RootElement.GetRawText() ?? "[]");
 
             var bark = new BarkData(profile.BarkProto, profile.BarkPitch, profile.LowBarkVar, profile.HighBarkVar);
 
@@ -605,6 +605,69 @@ namespace Content.Server.Database
                 profile.HeadshotUrl,
                 bark
             );
+        }
+
+        private static List<string>? DeserializeProfileMarkings(string markingsJson)
+        {
+            try
+            {
+                // Try to parse as array of objects first (new format)
+                var markingsList = JsonSerializer.Deserialize<List<Dictionary<string, object>>>(markingsJson);
+                if (markingsList != null)
+                {
+                    return markingsList.Select(TryParseColor).Where(x => x != null).ToList()!;
+                }
+            }
+            catch (JsonException)
+            {
+                // Fall back to old format (array of strings)
+            }
+
+            try
+            {
+                return JsonSerializer.Deserialize<List<string>>(markingsJson);
+            }
+            catch (JsonException)
+            {
+                return null;
+            }
+        }
+
+        private static string? TryParseColor(Dictionary<string, object> markingObj)
+        {
+            if (!markingObj.TryGetValue("marking", out var marking) || marking is not string markingStr)
+                return null;
+
+            if (!markingObj.TryGetValue("color", out var color))
+                return markingStr;
+
+            if (color is string colorStr)
+            {
+                return $"{markingStr}:{colorStr}";
+            }
+            else if (color is JsonElement colorElement && colorElement.ValueKind == JsonValueKind.Array)
+            {
+                var colors = ParseColorArray(colorElement);
+                if (colors.Length == 0)
+                    return markingStr;
+
+                return $"{markingStr}:{string.Join(",", colors)}";
+            }
+
+            return markingStr;
+        }
+
+        private static string[] ParseColorArray(JsonElement colorArray)
+        {
+            var colors = new List<string>();
+            foreach (var color in colorArray.EnumerateArray())
+            {
+                if (color.ValueKind == JsonValueKind.String)
+                {
+                    colors.Add(color.GetString()!);
+                }
+            }
+            return colors.ToArray();
         }
 
         private static Profile ConvertProfiles(HumanoidCharacterProfile humanoid, int slot, Profile? profile = null)
