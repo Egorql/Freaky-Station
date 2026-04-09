@@ -153,6 +153,7 @@ using Robust.Shared.Enums;
 using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
+using System.Text.Json;
 
 namespace Content.Server.Database
 {
@@ -301,6 +302,179 @@ namespace Content.Server.Database
             await db.DbContext.SaveChangesAsync();
         }
 
+        private static List<Marking> DeserializeProfileMarkings(JsonDocument? markingsDocument)
+        {
+            if (markingsDocument is null)
+            {
+                return new List<Marking>();
+            }
+
+            var root = markingsDocument.RootElement;
+            if (root.ValueKind != JsonValueKind.Array)
+            {
+                return new List<Marking>();
+            }
+
+            var markings = new List<Marking>();
+            foreach (var element in root.EnumerateArray())
+            {
+                if (element.ValueKind == JsonValueKind.String)
+                {
+                    var str = element.GetString();
+                    if (str == null)
+                        continue;
+
+                    var parsed = Marking.ParseFromDbString(str);
+                    if (parsed != null)
+                        markings.Add(parsed);
+
+                    continue;
+                }
+
+                if (element.ValueKind != JsonValueKind.Object)
+                    continue;
+
+                var markingId = TryGetStringProperty(element, "markingId")
+                                ?? TryGetStringProperty(element, "MarkingId")
+                                ?? TryGetStringProperty(element, "id");
+                if (markingId == null)
+                    continue;
+
+                var colors = ParseColorArray(element, "markingColors")
+                             ?? ParseColorArray(element, "MarkingColors")
+                             ?? ParseColorArray(element, "markingColor")
+                             ?? ParseColorArray(element, "colors")
+                             ?? new List<Color>();
+
+                if (colors.Count == 0)
+                    colors.Add(Color.White);
+
+                var marking = new Marking(markingId, colors)
+                {
+                    Visible = TryGetBoolProperty(element, "visible", true),
+                    Forced = TryGetBoolProperty(element, "forced", false)
+                };
+
+                markings.Add(marking);
+            }
+
+            return markings;
+        }
+
+        private static List<Color>? ParseColorArray(JsonElement element, string propertyName)
+        {
+            if (!element.TryGetProperty(propertyName, out var value) || value.ValueKind != JsonValueKind.Array)
+                return null;
+
+            var colors = new List<Color>();
+            foreach (var colorElement in value.EnumerateArray())
+            {
+                if (TryParseColor(colorElement, out var color))
+                    colors.Add(color);
+            }
+
+            return colors;
+        }
+
+        private static bool TryParseColor(JsonElement element, out Color color)
+        {
+            color = default;
+            switch (element.ValueKind)
+            {
+                case JsonValueKind.String:
+                {
+                    var text = element.GetString();
+                    if (!string.IsNullOrWhiteSpace(text))
+                    {
+                        try
+                        {
+                            color = Color.FromHex(text);
+                            return true;
+                        }
+                        catch
+                        {
+                            return false;
+                        }
+                    }
+
+                    return false;
+                }
+                case JsonValueKind.Object:
+                {
+                    if (TryGetFloatProperty(element, "r", out var r) || TryGetFloatProperty(element, "R", out r))
+                    {
+                        var g = TryGetFloatProperty(element, "g", out var gVal) ? gVal : 0f;
+                        var b = TryGetFloatProperty(element, "b", out var bVal) ? bVal : 0f;
+                        var a = TryGetFloatProperty(element, "a", out var aVal) ? aVal : 1f;
+                        color = new Color(r, g, b, a);
+                        return true;
+                    }
+
+                    return false;
+                }
+                case JsonValueKind.Array:
+                {
+                    var enumerator = element.EnumerateArray();
+                    if (!enumerator.MoveNext())
+                        return false;
+
+                    if (!TryGetFloatFromElement(enumerator.Current, out var r))
+                        return false;
+
+                    if (!enumerator.MoveNext() || !TryGetFloatFromElement(enumerator.Current, out var g))
+                        return false;
+
+                    if (!enumerator.MoveNext() || !TryGetFloatFromElement(enumerator.Current, out var b))
+                        return false;
+
+                    var a = 1f;
+                    if (enumerator.MoveNext())
+                        TryGetFloatFromElement(enumerator.Current, out a);
+
+                    color = new Color(r, g, b, a);
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        private static string? TryGetStringProperty(JsonElement element, string name)
+        {
+            return element.TryGetProperty(name, out var property) && property.ValueKind == JsonValueKind.String
+                ? property.GetString()
+                : null;
+        }
+
+        private static bool TryGetBoolProperty(JsonElement element, string name, bool defaultValue)
+        {
+            return element.TryGetProperty(name, out var property) && property.ValueKind == JsonValueKind.True;
+        }
+
+        private static bool TryGetFloatProperty(JsonElement element, string name, out float value)
+        {
+            if (element.TryGetProperty(name, out var property))
+                return TryGetFloatFromElement(property, out value);
+
+            value = 0f;
+            return false;
+        }
+
+        private static bool TryGetFloatFromElement(JsonElement element, out float value)
+        {
+            switch (element.ValueKind)
+            {
+                case JsonValueKind.Number:
+                    return element.TryGetSingle(out value);
+                case JsonValueKind.String when float.TryParse(element.GetString(), out var parsed):
+                    value = parsed;
+                    return true;
+                default:
+                    value = 0f;
+                    return false;
+            }
+        }
+
         public async Task SaveAdminOOCColorAsync(NetUserId userId, Color color)
         {
             await using var db = await GetDb();
@@ -360,7 +534,7 @@ namespace Content.Server.Database
             // CorvaxGoob-TTS-End
 
             // ReSharper disable once ConditionalAccessQualifierIsNonNullableAccordingToAPIContract
-            var markingsRaw = profile.Markings?.Deserialize<List<string>>();
+            var markingsRaw = DeserializeProfileMarkings(profile.Markings);
 
             var bark = new BarkData(profile.BarkProto, profile.BarkPitch, profile.LowBarkVar, profile.HighBarkVar);
 
