@@ -3,15 +3,11 @@
   equipment:
     jumpsuit: ClothingUniformJumpsuitOperative
     outerClothing: ClothingOuterArmorBasic
-    head: ClothingHeadHelmetBasic
     mask: ClothingMaskGasThunderdome
     shoes: ClothingShoesBootsCombatFilled
-    back: ClothingBackpack
+    gloves: ClothingHandsGlovesCombat
     pocket1: WeaponPistolMk58
     pocket2: MagazinePistol
-  storage:
-    back:
-      - MedkitCombatFilled
 
 - type: startingGear
   id: ThunderdomeShotgun
@@ -86,15 +82,6 @@
       - SpeedLoaderMagnum
 
 - type: startingGear
-  id: ThunderdomeHristov
-  equipment:
-    suitstorage: WeaponSniperHristov
-  storage:
-    back:
-      - MagazineAntiMateriel
-      - MagazineAntiMateriel
-
-- type: startingGear
   id: ThunderdomeEsword
   equipment:
     suitstorage: EnergySword
@@ -138,3 +125,209 @@
     back:
       - MagazineLightRifle
       - MagazineLightRifle
+
+- type: startingGear
+  id: ThunderdomeAdvancedLaser
+  equipment:
+    suitstorage: WeaponAdvancedLaser
+
+- type: startingGear
+  id: ThunderdomeLaserRifle
+  equipment:
+    suitstorage: WeaponLaserCarbineAutoRecharge
+
+- type: startingGear
+  id: ThunderdomeLaserSniper
+  equipment:
+    suitstorage: WeaponSniperLaser
+
+# Grenades
+- type: startingGear
+  id: ThunderdomeGrenadeNone
+  # No grenade
+
+- type: startingGear
+  id: ThunderdomeGrenadeFrag
+  storage:
+    back:
+      - GrenadeShrapnel
+
+- type: startingGear
+  id: ThunderdomeGrenadeFlash
+  storage:
+    back:
+      - GrenadeFlashBang
+
+- type: startingGear
+  id: ThunderdomeGrenadeSmoke
+  storage:
+    back:
+      - SmokeGrenade
+
+# Medical items
+- type: startingGear
+  id: ThunderdomeMedicalDefault
+  storage:
+    back:
+      - MedkitFilled
+
+- type: startingGear
+  id: ThunderdomeMedicalEphedrine
+  storage:
+    back:
+      - SyringeEphedrine
+      - SyringeEphedrine
+
+- type: startingGear
+  id: ThunderdomeMedicalBicaridine
+  storage:
+    back:
+      - SyringeBicaridine
+      - SyringeBicaridine
+      - SyringeBicaridine
+      - SyringeDermaline
+      - SyringeDermaline
+      - SyringeDermaline
+
+# Cosmetic options - Head
+- type: startingGear
+  id: ThunderdomeHead1
+  equipment:
+    head: ClothingHeadHelmetBasic
+
+- type: startingGear
+  id: ThunderdomeHead2
+  equipment:
+    head: ClothingHeadHatBeretSecurity
+
+- type: startingGear
+  id: ThunderdomeHead3
+  equipment:
+    head: ClothingHeadHatBeretBrigmedic
+
+- type: startingGear
+  id: ThunderdomeHead4
+  equipment:
+    head: ClothingHeadHatBeretSecurityMedic
+
+- type: startingGear
+  id: ThunderdomeHead5
+  equipment:
+    head: ClothingHeadHatBeretHoS
+
+- type: startingGear
+  id: ThunderdomeHead6
+  equipment:
+    head: ClothingHeadSanabi
+
+- type: startingGear
+  id: ThunderdomeHead7
+  equipment:
+    head: ClothingHeadHatChameleon
+
+# Cosmetic options - Neck
+- type: startingGear
+  id: ThunderdomeNeck1
+  # No cloak
+
+- type: startingGear
+  id: ThunderdomeNeck2
+  equipment:
+    neck: ClothingNeckCloakMoth
+
+- type: startingGear
+  id: ThunderdomeNeck3
+  equipment:
+    neck: ClothingNeckCloakGoliathCloak
+
+- type: startingGear
+  id: ThunderdomeNeck4
+  equipment:
+    neck: ClothingNeckEnsembleTrans
+
+- type: startingGear
+  id: ThunderdomeNeck5
+  equipment:
+    neck: ClothingNeckCloakSanabi
+
+- type: startingGear
+  id: ThunderdomeNeck6
+  equipment:
+    neck: ClothingNeckScarfBlueshield
+
+- type: startingGear
+  id: ThunderdomeNeck7
+  equipment:
+    neck: ClothingNeckOldClothWrap
+
+- type: startingGear
+  id: ThunderdomeNeck8
+  equipment:
+    neck: ClothingNeckCloakCentcomBlack
+
+- type: startingGear
+  id: ThunderdomeNeck9
+  equipment:
+    neck: ClothingNeckMantleHOSShoulder
+
+- type: startingGear
+  id: ThunderdomeNeck10
+  equipment:
+    neck: ClothingNeckMantleERTLeader
+
+- type: startingGear
+  id: ThunderdomeNeck11
+  equipment:
+    neck: ClothingNeckCloakAdmin
+
+- type: startingGear
+  id: ThunderdomeNeck12
+  equipment:
+    neck: ClothingNeckOldClothWrap
+
+- type: startingGear
+  id: ThunderdomeNeck13
+  equipment:
+    neck: ClothingNeckChameleon
+
+# Glasses
+- type: startingGear
+  id: ThunderdomeGlasses1
+  # No glasses
+
+- type: startingGear
+  id: ThunderdomeGlasses2
+  equipment:
+    eyes: ClothingEyesGlassesSunglasses
+
+- type: startingGear
+  id: ThunderdomeGlasses3
+  equipment:
+    eyes: ClothingEyesGlassesSecurity
+
+- type: startingGear
+  id: ThunderdomeGlasses4
+  equipment:
+    eyes: ClothingEyesHudMedical
+
+# Backpack
+- type: startingGear
+  id: ThunderdomeBackpack1
+  equipment:
+    back: ClothingBackpack
+
+- type: startingGear
+  id: ThunderdomeBackpack2
+  equipment:
+    back: ClothingBackpackSatchel
+
+- type: startingGear
+  id: ThunderdomeBackpack3
+  equipment:
+    back: ClothingBackpackSatchelLeather
+
+- type: startingGear
+  id: ThunderdomeBackpack4
+  equipment:
+    back: ClothingBackpackDuffel
+

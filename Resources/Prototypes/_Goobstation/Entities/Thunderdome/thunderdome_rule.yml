@@ -61,11 +61,6 @@
           description: thunderdome-desc-inspector
           category: thunderdome-category-revolvers
           sprite: WeaponRevolverInspector
-        - gear: ThunderdomeHristov
-          name: thunderdome-loadout-hristov
-          description: thunderdome-desc-hristov
-          category: thunderdome-category-snipers
-          sprite: WeaponSniperHristov
         - gear: ThunderdomeEsword
           name: thunderdome-loadout-esword
           description: thunderdome-desc-esword
@@ -76,6 +71,202 @@
           name: thunderdome-loadout-capo
           category: thunderdome-category-melee
           sprite: CapoeiraManual
+        - gear: ThunderdomeAdvancedLaser
+          name: thunderdome-loadout-advlaser
+          description: thunderdome-desc-advlaser
+          category: thunderdome-category-lasers
+          sprite: WeaponAdvancedLaser
+        - gear: ThunderdomeLaserRifle
+          name: thunderdome-loadout-laserrifle
+          description: thunderdome-desc-laserrifle
+          category: thunderdome-category-lasers
+          sprite: WeaponLaserCarbine
+        - gear: ThunderdomeLaserSniper
+          name: thunderdome-loadout-lasersniper
+          description: thunderdome-desc-lasersniper
+          category: thunderdome-category-lasers
+          sprite: WeaponLaserCannon
+      grenadeLoadouts:
+        - gear: ThunderdomeGrenadeNone
+          name: thunderdome-loadout-grenade-none
+          description: thunderdome-desc-grenade-none
+          category: thunderdome-category-grenades
+          sprite: ClothingBackpack
+        - gear: ThunderdomeGrenadeFrag
+          name: thunderdome-loadout-grenade-frag
+          description: thunderdome-desc-grenade-frag
+          category: thunderdome-category-grenades
+          sprite: GrenadeShrapnel
+        - gear: ThunderdomeGrenadeFlash
+          name: thunderdome-loadout-grenade-flash
+          description: thunderdome-desc-grenade-flash
+          category: thunderdome-category-grenades
+          sprite: GrenadeFlashBang
+        - gear: ThunderdomeGrenadeSmoke
+          name: thunderdome-loadout-grenade-smoke
+          description: thunderdome-desc-grenade-smoke
+          category: thunderdome-category-grenades
+          sprite: SmokeGrenade
+      medicalLoadouts:
+        - gear: ThunderdomeMedicalDefault
+          name: thunderdome-loadout-medical-default
+          description: thunderdome-desc-medical-default
+          category: thunderdome-category-medical
+          sprite: Brutepack
+        - gear: ThunderdomeMedicalEphedrine
+          name: thunderdome-loadout-medical-ephedrine
+          description: thunderdome-desc-medical-ephedrine
+          category: thunderdome-category-medical
+          sprite: SyringeEphedrine
+        - gear: ThunderdomeMedicalBicaridine
+          name: thunderdome-loadout-medical-bicaridine
+          description: thunderdome-desc-medical-bicaridine
+          category: thunderdome-category-medical
+          sprite: SyringeBicaridine
+      headLoadouts:
+        - gear: ThunderdomeHead1
+          name: thunderdome-loadout-head-basic
+          description: thunderdome-desc-head-basic
+          category: thunderdome-category-head
+          sprite: ClothingHeadHelmetBasic
+        - gear: ThunderdomeHead2
+          name: thunderdome-loadout-head-security
+          description: thunderdome-desc-head-security
+          category: thunderdome-category-head
+          sprite: ClothingHeadHatBeretSecurity
+        - gear: ThunderdomeHead3
+          name: thunderdome-loadout-head-brigmedic
+          description: thunderdome-desc-head-brigmedic
+          category: thunderdome-category-head
+          sprite: ClothingHeadHatBeretBrigmedic
+        - gear: ThunderdomeHead4
+          name: thunderdome-loadout-head-combatmedic
+          description: thunderdome-desc-head-combatmedic
+          category: thunderdome-category-head
+          sprite: ClothingHeadHatBeretSecurityMedic
+        - gear: ThunderdomeHead5
+          name: thunderdome-loadout-head-hos
+          description: thunderdome-desc-head-hos
+          category: thunderdome-category-head
+          sprite: ClothingHeadHatBeretHoS
+        - gear: ThunderdomeHead6
+          name: thunderdome-loadout-head-brigadier
+          description: thunderdome-desc-head-brigadier
+          category: thunderdome-category-head
+          sprite: ClothingHeadSanabi
+        - gear: ThunderdomeHead7
+          name: thunderdome-loadout-head-chameleon
+          description: thunderdome-desc-head-chameleon
+          category: thunderdome-category-head
+          sprite: ClothingHeadHatChameleon
+      neckLoadouts:
+        - gear: ThunderdomeNeck1
+          name: thunderdome-loadout-neck-none
+          description: thunderdome-desc-neck-none
+          category: thunderdome-category-neck
+          sprite: ClothingBackpack
+        - gear: ThunderdomeNeck2
+          name: thunderdome-loadout-neck-moth
+          description: thunderdome-desc-neck-moth
+          category: thunderdome-category-neck
+          sprite: ClothingNeckCloakMoth
+        - gear: ThunderdomeNeck3
+          name: thunderdome-loadout-neck-goliath
+          description: thunderdome-desc-neck-goliath
+          category: thunderdome-category-neck
+          sprite: ClothingNeckCloakGoliathCloak
+        - gear: ThunderdomeNeck4
+          name: thunderdome-loadout-neck-trans
+          description: thunderdome-desc-neck-trans
+          category: thunderdome-category-neck
+          sprite: ClothingNeckEnsembleTrans
+        - gear: ThunderdomeNeck5
+          name: thunderdome-loadout-neck-brigadier
+          description: thunderdome-desc-neck-brigadier
+          category: thunderdome-category-neck
+          sprite: ClothingNeckCloakSanabi
+        - gear: ThunderdomeNeck6
+          name: thunderdome-loadout-neck-blueshield
+          description: thunderdome-desc-neck-blueshield
+          category: thunderdome-category-neck
+          sprite: ClothingNeckScarfBlueshield
+        - gear: ThunderdomeNeck7
+          name: thunderdome-loadout-neck-oldmantle
+          description: thunderdome-desc-neck-oldmantle
+          category: thunderdome-category-neck
+          sprite: ClothingNeckOldClothWrap
+        - gear: ThunderdomeNeck8
+          name: thunderdome-loadout-neck-specops
+          description: thunderdome-desc-neck-specops
+          category: thunderdome-category-neck
+          sprite: ClothingNeckCloakCentcomBlack
+        - gear: ThunderdomeNeck9
+          name: thunderdome-loadout-neck-gsb
+          description: thunderdome-desc-neck-gsb
+          category: thunderdome-category-neck
+          sprite: ClothingNeckMantleHOSShoulder
+        - gear: ThunderdomeNeck10
+          name: thunderdome-loadout-neck-ertleader
+          description: thunderdome-desc-neck-ertleader
+          category: thunderdome-category-neck
+          sprite: ClothingNeckMantleERTLeader
+        - gear: ThunderdomeNeck11
+          name: thunderdome-loadout-neck-vox
+          description: thunderdome-desc-neck-vox
+          category: thunderdome-category-neck
+          sprite: ClothingNeckCloakAdmin
+        - gear: ThunderdomeNeck12
+          name: thunderdome-loadout-neck-bandage
+          description: thunderdome-desc-neck-bandage
+          category: thunderdome-category-neck
+          sprite: ClothingNeckOldClothWrap
+        - gear: ThunderdomeNeck13
+          name: thunderdome-loadout-neck-chameleon
+          description: thunderdome-desc-neck-chameleon
+          category: thunderdome-category-neck
+          sprite: ClothingNeckChameleon
+      glassesLoadouts:
+        - gear: ThunderdomeGlasses1
+          name: thunderdome-loadout-glasses-none
+          description: thunderdome-desc-glasses-none
+          category: thunderdome-category-glasses
+          sprite: ClothingBackpack
+        - gear: ThunderdomeGlasses2
+          name: thunderdome-loadout-glasses-sunglasses
+          description: thunderdome-desc-glasses-sunglasses
+          category: thunderdome-category-glasses
+          sprite: ClothingEyesGlassesSunglasses
+        - gear: ThunderdomeGlasses3
+          name: thunderdome-loadout-glasses-security
+          description: thunderdome-desc-glasses-security
+          category: thunderdome-category-glasses
+          sprite: ClothingEyesGlassesSecurity
+        - gear: ThunderdomeGlasses4
+          name: thunderdome-loadout-glasses-diagnostic
+          description: thunderdome-desc-glasses-diagnostic
+          category: thunderdome-category-glasses
+          sprite: ClothingEyesHudMedical
+      backpackLoadouts:
+        - gear: ThunderdomeBackpack1
+          name: thunderdome-loadout-backpack-default
+          description: thunderdome-desc-backpack-default
+          category: thunderdome-category-backpack
+          sprite: ClothingBackpack
+        - gear: ThunderdomeBackpack2
+          name: thunderdome-loadout-backpack-satchel
+          description: thunderdome-desc-backpack-satchel
+          category: thunderdome-category-backpack
+          sprite: ClothingBackpackSatchel
+        - gear: ThunderdomeBackpack3
+          name: thunderdome-loadout-backpack-leather
+          description: thunderdome-desc-backpack-leather
+          category: thunderdome-category-backpack
+          sprite: ClothingBackpackSatchelLeather
+        - gear: ThunderdomeBackpack4
+          name: thunderdome-loadout-backpack-duffel
+          description: thunderdome-desc-backpack-duffel
+          category: thunderdome-category-backpack
+          sprite: ClothingBackpackDuffel
     - type: LoadMapRule
       mapPath: /Maps/_Goobstation/Nonstations/dm01-entryway.yml
     - type: RuleGrids
