@@ -131,7 +131,7 @@
 - type: entity
   id: AnomalyLocatorUnpowered
   parent: BaseItem
-  name: anomaly locator
+  name: anomaly 
   description: A device designed to aid in the locating of anomalies. Did you check the gas miners?
   suffix: Always Powered
   components:
@@ -155,7 +155,7 @@
   - type: ProximityDetector
     range: 20
     components:
-    - type: Anomaly
+    - type: AnomalyMarker
   - type: Beeper
     isMuted: true
     minBeepInterval: 0.15

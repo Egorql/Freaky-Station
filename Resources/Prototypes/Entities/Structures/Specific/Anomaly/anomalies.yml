@@ -107,6 +107,7 @@
       path: /Audio/Ambience/anomaly_drone.ogg
   - type: Transform
     anchored: false
+  - type: AnomalyMarker
   - type: Physics
     bodyType: Static
     bodyStatus: InAir
