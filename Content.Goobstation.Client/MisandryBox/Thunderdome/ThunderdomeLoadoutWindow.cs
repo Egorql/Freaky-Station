@@ -6,19 +6,39 @@ namespace Content.Goobstation.Client.MisandryBox.Thunderdome;
 
 public sealed class ThunderdomeLoadoutWindow : ThunderdomeWindow
 {
-    public event Action<int>? OnLoadoutConfirmed;
+    public event Action<ThunderdomeLoadoutSelection>? OnLoadoutConfirmed;
 
     private int _weaponSelection = -1;
-    private ThunderdomeWeaponCard? _selectedCard;
+    private int _grenadeSelection = 0;
+    private int _medicalSelection = 0;
+    private int _headSelection = 0;
+    private int _neckSelection = 0;
+    private int _glassesSelection = 0;
+    private int _backpackSelection = 0;
+    private ThunderdomeWeaponCard? _selectedWeaponCard;
+    private ThunderdomeWeaponCard? _selectedGrenadeCard;
+    private ThunderdomeWeaponCard? _selectedMedicalCard;
+    private ThunderdomeWeaponCard? _selectedHeadCard;
+    private ThunderdomeWeaponCard? _selectedNeckCard;
+    private ThunderdomeWeaponCard? _selectedGlassesCard;
+    private ThunderdomeWeaponCard? _selectedBackpackCard;
 
     private readonly Label _playerCountLabel;
-    private readonly BoxContainer _categoriesContainer;
+    private readonly TabContainer _tabContainer;
+    private readonly BoxContainer _weaponsContainer;
+    private readonly BoxContainer _grenadesContainer;
+    private readonly BoxContainer _medicalsContainer;
+    private readonly BoxContainer _headsContainer;
+    private readonly BoxContainer _necksContainer;
+    private readonly BoxContainer _glassesContainer;
+    private readonly BoxContainer _backpacksContainer;
     private readonly ThunderdomeButton _confirmButton;
 
     public ThunderdomeLoadoutWindow()
     {
         WindowTitle = Loc.GetString("thunderdome-loadout-title");
-        SetSize = new System.Numerics.Vector2(450, 500);
+        SetSize = new System.Numerics.Vector2(550, 580);
+        MinSize = new System.Numerics.Vector2(550, 580);
 
         _playerCountLabel = new Label
         {
@@ -38,21 +58,125 @@ public sealed class ThunderdomeLoadoutWindow : ThunderdomeWindow
         };
         Contents.AddChild(subtitle);
 
-        _categoriesContainer = new BoxContainer
-        {
-            Orientation = BoxContainer.LayoutOrientation.Vertical,
-            HorizontalExpand = true,
-            SeparationOverride = 4,
-        };
-
-        var scroll = new ScrollContainer
+        _tabContainer = new TabContainer
         {
             VerticalExpand = true,
             HorizontalExpand = true,
             Margin = new Thickness(6, 0),
         };
-        scroll.AddChild(_categoriesContainer);
-        Contents.AddChild(scroll);
+        Contents.AddChild(_tabContainer);
+
+        // Weapons tab
+        var weaponsScroll = new ScrollContainer
+        {
+            VerticalExpand = true,
+            HorizontalExpand = true,
+        };
+        _weaponsContainer = new BoxContainer
+        {
+            Orientation = BoxContainer.LayoutOrientation.Vertical,
+            HorizontalExpand = true,
+            SeparationOverride = 4,
+        };
+        weaponsScroll.AddChild(_weaponsContainer);
+        _tabContainer.AddChild(weaponsScroll);
+        _tabContainer.SetTabTitle(0, "Weapons");
+
+        // Grenades tab
+        var grenadesScroll = new ScrollContainer
+        {
+            VerticalExpand = true,
+            HorizontalExpand = true,
+        };
+        _grenadesContainer = new BoxContainer
+        {
+            Orientation = BoxContainer.LayoutOrientation.Vertical,
+            HorizontalExpand = true,
+            SeparationOverride = 4,
+        };
+        grenadesScroll.AddChild(_grenadesContainer);
+        _tabContainer.AddChild(grenadesScroll);
+        _tabContainer.SetTabTitle(1, "Grenades");
+
+        // Medical tab
+        var medicalsScroll = new ScrollContainer
+        {
+            VerticalExpand = true,
+            HorizontalExpand = true,
+        };
+        _medicalsContainer = new BoxContainer
+        {
+            Orientation = BoxContainer.LayoutOrientation.Vertical,
+            HorizontalExpand = true,
+            SeparationOverride = 4,
+        };
+        medicalsScroll.AddChild(_medicalsContainer);
+        _tabContainer.AddChild(medicalsScroll);
+        _tabContainer.SetTabTitle(2, "Medical");
+
+        // Head tab
+        var headsScroll = new ScrollContainer
+        {
+            VerticalExpand = true,
+            HorizontalExpand = true,
+        };
+        _headsContainer = new BoxContainer
+        {
+            Orientation = BoxContainer.LayoutOrientation.Vertical,
+            HorizontalExpand = true,
+            SeparationOverride = 4,
+        };
+        headsScroll.AddChild(_headsContainer);
+        _tabContainer.AddChild(headsScroll);
+        _tabContainer.SetTabTitle(3, "Head");
+
+        // Neck tab
+        var necksScroll = new ScrollContainer
+        {
+            VerticalExpand = true,
+            HorizontalExpand = true,
+        };
+        _necksContainer = new BoxContainer
+        {
+            Orientation = BoxContainer.LayoutOrientation.Vertical,
+            HorizontalExpand = true,
+            SeparationOverride = 4,
+        };
+        necksScroll.AddChild(_necksContainer);
+        _tabContainer.AddChild(necksScroll);
+        _tabContainer.SetTabTitle(4, "Neck");
+
+        // Glasses tab
+        var glassesScroll = new ScrollContainer
+        {
+            VerticalExpand = true,
+            HorizontalExpand = true,
+        };
+        _glassesContainer = new BoxContainer
+        {
+            Orientation = BoxContainer.LayoutOrientation.Vertical,
+            HorizontalExpand = true,
+            SeparationOverride = 4,
+        };
+        glassesScroll.AddChild(_glassesContainer);
+        _tabContainer.AddChild(glassesScroll);
+        _tabContainer.SetTabTitle(5, "Glasses");
+
+        // Backpack tab
+        var backpacksScroll = new ScrollContainer
+        {
+            VerticalExpand = true,
+            HorizontalExpand = true,
+        };
+        _backpacksContainer = new BoxContainer
+        {
+            Orientation = BoxContainer.LayoutOrientation.Vertical,
+            HorizontalExpand = true,
+            SeparationOverride = 4,
+        };
+        backpacksScroll.AddChild(_backpacksContainer);
+        _tabContainer.AddChild(backpacksScroll);
+        _tabContainer.SetTabTitle(6, "Backpack");
 
         _confirmButton = new ThunderdomeButton
         {
@@ -63,7 +187,17 @@ public sealed class ThunderdomeLoadoutWindow : ThunderdomeWindow
         _confirmButton.OnPressed += () =>
         {
             if (_weaponSelection >= 0)
-                OnLoadoutConfirmed?.Invoke(_weaponSelection);
+            {
+                var selection = new ThunderdomeLoadoutSelection(
+                    _weaponSelection,
+                    _grenadeSelection,
+                    _medicalSelection,
+                    _headSelection,
+                    _neckSelection,
+                    _glassesSelection,
+                    _backpackSelection);
+                OnLoadoutConfirmed?.Invoke(selection);
+            }
         };
         Contents.AddChild(_confirmButton);
     }
@@ -72,11 +206,31 @@ public sealed class ThunderdomeLoadoutWindow : ThunderdomeWindow
     {
         _playerCountLabel.Text = Loc.GetString("thunderdome-loadout-players", ("count", state.PlayerCount));
 
-        _categoriesContainer.RemoveAllChildren();
-        _selectedCard = null;
-        _weaponSelection = -1;
-        _confirmButton.Disabled = true;
+        _weaponsContainer.RemoveAllChildren();
+        _grenadesContainer.RemoveAllChildren();
+        _medicalsContainer.RemoveAllChildren();
+        _headsContainer.RemoveAllChildren();
+        _necksContainer.RemoveAllChildren();
+        _glassesContainer.RemoveAllChildren();
+        _backpacksContainer.RemoveAllChildren();
 
+        _selectedWeaponCard = null;
+        _selectedGrenadeCard = null;
+        _selectedMedicalCard = null;
+        _selectedHeadCard = null;
+        _selectedNeckCard = null;
+        _selectedGlassesCard = null;
+        _selectedBackpackCard = null;
+        _weaponSelection = state.LastWeaponSelection;
+        _grenadeSelection = state.LastGrenadeSelection;
+        _medicalSelection = state.LastMedicalSelection;
+        _headSelection = state.LastHeadSelection;
+        _neckSelection = state.LastNeckSelection;
+        _glassesSelection = state.LastGlassesSelection;
+        _backpackSelection = state.LastBackpackSelection;
+        _confirmButton.Disabled = _weaponSelection < 0;
+
+        // Weapons tab - grouped by category
         var categories = new List<(string Category, List<ThunderdomeLoadoutOption> Options)>();
         var categoryMap = new Dictionary<string, List<ThunderdomeLoadoutOption>>();
 
@@ -99,25 +253,169 @@ public sealed class ThunderdomeLoadoutWindow : ThunderdomeWindow
                 StyleClasses = { "LabelKeyText" },
                 Margin = new Thickness(4, 6, 0, 2),
             };
-            _categoriesContainer.AddChild(header);
+            _weaponsContainer.AddChild(header);
 
             foreach (var option in options)
             {
                 var card = new ThunderdomeWeaponCard(option.Index, option.Name, option.SpritePrototype, option.Description);
-                card.OnSelected += OnCardSelected;
-                _categoriesContainer.AddChild(card);
+                card.OnSelected += OnWeaponCardSelected;
+                _weaponsContainer.AddChild(card);
+
+                if (option.Index == state.LastWeaponSelection)
+                {
+                    card.SetSelected(true);
+                    _selectedWeaponCard = card;
+                }
+            }
+        }
+
+        // Grenades tab
+        foreach (var option in state.Grenades)
+        {
+            var card = new ThunderdomeWeaponCard(option.Index, option.Name, option.SpritePrototype, option.Description);
+            card.OnSelected += OnGrenadeCardSelected;
+            _grenadesContainer.AddChild(card);
+
+            if (option.Index == state.LastGrenadeSelection)
+            {
+                card.SetSelected(true);
+                _selectedGrenadeCard = card;
+            }
+        }
+
+        // Medical tab
+        foreach (var option in state.Medicals)
+        {
+            var card = new ThunderdomeWeaponCard(option.Index, option.Name, option.SpritePrototype, option.Description);
+            card.OnSelected += OnMedicalCardSelected;
+            _medicalsContainer.AddChild(card);
+
+            if (option.Index == state.LastMedicalSelection)
+            {
+                card.SetSelected(true);
+                _selectedMedicalCard = card;
+            }
+        }
+
+        // Head tab
+        foreach (var option in state.Heads)
+        {
+            var card = new ThunderdomeWeaponCard(option.Index, option.Name, option.SpritePrototype, option.Description);
+            card.OnSelected += OnHeadCardSelected;
+            _headsContainer.AddChild(card);
+
+            if (option.Index == state.LastHeadSelection)
+            {
+                card.SetSelected(true);
+                _selectedHeadCard = card;
+            }
+        }
+
+        // Neck tab
+        foreach (var option in state.Necks)
+        {
+            var card = new ThunderdomeWeaponCard(option.Index, option.Name, option.SpritePrototype, option.Description);
+            card.OnSelected += OnNeckCardSelected;
+            _necksContainer.AddChild(card);
+
+            if (option.Index == state.LastNeckSelection)
+            {
+                card.SetSelected(true);
+                _selectedNeckCard = card;
+            }
+        }
+
+        // Glasses tab
+        foreach (var option in state.Glasses)
+        {
+            var card = new ThunderdomeWeaponCard(option.Index, option.Name, option.SpritePrototype, option.Description);
+            card.OnSelected += OnGlassesCardSelected;
+            _glassesContainer.AddChild(card);
+
+            if (option.Index == state.LastGlassesSelection)
+            {
+                card.SetSelected(true);
+                _selectedGlassesCard = card;
+            }
+        }
+
+        // Backpack tab
+        foreach (var option in state.Backpacks)
+        {
+            var card = new ThunderdomeWeaponCard(option.Index, option.Name, option.SpritePrototype, option.Description);
+            card.OnSelected += OnBackpackCardSelected;
+            _backpacksContainer.AddChild(card);
+
+            if (option.Index == state.LastBackpackSelection)
+            {
+                card.SetSelected(true);
+                _selectedBackpackCard = card;
             }
         }
     }
 
-    private void OnCardSelected(ThunderdomeWeaponCard card)
+    private void OnWeaponCardSelected(ThunderdomeWeaponCard card)
     {
-        _selectedCard?.SetSelected(false);
+        _selectedWeaponCard?.SetSelected(false);
 
-        _selectedCard = card;
+        _selectedWeaponCard = card;
         _weaponSelection = card.WeaponIndex;
         card.SetSelected(true);
 
         _confirmButton.Disabled = false;
+    }
+
+    private void OnGrenadeCardSelected(ThunderdomeWeaponCard card)
+    {
+        _selectedGrenadeCard?.SetSelected(false);
+
+        _selectedGrenadeCard = card;
+        _grenadeSelection = card.WeaponIndex;
+        card.SetSelected(true);
+    }
+
+    private void OnMedicalCardSelected(ThunderdomeWeaponCard card)
+    {
+        _selectedMedicalCard?.SetSelected(false);
+
+        _selectedMedicalCard = card;
+        _medicalSelection = card.WeaponIndex;
+        card.SetSelected(true);
+    }
+
+    private void OnHeadCardSelected(ThunderdomeWeaponCard card)
+    {
+        _selectedHeadCard?.SetSelected(false);
+
+        _selectedHeadCard = card;
+        _headSelection = card.WeaponIndex;
+        card.SetSelected(true);
+    }
+
+    private void OnNeckCardSelected(ThunderdomeWeaponCard card)
+    {
+        _selectedNeckCard?.SetSelected(false);
+
+        _selectedNeckCard = card;
+        _neckSelection = card.WeaponIndex;
+        card.SetSelected(true);
+    }
+
+    private void OnGlassesCardSelected(ThunderdomeWeaponCard card)
+    {
+        _selectedGlassesCard?.SetSelected(false);
+
+        _selectedGlassesCard = card;
+        _glassesSelection = card.WeaponIndex;
+        card.SetSelected(true);
+    }
+
+    private void OnBackpackCardSelected(ThunderdomeWeaponCard card)
+    {
+        _selectedBackpackCard?.SetSelected(false);
+
+        _selectedBackpackCard = card;
+        _backpackSelection = card.WeaponIndex;
+        card.SetSelected(true);
     }
 }

@@ -1,0 +1,28 @@
+- type: entity
+  id: ThunderdomeLeaderboard
+  name: thunderdome leaderboard
+  description: Displays the top fighters in the ThunderDome arena.
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Transform
+    anchored: true
+  - type: ThunderdomeLeaderboard
+    isGlobal: false
+    title: "THUNDERDOME ROUND TOP 10"
+    color: "#FFD700"
+    fontSize: 10
+    offset: 0,1.5
+
+- type: entity
+  id: ThunderdomeLeaderboardGlobal
+  parent: ThunderdomeLeaderboard
+  name: thunderdome global leaderboard
+  description: Displays the all-time top fighters in the ThunderDome arena.
+  components:
+  - type: ThunderdomeLeaderboard
+    isGlobal: true
+    title: "THUNDERDOME ALL-TIME TOP 10"
+    color: "#00FF00"
+    fontSize: 10
+    offset: 0,1.5

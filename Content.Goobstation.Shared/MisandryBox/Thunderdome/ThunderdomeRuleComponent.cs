@@ -43,6 +43,12 @@ public sealed partial class ThunderdomeRuleComponent : Component
     public Dictionary<NetUserId, int> Deaths = new();
 
     [DataField]
+    public Dictionary<NetUserId, string> CharacterNames = new();
+
+    [DataField]
+    public Dictionary<NetUserId, int> BestStreaks = new();
+
+    [DataField]
     public bool Active;
 
     [DataField]
@@ -50,6 +56,24 @@ public sealed partial class ThunderdomeRuleComponent : Component
 
     [DataField]
     public List<ThunderdomeWeaponLoadout> WeaponLoadouts = new();
+
+    [DataField]
+    public List<ThunderdomeWeaponLoadout> GrenadeLoadouts = new();
+
+    [DataField]
+    public List<ThunderdomeWeaponLoadout> MedicalLoadouts = new();
+
+    [DataField]
+    public List<ThunderdomeWeaponLoadout> HeadLoadouts = new();
+
+    [DataField]
+    public List<ThunderdomeWeaponLoadout> NeckLoadouts = new();
+
+    [DataField]
+    public List<ThunderdomeWeaponLoadout> GlassesLoadouts = new();
+
+    [DataField]
+    public List<ThunderdomeWeaponLoadout> BackpackLoadouts = new();
 
     [DataField]
     public TimeSpan CleanupInterval = TimeSpan.FromSeconds(25);

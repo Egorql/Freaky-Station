@@ -12,6 +12,7 @@ using Content.Server.Power.Components;
 using Content.Server.Spawners.Components;
 using Content.Server.Station.Systems;
 using Content.Server.Weapons.Ranged.Systems;
+using Content.Server.Chat.Managers;
 using Content.Shared.GameTicking;
 using Content.Shared.Ghost;
 using Content.Shared.Fluids.Components;
@@ -28,7 +29,14 @@ using Content.Shared.Mobs.Components;
 using Content.Shared.Mind.Components;
 using Content.Shared.Popups;
 using Content.Shared.Preferences;
+using Content.Shared.Roles;
 using Content.Shared.Weapons.Ranged.Components;
+using Content.Shared.Chemistry.Components;
+using Content.Shared.Chemistry.EntitySystems;
+using Content.Shared.Chemistry.Components.SolutionManager;
+using Content.Shared.Stacks;
+using Content.Shared.Storage;
+using Content.Shared.Storage.EntitySystems;
 using Robust.Server.Audio;
 using Robust.Server.Player;
 using Robust.Shared.Audio;
@@ -40,7 +48,12 @@ using Robust.Shared.Random;
 using Robust.Shared.Containers;
 using Robust.Shared.Spawners;
 using Robust.Shared.Timing;
+using Robust.Shared.Log;
+using Robust.Shared.Network;
+using Robust.Shared.Prototypes;
 using Content.Server._CorvaxGoob.Skills;
+using System.Text;
+using System.Linq;
 
 namespace Content.Goobstation.Server.MisandryBox.Thunderdome;
 
@@ -63,12 +76,39 @@ public sealed class ThunderdomeRuleSystem : EntitySystem
     [Dependency] private readonly TemporaryMindSystem _tempMind = default!;
     [Dependency] private readonly ILocalizationManager _loc = default!;
     [Dependency] private readonly GunSystem _gun = default!;
+    [Dependency] private readonly IChatManager _chatManager = default!;
+    [Dependency] private readonly SharedSolutionContainerSystem _solutionContainer = default!;
+    [Dependency] private readonly SharedStackSystem _stack = default!;
+    [Dependency] private readonly IPrototypeManager _prototype = default!;
+    [Dependency] private readonly SharedStorageSystem _storage = default!;
 
     private const string RulePrototype = "ThunderdomeRule";
     private EntityUid? _ruleEntity;
     private bool _refillOnKill;
 
     private readonly Dictionary<ICommonSession, ThunderdomeLoadoutEui> _activeEuis = new();
+    private readonly Dictionary<NetUserId, GlobalThunderdomeStats> _globalStats = new();
+
+    private static readonly HashSet<string> AllowedSpecies = new()
+    {
+        "Human", "Reptilian", "Dwarf", "Moth", "Diona", "Arachnid", "Slime",
+        "Felinid", "Oni", "Harpy", "Vulpkanin", "Tajaran"
+    };
+
+    private sealed class GlobalThunderdomeStats
+    {
+        public string LastCharacterName = string.Empty;
+        public int Kills;
+        public int Deaths;
+        public int BestStreak;
+        public int LastWeaponSelection = -1;
+        public int LastGrenadeSelection = 0;
+        public int LastMedicalSelection = 0;
+        public int LastHeadSelection = 0;
+        public int LastNeckSelection = 0;
+        public int LastGlassesSelection = 0;
+        public int LastBackpackSelection = 0;
+    }
 
     public override void Initialize()
     {
@@ -83,6 +123,7 @@ public sealed class ThunderdomeRuleSystem : EntitySystem
 
         SubscribeLocalEvent<RoundRestartCleanupEvent>(OnRoundEnding);
         SubscribeLocalEvent<ThunderdomeRuleComponent, RuleLoadedGridsEvent>(OnGridsLoaded);
+        SubscribeLocalEvent<ThunderdomeLeaderboardComponent, ComponentInit>(OnLeaderboardInit);
         SubscribeNetworkEvent<ThunderdomeJoinRequestEvent>(OnJoinRequest);
         SubscribeNetworkEvent<ThunderdomeLeaveRequestEvent>(OnLeaveRequest);
         SubscribeLocalEvent<ThunderdomePlayerComponent, MobStateChangedEvent>(OnMobStateChanged);
@@ -95,6 +136,8 @@ public sealed class ThunderdomeRuleSystem : EntitySystem
         SubscribeLocalEvent<ThunderdomePlayerComponent, GetAntagSelectionBlockerEvent>(OnAntagSelectionBlocker);
         SubscribeLocalEvent<ThunderdomeOriginalBodyComponent, ExaminedEvent>(OnOriginalBodyExamined);
         SubscribeLocalEvent<ThunderdomePlayerComponent, PlayerDetachedEvent>(OnPlayerDetached);
+
+        _playerManager.PlayerStatusChanged += OnPlayerStatusChanged;
     }
 
     public override void Update(float frameTime)
@@ -152,6 +195,10 @@ public sealed class ThunderdomeRuleSystem : EntitySystem
             }
 
             rule.Players.Clear();
+            rule.Kills.Clear();
+            rule.Deaths.Clear();
+            rule.BestStreaks.Clear();
+            rule.CharacterNames.Clear();
             rule.Active = false;
             BroadcastPlayerCount(rule);
         }
@@ -171,6 +218,8 @@ public sealed class ThunderdomeRuleSystem : EntitySystem
         ent.Comp.ArenaGrids.UnionWith(args.Grids);
         ent.Comp.Active = true;
         WorldGuard(args.Map);
+        MarkPreexistingItems(args.Map);
+        InitializeLeaderboards(ent);
         BroadcastPlayerCount(ent.Comp);
     }
 
@@ -255,7 +304,7 @@ public sealed class ThunderdomeRuleSystem : EntitySystem
         GhostDomePlayer(ent, rule, playSound: false);
     }
 
-    public void SpawnPlayer(ICommonSession session, EntityUid ruleEntity, int weaponIdx)
+    public void SpawnPlayer(ICommonSession session, EntityUid ruleEntity, int weaponIdx, int grenadeIdx, int medicalIdx, int headIdx, int neckIdx, int glassesIdx, int backpackIdx)
     {
         if (!TryComp<ThunderdomeRuleComponent>(ruleEntity, out var rule)
             || !rule.Active
@@ -268,19 +317,86 @@ public sealed class ThunderdomeRuleSystem : EntitySystem
 
         HumanoidCharacterProfile? profile = null;
         if (mindComp.UserId is { } userId && _prefs.TryGetCachedPreferences(userId, out var prefs))
-            profile = (prefs.SelectedCharacter as HumanoidCharacterProfile)?.WithSpecies(SharedHumanoidAppearanceSystem.DefaultSpecies);
+        {
+            var selectedProfile = prefs.SelectedCharacter as HumanoidCharacterProfile;
+            if (selectedProfile != null)
+            {
+                var species = AllowedSpecies.Contains(selectedProfile.Species)
+                    ? selectedProfile.Species
+                    : SharedHumanoidAppearanceSystem.DefaultSpecies;
+                profile = selectedProfile.WithSpecies(species);
+            }
+        }
 
         var originalBody = mindComp.OwnedEntity != ghostEntity ? mindComp.OwnedEntity : null;
 
         var mob = _stationSpawning.SpawnPlayerMob(spawnCoords.Value, null, profile, null);
         _stationSpawning.EquipStartingGear(mob, rule.Gear);
+
+        // Equip cosmetic items first (they don't use storage)
+        SpawnHeadLoadout(mob, headIdx, rule);
+        SpawnNeckLoadout(mob, neckIdx, rule);
+        SpawnGlassesLoadout(mob, glassesIdx, rule);
+        SpawnBackpackLoadout(mob, backpackIdx, rule);
+
+        // Then spawn items that go into storage (after backpack is equipped)
         SpawnLoadoutItems(mob, weaponIdx, rule);
+        SpawnGrenadeLoadout(mob, grenadeIdx, rule);
+        SpawnMedicalLoadout(mob, medicalIdx, rule);
 
         EnsureComp<IgnoreSkillsComponent>(mob);
 
         var tdPlayer = EnsureComp<ThunderdomePlayerComponent>(mob);
         tdPlayer.RuleEntity = ruleEntity;
         tdPlayer.WeaponSelection = weaponIdx;
+        tdPlayer.GrenadeSelection = grenadeIdx;
+        tdPlayer.MedicalSelection = medicalIdx;
+        tdPlayer.HeadSelection = headIdx;
+        tdPlayer.NeckSelection = neckIdx;
+        tdPlayer.GlassesSelection = glassesIdx;
+        tdPlayer.BackpackSelection = backpackIdx;
+        tdPlayer.CharacterName = profile?.Name ?? "Unknown";
+
+        // Восстанавливаем статистику из rule по UserId
+        if (mindComp.UserId != null)
+        {
+            rule.Kills.TryGetValue(mindComp.UserId.Value, out var kills);
+            rule.Deaths.TryGetValue(mindComp.UserId.Value, out var deaths);
+            rule.BestStreaks.TryGetValue(mindComp.UserId.Value, out var bestStreak);
+            tdPlayer.Kills = kills;
+            tdPlayer.Deaths = deaths;
+            tdPlayer.CurrentStreak = 0; // Серия сбрасывается при смерти
+            tdPlayer.BestStreak = bestStreak;
+
+            // Сохраняем имя персонажа в rule для таблицы лидеров
+            rule.CharacterNames[mindComp.UserId.Value] = tdPlayer.CharacterName;
+
+            // Ensure player exists in dictionaries (initialize with 0 if first time)
+            if (!rule.Kills.ContainsKey(mindComp.UserId.Value))
+                rule.Kills[mindComp.UserId.Value] = 0;
+            if (!rule.Deaths.ContainsKey(mindComp.UserId.Value))
+                rule.Deaths[mindComp.UserId.Value] = 0;
+            if (!rule.BestStreaks.ContainsKey(mindComp.UserId.Value))
+                rule.BestStreaks[mindComp.UserId.Value] = 0;
+
+            // Сохраняем выбор лодаута и инициализируем глобальную статистику
+            if (!_globalStats.TryGetValue(mindComp.UserId.Value, out var globalStats))
+            {
+                globalStats = new GlobalThunderdomeStats();
+                _globalStats[mindComp.UserId.Value] = globalStats;
+            }
+            globalStats.LastWeaponSelection = weaponIdx;
+            globalStats.LastGrenadeSelection = grenadeIdx;
+            globalStats.LastMedicalSelection = medicalIdx;
+            globalStats.LastHeadSelection = headIdx;
+            globalStats.LastNeckSelection = neckIdx;
+            globalStats.LastGlassesSelection = glassesIdx;
+            globalStats.LastBackpackSelection = backpackIdx;
+            globalStats.LastCharacterName = profile?.Name ?? "Unknown";
+
+            // Update leaderboard immediately to show new player
+            UpdateLeaderboard(rule);
+        }
 
         if (originalBody is { Valid: true } body && !HasComp<ThunderdomeOriginalBodyComponent>(body))
         {
@@ -358,24 +474,83 @@ public sealed class ThunderdomeRuleSystem : EntitySystem
         {
             rule.Deaths.TryGetValue(deadUserId, out var existingDeaths);
             rule.Deaths[deadUserId] = existingDeaths + 1;
+
+            // Update global stats
+            if (!_globalStats.TryGetValue(deadUserId, out var victimGlobalStats))
+            {
+                victimGlobalStats = new GlobalThunderdomeStats();
+                _globalStats[deadUserId] = victimGlobalStats;
+            }
+            victimGlobalStats.Deaths++;
+            victimGlobalStats.LastCharacterName = victim.Comp.CharacterName;
         }
 
         killer ??= victim.Comp.LastAttacker;
-        if (killer is not { } killerUid || !TryComp<ThunderdomePlayerComponent>(killerUid, out var killerComp))
+        victim.Comp.LastAttacker = null;
+
+        // Самоубийство или отсутствие киллера - штраф
+        if (killer == null || killer == victim.Owner || !TryComp<ThunderdomePlayerComponent>(killer.Value, out var killerComp))
+        {
+            // Штраф за самоубийство
+            if (victim.Comp.Kills > 0)
+            {
+                victim.Comp.Kills--;
+
+                // Update rule dictionary
+                if (_mind.TryGetMind(victim, out _, out var victimMind) && victimMind.UserId is { } victimUserId)
+                {
+                    rule.Kills.TryGetValue(victimUserId, out var existingKills);
+                    if (existingKills > 0)
+                        rule.Kills[victimUserId] = existingKills - 1;
+
+                    // Update global stats - apply suicide penalty
+                    if (_globalStats.TryGetValue(victimUserId, out var victimGlobalStats) && victimGlobalStats.Kills > 0)
+                        victimGlobalStats.Kills--;
+                }
+            }
+
+            UpdateLeaderboard(rule);
             return;
+        }
 
         killerComp.Kills++;
         killerComp.CurrentStreak++;
 
-        if (_mind.TryGetMind(killerUid, out _, out var killerMind) && killerMind.UserId is { } killerUserId)
+        if (killerComp.CurrentStreak > killerComp.BestStreak)
+            killerComp.BestStreak = killerComp.CurrentStreak;
+
+        if (_mind.TryGetMind(killer.Value, out _, out var killerMind) && killerMind.UserId is { } killerUserId)
         {
             rule.Kills.TryGetValue(killerUserId, out var existingKills);
             rule.Kills[killerUserId] = existingKills + 1;
-            CheckKillStreak((killerUid, killerComp), rule);
+
+            // Update best streak in rule
+            rule.BestStreaks.TryGetValue(killerUserId, out var existingBestStreak);
+            if (killerComp.CurrentStreak > existingBestStreak)
+                rule.BestStreaks[killerUserId] = killerComp.CurrentStreak;
+
+            // Update global stats
+            if (!_globalStats.TryGetValue(killerUserId, out var killerGlobalStats))
+            {
+                killerGlobalStats = new GlobalThunderdomeStats();
+                _globalStats[killerUserId] = killerGlobalStats;
+            }
+            killerGlobalStats.Kills++;
+            if (killerComp.CurrentStreak > killerGlobalStats.BestStreak)
+                killerGlobalStats.BestStreak = killerComp.CurrentStreak;
+            killerGlobalStats.LastCharacterName = killerComp.CharacterName;
+
+            BroadcastKillMessage((killer.Value, killerComp), (victim, victim.Comp), rule);
+            CheckKillStreak((killer.Value, killerComp), rule);
+            UpdateLeaderboard(rule);
         }
 
         if (_refillOnKill)
-            RefillAmmo(killerUid);
+        {
+            RefillAmmo(killer.Value);
+            RefillMedicals(killer.Value);
+            RefillGrenade(killer.Value, killerComp, rule);
+        }
     }
 
     private void GhostDomePlayer(
@@ -395,6 +570,7 @@ public sealed class ThunderdomeRuleSystem : EntitySystem
             || !TryComp<ThunderdomeRuleComponent>(ent.Comp.RuleEntity.Value, out var rule))
             return;
 
+        // Remove from active players list, but keep stats in dictionaries for round leaderboard
         rule.Players.Remove(GetNetEntity(ent));
         ClearOriginalBodyMarker(ent);
         _tempMind.TryRestoreAsGhost(ent);
@@ -436,6 +612,7 @@ public sealed class ThunderdomeRuleSystem : EntitySystem
         if (tdPlayer.RuleEntity != null
             && TryComp<ThunderdomeRuleComponent>(tdPlayer.RuleEntity.Value, out var rule))
         {
+            // Remove from active players list since they're leaving the arena
             rule.Players.Remove(GetNetEntity(currentEntity));
             BroadcastPlayerCount(rule);
         }
@@ -445,20 +622,43 @@ public sealed class ThunderdomeRuleSystem : EntitySystem
         QueueDel(currentEntity);
     }
 
+    private void MarkPreexistingItems(MapId map)
+    {
+        var items = new HashSet<Entity<ItemComponent>>();
+        var puddles = new HashSet<Entity<PuddleComponent>>();
+
+        _lookup.GetEntitiesOnMap(map, items);
+        _lookup.GetEntitiesOnMap(map, puddles);
+
+        foreach (var (uid, _) in items)
+            EnsureComp<ThunderdomeArenaProtectedComponent>(uid);
+
+        foreach (var (uid, _) in puddles)
+            EnsureComp<ThunderdomeArenaProtectedComponent>(uid);
+    }
+
     private void SweepLooseItems(ThunderdomeRuleComponent rule)
     {
         if (rule.ArenaMap is not { } map)
             return;
 
         var items = new HashSet<Entity<ItemComponent>>();
-        _lookup.GetEntitiesOnMap(map, items);
-        foreach (var (uid, _) in items)
-            MarkForDespawn(uid, rule.SweepDespawnTime, checkContainer: true);
-
         var puddles = new HashSet<Entity<PuddleComponent>>();
+
+        _lookup.GetEntitiesOnMap(map, items);
         _lookup.GetEntitiesOnMap(map, puddles);
+
+        foreach (var (uid, _) in items)
+        {
+            if (!HasComp<ThunderdomeArenaProtectedComponent>(uid))
+                MarkForDespawn(uid, rule.SweepDespawnTime, checkContainer: true);
+        }
+
         foreach (var (uid, _) in puddles)
-            MarkForDespawn(uid, rule.SweepDespawnTime);
+        {
+            if (!HasComp<ThunderdomeArenaProtectedComponent>(uid))
+                MarkForDespawn(uid, rule.SweepDespawnTime);
+        }
     }
 
     private static void OnAntagSelectionBlocker(Entity<ThunderdomePlayerComponent> ent, ref GetAntagSelectionBlockerEvent args)
@@ -482,6 +682,8 @@ public sealed class ThunderdomeRuleSystem : EntitySystem
         if (args.Player.Status != SessionStatus.Disconnected)
             return;
 
+        _activeEuis.Remove(args.Player);
+
         // TemporaryMindSystem may have already cleaned up, so search by UserId
         var query = EntityQueryEnumerator<ThunderdomeOriginalBodyComponent>();
         while (query.MoveNext(out var uid, out var comp))
@@ -500,6 +702,18 @@ public sealed class ThunderdomeRuleSystem : EntitySystem
         rule.Players.Remove(GetNetEntity(ent));
         QueueDel(ent);
         BroadcastPlayerCount(rule);
+    }
+
+    private void OnPlayerStatusChanged(object? sender, SessionStatusEventArgs args)
+    {
+        if (args.NewStatus != SessionStatus.Disconnected)
+            return;
+
+        if (_activeEuis.TryGetValue(args.Session, out var eui))
+        {
+            eui.Close();
+            _activeEuis.Remove(args.Session);
+        }
     }
 
     private void ClearOriginalBodyMarker(EntityUid tempBody)
@@ -532,8 +746,97 @@ public sealed class ThunderdomeRuleSystem : EntitySystem
         if (rule.WeaponLoadouts.Count == 0)
             return;
 
-        weaponIdx = Math.Clamp(weaponIdx, 0, rule.WeaponLoadouts.Count - 1);
+        if (weaponIdx < 0 || weaponIdx >= rule.WeaponLoadouts.Count)
+        {
+            Log.Warning($"ThunderDome: Invalid weaponIdx {weaponIdx} received, clamping to valid range [0, {rule.WeaponLoadouts.Count - 1}]");
+            weaponIdx = Math.Clamp(weaponIdx, 0, rule.WeaponLoadouts.Count - 1);
+        }
+
         _stationSpawning.EquipStartingGear(mob, rule.WeaponLoadouts[weaponIdx].Gear);
+    }
+
+    private void SpawnGrenadeLoadout(EntityUid mob, int grenadeIdx, ThunderdomeRuleComponent rule)
+    {
+        if (rule.GrenadeLoadouts.Count == 0)
+            return;
+
+        if (grenadeIdx < 0 || grenadeIdx >= rule.GrenadeLoadouts.Count)
+        {
+            Log.Warning($"ThunderDome: Invalid grenadeIdx {grenadeIdx} received, clamping to valid range [0, {rule.GrenadeLoadouts.Count - 1}]");
+            grenadeIdx = Math.Clamp(grenadeIdx, 0, rule.GrenadeLoadouts.Count - 1);
+        }
+
+        _stationSpawning.EquipStartingGear(mob, rule.GrenadeLoadouts[grenadeIdx].Gear);
+    }
+
+    private void SpawnMedicalLoadout(EntityUid mob, int medicalIdx, ThunderdomeRuleComponent rule)
+    {
+        if (rule.MedicalLoadouts.Count == 0)
+            return;
+
+        if (medicalIdx < 0 || medicalIdx >= rule.MedicalLoadouts.Count)
+        {
+            Log.Warning($"ThunderDome: Invalid medicalIdx {medicalIdx} received, clamping to valid range [0, {rule.MedicalLoadouts.Count - 1}]");
+            medicalIdx = Math.Clamp(medicalIdx, 0, rule.MedicalLoadouts.Count - 1);
+        }
+
+        _stationSpawning.EquipStartingGear(mob, rule.MedicalLoadouts[medicalIdx].Gear);
+    }
+
+    private void SpawnHeadLoadout(EntityUid mob, int headIdx, ThunderdomeRuleComponent rule)
+    {
+        if (rule.HeadLoadouts.Count == 0)
+            return;
+
+        if (headIdx < 0 || headIdx >= rule.HeadLoadouts.Count)
+        {
+            Log.Warning($"ThunderDome: Invalid headIdx {headIdx} received, clamping to valid range [0, {rule.HeadLoadouts.Count - 1}]");
+            headIdx = Math.Clamp(headIdx, 0, rule.HeadLoadouts.Count - 1);
+        }
+
+        _stationSpawning.EquipStartingGear(mob, rule.HeadLoadouts[headIdx].Gear);
+    }
+
+    private void SpawnNeckLoadout(EntityUid mob, int neckIdx, ThunderdomeRuleComponent rule)
+    {
+        if (rule.NeckLoadouts.Count == 0)
+            return;
+
+        if (neckIdx < 0 || neckIdx >= rule.NeckLoadouts.Count)
+        {
+            Log.Warning($"ThunderDome: Invalid neckIdx {neckIdx} received, clamping to valid range [0, {rule.NeckLoadouts.Count - 1}]");
+            neckIdx = Math.Clamp(neckIdx, 0, rule.NeckLoadouts.Count - 1);
+        }
+
+        _stationSpawning.EquipStartingGear(mob, rule.NeckLoadouts[neckIdx].Gear);
+    }
+
+    private void SpawnGlassesLoadout(EntityUid mob, int glassesIdx, ThunderdomeRuleComponent rule)
+    {
+        if (rule.GlassesLoadouts.Count == 0)
+            return;
+
+        if (glassesIdx < 0 || glassesIdx >= rule.GlassesLoadouts.Count)
+        {
+            Log.Warning($"ThunderDome: Invalid glassesIdx {glassesIdx} received, clamping to valid range [0, {rule.GlassesLoadouts.Count - 1}]");
+            glassesIdx = Math.Clamp(glassesIdx, 0, rule.GlassesLoadouts.Count - 1);
+        }
+
+        _stationSpawning.EquipStartingGear(mob, rule.GlassesLoadouts[glassesIdx].Gear);
+    }
+
+    private void SpawnBackpackLoadout(EntityUid mob, int backpackIdx, ThunderdomeRuleComponent rule)
+    {
+        if (rule.BackpackLoadouts.Count == 0)
+            return;
+
+        if (backpackIdx < 0 || backpackIdx >= rule.BackpackLoadouts.Count)
+        {
+            Log.Warning($"ThunderDome: Invalid backpackIdx {backpackIdx} received, clamping to valid range [0, {rule.BackpackLoadouts.Count - 1}]");
+            backpackIdx = Math.Clamp(backpackIdx, 0, rule.BackpackLoadouts.Count - 1);
+        }
+
+        _stationSpawning.EquipStartingGear(mob, rule.BackpackLoadouts[backpackIdx].Gear);
     }
 
     private EntityCoordinates? GetRandomSpawnPoint(ThunderdomeRuleComponent rule)
@@ -575,17 +878,22 @@ public sealed class ThunderdomeRuleSystem : EntitySystem
         if (streak < 3 || streak > 12)
             return;
 
-        var name = Identity.Name(killer, EntityManager);
+        var name = killer.Comp.CharacterName;
         if (!_loc.TryGetString($"thunderdome-streak-{streak}", out var message, ("player", name)))
             return;
 
-        var ev = new ThunderdomeAnnouncementEvent(message);
+        // Отправляем через чат всем игрокам
         foreach (var netEntity in rule.Players)
         {
             if (!TryGetEntity(netEntity, out var playerEntity))
                 continue;
 
-            RaiseNetworkEvent(ev, playerEntity.Value);
+            if (_mind.TryGetMind(playerEntity.Value, out _, out var mindComp) &&
+                mindComp.UserId != null &&
+                _playerManager.TryGetSessionById(mindComp.UserId.Value, out var session))
+            {
+                _chatManager.DispatchServerMessage(session, message);
+            }
         }
     }
 
@@ -598,7 +906,7 @@ public sealed class ThunderdomeRuleSystem : EntitySystem
         }
     }
 
-    public ThunderdomeLoadoutEuiState GetLoadoutState(ThunderdomeRuleComponent rule)
+    public ThunderdomeLoadoutEuiState GetLoadoutState(ThunderdomeRuleComponent rule, NetUserId? userId = null)
     {
         var weapons = new List<ThunderdomeLoadoutOption>();
         for (var i = 0; i < rule.WeaponLoadouts.Count; i++)
@@ -614,13 +922,118 @@ public sealed class ThunderdomeRuleSystem : EntitySystem
             });
         }
 
-        return new ThunderdomeLoadoutEuiState(weapons, rule.Players.Count);
+        var grenades = new List<ThunderdomeLoadoutOption>();
+        for (var i = 0; i < rule.GrenadeLoadouts.Count; i++)
+        {
+            var loadout = rule.GrenadeLoadouts[i];
+            grenades.Add(new ThunderdomeLoadoutOption
+            {
+                Index = i,
+                Name = Loc.GetString(loadout.Name),
+                Description = string.IsNullOrEmpty(loadout.Description) ? string.Empty : Loc.GetString(loadout.Description),
+                Category = string.Empty,
+                SpritePrototype = loadout.Sprite,
+            });
+        }
+
+        var medicals = new List<ThunderdomeLoadoutOption>();
+        for (var i = 0; i < rule.MedicalLoadouts.Count; i++)
+        {
+            var loadout = rule.MedicalLoadouts[i];
+            medicals.Add(new ThunderdomeLoadoutOption
+            {
+                Index = i,
+                Name = Loc.GetString(loadout.Name),
+                Description = string.IsNullOrEmpty(loadout.Description) ? string.Empty : Loc.GetString(loadout.Description),
+                Category = string.Empty,
+                SpritePrototype = loadout.Sprite,
+            });
+        }
+
+        var heads = new List<ThunderdomeLoadoutOption>();
+        for (var i = 0; i < rule.HeadLoadouts.Count; i++)
+        {
+            var loadout = rule.HeadLoadouts[i];
+            heads.Add(new ThunderdomeLoadoutOption
+            {
+                Index = i,
+                Name = Loc.GetString(loadout.Name),
+                Description = string.IsNullOrEmpty(loadout.Description) ? string.Empty : Loc.GetString(loadout.Description),
+                Category = string.Empty,
+                SpritePrototype = loadout.Sprite,
+            });
+        }
+
+        var necks = new List<ThunderdomeLoadoutOption>();
+        for (var i = 0; i < rule.NeckLoadouts.Count; i++)
+        {
+            var loadout = rule.NeckLoadouts[i];
+            necks.Add(new ThunderdomeLoadoutOption
+            {
+                Index = i,
+                Name = Loc.GetString(loadout.Name),
+                Description = string.IsNullOrEmpty(loadout.Description) ? string.Empty : Loc.GetString(loadout.Description),
+                Category = string.Empty,
+                SpritePrototype = loadout.Sprite,
+            });
+        }
+
+        var glasses = new List<ThunderdomeLoadoutOption>();
+        for (var i = 0; i < rule.GlassesLoadouts.Count; i++)
+        {
+            var loadout = rule.GlassesLoadouts[i];
+            glasses.Add(new ThunderdomeLoadoutOption
+            {
+                Index = i,
+                Name = Loc.GetString(loadout.Name),
+                Description = string.IsNullOrEmpty(loadout.Description) ? string.Empty : Loc.GetString(loadout.Description),
+                Category = string.Empty,
+                SpritePrototype = loadout.Sprite,
+            });
+        }
+
+        var backpacks = new List<ThunderdomeLoadoutOption>();
+        for (var i = 0; i < rule.BackpackLoadouts.Count; i++)
+        {
+            var loadout = rule.BackpackLoadouts[i];
+            backpacks.Add(new ThunderdomeLoadoutOption
+            {
+                Index = i,
+                Name = Loc.GetString(loadout.Name),
+                Description = string.IsNullOrEmpty(loadout.Description) ? string.Empty : Loc.GetString(loadout.Description),
+                Category = string.Empty,
+                SpritePrototype = loadout.Sprite,
+            });
+        }
+
+        // Получаем сохраненный выбор
+        var lastWeapon = -1;
+        var lastGrenade = 0;
+        var lastMedical = 0;
+        var lastHead = 0;
+        var lastNeck = 0;
+        var lastGlasses = 0;
+        var lastBackpack = 0;
+        if (userId.HasValue && _globalStats.TryGetValue(userId.Value, out var stats))
+        {
+            lastWeapon = stats.LastWeaponSelection;
+            lastGrenade = stats.LastGrenadeSelection;
+            lastMedical = stats.LastMedicalSelection;
+            lastHead = stats.LastHeadSelection;
+            lastNeck = stats.LastNeckSelection;
+            lastGlasses = stats.LastGlassesSelection;
+            lastBackpack = stats.LastBackpackSelection;
+        }
+
+        return new ThunderdomeLoadoutEuiState(weapons, grenades, medicals, heads, necks, glasses, backpacks, rule.Players.Count, lastWeapon, lastGrenade, lastMedical, lastHead, lastNeck, lastGlasses, lastBackpack);
     }
 
     private void RefillAmmo(EntityUid killer)
     {
         var toCheck = new Queue<EntityUid>();
+        var visited = new HashSet<EntityUid>();
         toCheck.Enqueue(killer);
+        visited.Add(killer);
 
         while (toCheck.Count > 0)
         {
@@ -635,7 +1048,8 @@ public sealed class ThunderdomeRuleSystem : EntitySystem
 
                 foreach (var contained in container.ContainedEntities)
                 {
-                    toCheck.Enqueue(contained);
+                    if (visited.Add(contained))
+                        toCheck.Enqueue(contained);
 
                     if (!inGun && TryComp<BallisticAmmoProviderComponent>(contained, out var ballistic))
                         RefillBallistic((contained, ballistic));
@@ -688,5 +1102,330 @@ public sealed class ThunderdomeRuleSystem : EntitySystem
         }
 
         Dirty(ent);
+    }
+
+    private void RefillMedicals(EntityUid killer)
+    {
+        var toCheck = new Queue<EntityUid>();
+        var visited = new HashSet<EntityUid>();
+        toCheck.Enqueue(killer);
+        visited.Add(killer);
+
+        while (toCheck.Count > 0)
+        {
+            var current = toCheck.Dequeue();
+
+            if (!TryComp<ContainerManagerComponent>(current, out var containerManager))
+                continue;
+
+            foreach (var container in _container.GetAllContainers(current, containerManager))
+            {
+                foreach (var contained in container.ContainedEntities)
+                {
+                    if (visited.Add(contained))
+                        toCheck.Enqueue(contained);
+
+                    // Refill syringes - restore solution to max
+                    if (TryComp<SolutionContainerManagerComponent>(contained, out var solutionManager))
+                    {
+                        RefillSyringe(contained, solutionManager);
+                    }
+
+                    // Refill medical stacks (gauze, ointment, brutepack) to 15
+                    if (TryComp<StackComponent>(contained, out var stack))
+                    {
+                        RefillStack((contained, stack));
+                    }
+                }
+            }
+        }
+    }
+
+    private void RefillSyringe(EntityUid uid, SolutionContainerManagerComponent solutionManager)
+    {
+        foreach (var (solutionName, solutionEnt) in _solutionContainer.EnumerateSolutions((uid, solutionManager)))
+        {
+            var solution = solutionEnt.Comp.Solution;
+            var currentReagents = solution.Contents.ToList();
+
+            // If empty, try to get original reagent from prototype by spawning a temporary entity
+            if (currentReagents.Count == 0)
+            {
+                var meta = MetaData(uid);
+                if (meta.EntityPrototype != null)
+                {
+                    // Spawn temporary entity to read its solution
+                    var tempEntity = Spawn(meta.EntityPrototype.ID, MapCoordinates.Nullspace);
+
+                    if (TryComp<SolutionContainerManagerComponent>(tempEntity, out var tempSolutionManager))
+                    {
+                        foreach (var (tempSolutionName, tempSolutionEnt) in _solutionContainer.EnumerateSolutions((tempEntity, tempSolutionManager)))
+                        {
+                            if (tempSolutionName == solutionName)
+                            {
+                                var tempSolution = tempSolutionEnt.Comp.Solution;
+                                // Copy reagents from temp entity to our syringe
+                                foreach (var reagent in tempSolution.Contents)
+                                {
+                                    _solutionContainer.TryAddReagent(solutionEnt, reagent.Reagent.Prototype, reagent.Quantity);
+                                }
+                                break;
+                            }
+                        }
+                    }
+
+                    QueueDel(tempEntity);
+                }
+                continue;
+            }
+
+            var totalCurrent = solution.Volume;
+            if (totalCurrent <= 0)
+                continue;
+
+            var maxVolume = solution.MaxVolume;
+            var deficit = maxVolume - totalCurrent;
+
+            if (deficit <= 0)
+                continue;
+
+            // Add each reagent proportionally to fill to max
+            foreach (var reagent in currentReagents)
+            {
+                var proportion = reagent.Quantity / totalCurrent;
+                var amountToAdd = deficit * proportion;
+                _solutionContainer.TryAddReagent(solutionEnt, reagent.Reagent.Prototype, amountToAdd);
+            }
+        }
+    }
+
+    private void RefillStack(Entity<StackComponent> stack)
+    {
+        const int maxMedicalStack = 15;
+
+        if (stack.Comp.Count < maxMedicalStack)
+        {
+            _stack.SetCount(stack, maxMedicalStack);
+        }
+    }
+
+    private void RefillGrenade(EntityUid killer, ThunderdomePlayerComponent tdPlayer, ThunderdomeRuleComponent rule)
+    {
+        // Check if player selected a grenade (index 0 = no grenade)
+        if (tdPlayer.GrenadeSelection <= 0 || tdPlayer.GrenadeSelection >= rule.GrenadeLoadouts.Count)
+            return;
+
+        var grenadeLoadout = rule.GrenadeLoadouts[tdPlayer.GrenadeSelection];
+
+        // Get the startingGear prototype
+        if (!_prototype.TryIndex<StartingGearPrototype>(grenadeLoadout.Gear, out var gearProto))
+        {
+            Log.Warning($"RefillGrenade: Failed to find startingGear prototype {grenadeLoadout.Gear}");
+            return;
+        }
+
+        // Extract grenade ID from storage.back
+        if (gearProto.Storage == null || !gearProto.Storage.TryGetValue("back", out var backItems) || backItems.Count == 0)
+            return;
+
+        var grenadeProtoId = backItems[0]; // First item in back storage is the grenade
+
+        // Try to find backpack in player's inventory
+        if (!TryComp<ContainerManagerComponent>(killer, out var containerManager))
+            return;
+
+        EntityUid? backpack = null;
+        foreach (var container in _container.GetAllContainers(killer, containerManager))
+        {
+            foreach (var contained in container.ContainedEntities)
+            {
+                // Check if this is a backpack/storage
+                if (HasComp<StorageComponent>(contained))
+                {
+                    backpack = contained;
+                    break;
+                }
+            }
+            if (backpack != null)
+                break;
+        }
+
+        if (backpack == null)
+            return;
+
+        // Spawn grenade and try to insert into backpack
+        var grenade = Spawn(grenadeProtoId, Transform(killer).Coordinates);
+
+        if (!TryComp<StorageComponent>(backpack.Value, out var storageComp))
+        {
+            QueueDel(grenade);
+            return;
+        }
+
+        if (!_storage.Insert(backpack.Value, grenade, out _, storageComp: storageComp, playSound: false))
+        {
+            QueueDel(grenade);
+        }
+    }
+
+    private void BroadcastKillMessage(
+        Entity<ThunderdomePlayerComponent> killer,
+        Entity<ThunderdomePlayerComponent> victim,
+        ThunderdomeRuleComponent rule)
+    {
+        var killerName = killer.Comp.CharacterName;
+        var victimName = victim.Comp.CharacterName;
+
+        var kills = killer.Comp.Kills;
+        var deaths = killer.Comp.Deaths;
+        var kd = deaths > 0 ? (float)kills / deaths : kills;
+        var streak = killer.Comp.CurrentStreak;
+
+        var message = Loc.GetString("thunderdome-kill-announcement",
+            ("killer", killerName),
+            ("victim", victimName),
+            ("kills", kills),
+            ("kd", $"{kd:F2}"),
+            ("streak", streak));
+
+        foreach (var netEntity in rule.Players)
+        {
+            if (!TryGetEntity(netEntity, out var playerEntity))
+                continue;
+
+            if (_mind.TryGetMind(playerEntity.Value, out _, out var mindComp) &&
+                mindComp.UserId != null &&
+                _playerManager.TryGetSessionById(mindComp.UserId.Value, out var session))
+            {
+                _chatManager.DispatchServerMessage(session, message);
+            }
+        }
+    }
+
+    private void UpdateLeaderboard(ThunderdomeRuleComponent rule)
+    {
+        if (rule.ArenaMap == null)
+            return;
+
+        var leaderboards = new HashSet<Entity<ThunderdomeLeaderboardComponent>>();
+        _lookup.GetEntitiesOnMap(rule.ArenaMap.Value, leaderboards);
+
+        var roundEntries = GenerateRoundLeaderboardEntries(rule);
+        var globalEntries = GenerateGlobalLeaderboardEntries();
+
+        foreach (var (lbUid, lbComp) in leaderboards)
+        {
+            var entries = lbComp.IsGlobal ? globalEntries : roundEntries;
+            lbComp.Entries = entries;
+            lbComp.Title = lbComp.IsGlobal ? "THUNDERDOME ALL-TIME TOP 10" : "THUNDERDOME ROUND TOP 10";
+            Dirty(lbUid, lbComp);
+        }
+    }
+
+    private List<ThunderdomeLeaderboardEntry> GenerateRoundLeaderboardEntries(ThunderdomeRuleComponent rule)
+    {
+        var leaderboardData = new List<(string Name, int Kills, int Deaths, float KD, int BestStreak, NetUserId UserId)>();
+
+        // Collect data from rule dictionaries instead of live entities
+        foreach (var (userId, kills) in rule.Kills)
+        {
+            rule.Deaths.TryGetValue(userId, out var deaths);
+            rule.BestStreaks.TryGetValue(userId, out var bestStreak);
+            rule.CharacterNames.TryGetValue(userId, out var name);
+
+            if (string.IsNullOrEmpty(name))
+                name = "Unknown";
+
+            var kd = deaths > 0 ? (float)kills / deaths : kills;
+            leaderboardData.Add((name, kills, deaths, kd, bestStreak, userId));
+        }
+
+        leaderboardData.Sort((a, b) =>
+        {
+            var killCompare = b.Kills.CompareTo(a.Kills);
+            if (killCompare != 0) return killCompare;
+            return b.KD.CompareTo(a.KD);
+        });
+
+        var topPlayers = leaderboardData.Take(10).ToList();
+        var entries = new List<ThunderdomeLeaderboardEntry>();
+
+        for (var i = 0; i < topPlayers.Count; i++)
+        {
+            var player = topPlayers[i];
+            var rank = i + 1;
+            entries.Add(new ThunderdomeLeaderboardEntry(
+                player.Name,
+                player.Kills,
+                player.Deaths,
+                player.KD,
+                player.BestStreak,
+                rank));
+        }
+
+        return entries;
+    }
+
+    private List<ThunderdomeLeaderboardEntry> GenerateGlobalLeaderboardEntries()
+    {
+        var leaderboardData = new List<(string Ckey, string CharName, int Kills, int Deaths, float KD, int BestStreak)>();
+
+        foreach (var (userId, stats) in _globalStats)
+        {
+            var kd = stats.Deaths > 0 ? (float)stats.Kills / stats.Deaths : stats.Kills;
+            var ckey = "Unknown";
+
+            if (_playerManager.TryGetSessionById(userId, out var session))
+                ckey = session.Name;
+
+            var charName = string.IsNullOrEmpty(stats.LastCharacterName) ? "Unknown" : stats.LastCharacterName;
+
+            leaderboardData.Add((ckey, charName, stats.Kills, stats.Deaths, kd, stats.BestStreak));
+        }
+
+        leaderboardData.Sort((a, b) =>
+        {
+            var killCompare = b.Kills.CompareTo(a.Kills);
+            if (killCompare != 0) return killCompare;
+            return b.KD.CompareTo(a.KD);
+        });
+
+        var topPlayers = leaderboardData.Take(10).ToList();
+        var entries = new List<ThunderdomeLeaderboardEntry>();
+
+        for (var i = 0; i < topPlayers.Count; i++)
+        {
+            var player = topPlayers[i];
+            var rank = i + 1;
+            var displayName = $"{player.Ckey} ({player.CharName})";
+            entries.Add(new ThunderdomeLeaderboardEntry(
+                displayName,
+                player.Kills,
+                player.Deaths,
+                player.KD,
+                player.BestStreak,
+                rank));
+        }
+
+        return entries;
+    }
+
+    private void InitializeLeaderboards(Entity<ThunderdomeRuleComponent> ent)
+    {
+        if (ent.Comp.ArenaMap == null)
+            return;
+
+        var leaderboards = new HashSet<Entity<ThunderdomeLeaderboardComponent>>();
+        _lookup.GetEntitiesOnMap(ent.Comp.ArenaMap.Value, leaderboards);
+
+        foreach (var (lbUid, leaderboard) in leaderboards)
+        {
+            leaderboard.RuleEntity = ent;
+        }
+    }
+
+    private void OnLeaderboardInit(Entity<ThunderdomeLeaderboardComponent> ent, ref ComponentInit args)
+    {
+        // MapText is already on the entity from prototype
     }
 }

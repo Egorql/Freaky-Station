@@ -19,7 +19,31 @@ public sealed partial class ThunderdomePlayerComponent : Component
     public int CurrentStreak;
 
     [DataField]
+    public int BestStreak;
+
+    [DataField]
     public int WeaponSelection;
+
+    [DataField]
+    public int GrenadeSelection;
+
+    [DataField]
+    public int MedicalSelection;
+
+    [DataField]
+    public int HeadSelection;
+
+    [DataField]
+    public int NeckSelection;
+
+    [DataField]
+    public int GlassesSelection;
+
+    [DataField]
+    public int BackpackSelection;
+
+    [DataField]
+    public string CharacterName = string.Empty;
 
     public EntityUid? LastAttacker;
 }

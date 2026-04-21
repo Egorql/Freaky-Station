@@ -1,0 +1,21 @@
+# Thunderdome laser weapons with self-recharge
+
+- type: entity
+  name: laser carbine
+  parent: WeaponLaserCarbine
+  id: WeaponLaserCarbineAutoRecharge
+  description: An ergonomic laser carbine with a self-recharging nuclear battery. Perfect for sustained combat.
+  components:
+  - type: BatterySelfRecharger
+    autoRecharge: true
+    autoRechargeRate: 25
+
+- type: entity
+  name: laser sniper rifle
+  parent: WeaponLaserCannon
+  id: WeaponSniperLaser
+  description: A high-powered laser sniper rifle with a self-recharging power cell. Delivers devastating precision shots.
+  components:
+  - type: BatterySelfRecharger
+    autoRecharge: true
+    autoRechargeRate: 20
