@@ -131,7 +131,7 @@
 - type: entity
   id: AnomalyLocatorUnpowered
   parent: BaseItem
-  name: anomaly 
+  name: anomaly locator
   description: A device designed to aid in the locating of anomalies. Did you check the gas miners?
   suffix: Always Powered
   components:
