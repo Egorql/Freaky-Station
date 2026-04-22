@@ -130,16 +130,25 @@
   id: ThunderdomeAdvancedLaser
   equipment:
     suitstorage: WeaponAdvancedLaser
+  storage:
+    back:
+      - PortableRecharger
 
 - type: startingGear
   id: ThunderdomeLaserRifle
   equipment:
     suitstorage: WeaponLaserCarbineAutoRecharge
+  storage:
+    back:
+      - PortableRecharger
 
 - type: startingGear
   id: ThunderdomeLaserSniper
   equipment:
     suitstorage: WeaponSniperLaser
+  storage:
+    back:
+      - PortableRecharger
 
 # Grenades
 - type: startingGear
@@ -163,13 +172,40 @@
   storage:
     back:
       - SmokeGrenade
+      - SmokeGrenade
+
+- type: startingGear
+  id: ThunderdomeGrenadeIncendiary
+  storage:
+    back:
+      - GrenadeIncendiary
+
+- type: startingGear
+  id: ThunderdomeGrenadeCleaner
+  storage:
+    back:
+      - CleanerGrenade
+
+- type: startingGear
+  id: ThunderdomeGrenadeStinger
+  storage:
+    back:
+      - GrenadeStinger
+
+- type: startingGear
+  id: ThunderdomeGrenadeTearGas
+  storage:
+    back:
+      - TearGasGrenade
 
 # Medical items
 - type: startingGear
   id: ThunderdomeMedicalDefault
   storage:
     back:
-      - MedkitFilled
+      - MedicatedSuture
+      - RegenerativeMesh
+      - PillCanisterTricordrazine
 
 - type: startingGear
   id: ThunderdomeMedicalEphedrine
@@ -177,6 +213,9 @@
     back:
       - SyringeEphedrine
       - SyringeEphedrine
+      - Brutepack
+      - Ointment
+      - Gauze
 
 - type: startingGear
   id: ThunderdomeMedicalBicaridine
@@ -188,6 +227,9 @@
       - SyringeDermaline
       - SyringeDermaline
       - SyringeDermaline
+      - Brutepack
+      - Ointment
+      - Gauze
 
 # Cosmetic options - Head
 - type: startingGear
@@ -309,6 +351,11 @@
   id: ThunderdomeGlasses4
   equipment:
     eyes: ClothingEyesHudMedical
+
+- type: startingGear
+  id: ThunderdomeGlasses5
+  equipment:
+    eyes: ClothingEyesThermalVisionGoggles
 
 # Backpack
 - type: startingGear

@@ -1,9 +1,9 @@
 # Ghost HUD button
-thunderdome-ghost-button = Грозовая Арена ({$count})
-thunderdome-ghost-button-default = Грозовая Арена (0)
+thunderdome-ghost-button = Тандердом ({$count})
+thunderdome-ghost-button-default = Тандердом (0)
 
 # Loadout window
-thunderdome-loadout-title = Снаряжение Грозовой Арены
+thunderdome-loadout-title = Снаряжение Тандердома
 thunderdome-loadout-players = игроков на арене: {$count}
 thunderdome-loadout-subtitle = Выбери свой комплект оружия
 thunderdome-loadout-confirm = Зайти на арену
@@ -49,29 +49,37 @@ thunderdome-desc-capo = Пособие по Капоэйре + 2 автоинъ�
 thunderdome-desc-smg2 = Компактный пистолет-пулемёт C-20r + 2 запасных магазина
 thunderdome-desc-smg3 = Штурмовая винтовка WSPR + 2 запасных магазина
 thunderdome-desc-estoc = Дальнобойный эсток + 2 запасных магазина
-thunderdome-desc-advlaser = Самозаряжающийся лазерный пистолет
-thunderdome-desc-laserrifle = Самозаряжающийся лазерный карабин с автоматическим огнём
-thunderdome-desc-lasersniper = Мощная самозаряжающаяся лазерная снайперская винтовка
+thunderdome-desc-advlaser = Самозаряжающийся лазерный пистолет + портативный зарядник
+thunderdome-desc-laserrifle = Самозаряжающийся лазерный карабин с автоматическим огнём + портативный зарядник
+thunderdome-desc-lasersniper = Мощная самозаряжающаяся лазерная снайперская винтовка + портативный зарядник
 
 # Grenade loadouts
 thunderdome-loadout-grenade-none = Без гранаты
 thunderdome-loadout-grenade-frag = Осколочная граната
 thunderdome-loadout-grenade-flash = Светошумовая граната
-thunderdome-loadout-grenade-smoke = Дымовая граната
+thunderdome-loadout-grenade-smoke = Дымовые гранаты
+thunderdome-loadout-grenade-incendiary = Зажигательная граната
+thunderdome-loadout-grenade-cleaner = Чистящая граната
+thunderdome-loadout-grenade-stinger = Травматическая граната
+thunderdome-loadout-grenade-teargas = Слезоточивая граната
 
 thunderdome-desc-grenade-none = Без гранаты
 thunderdome-desc-grenade-frag = Осколочная граната для урона по площади
 thunderdome-desc-grenade-flash = Оглушает и ослепляет врагов поблизости
-thunderdome-desc-grenade-smoke = Создаёт дымовую завесу
+thunderdome-desc-grenade-smoke = 2x дымовые гранаты для создания завесы
+thunderdome-desc-grenade-incendiary = Зажигательная граната, поджигающая всё вокруг
+thunderdome-desc-grenade-cleaner = Чистящая граната, распыляющая космическое чистящее средство
+thunderdome-desc-grenade-stinger = Граната с резиновыми шариками для нелетального урона
+thunderdome-desc-grenade-teargas = Слезоточивый газ, ослепляющий и замедляющий врагов
 
 # Medical loadouts
 thunderdome-loadout-medical-default = Базовая аптечка
 thunderdome-loadout-medical-ephedrine = Шприцы с эфедрином
 thunderdome-loadout-medical-bicaridine = Бикаридин + Дермалин
 
-thunderdome-desc-medical-default = Трикордразин, бинт, мазь, набор для ушибов
-thunderdome-desc-medical-ephedrine = 2x шприца с эфедрином для ускорения
-thunderdome-desc-medical-bicaridine = 3x бикаридин + 3x дермалин шприцы
+thunderdome-desc-medical-default = Медицинская нить, регенеративная сетка, трикордразин
+thunderdome-desc-medical-ephedrine = 2x шприца с эфедрином + набор для ушибов + мазь + бинт
+thunderdome-desc-medical-bicaridine = 3x бикаридин + 3x дермалин + набор для ушибов + мазь + бинт
 
 # Head loadouts
 thunderdome-loadout-head-default = Базовый шлем
@@ -128,6 +136,7 @@ thunderdome-loadout-glasses-sunglasses = Солнцезащитные очки
 thunderdome-loadout-glasses-secsun = Солнцезащитные очки СБ
 thunderdome-loadout-glasses-security = Солнцезащитные очки СБ
 thunderdome-loadout-glasses-diagnostic = Медицинский HUD
+thunderdome-loadout-glasses-thermal = Термальные очки
 
 thunderdome-desc-glasses-none = Без очков
 thunderdome-desc-glasses-sun = Обычные солнцезащитные очки
@@ -135,6 +144,7 @@ thunderdome-desc-glasses-sunglasses = Обычные солнцезащитны�
 thunderdome-desc-glasses-secsun = Солнцезащитные очки СБ
 thunderdome-desc-glasses-security = Солнцезащитные очки СБ
 thunderdome-desc-glasses-diagnostic = HUD медицинской диагностики
+thunderdome-desc-glasses-thermal = Термальные очки, позволяющие видеть сквозь стены
 
 # Backpack loadouts
 thunderdome-loadout-backpack-default = Рюкзак
