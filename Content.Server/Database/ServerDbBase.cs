@@ -534,22 +534,9 @@ namespace Content.Server.Database
             // CorvaxGoob-TTS-End
 
             // ReSharper disable once ConditionalAccessQualifierIsNonNullableAccordingToAPIContract
-            var markingsRaw = DeserializeProfileMarkings(profile.Markings?.RootElement.GetRawText() ?? "[]");
+            var markings = dDeserializeProfileMarkings(profile.Markings);
 
             var bark = new BarkData(profile.BarkProto, profile.BarkPitch, profile.LowBarkVar, profile.HighBarkVar);
-
-            List<Marking> markings = new();
-            if (markingsRaw != null)
-            {
-                foreach (var marking in markingsRaw)
-                {
-                    var parsed = Marking.ParseFromDbString(marking);
-
-                    if (parsed is null) continue;
-
-                    markings.Add(parsed);
-                }
-            }
 
             var loadouts = new Dictionary<string, RoleLoadout>();
 
@@ -674,7 +661,16 @@ namespace Content.Server.Database
         {
             profile ??= new Profile();
             var appearance = (HumanoidCharacterAppearance) humanoid.CharacterAppearance;
-            var markings = JsonSerializer.SerializeToDocument(appearance.Markings);
+
+            // Manually serialize markings to ensure colors are preserved
+            var markingsArray = appearance.Markings.Select(m => new
+            {
+                markingId = m.MarkingId,
+                markingColors = m.MarkingColors.Select(c => c.ToHex()).ToList(),
+                visible = m.Visible,
+                forced = m.Forced
+            }).ToList();
+            var markings = JsonSerializer.SerializeToDocument(markingsArray);
 
             profile.CharacterName = humanoid.Name;
             profile.FlavorText = humanoid.FlavorText;
