@@ -247,26 +247,21 @@
           sprite: ClothingNeckChameleon
       glassesLoadouts:
         - gear: ThunderdomeGlasses1
-          name: thunderdome-loadout-glasses-none
-          description: thunderdome-desc-glasses-none
-          category: thunderdome-category-glasses
-          sprite: ClothingBackpack
-        - gear: ThunderdomeGlasses2
           name: thunderdome-loadout-glasses-sunglasses
           description: thunderdome-desc-glasses-sunglasses
           category: thunderdome-category-glasses
           sprite: ClothingEyesGlassesSunglasses
-        - gear: ThunderdomeGlasses3
+        - gear: ThunderdomeGlasses2
           name: thunderdome-loadout-glasses-security
           description: thunderdome-desc-glasses-security
           category: thunderdome-category-glasses
           sprite: ClothingEyesGlassesSecurity
-        - gear: ThunderdomeGlasses4
+        - gear: ThunderdomeGlasses3
           name: thunderdome-loadout-glasses-diagnostic
           description: thunderdome-desc-glasses-diagnostic
           category: thunderdome-category-glasses
           sprite: ClothingEyesHudMedical
-        - gear: ThunderdomeGlasses5
+        - gear: ThunderdomeGlasses4
           name: thunderdome-loadout-glasses-thermal
           description: thunderdome-desc-glasses-thermal
           category: thunderdome-category-glasses

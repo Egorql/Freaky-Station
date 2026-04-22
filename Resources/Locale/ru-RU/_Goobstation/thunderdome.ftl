@@ -7,6 +7,7 @@ thunderdome-loadout-title = Снаряжение Тандердома
 thunderdome-loadout-players = игроков на арене: {$count}
 thunderdome-loadout-subtitle = Выбери свой комплект оружия
 thunderdome-loadout-confirm = Зайти на арену
+thunderdome-loadout-base-gear = Базовое снаряжение: пистолет Mk58 + магазин, вспышка в РПС, сам РПС
 # Weapon categories
 thunderdome-category-shotguns = Дробовики
 thunderdome-category-smgs = Пистолеты-пулемёты
@@ -35,23 +36,23 @@ thunderdome-loadout-laserrifle = Лазерный карабин
 thunderdome-loadout-lasersniper = Лазерная снайперка
 
 # Weapon descriptions (tooltips)
-thunderdome-desc-shotgun = Дробовик + 1 коробка картечи, 1 коробка ружейных патронов
-thunderdome-desc-doublebarreled = Двустволка + 2 коробки картечи
-thunderdome-desc-smg = Пистолет пулемёт + 2 пары магазинов
-thunderdome-desc-wt550 = Пистолет пулемёт + 2 пары магазинов
-thunderdome-desc-lecter = Винтовка + 2 стандартных магазина, 1 зажигательный магазин
-thunderdome-desc-akms = Штурмовая винтовка + 2 пары магазинов
-thunderdome-desc-python = Заряженный бронебойный револьвер + 1 спидлоадер с бронебойными
-thunderdome-desc-inspector = Револьвер + 2 спидлоадера
-thunderdome-desc-hristov = Анти-материальная снайперская винтовка + 2 пары магазинов
-thunderdome-desc-esword = Энергетический меч + 2 инъектора стимуляторов
-thunderdome-desc-capo = Пособие по Капоэйре + 2 автоинъектора
-thunderdome-desc-smg2 = Компактный пистолет-пулемёт C-20r + 2 запасных магазина
-thunderdome-desc-smg3 = Штурмовая винтовка WSPR + 2 запасных магазина
-thunderdome-desc-estoc = Дальнобойный эсток + 2 запасных магазина
-thunderdome-desc-advlaser = Самозаряжающийся лазерный пистолет + портативный зарядник
-thunderdome-desc-laserrifle = Самозаряжающийся лазерный карабин с автоматическим огнём + портативный зарядник
-thunderdome-desc-lasersniper = Мощная самозаряжающаяся лазерная снайперская винтовка + портативный зарядник
+thunderdome-desc-shotgun = Дробовик + патроны в поясе (1 коробка картечи, 1 коробка ружейных патронов)
+thunderdome-desc-doublebarreled = Двустволка + патроны в поясе (2 коробки картечи)
+thunderdome-desc-smg = Пистолет пулемёт + магазины в поясе (2 запасных)
+thunderdome-desc-wt550 = Пистолет пулемёт + магазины в поясе (2 запасных)
+thunderdome-desc-lecter = Винтовка + магазины в поясе (2 стандартных, 1 зажигательный)
+thunderdome-desc-akms = Штурмовая винтовка + магазины в поясе (2 запасных)
+thunderdome-desc-python = Заряженный бронебойный револьвер + спидлоадер в поясе
+thunderdome-desc-inspector = Револьвер + спидлоадеры в поясе (2 запасных)
+thunderdome-desc-hristov = Анти-материальная снайперская винтовка + магазины в поясе (2 запасных)
+thunderdome-desc-esword = Энергетический меч + 2 инъектора стимуляторов в рюкзаке
+thunderdome-desc-capo = Пособие по Капоэйре + 2 автоинъектора в рюкзаке
+thunderdome-desc-smg2 = Компактный пистолет-пулемёт C-20r + магазины в поясе (2 запасных)
+thunderdome-desc-smg3 = Штурмовая винтовка WSPR + магазины в поясе (2 запасных)
+thunderdome-desc-estoc = Дальнобойный эсток + магазины в поясе (2 запасных)
+thunderdome-desc-advlaser = Самозаряжающийся лазерный пистолет + портативный зарядник в рюкзаке
+thunderdome-desc-laserrifle = Самозаряжающийся лазерный карабин + портативный зарядник в рюкзаке
+thunderdome-desc-lasersniper = Мощная самозаряжающаяся лазерная снайперка + портативный зарядник в рюкзаке
 
 # Grenade loadouts
 thunderdome-loadout-grenade-none = Без гранаты
@@ -64,13 +65,13 @@ thunderdome-loadout-grenade-stinger = Травматическая гранат�
 thunderdome-loadout-grenade-teargas = Слезоточивая граната
 
 thunderdome-desc-grenade-none = Без гранаты
-thunderdome-desc-grenade-frag = Осколочная граната для урона по площади
-thunderdome-desc-grenade-flash = Оглушает и ослепляет врагов поблизости
-thunderdome-desc-grenade-smoke = 2x дымовые гранаты для создания завесы
-thunderdome-desc-grenade-incendiary = Зажигательная граната, поджигающая всё вокруг
-thunderdome-desc-grenade-cleaner = Чистящая граната, распыляющая космическое чистящее средство
-thunderdome-desc-grenade-stinger = Граната с резиновыми шариками для нелетального урона
-thunderdome-desc-grenade-teargas = Слезоточивый газ, ослепляющий и замедляющий врагов
+thunderdome-desc-grenade-frag = Осколочная граната в поясе для урона по площади
+thunderdome-desc-grenade-flash = Светошумовая граната в поясе, оглушает и ослепляет врагов
+thunderdome-desc-grenade-smoke = 2x дымовые гранаты в поясе для создания завесы
+thunderdome-desc-grenade-incendiary = Зажигательная граната в поясе, поджигающая всё вокруг
+thunderdome-desc-grenade-cleaner = Чистящая граната в поясе, распыляющая космическое чистящее средство
+thunderdome-desc-grenade-stinger = Травматическая граната в поясе с резиновыми шариками
+thunderdome-desc-grenade-teargas = Слезоточивая граната в поясе, ослепляющая и замедляющая врагов
 
 # Medical loadouts
 thunderdome-loadout-medical-default = Базовая аптечка
@@ -130,21 +131,15 @@ thunderdome-desc-neck-bandage = Потрёпанная тканевая обмо
 thunderdome-desc-neck-chameleon = Шарф-хамелеон, меняющий внешний вид
 
 # Glasses loadouts
-thunderdome-loadout-glasses-none = Без очков
-thunderdome-loadout-glasses-sun = Солнцезащитные очки
 thunderdome-loadout-glasses-sunglasses = Солнцезащитные очки
-thunderdome-loadout-glasses-secsun = Солнцезащитные очки СБ
 thunderdome-loadout-glasses-security = Солнцезащитные очки СБ
 thunderdome-loadout-glasses-diagnostic = Медицинский HUD
 thunderdome-loadout-glasses-thermal = Термальные очки
 
-thunderdome-desc-glasses-none = Без очков
-thunderdome-desc-glasses-sun = Обычные солнцезащитные очки
-thunderdome-desc-glasses-sunglasses = Обычные солнцезащитные очки
-thunderdome-desc-glasses-secsun = Солнцезащитные очки СБ
-thunderdome-desc-glasses-security = Солнцезащитные очки СБ
-thunderdome-desc-glasses-diagnostic = HUD медицинской диагностики
-thunderdome-desc-glasses-thermal = Термальные очки, позволяющие видеть сквозь стены
+thunderdome-desc-glasses-sunglasses = Защита от вспышек
+thunderdome-desc-glasses-security = Защита от вспышек (СБ стиль)
+thunderdome-desc-glasses-diagnostic = Медицинский HUD - уязвимы к вспышкам!
+thunderdome-desc-glasses-thermal = Термальные очки для видения сквозь стены - уязвимы к вспышкам!
 
 # Backpack loadouts
 thunderdome-loadout-backpack-default = Рюкзак
