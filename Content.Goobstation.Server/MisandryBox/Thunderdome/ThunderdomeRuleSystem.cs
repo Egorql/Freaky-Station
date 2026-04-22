@@ -1224,45 +1224,45 @@ public sealed class ThunderdomeRuleSystem : EntitySystem
             return;
         }
 
-        // Extract grenade ID from storage.back
-        if (gearProto.Storage == null || !gearProto.Storage.TryGetValue("back", out var backItems) || backItems.Count == 0)
+        // Extract grenade ID from storage.belt
+        if (gearProto.Storage == null || !gearProto.Storage.TryGetValue("belt", out var beltItems) || beltItems.Count == 0)
             return;
 
-        var grenadeProtoId = backItems[0]; // First item in back storage is the grenade
+        var grenadeProtoId = beltItems[0]; // First item in belt storage is the grenade
 
-        // Try to find backpack in player's inventory
+        // Try to find belt in player's inventory
         if (!TryComp<ContainerManagerComponent>(killer, out var containerManager))
             return;
 
-        EntityUid? backpack = null;
+        EntityUid? belt = null;
         foreach (var container in _container.GetAllContainers(killer, containerManager))
         {
             foreach (var contained in container.ContainedEntities)
             {
-                // Check if this is a backpack/storage
-                if (HasComp<StorageComponent>(contained))
+                // Check if this is a belt with storage
+                if (HasComp<StorageComponent>(contained) && MetaData(contained).EntityPrototype?.ID == "ClothingBeltMilitaryWebbing")
                 {
-                    backpack = contained;
+                    belt = contained;
                     break;
                 }
             }
-            if (backpack != null)
+            if (belt != null)
                 break;
         }
 
-        if (backpack == null)
+        if (belt == null)
             return;
 
-        // Spawn grenade and try to insert into backpack
+        // Spawn grenade and try to insert into belt
         var grenade = Spawn(grenadeProtoId, Transform(killer).Coordinates);
 
-        if (!TryComp<StorageComponent>(backpack.Value, out var storageComp))
+        if (!TryComp<StorageComponent>(belt.Value, out var storageComp))
         {
             QueueDel(grenade);
             return;
         }
 
-        if (!_storage.Insert(backpack.Value, grenade, out _, storageComp: storageComp, playSound: false))
+        if (!_storage.Insert(belt.Value, grenade, out _, storageComp: storageComp, playSound: false))
         {
             QueueDel(grenade);
         }

@@ -9,7 +9,8 @@
   - type: BatterySelfRecharger
     autoRecharge: true
     autoRechargeRate: 25
-
+    autoRechargePauseTime: 25
+    autoRechargePause: true
 - type: entity
   name: laser sniper rifle
   parent: WeaponLaserCannon
@@ -19,3 +20,5 @@
   - type: BatterySelfRecharger
     autoRecharge: true
     autoRechargeRate: 20
+    autoRechargePauseTime: 25
+    autoRechargePause: true

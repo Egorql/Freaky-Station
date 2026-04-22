@@ -6,15 +6,19 @@
     mask: ClothingMaskGasThunderdome
     shoes: ClothingShoesBootsCombatFilled
     gloves: ClothingHandsGlovesCombat
+    belt: ClothingBeltMilitaryWebbing
     pocket1: WeaponPistolMk58
     pocket2: MagazinePistol
+  storage:
+    belt:
+      - Flash
 
 - type: startingGear
   id: ThunderdomeShotgun
   equipment:
     suitstorage: WeaponShotgunKammerer
   storage:
-    back:
+    belt:
       - BoxLethalshot
       - BoxShotgunSlug
 
@@ -23,7 +27,7 @@
   equipment:
     suitstorage: WeaponShotgunDoubleBarreled
   storage:
-    back:
+    belt:
       - BoxLethalshot
       - BoxLethalshot
 
@@ -32,7 +36,7 @@
   equipment:
     suitstorage: WeaponSubMachineGunDrozd
   storage:
-    back:
+    belt:
       - MagazinePistolSubMachineGun
       - MagazinePistolSubMachineGun
 
@@ -41,7 +45,7 @@
   equipment:
     suitstorage: WeaponSubMachineGunWt550
   storage:
-    back:
+    belt:
       - MagazinePistolSubMachineGunTopMounted
       - MagazinePistolSubMachineGunTopMounted
 
@@ -50,7 +54,7 @@
   equipment:
     suitstorage: WeaponRifleLecter
   storage:
-    back:
+    belt:
       - MagazineRifle
       - MagazineRifle
       - MagazineRifleIncendiary
@@ -60,7 +64,7 @@
   equipment:
     suitstorage: WeaponRifleAk
   storage:
-    back:
+    belt:
       - MagazineLightRifle
       - MagazineLightRifle
 
@@ -69,7 +73,7 @@
   equipment:
     suitstorage: WeaponRevolverPythonAP
   storage:
-    back:
+    belt:
       - SpeedLoaderMagnumAP
 
 - type: startingGear
@@ -77,7 +81,7 @@
   equipment:
     suitstorage: WeaponRevolverInspector
   storage:
-    back:
+    belt:
       - SpeedLoaderMagnum
       - SpeedLoaderMagnum
 
@@ -104,7 +108,7 @@
   equipment:
     suitstorage: WeaponSubMachineGunC20r
   storage:
-    back:
+    belt:
       - MagazinePistolSubMachineGun
       - MagazinePistolSubMachineGun
 
@@ -113,7 +117,7 @@
   equipment:
     suitstorage: WeaponRifleWSPR
   storage:
-    back:
+    belt:
       - MagazineCaselessRifle
       - MagazineCaselessRifle
 
@@ -122,7 +126,7 @@
   equipment:
     suitstorage: WeaponRifleEstoc
   storage:
-    back:
+    belt:
       - MagazineLightRifle
       - MagazineLightRifle
 
@@ -130,16 +134,25 @@
   id: ThunderdomeAdvancedLaser
   equipment:
     suitstorage: WeaponAdvancedLaser
+  storage:
+    back:
+      - PortableRecharger
 
 - type: startingGear
   id: ThunderdomeLaserRifle
   equipment:
     suitstorage: WeaponLaserCarbineAutoRecharge
+  storage:
+    back:
+      - PortableRecharger
 
 - type: startingGear
   id: ThunderdomeLaserSniper
   equipment:
     suitstorage: WeaponSniperLaser
+  storage:
+    back:
+      - PortableRecharger
 
 # Grenades
 - type: startingGear
@@ -149,27 +162,54 @@
 - type: startingGear
   id: ThunderdomeGrenadeFrag
   storage:
-    back:
+    belt:
       - GrenadeShrapnel
 
 - type: startingGear
   id: ThunderdomeGrenadeFlash
   storage:
-    back:
+    belt:
       - GrenadeFlashBang
 
 - type: startingGear
   id: ThunderdomeGrenadeSmoke
   storage:
-    back:
+    belt:
       - SmokeGrenade
+      - SmokeGrenade
+
+- type: startingGear
+  id: ThunderdomeGrenadeIncendiary
+  storage:
+    belt:
+      - GrenadeIncendiary
+
+- type: startingGear
+  id: ThunderdomeGrenadeCleaner
+  storage:
+    belt:
+      - CleanerGrenade
+
+- type: startingGear
+  id: ThunderdomeGrenadeStinger
+  storage:
+    belt:
+      - GrenadeStinger
+
+- type: startingGear
+  id: ThunderdomeGrenadeTearGas
+  storage:
+    belt:
+      - TearGasGrenade
 
 # Medical items
 - type: startingGear
   id: ThunderdomeMedicalDefault
   storage:
     back:
-      - MedkitFilled
+      - MedicatedSuture
+      - RegenerativeMesh
+      - PillCanisterTricordrazine
 
 - type: startingGear
   id: ThunderdomeMedicalEphedrine
@@ -177,6 +217,9 @@
     back:
       - SyringeEphedrine
       - SyringeEphedrine
+      - Brutepack
+      - Ointment
+      - Gauze
 
 - type: startingGear
   id: ThunderdomeMedicalBicaridine
@@ -188,6 +231,9 @@
       - SyringeDermaline
       - SyringeDermaline
       - SyringeDermaline
+      - Brutepack
+      - Ointment
+      - Gauze
 
 # Cosmetic options - Head
 - type: startingGear
@@ -293,22 +339,23 @@
 # Glasses
 - type: startingGear
   id: ThunderdomeGlasses1
-  # No glasses
-
-- type: startingGear
-  id: ThunderdomeGlasses2
   equipment:
     eyes: ClothingEyesGlassesSunglasses
 
 - type: startingGear
-  id: ThunderdomeGlasses3
+  id: ThunderdomeGlasses2
   equipment:
     eyes: ClothingEyesGlassesSecurity
 
 - type: startingGear
-  id: ThunderdomeGlasses4
+  id: ThunderdomeGlasses3
   equipment:
     eyes: ClothingEyesHudMedical
+
+- type: startingGear
+  id: ThunderdomeGlasses4
+  equipment:
+    eyes: ClothingEyesThermalVisionGoggles
 
 # Backpack
 - type: startingGear

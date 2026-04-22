@@ -107,6 +107,26 @@
           description: thunderdome-desc-grenade-smoke
           category: thunderdome-category-grenades
           sprite: SmokeGrenade
+        - gear: ThunderdomeGrenadeIncendiary
+          name: thunderdome-loadout-grenade-incendiary
+          description: thunderdome-desc-grenade-incendiary
+          category: thunderdome-category-grenades
+          sprite: GrenadeIncendiary
+        - gear: ThunderdomeGrenadeCleaner
+          name: thunderdome-loadout-grenade-cleaner
+          description: thunderdome-desc-grenade-cleaner
+          category: thunderdome-category-grenades
+          sprite: CleanerGrenade
+        - gear: ThunderdomeGrenadeStinger
+          name: thunderdome-loadout-grenade-stinger
+          description: thunderdome-desc-grenade-stinger
+          category: thunderdome-category-grenades
+          sprite: GrenadeStinger
+        - gear: ThunderdomeGrenadeTearGas
+          name: thunderdome-loadout-grenade-teargas
+          description: thunderdome-desc-grenade-teargas
+          category: thunderdome-category-grenades
+          sprite: TearGasGrenade
       medicalLoadouts:
         - gear: ThunderdomeMedicalDefault
           name: thunderdome-loadout-medical-default
@@ -227,25 +247,25 @@
           sprite: ClothingNeckChameleon
       glassesLoadouts:
         - gear: ThunderdomeGlasses1
-          name: thunderdome-loadout-glasses-none
-          description: thunderdome-desc-glasses-none
-          category: thunderdome-category-glasses
-          sprite: ClothingBackpack
-        - gear: ThunderdomeGlasses2
           name: thunderdome-loadout-glasses-sunglasses
           description: thunderdome-desc-glasses-sunglasses
           category: thunderdome-category-glasses
           sprite: ClothingEyesGlassesSunglasses
-        - gear: ThunderdomeGlasses3
+        - gear: ThunderdomeGlasses2
           name: thunderdome-loadout-glasses-security
           description: thunderdome-desc-glasses-security
           category: thunderdome-category-glasses
           sprite: ClothingEyesGlassesSecurity
-        - gear: ThunderdomeGlasses4
+        - gear: ThunderdomeGlasses3
           name: thunderdome-loadout-glasses-diagnostic
           description: thunderdome-desc-glasses-diagnostic
           category: thunderdome-category-glasses
           sprite: ClothingEyesHudMedical
+        - gear: ThunderdomeGlasses4
+          name: thunderdome-loadout-glasses-thermal
+          description: thunderdome-desc-glasses-thermal
+          category: thunderdome-category-glasses
+          sprite: ClothingEyesThermalVisionGoggles
       backpackLoadouts:
         - gear: ThunderdomeBackpack1
           name: thunderdome-loadout-backpack-default
