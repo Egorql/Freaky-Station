@@ -4,8 +4,8 @@ meta:
   engineVersion: 266.0.0
   forkId: ""
   forkVersion: ""
-  time: 04/21/2026 21:11:07
-  entityCount: 1874
+  time: 04/23/2026 13:03:52
+  entityCount: 1864
 maps:
 - 1
 grids:
@@ -1931,13 +1931,6 @@ entities:
     - type: Transform
       pos: 25.5,43.5
       parent: 2
-- proto: AutolatheHyperConvection
-  entities:
-  - uid: 78
-    components:
-    - type: Transform
-      pos: 34.5,48.5
-      parent: 2
 - proto: BannerBlue
   entities:
   - uid: 79
@@ -2048,7 +2041,7 @@ entities:
       pos: 23.5,47.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -2350.1123
+      secondsUntilStateChange: -2397.6628
       state: Opening
   - uid: 99
     components:
@@ -2057,7 +2050,7 @@ entities:
       pos: 23.5,46.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -2350.5122
+      secondsUntilStateChange: -2398.0627
       state: Opening
   - uid: 100
     components:
@@ -2066,7 +2059,7 @@ entities:
       pos: 13.5,42.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -2354.4124
+      secondsUntilStateChange: -2401.963
       state: Opening
   - uid: 101
     components:
@@ -2075,7 +2068,7 @@ entities:
       pos: 12.5,42.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -2354.779
+      secondsUntilStateChange: -2402.3296
       state: Opening
   - uid: 102
     components:
@@ -2084,7 +2077,7 @@ entities:
       pos: 20.5,42.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -2353.1123
+      secondsUntilStateChange: -2400.6628
       state: Opening
   - uid: 103
     components:
@@ -2093,7 +2086,7 @@ entities:
       pos: 21.5,42.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -2352.7124
+      secondsUntilStateChange: -2400.263
       state: Opening
   - uid: 104
     components:
@@ -2101,7 +2094,7 @@ entities:
       pos: 17.5,48.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -2349.3123
+      secondsUntilStateChange: -2396.8628
       state: Opening
   - uid: 105
     components:
@@ -2109,7 +2102,7 @@ entities:
       pos: 18.5,48.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -2349.5457
+      secondsUntilStateChange: -2397.0962
       state: Opening
   - uid: 106
     components:
@@ -2118,7 +2111,7 @@ entities:
       pos: 7.5,31.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -2341.0457
+      secondsUntilStateChange: -2388.5962
       state: Opening
   - uid: 107
     components:
@@ -2127,7 +2120,7 @@ entities:
       pos: 19.5,32.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -2338.9124
+      secondsUntilStateChange: -2386.463
       state: Opening
   - uid: 108
     components:
@@ -2136,7 +2129,7 @@ entities:
       pos: 32.5,29.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -2337.479
+      secondsUntilStateChange: -2385.0295
       state: Opening
   - uid: 109
     components:
@@ -2145,7 +2138,7 @@ entities:
       pos: 30.5,46.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -2347.8457
+      secondsUntilStateChange: -2395.3962
       state: Opening
   - uid: 110
     components:
@@ -2153,7 +2146,7 @@ entities:
       pos: 18.5,56.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -2345.0457
+      secondsUntilStateChange: -2392.5962
       state: Opening
   - uid: 111
     components:
@@ -2161,7 +2154,7 @@ entities:
       pos: 17.5,56.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -2344.8457
+      secondsUntilStateChange: -2392.3962
       state: Opening
   - uid: 112
     components:
@@ -2170,7 +2163,7 @@ entities:
       pos: 17.5,58.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -2344.5457
+      secondsUntilStateChange: -2392.0962
       state: Opening
   - uid: 113
     components:
@@ -2179,7 +2172,7 @@ entities:
       pos: 18.5,58.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -2344.3123
+      secondsUntilStateChange: -2391.8628
       state: Opening
   - uid: 114
     components:
@@ -2188,7 +2181,7 @@ entities:
       pos: 21.5,54.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -2346.379
+      secondsUntilStateChange: -2393.9294
       state: Opening
   - uid: 115
     components:
@@ -2197,7 +2190,7 @@ entities:
       pos: 28.5,52.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -2346.8457
+      secondsUntilStateChange: -2394.3962
       state: Opening
   - uid: 116
     components:
@@ -2206,7 +2199,7 @@ entities:
       pos: 14.5,25.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -2324.3123
+      secondsUntilStateChange: -2371.8628
       state: Opening
   - uid: 117
     components:
@@ -2215,7 +2208,7 @@ entities:
       pos: 23.5,24.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -2317.8123
+      secondsUntilStateChange: -2365.3628
       state: Opening
   - uid: 118
     components:
@@ -2224,7 +2217,7 @@ entities:
       pos: 29.5,24.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -2318.4124
+      secondsUntilStateChange: -2365.963
       state: Opening
 - proto: BarSign
   entities:
@@ -5138,14 +5131,6 @@ entities:
     - type: Transform
       pos: 6.5,28.5
       parent: 2
-- proto: FireAxe
-  entities:
-  - uid: 675
-    components:
-    - type: Transform
-      pos: 3.604517,22.647717
-      parent: 2
-    - type: StepTriggerCleanup
 - proto: FloorAzureWaterEntity
   entities:
   - uid: 676
@@ -7782,13 +7767,6 @@ entities:
     - type: Transform
       pos: 35.5,35.5
       parent: 2
-- proto: ProtolatheHyperConvection
-  entities:
-  - uid: 1136
-    components:
-    - type: Transform
-      pos: 34.5,45.5
-      parent: 2
 - proto: Rack
   entities:
   - uid: 1137
@@ -8575,27 +8553,6 @@ entities:
     components:
     - type: Transform
       pos: 8.5,28.5
-      parent: 2
-- proto: SheetGlass
-  entities:
-  - uid: 1280
-    components:
-    - type: Transform
-      pos: 36.60232,47.59975
-      parent: 2
-- proto: SheetPlastic
-  entities:
-  - uid: 1281
-    components:
-    - type: Transform
-      pos: 36.461697,47.47475
-      parent: 2
-- proto: SheetSteel
-  entities:
-  - uid: 1282
-    components:
-    - type: Transform
-      pos: 36.367947,47.396626
       parent: 2
 - proto: SignBiohazard
   entities:
@@ -11583,17 +11540,6 @@ entities:
     - type: Transform
       pos: 29.5,48.5
       parent: 2
-  - uid: 1855
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 34.5,45.5
-      parent: 2
-  - uid: 1856
-    components:
-    - type: Transform
-      pos: 34.5,48.5
-      parent: 2
 - proto: WindowReinforcedDirectional
   entities:
   - uid: 1857
@@ -11653,18 +11599,6 @@ entities:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 31.5,45.5
-      parent: 2
-  - uid: 1867
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 35.5,48.5
-      parent: 2
-  - uid: 1868
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 35.5,45.5
       parent: 2
   - uid: 1869
     components:
