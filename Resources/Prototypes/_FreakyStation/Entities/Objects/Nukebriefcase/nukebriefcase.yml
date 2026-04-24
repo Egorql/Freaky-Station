@@ -1,0 +1,23 @@
+- type: entity
+  parent: BaseItem
+  id: BriefcaseNuke
+  name: ядерный чемоданчик
+  description: Капитанский чемодан, который хранит страшные секреты
+  components:
+  - type: Sprite
+    sprite: _FreakStation/briefcase_nuclear.rsi
+    state: icon
+  - type: Item
+    sprite: _FreakStation/briefcase_nuclear.rsi
+    size: Ginormous
+  - type: Tag
+    tags:
+    - Briefcase
+  - type: MeleeWeapon
+    damage:
+      types:
+        Blunt: 8
+  - type: Nukebriefcase
+    doAfterTime: 0.8
+    successChance: 0.3
+    spawnOnSuccessful: "MobHuman"
