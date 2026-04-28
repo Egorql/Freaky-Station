@@ -38,6 +38,7 @@ using Content.Shared.Stacks;
 using Content.Shared.Storage;
 using Content.Shared.Storage.EntitySystems;
 using Robust.Server.Audio;
+using Robust.Server.GameStates;
 using Robust.Server.Player;
 using Robust.Shared.Audio;
 using Robust.Shared.Configuration;
@@ -81,6 +82,7 @@ public sealed class ThunderdomeRuleSystem : EntitySystem
     [Dependency] private readonly SharedStackSystem _stack = default!;
     [Dependency] private readonly IPrototypeManager _prototype = default!;
     [Dependency] private readonly SharedStorageSystem _storage = default!;
+    [Dependency] private readonly PvsOverrideSystem _pvsOverride = default!;
 
     private const string RulePrototype = "ThunderdomeRule";
     private EntityUid? _ruleEntity;
@@ -1343,8 +1345,17 @@ public sealed class ThunderdomeRuleSystem : EntitySystem
             var leaderboards = new HashSet<Entity<ThunderdomeLeaderboardComponent>>();
             _lookup.GetEntitiesOnMap(rule.ArenaMap.Value, leaderboards);
 
-            if (leaderboards.Count > 0)
+            // Double-check to prevent race condition
+            if (leaderboards.Count > 0 && rule.CachedLeaderboards.Count == 0)
+            {
                 rule.CachedLeaderboards = leaderboards.ToList();
+
+                // Make leaderboards visible to all clients (including ghosts far away)
+                foreach (var (lbUid, _) in leaderboards)
+                {
+                    _pvsOverride.AddGlobalOverride(lbUid);
+                }
+            }
         }
 
         if (rule.CachedLeaderboards.Count == 0)
@@ -1463,6 +1474,8 @@ public sealed class ThunderdomeRuleSystem : EntitySystem
         foreach (var (lbUid, leaderboard) in leaderboards)
         {
             leaderboard.RuleEntity = ent;
+            // Make leaderboards visible to all clients (including ghosts far away)
+            _pvsOverride.AddGlobalOverride(lbUid);
         }
     }
 
@@ -1471,6 +1484,7 @@ public sealed class ThunderdomeRuleSystem : EntitySystem
         // Only track damage from other Thunderdome players
         if (args.Origin == null ||
             args.Origin == ent.Owner ||
+            !Exists(args.Origin.Value) ||
             !HasComp<ThunderdomePlayerComponent>(args.Origin.Value))
             return;
 
