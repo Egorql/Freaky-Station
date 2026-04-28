@@ -132,17 +132,17 @@
           name: thunderdome-loadout-medical-default
           description: thunderdome-desc-medical-default
           category: thunderdome-category-medical
-          sprite: Brutepack
+          sprite: MedicatedSuture
         - gear: ThunderdomeMedicalEphedrine
           name: thunderdome-loadout-medical-ephedrine
           description: thunderdome-desc-medical-ephedrine
           category: thunderdome-category-medical
-          sprite: SyringeEphedrine
+          sprite: EphedrineAutoInjectorThunderdome
         - gear: ThunderdomeMedicalBicaridine
           name: thunderdome-loadout-medical-bicaridine
           description: thunderdome-desc-medical-bicaridine
           category: thunderdome-category-medical
-          sprite: SyringeBicaridine
+          sprite: BicaridineAutoInjectorThunderdome
       headLoadouts:
         - gear: ThunderdomeHead1
           name: thunderdome-loadout-head-basic

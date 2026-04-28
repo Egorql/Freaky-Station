@@ -1,0 +1,112 @@
+# Thunderdome custom items
+
+# Compact portable recharger for laser loadouts
+- type: entity
+  parent: PortableRecharger
+  id: PortableRechargerCompact
+  name: compact portable recharger
+  description: A compact version of the portable recharger. Smaller, but just as effective.
+  components:
+  - type: Item
+    size: Small
+    shape:
+    - 0,0,1,1
+
+# Ephedrine autoinjector for Thunderdome medical loadout
+- type: entity
+  parent: ChemicalMedipen
+  id: EphedrineAutoInjectorThunderdome
+  name: ephedrine autoinjector
+  description: A rapid-injection autoinjector loaded with 10 units of ephedrine. Provides a quick combat stimulant boost.
+  components:
+  - type: Sprite
+    sprite: _Goobstation/Objects/Specific/Medical/stasipen.rsi
+    layers:
+    - state: stasipen
+      map: ["enum.SolutionContainerLayers.Fill"]
+  - type: SolutionContainerVisuals
+    maxFillLevels: 1
+    changeColor: false
+    emptySpriteName: stasipen_empty
+  - type: Hypospray
+    solutionName: pen
+    transferAmount: 10
+    onlyAffectsMobs: false
+    injectOnly: true
+  - type: SolutionContainerManager
+    solutions:
+      pen:
+        maxVol: 10
+        reagents:
+        - ReagentId: Ephedrine
+          Quantity: 10
+
+# Bicaridine autoinjector for Thunderdome medical loadout
+- type: entity
+  parent: ChemicalMedipen
+  id: BicaridineAutoInjectorThunderdome
+  name: bicaridine autoinjector
+  description: A rapid-injection autoinjector loaded with 10 units of bicaridine. Heals brute damage quickly.
+  components:
+  - type: Sprite
+    sprite: Objects/Specific/Medical/medipen.rsi
+    layers:
+    - state: arithpen
+      map: ["enum.SolutionContainerLayers.Fill"]
+  - type: SolutionContainerVisuals
+    maxFillLevels: 1
+    changeColor: false
+    emptySpriteName: arithpen_empty
+  - type: Hypospray
+    solutionName: pen
+    transferAmount: 10
+    onlyAffectsMobs: false
+    injectOnly: true
+  - type: SolutionContainerManager
+    solutions:
+      pen:
+        maxVol: 10
+        reagents:
+        - ReagentId: Bicaridine
+          Quantity: 10
+
+# Dermaline autoinjector for Thunderdome medical loadout
+- type: entity
+  parent: ChemicalMedipen
+  id: DermalineAutoInjectorThunderdome
+  name: dermaline autoinjector
+  description: A rapid-injection autoinjector loaded with 10 units of dermaline. Heals burn damage quickly.
+  components:
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: base-needle-inhand-left
+      - state: base-colorA-inhand-left
+        color: "#427485"
+      - state: base-colorB-inhand-left
+      right:
+      - state: base-needle-inhand-right
+      - state: base-colorA-inhand-right
+        color: "#427485"
+      - state: base-colorB-inhand-right
+  - type: Sprite
+    sprite: Objects/Specific/Medical/medipen.rsi
+    layers:
+    - state: dermpen
+      map: ["enum.SolutionContainerLayers.Fill"]
+  - type: SolutionContainerVisuals
+    maxFillLevels: 1
+    changeColor: false
+    emptySpriteName: dermpen_empty
+  - type: Hypospray
+    solutionName: pen
+    transferAmount: 10
+    onlyAffectsMobs: false
+    injectOnly: true
+  - type: SolutionContainerManager
+    solutions:
+      pen:
+        maxVol: 10
+        reagents:
+        - ReagentId: Dermaline
+          Quantity: 10

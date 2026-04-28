@@ -340,9 +340,12 @@ public sealed class ThunderdomeRuleSystem : EntitySystem
         SpawnBackpackLoadout(mob, backpackIdx, rule);
 
         // Then spawn items that go into storage (after backpack is equipped)
-        SpawnLoadoutItems(mob, weaponIdx, rule);
-        SpawnGrenadeLoadout(mob, grenadeIdx, rule);
+        // Medical first (bottom of stack)
         SpawnMedicalLoadout(mob, medicalIdx, rule);
+        // Weapon second (top of stack, quick access Q/E)
+        SpawnLoadoutItems(mob, weaponIdx, rule);
+        // Grenade last (goes to belt, doesn't affect backpack order)
+        SpawnGrenadeLoadout(mob, grenadeIdx, rule);
 
         EnsureComp<IgnoreSkillsComponent>(mob);
 

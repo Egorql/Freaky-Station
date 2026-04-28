@@ -67,13 +67,13 @@ thunderdome-desc-grenade-flash = Stuns and blinds nearby enemies
 thunderdome-desc-grenade-smoke = Creates smoke cover
 
 # Medical loadouts
-thunderdome-loadout-medical-default = Basic Medkit
-thunderdome-loadout-medical-ephedrine = Ephedrine Syringes
-thunderdome-loadout-medical-bicaridine = Bicaridine + Dermaline
+thunderdome-loadout-medical-default = Basic Medicine
+thunderdome-loadout-medical-ephedrine = Combat Stimulant
+thunderdome-loadout-medical-bicaridine = Combat Medicine
 
-thunderdome-desc-medical-default = Tricordrazine, gauze, ointment, brutepack
-thunderdome-desc-medical-ephedrine = 2x ephedrine syringes for speed boost
-thunderdome-desc-medical-bicaridine = 3x bicaridine + 3x dermaline syringes
+thunderdome-desc-medical-default = Slow but effective healing: surgical tools and tricordrazine pills
+thunderdome-desc-medical-ephedrine = Fast ephedrine autoinjectors for instant speed boost and basic supplies
+thunderdome-desc-medical-bicaridine = Bicaridine and dermaline autoinjectors for rapid wound and burn treatment in combat
 
 # Head loadouts
 thunderdome-loadout-head-default = Basic Helmet
@@ -178,3 +178,16 @@ ent-WeaponLaserCarbineAutoRecharge = laser carbine
     .desc = An ergonomic laser carbine with a self-recharging nuclear battery. Perfect for sustained combat.
 ent-WeaponSniperLaser = laser sniper rifle
     .desc = A high-powered laser sniper rifle with a self-recharging power cell. Delivers devastating precision shots.
+
+# Thunderdome custom items
+ent-EphedrineAutoInjectorThunderdome = ephedrine autoinjector
+    .desc = A rapid-injection autoinjector loaded with 10 units of ephedrine. Provides a quick combat stimulant boost.
+
+ent-BicaridineAutoInjectorThunderdome = bicaridine autoinjector
+    .desc = A rapid-injection autoinjector loaded with 10 units of bicaridine. Heals brute damage quickly.
+
+ent-DermalineAutoInjectorThunderdome = dermaline autoinjector
+    .desc = A rapid-injection autoinjector loaded with 10 units of dermaline. Heals burn damage quickly.
+
+ent-PortableRechargerCompact = compact portable recharger
+    .desc = A compact version of the portable recharger. Smaller, but just as effective.

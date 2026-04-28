@@ -74,13 +74,13 @@ thunderdome-desc-grenade-stinger = Травматическая граната �
 thunderdome-desc-grenade-teargas = Слезоточивая граната в поясе, ослепляющая и замедляющая врагов
 
 # Medical loadouts
-thunderdome-loadout-medical-default = Базовая аптечка
-thunderdome-loadout-medical-ephedrine = Шприцы с эфедрином
-thunderdome-loadout-medical-bicaridine = Бикаридин + Дермалин
+thunderdome-loadout-medical-default = Базовая медицина
+thunderdome-loadout-medical-ephedrine = Боевой стимулятор (эфедрин)
+thunderdome-loadout-medical-bicaridine = Боевая медицина (бикаридин + дермалин)
 
-thunderdome-desc-medical-default = Медицинская нить, регенеративная сетка, трикордразин
-thunderdome-desc-medical-ephedrine = 2x шприца с эфедрином + набор для ушибов + мазь + бинт
-thunderdome-desc-medical-bicaridine = 3x бикаридин + 3x дермалин + набор для ушибов + мазь + бинт
+thunderdome-desc-medical-default = Медленное, но эффективное лечение: хирургические инструменты и таблетки трикордразина
+thunderdome-desc-medical-ephedrine = Быстрые автоинъекторы эфедрина для мгновенного буста скорости и базовые расходники
+thunderdome-desc-medical-bicaridine = Автоинъекторы бикаридина и дермалина для быстрого лечения ран и ожогов в бою
 
 # Head loadouts
 thunderdome-loadout-head-default = Базовый шлем
@@ -179,3 +179,16 @@ ent-WeaponLaserCarbineAutoRecharge = лазерный карабин
     .desc = Эргономичный лазерный карабин с самозаряжающейся ядерной батареей. Идеален для продолжительного боя.
 ent-WeaponSniperLaser = лазерная снайперская винтовка
     .desc = Мощная лазерная снайперская винтовка с самозаряжающимся энергоблоком. Наносит разрушительные точные выстрелы.
+
+# Thunderdome custom items
+ent-EphedrineAutoInjectorThunderdome = автоинъектор эфедрина
+    .desc = Быстрый автоинъектор с 10 единицами эфедрина. Даёт мгновенный буст скорости в бою.
+
+ent-BicaridineAutoInjectorThunderdome = автоинъектор бикаридина
+    .desc = Быстрый автоинъектор с 10 единицами бикаридина. Быстро лечит физические повреждения.
+
+ent-DermalineAutoInjectorThunderdome = автоинъектор дермалина
+    .desc = Быстрый автоинъектор с 10 единицами дермалина. Быстро лечит ожоги.
+
+ent-PortableRechargerCompact = компактный портативный зарядник
+    .desc = Компактная версия портативного зарядника. Меньше, но так же эффективна.
