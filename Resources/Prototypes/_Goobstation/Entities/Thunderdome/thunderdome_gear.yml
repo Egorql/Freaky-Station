@@ -110,8 +110,8 @@
   storage:
     back:
     - Flash
-    - BruteAutoInjector
     - BurnAutoInjector
+    - BruteAutoInjector # брут урон чаще, Q/A брут инъектор
 
 - type: startingGear
   id: ThunderdomeSmg2

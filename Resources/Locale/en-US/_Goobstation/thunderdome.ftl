@@ -8,6 +8,15 @@ thunderdome-loadout-players = Players in arena: {$count}
 thunderdome-loadout-subtitle = Select your primary weapon
 thunderdome-loadout-confirm = Enter Arena
 
+# Tab titles
+thunderdome-tab-weapons = Weapons
+thunderdome-tab-grenades = Grenades
+thunderdome-tab-medical = Medical
+thunderdome-tab-head = Head
+thunderdome-tab-neck = Neck
+thunderdome-tab-glasses = Glasses
+thunderdome-tab-backpack = Backpack
+
 # Weapon categories
 thunderdome-category-shotguns = Shotguns
 thunderdome-category-smgs = SMGs
@@ -16,6 +25,12 @@ thunderdome-category-revolvers = Revolvers
 thunderdome-category-snipers = Snipers
 thunderdome-category-melee = Melee
 thunderdome-category-lasers = Lasers
+thunderdome-category-grenades = Grenades
+thunderdome-category-medical = Medical
+thunderdome-category-head = Head
+thunderdome-category-neck = Neck
+thunderdome-category-glasses = Glasses
+thunderdome-category-backpack = Backpack
 
 # Weapon names
 thunderdome-loadout-shotgun = Kammerer
@@ -60,20 +75,28 @@ thunderdome-loadout-grenade-none = No Grenade
 thunderdome-loadout-grenade-frag = Shrapnel Grenade
 thunderdome-loadout-grenade-flash = Flashbang
 thunderdome-loadout-grenade-smoke = Smoke Grenade
+thunderdome-loadout-grenade-incendiary = Incendiary Grenade
+thunderdome-loadout-grenade-cleaner = Cleaner Grenade
+thunderdome-loadout-grenade-stinger = Stinger Grenade
+thunderdome-loadout-grenade-teargas = Tear Gas Grenade
 
 thunderdome-desc-grenade-none = No grenade
 thunderdome-desc-grenade-frag = Shrapnel grenade for area damage
 thunderdome-desc-grenade-flash = Stuns and blinds nearby enemies
 thunderdome-desc-grenade-smoke = Creates smoke cover
+thunderdome-desc-grenade-incendiary = Sets the area on fire
+thunderdome-desc-grenade-cleaner = Releases space cleaner foam
+thunderdome-desc-grenade-stinger = Rubber pellet grenade for non-lethal crowd control
+thunderdome-desc-grenade-teargas = Releases tear gas that causes pain and blindness
 
 # Medical loadouts
-thunderdome-loadout-medical-default = Basic Medicine
+thunderdome-loadout-medical-default = Surgical Kit
 thunderdome-loadout-medical-ephedrine = Combat Stimulant
-thunderdome-loadout-medical-bicaridine = Combat Medicine
+thunderdome-loadout-medical-bicaridine = Rapid Healing
 
-thunderdome-desc-medical-default = Slow but effective healing: surgical tools and tricordrazine pills
-thunderdome-desc-medical-ephedrine = Fast ephedrine autoinjectors for instant speed boost and basic supplies
-thunderdome-desc-medical-bicaridine = Bicaridine and dermaline autoinjectors for rapid wound and burn treatment in combat
+thunderdome-desc-medical-default = Advanced surgical tools, regenerative mesh, medicated suture, and tricordrazine pills
+thunderdome-desc-medical-ephedrine = Ephedrine autoinjector for speed boost, plus brutepack, ointment, and gauze
+thunderdome-desc-medical-bicaridine = Bicaridine and dermaline autoinjectors for rapid healing, plus brutepack, ointment, and gauze
 
 # Head loadouts
 thunderdome-loadout-head-default = Basic Helmet
@@ -124,19 +147,15 @@ thunderdome-desc-neck-bandage = A tattered fabric wrap, faded over the years
 thunderdome-desc-neck-chameleon = Chameleon scarf that can change appearance
 
 # Glasses loadouts
-thunderdome-loadout-glasses-none = No Glasses
-thunderdome-loadout-glasses-sun = Sunglasses
 thunderdome-loadout-glasses-sunglasses = Sunglasses
-thunderdome-loadout-glasses-secsun = Security Sunglasses
 thunderdome-loadout-glasses-security = Security Sunglasses
 thunderdome-loadout-glasses-diagnostic = Medical HUD
+thunderdome-loadout-glasses-thermal = Thermal Vision Goggles
 
-thunderdome-desc-glasses-none = No eyewear
-thunderdome-desc-glasses-sun = Standard sunglasses
 thunderdome-desc-glasses-sunglasses = Standard sunglasses
-thunderdome-desc-glasses-secsun = Security sunglasses
-thunderdome-desc-glasses-security = Security sunglasses
+thunderdome-desc-glasses-security = Security sunglasses with HUD
 thunderdome-desc-glasses-diagnostic = Medical diagnostic HUD
+thunderdome-desc-glasses-thermal = See heat signatures through walls
 
 # Backpack loadouts
 thunderdome-loadout-backpack-default = Backpack

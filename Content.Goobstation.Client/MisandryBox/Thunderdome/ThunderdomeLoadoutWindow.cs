@@ -1,6 +1,7 @@
 using Content.Goobstation.Shared.MisandryBox.Thunderdome;
 using Content.Goobstation.UIKit.UserInterface.Controls;
 using Robust.Client.UserInterface.Controls;
+using Robust.Shared.Localization;
 
 namespace Content.Goobstation.Client.MisandryBox.Thunderdome;
 
@@ -80,7 +81,7 @@ public sealed class ThunderdomeLoadoutWindow : ThunderdomeWindow
         };
         weaponsScroll.AddChild(_weaponsContainer);
         _tabContainer.AddChild(weaponsScroll);
-        _tabContainer.SetTabTitle(0, "Weapons");
+        _tabContainer.SetTabTitle(0, Loc.GetString("thunderdome-tab-weapons"));
 
         // Grenades tab
         var grenadesScroll = new ScrollContainer
@@ -96,7 +97,7 @@ public sealed class ThunderdomeLoadoutWindow : ThunderdomeWindow
         };
         grenadesScroll.AddChild(_grenadesContainer);
         _tabContainer.AddChild(grenadesScroll);
-        _tabContainer.SetTabTitle(1, "Grenades");
+        _tabContainer.SetTabTitle(1, Loc.GetString("thunderdome-tab-grenades"));
 
         // Medical tab
         var medicalsScroll = new ScrollContainer
@@ -112,7 +113,7 @@ public sealed class ThunderdomeLoadoutWindow : ThunderdomeWindow
         };
         medicalsScroll.AddChild(_medicalsContainer);
         _tabContainer.AddChild(medicalsScroll);
-        _tabContainer.SetTabTitle(2, "Medical");
+        _tabContainer.SetTabTitle(2, Loc.GetString("thunderdome-tab-medical"));
 
         // Head tab
         var headsScroll = new ScrollContainer
@@ -128,7 +129,7 @@ public sealed class ThunderdomeLoadoutWindow : ThunderdomeWindow
         };
         headsScroll.AddChild(_headsContainer);
         _tabContainer.AddChild(headsScroll);
-        _tabContainer.SetTabTitle(3, "Head");
+        _tabContainer.SetTabTitle(3, Loc.GetString("thunderdome-tab-head"));
 
         // Neck tab
         var necksScroll = new ScrollContainer
@@ -144,7 +145,7 @@ public sealed class ThunderdomeLoadoutWindow : ThunderdomeWindow
         };
         necksScroll.AddChild(_necksContainer);
         _tabContainer.AddChild(necksScroll);
-        _tabContainer.SetTabTitle(4, "Neck");
+        _tabContainer.SetTabTitle(4, Loc.GetString("thunderdome-tab-neck"));
 
         // Glasses tab
         var glassesScroll = new ScrollContainer
@@ -160,7 +161,7 @@ public sealed class ThunderdomeLoadoutWindow : ThunderdomeWindow
         };
         glassesScroll.AddChild(_glassesContainer);
         _tabContainer.AddChild(glassesScroll);
-        _tabContainer.SetTabTitle(5, "Glasses");
+        _tabContainer.SetTabTitle(5, Loc.GetString("thunderdome-tab-glasses"));
 
         // Backpack tab
         var backpacksScroll = new ScrollContainer
@@ -176,7 +177,7 @@ public sealed class ThunderdomeLoadoutWindow : ThunderdomeWindow
         };
         backpacksScroll.AddChild(_backpacksContainer);
         _tabContainer.AddChild(backpacksScroll);
-        _tabContainer.SetTabTitle(6, "Backpack");
+        _tabContainer.SetTabTitle(6, Loc.GetString("thunderdome-tab-backpack"));
 
         _confirmButton = new ThunderdomeButton
         {
