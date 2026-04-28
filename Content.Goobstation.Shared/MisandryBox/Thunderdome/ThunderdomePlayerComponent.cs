@@ -47,4 +47,7 @@ public sealed partial class ThunderdomePlayerComponent : Component
     public string CharacterName = string.Empty;
 
     public EntityUid? LastAttacker;
+
+    [DataField]
+    public TimeSpan LastDamagedByPlayer = TimeSpan.Zero;
 }

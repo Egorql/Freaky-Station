@@ -36,4 +36,11 @@ public sealed class ThunderdomeCVars
     /// </summary>
     public static readonly CVarDef<int> GlobalStatsRetentionDays =
         CVarDef.Create("thunderdome.global_stats_retention_days", 30, CVar.SERVER);
+
+    /// <summary>
+    /// Time window (in seconds) after receiving player damage during which suicide/ghost credits the attacker.
+    /// If player ghosts/suicides within this window, the attacker gets credit for the kill.
+    /// </summary>
+    public static readonly CVarDef<float> SuicidePenaltyWindow =
+        CVarDef.Create("thunderdome.suicide_penalty_window", 10f, CVar.SERVER);
 }

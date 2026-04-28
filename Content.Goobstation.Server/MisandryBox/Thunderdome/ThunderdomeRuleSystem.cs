@@ -90,6 +90,7 @@ public sealed class ThunderdomeRuleSystem : EntitySystem
     private readonly Dictionary<NetUserId, GlobalThunderdomeStats> _globalStats = new();
     private TimeSpan _nextGlobalStatsCleanup = TimeSpan.Zero;
     private int _retentionDays = 30;
+    private float _suicidePenaltyWindow = 10f;
 
     private HashSet<string> _allowedSpecies = new();
 
@@ -123,6 +124,8 @@ public sealed class ThunderdomeRuleSystem : EntitySystem
 
         Subs.CVar(_cfg, ThunderdomeCVars.GlobalStatsRetentionDays, value => _retentionDays = value, true);
 
+        Subs.CVar(_cfg, ThunderdomeCVars.SuicidePenaltyWindow, value => _suicidePenaltyWindow = value, true);
+
         Subs.CVar(_cfg, ThunderdomeCVars.AllowedSpecies, value =>
         {
             _allowedSpecies = value.Split(',', StringSplitOptions.RemoveEmptyEntries)
@@ -145,6 +148,7 @@ public sealed class ThunderdomeRuleSystem : EntitySystem
         SubscribeLocalEvent<ThunderdomePlayerComponent, GetAntagSelectionBlockerEvent>(OnAntagSelectionBlocker);
         SubscribeLocalEvent<ThunderdomeOriginalBodyComponent, ExaminedEvent>(OnOriginalBodyExamined);
         SubscribeLocalEvent<ThunderdomePlayerComponent, PlayerDetachedEvent>(OnPlayerDetached);
+        SubscribeLocalEvent<ThunderdomePlayerComponent, DamageChangedEvent>(OnThunderdomePlayerDamaged);
 
         _playerManager.PlayerStatusChanged += OnPlayerStatusChanged;
     }
@@ -487,6 +491,37 @@ public sealed class ThunderdomeRuleSystem : EntitySystem
 
     private void CreditKill(Entity<ThunderdomePlayerComponent> victim, ThunderdomeRuleComponent rule, EntityUid? killer = null)
     {
+        // Самоубийство или отсутствие киллера
+        if (killer == null || killer == victim.Owner || !TryComp<ThunderdomePlayerComponent>(killer.Value, out var killerComp))
+        {
+            // Check if player is in critical state or recently damaged by another player
+            var isCritical = TryComp<MobStateComponent>(victim.Owner, out var mobState) &&
+                             mobState.CurrentState == MobState.Critical;
+            var timeSinceLastDamage = _timing.CurTime - victim.Comp.LastDamagedByPlayer;
+            var recentlyDamaged = timeSinceLastDamage.TotalSeconds < _suicidePenaltyWindow;
+
+            // If in crit OR recently damaged, and attacker exists, credit them with kill
+            if ((isCritical || recentlyDamaged) &&
+                victim.Comp.LastAttacker != null &&
+                TryComp<ThunderdomePlayerComponent>(victim.Comp.LastAttacker.Value, out var attackerComp))
+            {
+                // Combat death - credit attacker, clear LastAttacker, recurse
+                var lastAttacker = victim.Comp.LastAttacker.Value;
+                victim.Comp.LastAttacker = null;
+                CreditKill(victim, rule, lastAttacker);
+                return;
+            }
+
+            // Not in combat - peaceful exit, NO death counted
+            victim.Comp.LastAttacker = null;
+            UpdateLeaderboard(rule);
+            return;
+        }
+
+        // Has killer - this is a combat death
+        victim.Comp.LastAttacker = null;
+
+        // Increment deaths ONLY for combat deaths
         victim.Comp.Deaths++;
         victim.Comp.CurrentStreak = 0;
 
@@ -507,34 +542,7 @@ public sealed class ThunderdomeRuleSystem : EntitySystem
             victimGlobalStats.LastActivity = DateTime.UtcNow;
         }
 
-        killer ??= victim.Comp.LastAttacker;
-        victim.Comp.LastAttacker = null;
-
-        // Самоубийство или отсутствие киллера - штраф
-        if (killer == null || killer == victim.Owner || !TryComp<ThunderdomePlayerComponent>(killer.Value, out var killerComp))
-        {
-            // Штраф за самоубийство
-            if (victim.Comp.Kills > 0)
-            {
-                victim.Comp.Kills--;
-
-                // Update rule dictionary
-                if (_mind.TryGetMind(victim, out _, out var victimMind) && victimMind.UserId is { } victimUserId)
-                {
-                    rule.Kills.TryGetValue(victimUserId, out var existingKills);
-                    if (existingKills > 0)
-                        rule.Kills[victimUserId] = existingKills - 1;
-
-                    // Update global stats - apply suicide penalty
-                    if (_globalStats.TryGetValue(victimUserId, out var victimGlobalStats) && victimGlobalStats.Kills > 0)
-                        victimGlobalStats.Kills--;
-                }
-            }
-
-            UpdateLeaderboard(rule);
-            return;
-        }
-
+        // Credit killer
         killerComp.Kills++;
         killerComp.CurrentStreak++;
 
@@ -1329,6 +1337,16 @@ public sealed class ThunderdomeRuleSystem : EntitySystem
 
     private void UpdateLeaderboard(ThunderdomeRuleComponent rule)
     {
+        // Fallback: if cache is empty, try to populate it
+        if (rule.CachedLeaderboards.Count == 0 && rule.ArenaMap != null)
+        {
+            var leaderboards = new HashSet<Entity<ThunderdomeLeaderboardComponent>>();
+            _lookup.GetEntitiesOnMap(rule.ArenaMap.Value, leaderboards);
+
+            if (leaderboards.Count > 0)
+                rule.CachedLeaderboards = leaderboards.ToList();
+        }
+
         if (rule.CachedLeaderboards.Count == 0)
             return;
 
@@ -1446,6 +1464,22 @@ public sealed class ThunderdomeRuleSystem : EntitySystem
         {
             leaderboard.RuleEntity = ent;
         }
+    }
+
+    private void OnThunderdomePlayerDamaged(Entity<ThunderdomePlayerComponent> ent, ref DamageChangedEvent args)
+    {
+        // Only track damage from other Thunderdome players
+        if (args.Origin == null ||
+            args.Origin == ent.Owner ||
+            !HasComp<ThunderdomePlayerComponent>(args.Origin.Value))
+            return;
+
+        // Only track if damage increased (not healing)
+        if (!args.DamageIncreased)
+            return;
+
+        ent.Comp.LastAttacker = args.Origin.Value;
+        ent.Comp.LastDamagedByPlayer = _timing.CurTime;
     }
 
     private void CleanupOldGlobalStats()
