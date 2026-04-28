@@ -29,4 +29,11 @@ public sealed class ThunderdomeCVars
     public static readonly CVarDef<bool> ActivationDelayEnabled =
         CVarDef.Create("thunderdome.activation_delay_enabled", false, CVar.SERVER | CVar.REPLICATED);
     // CorvaxGoob-Thunderdome-end
+
+    /// <summary>
+    /// Number of days to retain global Thunderdome stats before cleanup.
+    /// Stats older than this will be removed during periodic cleanup.
+    /// </summary>
+    public static readonly CVarDef<int> GlobalStatsRetentionDays =
+        CVarDef.Create("thunderdome.global_stats_retention_days", 30, CVar.SERVER);
 }

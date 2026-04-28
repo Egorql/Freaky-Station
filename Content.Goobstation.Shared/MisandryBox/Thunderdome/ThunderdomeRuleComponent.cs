@@ -48,6 +48,8 @@ public sealed partial class ThunderdomeRuleComponent : Component
     [DataField]
     public Dictionary<NetUserId, int> BestStreaks = new();
 
+    public List<Entity<ThunderdomeLeaderboardComponent>> CachedLeaderboards = new();
+
     [DataField]
     public bool Active;
 
