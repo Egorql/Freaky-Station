@@ -13,6 +13,14 @@ public sealed class ThunderdomeCVars
     public static readonly CVarDef<bool> ThunderdomeRefill =
         CVarDef.Create("thunderdome.refill", true, CVar.SERVER | CVar.REPLICATED);
 
+    /// <summary>
+    /// Comma-separated list of allowed species in Thunderdome.
+    /// </summary>
+    public static readonly CVarDef<string> AllowedSpecies =
+        CVarDef.Create("thunderdome.allowed_species",
+            "Human,Reptilian,Dwarf,Moth,Diona,Arachnid,Slime,Felinid,Oni,Harpy,Vulpkanin,Tajaran",
+            CVar.SERVER | CVar.REPLICATED);
+
     // CorvaxGoob-Thunderdome-start
     [CVarControl(AdminFlags.Admin, min: 10, max: 180)]
     public static readonly CVarDef<int> ActivationDelay =

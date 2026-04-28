@@ -1,9 +1,10 @@
 using Robust.Shared.GameObjects;
+using Robust.Shared.GameStates;
 using Robust.Shared.Serialization.Manager.Attributes;
 
 namespace Content.Goobstation.Shared.MisandryBox.Thunderdome;
 
-[RegisterComponent]
+[RegisterComponent, NetworkedComponent]
 public sealed partial class ThunderdomePlayerComponent : Component
 {
     [DataField]
