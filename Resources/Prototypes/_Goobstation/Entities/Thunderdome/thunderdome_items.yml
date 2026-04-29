@@ -59,16 +59,16 @@
     emptySpriteName: arithpen_empty
   - type: Hypospray
     solutionName: pen
-    transferAmount: 10
+    transferAmount: 15
     onlyAffectsMobs: false
     injectOnly: true
   - type: SolutionContainerManager
     solutions:
       pen:
-        maxVol: 10
+        maxVol: 15
         reagents:
         - ReagentId: Bicaridine
-          Quantity: 10
+          Quantity: 15
 
 # Dermaline autoinjector for Thunderdome medical loadout
 - type: entity
@@ -110,3 +110,23 @@
         reagents:
         - ReagentId: Dermaline
           Quantity: 10
+
+# Decoy hologram projector for Thunderdome utility loadout
+- type: entity
+  id: DecoyHologramThunderdome
+  name: decoy hologram projector
+  description: Projects a holographic decoy of yourself. Lasts 8 seconds.
+  parent: BaseItem
+  components:
+  - type: Sprite
+    sprite: /Textures/Objects/Devices/chameleon_projector.rsi
+    state: icon
+  - type: Item
+    size: Small
+  - type: SpawnIllusionOnUse
+    lifetime: 10
+    healthMultiplier: 0.05
+    cloneCount: 2
+  - type: UseDelay
+    delay: 45
+

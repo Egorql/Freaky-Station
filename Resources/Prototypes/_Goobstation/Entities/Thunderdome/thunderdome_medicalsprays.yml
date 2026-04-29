@@ -13,10 +13,10 @@
   - type: SolutionContainerManager
     solutions:
       spray:
-        maxVol: 30  # 3 uses x 10u per spray
+        maxVol: 20  # 2 uses x 10u per spray
         reagents:
         - ReagentId: StypticPowder
-          Quantity: 30
+          Quantity: 20
 
 - type: entity
   name: compact silver sulfadiazine spray
@@ -28,7 +28,7 @@
   - type: SolutionContainerManager
     solutions:
       spray:
-        maxVol: 30  # 3 uses x 10u per spray
+        maxVol: 20  # 2 uses x 10u per spray
         reagents:
         - ReagentId: SilverSulfadiazine
-          Quantity: 30
+          Quantity: 20

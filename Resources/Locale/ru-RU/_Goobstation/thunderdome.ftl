@@ -16,6 +16,7 @@ thunderdome-tab-head = Голова
 thunderdome-tab-neck = Шея
 thunderdome-tab-glasses = Очки
 thunderdome-tab-backpack = Рюкзак
+thunderdome-tab-utility = Утилита
 
 thunderdome-loadout-base-gear = Базовое снаряжение: пистолет Mk58 + магазин, вспышка в РПС, сам РПС
 # Weapon categories
@@ -32,6 +33,7 @@ thunderdome-category-head = Голова
 thunderdome-category-neck = Шея
 thunderdome-category-glasses = Очки
 thunderdome-category-backpack = Рюкзаки
+thunderdome-category-utility = Утилита
 # Weapon names
 thunderdome-loadout-shotgun = Каммерер
 thunderdome-loadout-doublebarreled = Двустволка
@@ -151,11 +153,13 @@ thunderdome-loadout-glasses-sunglasses = Солнцезащитные очки
 thunderdome-loadout-glasses-security = Солнцезащитные очки СБ
 thunderdome-loadout-glasses-diagnostic = Медицинский HUD
 thunderdome-loadout-glasses-thermal = Термальные очки
+thunderdome-loadout-glasses-nightvision = Ночное видение
 
 thunderdome-desc-glasses-sunglasses = Защита от вспышек
 thunderdome-desc-glasses-security = Защита от вспышек (СБ стиль)
 thunderdome-desc-glasses-diagnostic = Медицинский HUD - уязвимы к вспышкам!
 thunderdome-desc-glasses-thermal = Термальные очки для видения сквозь стены - уязвимы к вспышкам!
+thunderdome-desc-glasses-nightvision = Очки ночного видения для видения в темноте
 
 # Backpack loadouts
 thunderdome-loadout-backpack-default = Рюкзак
@@ -167,6 +171,19 @@ thunderdome-desc-backpack-default = Стандартный рюкзак
 thunderdome-desc-backpack-satchel = Компактная сумка
 thunderdome-desc-backpack-leather = Стильная кожаная сумка
 thunderdome-desc-backpack-duffel = Большой вещмешок
+
+# Utility loadouts
+thunderdome-loadout-utility-none = Без утилиты
+thunderdome-loadout-utility-soap = Мыло
+thunderdome-loadout-utility-knives = Метательные ножи
+thunderdome-loadout-utility-skates = Роликовые коньки
+thunderdome-loadout-utility-decoy = Голографическая ловушка
+
+thunderdome-desc-utility-none = Без утилиты
+thunderdome-desc-utility-soap = Кусок мыла для мгновенного сбивания с ног. Высокий риск - высокая награда.
+thunderdome-desc-utility-knives = 4 метательных ножа для дальнего урона
+thunderdome-desc-utility-skates = Роликовые коньки для увеличения скорости передвижения
+thunderdome-desc-utility-decoy = Проектор голографической ловушки. Создаёт 3 фальшивых клона на 8 секунд.
 
 # Kill streak announcements
 thunderdome-streak-3 = { $player } совершил серию убийств!
@@ -201,7 +218,7 @@ ent-EphedrineAutoInjectorThunderdome = автоинъектор эфедрина
     .desc = Быстрый автоинъектор с 10 единицами эфедрина. Даёт мгновенный буст скорости в бою.
 
 ent-BicaridineAutoInjectorThunderdome = автоинъектор бикаридина
-    .desc = Быстрый автоинъектор с 10 единицами бикаридина. Быстро лечит физические повреждения.
+    .desc = Быстрый автоинъектор с 15 единицами бикаридина. Быстро лечит физические повреждения.
 
 ent-DermalineAutoInjectorThunderdome = автоинъектор дермалина
     .desc = Быстрый автоинъектор с 10 единицами дермалина. Быстро лечит ожоги.
@@ -210,9 +227,12 @@ ent-PortableRechargerCompact = компактный портативный за�
     .desc = Компактная версия портативного зарядника. Меньше, но так же эффективна.
 
 ent-SprayBottleStypticPowderThunderdome = компактный спрей с кровоостанавливающим порошком
-    .suffix = Тандердом, 3 использования
-    .desc = Компактный флакон-спрей с кровоостанавливающим порошком. Хватит на 3 применения.
+    .suffix = Тандердом, 2 использования
+    .desc = Компактный флакон-спрей с кровоостанавливающим порошком. Хватит на 2 применения.
 
 ent-SprayBottleSilverSulfadiazineThunderdome = компактный спрей с сульфадиазином серебра
-    .suffix = Тандердом, 3 использования
-    .desc = Компактный флакон-спрей с сульфадиазином серебра. Хватит на 3 применения.
+    .suffix = Тандердом, 2 использования
+    .desc = Компактный флакон-спрей с сульфадиазином серебра. Хватит на 2 применения.
+
+ent-DecoyHologramThunderdome = проектор голографической ловушки
+    .desc = Проецирует голографическую ловушку в виде вас. Длится 10 секунд.

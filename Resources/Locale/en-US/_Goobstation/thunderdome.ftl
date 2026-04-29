@@ -16,6 +16,7 @@ thunderdome-tab-head = Head
 thunderdome-tab-neck = Neck
 thunderdome-tab-glasses = Glasses
 thunderdome-tab-backpack = Backpack
+thunderdome-tab-utility = Utility
 
 # Weapon categories
 thunderdome-category-shotguns = Shotguns
@@ -31,6 +32,7 @@ thunderdome-category-head = Head
 thunderdome-category-neck = Neck
 thunderdome-category-glasses = Glasses
 thunderdome-category-backpack = Backpack
+thunderdome-category-utility = Utility
 
 # Weapon names
 thunderdome-loadout-shotgun = Kammerer
@@ -151,11 +153,13 @@ thunderdome-loadout-glasses-sunglasses = Sunglasses
 thunderdome-loadout-glasses-security = Security Sunglasses
 thunderdome-loadout-glasses-diagnostic = Medical HUD
 thunderdome-loadout-glasses-thermal = Thermal Vision Goggles
+thunderdome-loadout-glasses-nightvision = Night Vision
 
 thunderdome-desc-glasses-sunglasses = Standard sunglasses
 thunderdome-desc-glasses-security = Security sunglasses with HUD
 thunderdome-desc-glasses-diagnostic = Medical diagnostic HUD
 thunderdome-desc-glasses-thermal = See heat signatures through walls
+thunderdome-desc-glasses-nightvision = Night vision goggles for seeing in the dark
 
 # Backpack loadouts
 thunderdome-loadout-backpack-default = Backpack
@@ -167,6 +171,19 @@ thunderdome-desc-backpack-default = Standard backpack
 thunderdome-desc-backpack-satchel = Compact satchel
 thunderdome-desc-backpack-leather = Stylish leather satchel
 thunderdome-desc-backpack-duffel = Large duffel bag
+
+# Utility loadouts
+thunderdome-loadout-utility-none = No Utility
+thunderdome-loadout-utility-soap = Soap
+thunderdome-loadout-utility-knives = Throwing Knives
+thunderdome-loadout-utility-skates = Roller Skates
+thunderdome-loadout-utility-decoy = Decoy Hologram
+
+thunderdome-desc-utility-none = No utility item
+thunderdome-desc-utility-soap = Soap bar for instant knockdown. High risk, high reward.
+thunderdome-desc-utility-knives = 4x throwing knives for ranged utility damage
+thunderdome-desc-utility-skates = Roller skates for increased movement speed
+thunderdome-desc-utility-decoy = Holographic decoy projector. Creates 3 fake clones for 8 seconds.
 
 # Kill streak announcements
 thunderdome-streak-3 = {$player} is on a Killing Spree!
@@ -212,9 +229,12 @@ ent-PortableRechargerCompact = compact portable recharger
     .desc = A compact version of the portable recharger. Smaller, but just as effective.
 
 ent-SprayBottleStypticPowderThunderdome = compact styptic spray
-    .suffix = Thunderdome, 3 uses
-    .desc = A compact spray bottle loaded with styptic powder. Contains enough for 3 applications.
+    .suffix = Thunderdome, 2 uses
+    .desc = A compact spray bottle loaded with styptic powder. Contains enough for 2 applications.
 
 ent-SprayBottleSilverSulfadiazineThunderdome = compact silver sulfadiazine spray
-    .suffix = Thunderdome, 3 uses
-    .desc = A compact spray bottle loaded with silver sulfadiazine. Contains enough for 3 applications.
+    .suffix = Thunderdome, 2 uses
+    .desc = A compact spray bottle loaded with silver sulfadiazine. Contains enough for 2 applications.
+
+ent-DecoyHologramThunderdome = decoy hologram projector
+    .desc = Projects a holographic decoy of yourself. Lasts 8 seconds.

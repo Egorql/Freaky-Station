@@ -180,7 +180,7 @@
     blockSmokeIngestion: true
 
 - type: entity
-  parent: ClothingMaskBase
+  parent: ClothingMaskGas
   id: ClothingMaskGasThunderdome
   name: Thunderdome gas mask
   suffix: DONT MAP
@@ -204,6 +204,3 @@
   - type: Tag
     tags: [] # no whitelist chameleon
   - type: Hailer # needs its own voicelines for thunderdome eventually but for now its good enough
-  - type: IngestionBlocker
-    blockSmokeIngestion: true
-    enabled: false

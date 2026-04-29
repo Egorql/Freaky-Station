@@ -16,6 +16,7 @@ public sealed class ThunderdomeLoadoutWindow : ThunderdomeWindow
     private int _neckSelection = 0;
     private int _glassesSelection = 0;
     private int _backpackSelection = 0;
+    private int _utilitySelection = 0;
     private ThunderdomeWeaponCard? _selectedWeaponCard;
     private ThunderdomeWeaponCard? _selectedGrenadeCard;
     private ThunderdomeWeaponCard? _selectedMedicalCard;
@@ -23,6 +24,7 @@ public sealed class ThunderdomeLoadoutWindow : ThunderdomeWindow
     private ThunderdomeWeaponCard? _selectedNeckCard;
     private ThunderdomeWeaponCard? _selectedGlassesCard;
     private ThunderdomeWeaponCard? _selectedBackpackCard;
+    private ThunderdomeWeaponCard? _selectedUtilityCard;
 
     private readonly Label _playerCountLabel;
     private readonly TabContainer _tabContainer;
@@ -33,13 +35,14 @@ public sealed class ThunderdomeLoadoutWindow : ThunderdomeWindow
     private readonly BoxContainer _necksContainer;
     private readonly BoxContainer _glassesContainer;
     private readonly BoxContainer _backpacksContainer;
+    private readonly BoxContainer _utilitiesContainer;
     private readonly ThunderdomeButton _confirmButton;
 
     public ThunderdomeLoadoutWindow()
     {
         WindowTitle = Loc.GetString("thunderdome-loadout-title");
-        SetSize = new System.Numerics.Vector2(550, 580);
-        MinSize = new System.Numerics.Vector2(550, 580);
+        SetSize = new System.Numerics.Vector2(650, 620);
+        MinSize = new System.Numerics.Vector2(650, 620);
 
         _playerCountLabel = new Label
         {
@@ -59,13 +62,21 @@ public sealed class ThunderdomeLoadoutWindow : ThunderdomeWindow
         };
         Contents.AddChild(subtitle);
 
+        var tabWrapper = new BoxContainer
+        {
+            Orientation = BoxContainer.LayoutOrientation.Horizontal,
+            HorizontalExpand = true,
+            VerticalExpand = true,
+            HorizontalAlignment = HAlignment.Center,
+        };
+
         _tabContainer = new TabContainer
         {
             VerticalExpand = true,
-            HorizontalExpand = true,
-            Margin = new Thickness(6, 0),
+            MinWidth = 570,
         };
-        Contents.AddChild(_tabContainer);
+        tabWrapper.AddChild(_tabContainer);
+        Contents.AddChild(tabWrapper);
 
         // Weapons tab
         var weaponsScroll = new ScrollContainer
@@ -179,6 +190,22 @@ public sealed class ThunderdomeLoadoutWindow : ThunderdomeWindow
         _tabContainer.AddChild(backpacksScroll);
         _tabContainer.SetTabTitle(6, Loc.GetString("thunderdome-tab-backpack"));
 
+        // Utility tab
+        var utilitiesScroll = new ScrollContainer
+        {
+            VerticalExpand = true,
+            HorizontalExpand = true,
+        };
+        _utilitiesContainer = new BoxContainer
+        {
+            Orientation = BoxContainer.LayoutOrientation.Vertical,
+            HorizontalExpand = true,
+            SeparationOverride = 4,
+        };
+        utilitiesScroll.AddChild(_utilitiesContainer);
+        _tabContainer.AddChild(utilitiesScroll);
+        _tabContainer.SetTabTitle(7, Loc.GetString("thunderdome-tab-utility"));
+
         _confirmButton = new ThunderdomeButton
         {
             Text = Loc.GetString("thunderdome-loadout-confirm"),
@@ -196,7 +223,8 @@ public sealed class ThunderdomeLoadoutWindow : ThunderdomeWindow
                     _headSelection,
                     _neckSelection,
                     _glassesSelection,
-                    _backpackSelection);
+                    _backpackSelection,
+                    _utilitySelection);
                 OnLoadoutConfirmed?.Invoke(selection);
             }
         };
@@ -214,6 +242,7 @@ public sealed class ThunderdomeLoadoutWindow : ThunderdomeWindow
         _necksContainer.RemoveAllChildren();
         _glassesContainer.RemoveAllChildren();
         _backpacksContainer.RemoveAllChildren();
+        _utilitiesContainer.RemoveAllChildren();
 
         _selectedWeaponCard = null;
         _selectedGrenadeCard = null;
@@ -222,6 +251,7 @@ public sealed class ThunderdomeLoadoutWindow : ThunderdomeWindow
         _selectedNeckCard = null;
         _selectedGlassesCard = null;
         _selectedBackpackCard = null;
+        _selectedUtilityCard = null;
         _weaponSelection = state.LastWeaponSelection;
         _grenadeSelection = state.LastGrenadeSelection;
         _medicalSelection = state.LastMedicalSelection;
@@ -229,6 +259,7 @@ public sealed class ThunderdomeLoadoutWindow : ThunderdomeWindow
         _neckSelection = state.LastNeckSelection;
         _glassesSelection = state.LastGlassesSelection;
         _backpackSelection = state.LastBackpackSelection;
+        _utilitySelection = state.LastUtilitySelection;
         _confirmButton.Disabled = _weaponSelection < 0;
 
         // Weapons tab - grouped by category
@@ -353,6 +384,20 @@ public sealed class ThunderdomeLoadoutWindow : ThunderdomeWindow
                 _selectedBackpackCard = card;
             }
         }
+
+        // Utilities tab
+        foreach (var option in state.Utilities)
+        {
+            var card = new ThunderdomeWeaponCard(option.Index, option.Name, option.SpritePrototype, option.Description);
+            card.OnSelected += OnUtilityCardSelected;
+            _utilitiesContainer.AddChild(card);
+
+            if (option.Index == state.LastUtilitySelection)
+            {
+                card.SetSelected(true);
+                _selectedUtilityCard = card;
+            }
+        }
     }
 
     private void OnWeaponCardSelected(ThunderdomeWeaponCard card)
@@ -417,6 +462,15 @@ public sealed class ThunderdomeLoadoutWindow : ThunderdomeWindow
 
         _selectedBackpackCard = card;
         _backpackSelection = card.WeaponIndex;
+        card.SetSelected(true);
+    }
+
+    private void OnUtilityCardSelected(ThunderdomeWeaponCard card)
+    {
+        _selectedUtilityCard?.SetSelected(false);
+
+        _selectedUtilityCard = card;
+        _utilitySelection = card.WeaponIndex;
         card.SetSelected(true);
     }
 }

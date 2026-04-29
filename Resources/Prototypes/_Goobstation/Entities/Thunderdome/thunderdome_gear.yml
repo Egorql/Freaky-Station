@@ -64,15 +64,15 @@
       - MagazineRifle
       - MagazineRifleIncendiary
 
-- type: startingGear
-  id: ThunderdomeAkms
-  equipment:
-    suitstorage: WeaponRifleAk
-  storage:
-    back:
-      - Flash
-      - MagazineLightRifle
-      - MagazineLightRifle
+# - type: startingGear # Мама я люблю сатану
+#   id: ThunderdomeAkms
+#   equipment:
+#     suitstorage: WeaponRifleAk
+#   storage:
+#     back:
+#       - Flash
+#       - MagazineLightRifle
+#       - MagazineLightRifle
 
 - type: startingGear
   id: ThunderdomePython
@@ -112,15 +112,15 @@
     - BurnAutoInjector
     - BruteAutoInjector # брут урон чаще, Q/A брут инъектор
 
-- type: startingGear
-  id: ThunderdomeSmg2
-  equipment:
-    suitstorage: WeaponSubMachineGunC20r
-  storage:
-    back:
-      - Flash
-      - MagazinePistolSubMachineGun
-      - MagazinePistolSubMachineGun
+# - type: startingGear # Мама я люблю кокаин
+#   id: ThunderdomeSmg2
+#   equipment:
+#     suitstorage: WeaponSubMachineGunC20r
+#   storage:
+#     back:
+#       - Flash
+#       - MagazinePistolSubMachineGun
+#       - MagazinePistolSubMachineGun
 
 - type: startingGear
   id: ThunderdomeSmg3
@@ -369,6 +369,11 @@
   equipment:
     eyes: ClothingEyesThermalVisionGoggles
 
+- type: startingGear
+  id: ThunderdomeGlasses5
+  equipment:
+    eyes: ClothingEyesNightVisionGoggles
+
 # Backpack
 - type: startingGear
   id: ThunderdomeBackpack1
@@ -390,3 +395,33 @@
   equipment:
     back: ClothingBackpackDuffel
 
+# Utility items
+- type: startingGear
+  id: ThunderdomeUtilityNone
+
+- type: startingGear
+  id: ThunderdomeUtilitySoap
+  storage:
+    back:
+      - Soap
+
+- type: startingGear
+  id: ThunderdomeUtilityThrowingKnives
+  storage:
+    back:
+      - ThrowingKnife
+      - ThrowingKnife
+      - ThrowingKnife
+      - ThrowingKnife
+
+- type: startingGear
+  id: ThunderdomeUtilityRollerSkates
+  storage:
+    back:
+      - ClothingShoesSkates
+
+- type: startingGear
+  id: ThunderdomeUtilityDecoy
+  storage:
+    back:
+      - DecoyHologramThunderdome

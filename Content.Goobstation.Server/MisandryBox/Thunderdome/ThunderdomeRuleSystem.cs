@@ -111,6 +111,7 @@ public sealed class ThunderdomeRuleSystem : EntitySystem
         public int LastNeckSelection = 0;
         public int LastGlassesSelection = 0;
         public int LastBackpackSelection = 0;
+        public int LastUtilitySelection = 0;
     }
 
     public override void Initialize()
@@ -328,7 +329,7 @@ public sealed class ThunderdomeRuleSystem : EntitySystem
         GhostDomePlayer(ent, rule, playSound: false);
     }
 
-    public void SpawnPlayer(ICommonSession session, EntityUid ruleEntity, int weaponIdx, int grenadeIdx, int medicalIdx, int headIdx, int neckIdx, int glassesIdx, int backpackIdx)
+    public void SpawnPlayer(ICommonSession session, EntityUid ruleEntity, int weaponIdx, int grenadeIdx, int medicalIdx, int headIdx, int neckIdx, int glassesIdx, int backpackIdx, int utilityIdx)
     {
         if (!TryComp<ThunderdomeRuleComponent>(ruleEntity, out var rule)
             || !rule.Active
@@ -364,12 +365,14 @@ public sealed class ThunderdomeRuleSystem : EntitySystem
         SpawnBackpackLoadout(mob, backpackIdx, rule);
 
         // Then spawn items that go into storage (after backpack is equipped)
-        // Medical first (bottom of stack)
-        SpawnMedicalLoadout(mob, medicalIdx, rule);
-        // Weapon second (top of stack, quick access Q/E)
-        SpawnLoadoutItems(mob, weaponIdx, rule);
-        // Grenade last (goes to belt, doesn't affect backpack order)
+        // Grenade first (goes to belt, doesn't affect backpack order)
         SpawnGrenadeLoadout(mob, grenadeIdx, rule);
+        // Utility second (goes to backpack)
+        SpawnUtilityLoadout(mob, utilityIdx, rule);
+        // Medical third (goes to backpack)
+        SpawnMedicalLoadout(mob, medicalIdx, rule);
+        // Weapon last (ammo goes to backpack, appears in Q/A)
+        SpawnLoadoutItems(mob, weaponIdx, rule);
 
         EnsureComp<IgnoreSkillsComponent>(mob);
 
@@ -382,6 +385,7 @@ public sealed class ThunderdomeRuleSystem : EntitySystem
         tdPlayer.NeckSelection = neckIdx;
         tdPlayer.GlassesSelection = glassesIdx;
         tdPlayer.BackpackSelection = backpackIdx;
+        tdPlayer.UtilitySelection = utilityIdx;
         tdPlayer.CharacterName = profile?.Name ?? "Unknown";
 
         // Восстанавливаем статистику из rule по UserId
@@ -419,6 +423,7 @@ public sealed class ThunderdomeRuleSystem : EntitySystem
             globalStats.LastNeckSelection = neckIdx;
             globalStats.LastGlassesSelection = glassesIdx;
             globalStats.LastBackpackSelection = backpackIdx;
+            globalStats.LastUtilitySelection = utilityIdx;
             globalStats.LastCharacterName = profile?.Name ?? "Unknown";
 
             // Update leaderboard immediately to show new player
@@ -874,6 +879,20 @@ public sealed class ThunderdomeRuleSystem : EntitySystem
         _stationSpawning.EquipStartingGear(mob, rule.BackpackLoadouts[backpackIdx].Gear);
     }
 
+    private void SpawnUtilityLoadout(EntityUid mob, int utilityIdx, ThunderdomeRuleComponent rule)
+    {
+        if (rule.UtilityLoadouts.Count == 0)
+            return;
+
+        if (utilityIdx < 0 || utilityIdx >= rule.UtilityLoadouts.Count)
+        {
+            Log.Warning($"ThunderDome: Invalid utilityIdx {utilityIdx} received, clamping to valid range [0, {rule.UtilityLoadouts.Count - 1}]");
+            utilityIdx = Math.Clamp(utilityIdx, 0, rule.UtilityLoadouts.Count - 1);
+        }
+
+        _stationSpawning.EquipStartingGear(mob, rule.UtilityLoadouts[utilityIdx].Gear);
+    }
+
     private EntityCoordinates? GetRandomSpawnPoint(ThunderdomeRuleComponent rule)
     {
         if (rule.ArenaMap == null)
@@ -1041,6 +1060,20 @@ public sealed class ThunderdomeRuleSystem : EntitySystem
             });
         }
 
+        var utilities = new List<ThunderdomeLoadoutOption>();
+        for (var i = 0; i < rule.UtilityLoadouts.Count; i++)
+        {
+            var loadout = rule.UtilityLoadouts[i];
+            utilities.Add(new ThunderdomeLoadoutOption
+            {
+                Index = i,
+                Name = Loc.GetString(loadout.Name),
+                Description = string.IsNullOrEmpty(loadout.Description) ? string.Empty : Loc.GetString(loadout.Description),
+                Category = string.Empty,
+                SpritePrototype = loadout.Sprite,
+            });
+        }
+
         // Получаем сохраненный выбор
         var lastWeapon = -1;
         var lastGrenade = 0;
@@ -1049,6 +1082,7 @@ public sealed class ThunderdomeRuleSystem : EntitySystem
         var lastNeck = 0;
         var lastGlasses = 0;
         var lastBackpack = 0;
+        var lastUtility = 0;
         if (userId.HasValue && _globalStats.TryGetValue(userId.Value, out var stats))
         {
             lastWeapon = stats.LastWeaponSelection;
@@ -1058,9 +1092,10 @@ public sealed class ThunderdomeRuleSystem : EntitySystem
             lastNeck = stats.LastNeckSelection;
             lastGlasses = stats.LastGlassesSelection;
             lastBackpack = stats.LastBackpackSelection;
+            lastUtility = stats.LastUtilitySelection;
         }
 
-        return new ThunderdomeLoadoutEuiState(weapons, grenades, medicals, heads, necks, glasses, backpacks, rule.Players.Count, lastWeapon, lastGrenade, lastMedical, lastHead, lastNeck, lastGlasses, lastBackpack);
+        return new ThunderdomeLoadoutEuiState(weapons, grenades, medicals, heads, necks, glasses, backpacks, utilities, rule.Players.Count, lastWeapon, lastGrenade, lastMedical, lastHead, lastNeck, lastGlasses, lastBackpack, lastUtility);
     }
 
     private void RefillAmmo(EntityUid killer)

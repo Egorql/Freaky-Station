@@ -78,6 +78,9 @@ public sealed partial class ThunderdomeRuleComponent : Component
     public List<ThunderdomeWeaponLoadout> BackpackLoadouts = new();
 
     [DataField]
+    public List<ThunderdomeWeaponLoadout> UtilityLoadouts = new();
+
+    [DataField]
     public TimeSpan CleanupInterval = TimeSpan.FromSeconds(25);
 
     [DataField]

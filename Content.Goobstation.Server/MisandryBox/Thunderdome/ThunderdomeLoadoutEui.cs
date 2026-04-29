@@ -23,7 +23,7 @@ public sealed class ThunderdomeLoadoutEui : BaseEui
     public override EuiStateBase GetNewState()
     {
         if (!_entManager.TryGetComponent<ThunderdomeRuleComponent>(_ruleEntity, out var rule))
-            return new ThunderdomeLoadoutEuiState(new List<ThunderdomeLoadoutOption>(), new List<ThunderdomeLoadoutOption>(), new List<ThunderdomeLoadoutOption>(), new List<ThunderdomeLoadoutOption>(), new List<ThunderdomeLoadoutOption>(), new List<ThunderdomeLoadoutOption>(), new List<ThunderdomeLoadoutOption>(), 0);
+            return new ThunderdomeLoadoutEuiState(new List<ThunderdomeLoadoutOption>(), new List<ThunderdomeLoadoutOption>(), new List<ThunderdomeLoadoutOption>(), new List<ThunderdomeLoadoutOption>(), new List<ThunderdomeLoadoutOption>(), new List<ThunderdomeLoadoutOption>(), new List<ThunderdomeLoadoutOption>(), new List<ThunderdomeLoadoutOption>(), 0);
 
         return _thunderdomeSystem.GetLoadoutState(rule, _session.UserId);
     }
@@ -36,7 +36,7 @@ public sealed class ThunderdomeLoadoutEui : BaseEui
         {
             case ThunderdomeLoadoutSelectedMessage selected:
                 var sel = selected.Selection;
-                _thunderdomeSystem.SpawnPlayer(_session, _ruleEntity, sel.WeaponIndex, sel.GrenadeIndex, sel.MedicalIndex, sel.HeadIndex, sel.NeckIndex, sel.GlassesIndex, sel.BackpackIndex);
+                _thunderdomeSystem.SpawnPlayer(_session, _ruleEntity, sel.WeaponIndex, sel.GrenadeIndex, sel.MedicalIndex, sel.HeadIndex, sel.NeckIndex, sel.GlassesIndex, sel.BackpackIndex, sel.UtilityIndex);
                 Close();
                 break;
         }

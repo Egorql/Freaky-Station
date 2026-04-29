@@ -44,6 +44,9 @@ public sealed partial class ThunderdomePlayerComponent : Component
     public int BackpackSelection;
 
     [DataField]
+    public int UtilitySelection;
+
+    [DataField]
     public string CharacterName = string.Empty;
 
     public EntityUid? LastAttacker;
