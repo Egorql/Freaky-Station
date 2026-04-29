@@ -48,6 +48,8 @@ public sealed partial class ThunderdomeRuleComponent : Component
     [DataField]
     public Dictionary<NetUserId, int> BestStreaks = new();
 
+    public List<Entity<ThunderdomeLeaderboardComponent>> CachedLeaderboards = new();
+
     [DataField]
     public bool Active;
 
@@ -74,6 +76,9 @@ public sealed partial class ThunderdomeRuleComponent : Component
 
     [DataField]
     public List<ThunderdomeWeaponLoadout> BackpackLoadouts = new();
+
+    [DataField]
+    public List<ThunderdomeWeaponLoadout> UtilityLoadouts = new();
 
     [DataField]
     public TimeSpan CleanupInterval = TimeSpan.FromSeconds(25);

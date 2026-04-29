@@ -18,6 +18,7 @@ using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Interaction.Components;
+using Content.Shared.Interaction.Events;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
@@ -71,6 +72,7 @@ public sealed class IllusionSystem : EntitySystem
         base.Initialize();
 
         SubscribeLocalEvent<IllusionOnMeleeHitComponent, MeleeHitEvent>(OnHit);
+        SubscribeLocalEvent<SpawnIllusionOnUseComponent, UseInHandEvent>(OnUseInHand);
 
         SubscribeLocalEvent<IllusionComponent, MobStateChangedEvent>(OnStateChanged);
         SubscribeLocalEvent<IllusionComponent, TimedDespawnEvent>(OnDespawn);
@@ -103,6 +105,18 @@ public sealed class IllusionSystem : EntitySystem
             return;
 
         SpawnIllusion(args.User, ent.Comp.Lifetime, ent.Comp.HealthMultiplier, args.HitEntities, ent.Comp.Components);
+    }
+
+    private void OnUseInHand(Entity<SpawnIllusionOnUseComponent> ent, ref UseInHandEvent args)
+    {
+        if (args.Handled)
+            return;
+
+        for (int i = 0; i < ent.Comp.CloneCount; i++)
+        {
+            SpawnIllusion(args.User, ent.Comp.Lifetime, ent.Comp.HealthMultiplier, [], new ComponentRegistry());
+        }
+        args.Handled = true;
     }
 
     private void SpawnIllusion(EntityUid user,
@@ -176,7 +190,10 @@ public sealed class IllusionSystem : EntitySystem
 
         var exception = EnsureComp<FactionExceptionComponent>(clone.Value);
         _npcFaction.IgnoreEntity((clone.Value, exception), user);
-        _npcFaction.AggroEntities((clone.Value, exception), targets);
+
+        // Only aggro targets if there are any (for melee hit clones)
+        if (targets.Count > 0)
+            _npcFaction.AggroEntities((clone.Value, exception), targets);
 
         _htn.Replan(htn);
 

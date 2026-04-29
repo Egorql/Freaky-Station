@@ -1,0 +1,132 @@
+# Thunderdome custom items
+
+# Compact portable recharger for laser loadouts
+- type: entity
+  parent: PortableRecharger
+  id: PortableRechargerCompact
+  name: compact portable recharger
+  description: A compact version of the portable recharger. Smaller, but just as effective.
+  components:
+  - type: Item
+    size: Small
+    shape:
+    - 0,0,1,1
+
+# Ephedrine autoinjector for Thunderdome medical loadout
+- type: entity
+  parent: ChemicalMedipen
+  id: EphedrineAutoInjectorThunderdome
+  name: ephedrine autoinjector
+  description: A rapid-injection autoinjector loaded with 10 units of ephedrine. Provides a quick combat stimulant boost.
+  components:
+  - type: Sprite
+    sprite: _Goobstation/Objects/Specific/Medical/stasipen.rsi
+    layers:
+    - state: stasipen
+      map: ["enum.SolutionContainerLayers.Fill"]
+  - type: SolutionContainerVisuals
+    maxFillLevels: 1
+    changeColor: false
+    emptySpriteName: stasipen_empty
+  - type: Hypospray
+    solutionName: pen
+    transferAmount: 10
+    onlyAffectsMobs: false
+    injectOnly: true
+  - type: SolutionContainerManager
+    solutions:
+      pen:
+        maxVol: 10
+        reagents:
+        - ReagentId: Ephedrine
+          Quantity: 10
+
+# Bicaridine autoinjector for Thunderdome medical loadout
+- type: entity
+  parent: ChemicalMedipen
+  id: BicaridineAutoInjectorThunderdome
+  name: bicaridine autoinjector
+  description: A rapid-injection autoinjector loaded with 10 units of bicaridine. Heals brute damage quickly.
+  components:
+  - type: Sprite
+    sprite: Objects/Specific/Medical/medipen.rsi
+    layers:
+    - state: arithpen
+      map: ["enum.SolutionContainerLayers.Fill"]
+  - type: SolutionContainerVisuals
+    maxFillLevels: 1
+    changeColor: false
+    emptySpriteName: arithpen_empty
+  - type: Hypospray
+    solutionName: pen
+    transferAmount: 15
+    onlyAffectsMobs: false
+    injectOnly: true
+  - type: SolutionContainerManager
+    solutions:
+      pen:
+        maxVol: 15
+        reagents:
+        - ReagentId: Bicaridine
+          Quantity: 15
+
+# Dermaline autoinjector for Thunderdome medical loadout
+- type: entity
+  parent: ChemicalMedipen
+  id: DermalineAutoInjectorThunderdome
+  name: dermaline autoinjector
+  description: A rapid-injection autoinjector loaded with 10 units of dermaline. Heals burn damage quickly.
+  components:
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: base-needle-inhand-left
+      - state: base-colorA-inhand-left
+        color: "#427485"
+      - state: base-colorB-inhand-left
+      right:
+      - state: base-needle-inhand-right
+      - state: base-colorA-inhand-right
+        color: "#427485"
+      - state: base-colorB-inhand-right
+  - type: Sprite
+    sprite: Objects/Specific/Medical/medipen.rsi
+    layers:
+    - state: dermpen
+      map: ["enum.SolutionContainerLayers.Fill"]
+  - type: SolutionContainerVisuals
+    maxFillLevels: 1
+    changeColor: false
+    emptySpriteName: dermpen_empty
+  - type: Hypospray
+    solutionName: pen
+    transferAmount: 10
+    onlyAffectsMobs: false
+    injectOnly: true
+  - type: SolutionContainerManager
+    solutions:
+      pen:
+        maxVol: 10
+        reagents:
+        - ReagentId: Dermaline
+          Quantity: 10
+
+# Decoy hologram projector for Thunderdome utility loadout
+- type: entity
+  id: DecoyHologramThunderdome
+  name: decoy hologram projector
+  description: Projects a holographic decoy of yourself. Lasts 8 seconds.
+  parent: BaseItem
+  components:
+  - type: Sprite
+    sprite: /Textures/Objects/Devices/chameleon_projector.rsi
+    state: icon
+  - type: Item
+    size: Small
+  - type: SpawnIllusionOnUse
+    lifetime: 10
+    healthMultiplier: 0.05
+    cloneCount: 2
+  - type: UseDelay
+    delay: 45
+

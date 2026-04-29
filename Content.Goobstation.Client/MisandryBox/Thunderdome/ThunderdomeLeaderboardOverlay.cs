@@ -26,6 +26,8 @@ public sealed class ThunderdomeLeaderboardOverlay : Overlay
     private readonly TransformSystem _transform;
     private readonly ExamineSystemShared _examine;
 
+    private const string DefaultFontPrototype = "Default";
+
     public override OverlaySpace Space => OverlaySpace.ScreenSpace;
 
     internal ThunderdomeLeaderboardOverlay()
@@ -45,13 +47,10 @@ public sealed class ThunderdomeLeaderboardOverlay : Overlay
         var matrix = args.ViewportControl.GetWorldToScreenMatrix();
 
         var ourEntity = _playerMgr.LocalEntity;
-        var viewPos = new MapCoordinates(args.WorldAABB.Center, args.MapId);
-        var ourPos = args.WorldBounds.Center;
-        if (ourEntity != null)
-        {
-            viewPos = _transform.GetMapCoordinates(ourEntity.Value);
-            ourPos = viewPos.Position;
-        }
+        if (ourEntity == null)
+            return; // Нет локального игрока — нечего рисовать
+
+        var viewPos = _transform.GetMapCoordinates(ourEntity.Value);
 
         var query = _entity.AllEntityQueryEnumerator<ThunderdomeLeaderboardComponent, TransformComponent>();
         while (query.MoveNext(out var uid, out var leaderboard, out var xform))
@@ -62,13 +61,13 @@ public sealed class ThunderdomeLeaderboardOverlay : Overlay
                 continue;
 
             // FOV check
-            var distance = (mapPos.Position - ourPos).Length();
+            var distance = (mapPos.Position - viewPos.Position).Length();
             if (!args.WorldBounds.Contains(mapPos.Position) ||
                 !_examine.InRangeUnOccluded(viewPos, mapPos, distance, e => e == uid || e == ourEntity, entMan: _entity))
                 continue;
 
             // Get font - use Default font prototype
-            if (!_prototypeManager.TryIndex<FontPrototype>("Default", out var fontProto))
+            if (!_prototypeManager.TryIndex<FontPrototype>(DefaultFontPrototype, out var fontProto))
                 continue;
 
             var fontResource = _resourceCache.GetResource<FontResource>(fontProto.Path);

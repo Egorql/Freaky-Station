@@ -7,6 +7,17 @@ thunderdome-loadout-title = Снаряжение Тандердома
 thunderdome-loadout-players = игроков на арене: {$count}
 thunderdome-loadout-subtitle = Выбери свой комплект оружия
 thunderdome-loadout-confirm = Зайти на арену
+
+# Tab titles
+thunderdome-tab-weapons = Оружие
+thunderdome-tab-grenades = Гранаты
+thunderdome-tab-medical = Медицина
+thunderdome-tab-head = Голова
+thunderdome-tab-neck = Шея
+thunderdome-tab-glasses = Очки
+thunderdome-tab-backpack = Рюкзак
+thunderdome-tab-utility = Утилита
+
 thunderdome-loadout-base-gear = Базовое снаряжение: пистолет Mk58 + магазин, вспышка в РПС, сам РПС
 # Weapon categories
 thunderdome-category-shotguns = Дробовики
@@ -16,6 +27,13 @@ thunderdome-category-revolvers = Револьверы
 thunderdome-category-snipers = Снайперские винтовки
 thunderdome-category-melee = Рукопашное
 thunderdome-category-lasers = Лазеры
+thunderdome-category-grenades = Гранаты
+thunderdome-category-medical = Медицина
+thunderdome-category-head = Голова
+thunderdome-category-neck = Шея
+thunderdome-category-glasses = Очки
+thunderdome-category-backpack = Рюкзаки
+thunderdome-category-utility = Утилита
 # Weapon names
 thunderdome-loadout-shotgun = Каммерер
 thunderdome-loadout-doublebarreled = Двустволка
@@ -74,13 +92,13 @@ thunderdome-desc-grenade-stinger = Травматическая граната �
 thunderdome-desc-grenade-teargas = Слезоточивая граната в поясе, ослепляющая и замедляющая врагов
 
 # Medical loadouts
-thunderdome-loadout-medical-default = Базовая аптечка
-thunderdome-loadout-medical-ephedrine = Шприцы с эфедрином
-thunderdome-loadout-medical-bicaridine = Бикаридин + Дермалин
+thunderdome-loadout-medical-default = Базовая медицина
+thunderdome-loadout-medical-ephedrine = Боевой стимулятор 
+thunderdome-loadout-medical-bicaridine = Быстрое лечение
 
-thunderdome-desc-medical-default = Медицинская нить, регенеративная сетка, трикордразин
-thunderdome-desc-medical-ephedrine = 2x шприца с эфедрином + набор для ушибов + мазь + бинт
-thunderdome-desc-medical-bicaridine = 3x бикаридин + 3x дермалин + набор для ушибов + мазь + бинт
+thunderdome-desc-medical-default = Медицинская нить, регенеративная сетка, компактный спрей от ран, компактный спрей от ожогов и таблетки трикордразина
+thunderdome-desc-medical-ephedrine = Автоинъектор эфедрина для буста скорости, плюс бинты, мазь и марля
+thunderdome-desc-medical-bicaridine = Автоинъекторы бикаридина и дермалина для быстрого лечения, плюс бинты, мазь и марля
 
 # Head loadouts
 thunderdome-loadout-head-default = Базовый шлем
@@ -135,11 +153,13 @@ thunderdome-loadout-glasses-sunglasses = Солнцезащитные очки
 thunderdome-loadout-glasses-security = Солнцезащитные очки СБ
 thunderdome-loadout-glasses-diagnostic = Медицинский HUD
 thunderdome-loadout-glasses-thermal = Термальные очки
+thunderdome-loadout-glasses-nightvision = Ночное видение
 
 thunderdome-desc-glasses-sunglasses = Защита от вспышек
 thunderdome-desc-glasses-security = Защита от вспышек (СБ стиль)
 thunderdome-desc-glasses-diagnostic = Медицинский HUD - уязвимы к вспышкам!
 thunderdome-desc-glasses-thermal = Термальные очки для видения сквозь стены - уязвимы к вспышкам!
+thunderdome-desc-glasses-nightvision = Очки ночного видения для видения в темноте
 
 # Backpack loadouts
 thunderdome-loadout-backpack-default = Рюкзак
@@ -151,6 +171,19 @@ thunderdome-desc-backpack-default = Стандартный рюкзак
 thunderdome-desc-backpack-satchel = Компактная сумка
 thunderdome-desc-backpack-leather = Стильная кожаная сумка
 thunderdome-desc-backpack-duffel = Большой вещмешок
+
+# Utility loadouts
+thunderdome-loadout-utility-none = Без утилиты
+thunderdome-loadout-utility-soap = Мыло
+thunderdome-loadout-utility-knives = Метательные ножи
+thunderdome-loadout-utility-skates = Роликовые коньки
+thunderdome-loadout-utility-decoy = Голографическая ловушка
+
+thunderdome-desc-utility-none = Без утилиты
+thunderdome-desc-utility-soap = Кусок мыла для мгновенного сбивания с ног. Высокий риск - высокая награда.
+thunderdome-desc-utility-knives = 4 метательных ножа для дальнего урона
+thunderdome-desc-utility-skates = Роликовые коньки для увеличения скорости передвижения
+thunderdome-desc-utility-decoy = Проектор голографической ловушки. Создаёт 3 фальшивых клона на 8 секунд.
 
 # Kill streak announcements
 thunderdome-streak-3 = { $player } совершил серию убийств!
@@ -179,3 +212,27 @@ ent-WeaponLaserCarbineAutoRecharge = лазерный карабин
     .desc = Эргономичный лазерный карабин с самозаряжающейся ядерной батареей. Идеален для продолжительного боя.
 ent-WeaponSniperLaser = лазерная снайперская винтовка
     .desc = Мощная лазерная снайперская винтовка с самозаряжающимся энергоблоком. Наносит разрушительные точные выстрелы.
+
+# Thunderdome custom items
+ent-EphedrineAutoInjectorThunderdome = автоинъектор эфедрина
+    .desc = Быстрый автоинъектор с 10 единицами эфедрина. Даёт мгновенный буст скорости в бою.
+
+ent-BicaridineAutoInjectorThunderdome = автоинъектор бикаридина
+    .desc = Быстрый автоинъектор с 15 единицами бикаридина. Быстро лечит физические повреждения.
+
+ent-DermalineAutoInjectorThunderdome = автоинъектор дермалина
+    .desc = Быстрый автоинъектор с 10 единицами дермалина. Быстро лечит ожоги.
+
+ent-PortableRechargerCompact = компактный портативный зарядник
+    .desc = Компактная версия портативного зарядника. Меньше, но так же эффективна.
+
+ent-SprayBottleStypticPowderThunderdome = компактный спрей с кровоостанавливающим порошком
+    .suffix = Тандердом, 2 использования
+    .desc = Компактный флакон-спрей с кровоостанавливающим порошком. Хватит на 2 применения.
+
+ent-SprayBottleSilverSulfadiazineThunderdome = компактный спрей с сульфадиазином серебра
+    .suffix = Тандердом, 2 использования
+    .desc = Компактный флакон-спрей с сульфадиазином серебра. Хватит на 2 применения.
+
+ent-DecoyHologramThunderdome = проектор голографической ловушки
+    .desc = Проецирует голографическую ловушку в виде вас. Длится 10 секунд.

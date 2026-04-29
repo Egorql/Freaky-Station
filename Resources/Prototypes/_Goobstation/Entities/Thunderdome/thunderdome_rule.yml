@@ -21,11 +21,11 @@
           description: thunderdome-desc-smg
           category: thunderdome-category-smgs
           sprite: WeaponSubMachineGunDrozd
-        - gear: ThunderdomeSmg2
-          name: thunderdome-loadout-smg2
-          description: thunderdome-desc-smg2
-          category: thunderdome-category-smgs
-          sprite: WeaponSubMachineGunC20r
+        # - gear: ThunderdomeSmg2 # Мама я предал страну
+        #   name: thunderdome-loadout-smg2
+        #   description: thunderdome-desc-smg2
+        #   category: thunderdome-category-smgs
+        #   sprite: WeaponSubMachineGunC20r
         - gear: ThunderdomeSmg3
           name: thunderdome-loadout-smg3
           description: thunderdome-desc-smg3
@@ -46,11 +46,11 @@
           description: thunderdome-desc-lecter
           category: thunderdome-category-rifles
           sprite: WeaponRifleLecter
-        - gear: ThunderdomeAkms
-          name: thunderdome-loadout-akms
-          description: thunderdome-desc-akms
-          category: thunderdome-category-rifles
-          sprite: WeaponRifleAk
+        # - gear: ThunderdomeAkms # Мама я некрофил
+        #   name: thunderdome-loadout-akms
+        #   description: thunderdome-desc-akms
+        #   category: thunderdome-category-rifles
+        #   sprite: WeaponRifleAk
         - gear: ThunderdomePython
           name: thunderdome-loadout-python
           description: thunderdome-desc-python
@@ -132,17 +132,17 @@
           name: thunderdome-loadout-medical-default
           description: thunderdome-desc-medical-default
           category: thunderdome-category-medical
-          sprite: Brutepack
+          sprite: MedicatedSuture
         - gear: ThunderdomeMedicalEphedrine
           name: thunderdome-loadout-medical-ephedrine
           description: thunderdome-desc-medical-ephedrine
           category: thunderdome-category-medical
-          sprite: SyringeEphedrine
+          sprite: EphedrineAutoInjectorThunderdome
         - gear: ThunderdomeMedicalBicaridine
           name: thunderdome-loadout-medical-bicaridine
           description: thunderdome-desc-medical-bicaridine
           category: thunderdome-category-medical
-          sprite: SyringeBicaridine
+          sprite: BicaridineAutoInjectorThunderdome
       headLoadouts:
         - gear: ThunderdomeHead1
           name: thunderdome-loadout-head-basic
@@ -266,6 +266,11 @@
           description: thunderdome-desc-glasses-thermal
           category: thunderdome-category-glasses
           sprite: ClothingEyesThermalVisionGoggles
+        - gear: ThunderdomeGlasses5
+          name: thunderdome-loadout-glasses-nightvision
+          description: thunderdome-desc-glasses-nightvision
+          category: thunderdome-category-glasses
+          sprite: ClothingEyesNightVisionGoggles
       backpackLoadouts:
         - gear: ThunderdomeBackpack1
           name: thunderdome-loadout-backpack-default
@@ -287,6 +292,32 @@
           description: thunderdome-desc-backpack-duffel
           category: thunderdome-category-backpack
           sprite: ClothingBackpackDuffel
+      utilityLoadouts:
+        - gear: ThunderdomeUtilityNone
+          name: thunderdome-loadout-utility-none
+          description: thunderdome-desc-utility-none
+          category: thunderdome-category-utility
+          sprite: ClothingBackpack
+        - gear: ThunderdomeUtilitySoap
+          name: thunderdome-loadout-utility-soap
+          description: thunderdome-desc-utility-soap
+          category: thunderdome-category-utility
+          sprite: Soap
+        - gear: ThunderdomeUtilityThrowingKnives
+          name: thunderdome-loadout-utility-knives
+          description: thunderdome-desc-utility-knives
+          category: thunderdome-category-utility
+          sprite: ThrowingKnife
+        - gear: ThunderdomeUtilityRollerSkates
+          name: thunderdome-loadout-utility-skates
+          description: thunderdome-desc-utility-skates
+          category: thunderdome-category-utility
+          sprite: ClothingShoesSkates
+        - gear: ThunderdomeUtilityDecoy
+          name: thunderdome-loadout-utility-decoy
+          description: thunderdome-desc-utility-decoy
+          category: thunderdome-category-utility
+          sprite: DecoyHologramThunderdome
     - type: LoadMapRule
       mapPath: /Maps/_Goobstation/Nonstations/dm01-entryway.yml
     - type: RuleGrids

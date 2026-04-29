@@ -13,6 +13,7 @@ public sealed class ThunderdomeLoadoutEuiState : EuiStateBase
     public List<ThunderdomeLoadoutOption> Necks { get; }
     public List<ThunderdomeLoadoutOption> Glasses { get; }
     public List<ThunderdomeLoadoutOption> Backpacks { get; }
+    public List<ThunderdomeLoadoutOption> Utilities { get; }
     public int PlayerCount { get; }
     public int LastWeaponSelection { get; }
     public int LastGrenadeSelection { get; }
@@ -21,6 +22,7 @@ public sealed class ThunderdomeLoadoutEuiState : EuiStateBase
     public int LastNeckSelection { get; }
     public int LastGlassesSelection { get; }
     public int LastBackpackSelection { get; }
+    public int LastUtilitySelection { get; }
 
     public ThunderdomeLoadoutEuiState(
         List<ThunderdomeLoadoutOption> weapons,
@@ -30,6 +32,7 @@ public sealed class ThunderdomeLoadoutEuiState : EuiStateBase
         List<ThunderdomeLoadoutOption> necks,
         List<ThunderdomeLoadoutOption> glasses,
         List<ThunderdomeLoadoutOption> backpacks,
+        List<ThunderdomeLoadoutOption> utilities,
         int playerCount,
         int lastWeaponSelection = -1,
         int lastGrenadeSelection = 0,
@@ -37,7 +40,8 @@ public sealed class ThunderdomeLoadoutEuiState : EuiStateBase
         int lastHeadSelection = 0,
         int lastNeckSelection = 0,
         int lastGlassesSelection = 0,
-        int lastBackpackSelection = 0)
+        int lastBackpackSelection = 0,
+        int lastUtilitySelection = 0)
     {
         Weapons = weapons;
         Grenades = grenades;
@@ -46,6 +50,7 @@ public sealed class ThunderdomeLoadoutEuiState : EuiStateBase
         Necks = necks;
         Glasses = glasses;
         Backpacks = backpacks;
+        Utilities = utilities;
         PlayerCount = playerCount;
         LastWeaponSelection = lastWeaponSelection;
         LastGrenadeSelection = lastGrenadeSelection;
@@ -54,6 +59,7 @@ public sealed class ThunderdomeLoadoutEuiState : EuiStateBase
         LastNeckSelection = lastNeckSelection;
         LastGlassesSelection = lastGlassesSelection;
         LastBackpackSelection = lastBackpackSelection;
+        LastUtilitySelection = lastUtilitySelection;
     }
 }
 
@@ -75,7 +81,8 @@ public readonly record struct ThunderdomeLoadoutSelection(
     int HeadIndex,
     int NeckIndex,
     int GlassesIndex,
-    int BackpackIndex);
+    int BackpackIndex,
+    int UtilityIndex);
 
 [Serializable, NetSerializable]
 public sealed class ThunderdomeLoadoutSelectedMessage : EuiMessageBase
@@ -95,4 +102,5 @@ public sealed class ThunderdomeLoadoutSelectedMessage : EuiMessageBase
     public int NeckIndex => Selection.NeckIndex;
     public int GlassesIndex => Selection.GlassesIndex;
     public int BackpackIndex => Selection.BackpackIndex;
+    public int UtilityIndex => Selection.UtilityIndex;
 }
