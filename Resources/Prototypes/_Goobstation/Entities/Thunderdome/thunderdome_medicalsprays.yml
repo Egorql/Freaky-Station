@@ -1,0 +1,34 @@
+# SPDX-FileCopyrightText: 2026 Claude Code
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+# Thunderdome medical sprays - compact versions with limited uses
+
+- type: entity
+  name: compact styptic spray
+  id: SprayBottleStypticPowderThunderdome
+  suffix: Thunderdome, 3 uses
+  parent: SprayBottleStypticPowder
+  description: A compact spray bottle loaded with styptic powder. Contains enough for 3 applications.
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      spray:
+        maxVol: 30  # 3 uses x 10u per spray
+        reagents:
+        - ReagentId: StypticPowder
+          Quantity: 30
+
+- type: entity
+  name: compact silver sulfadiazine spray
+  id: SprayBottleSilverSulfadiazineThunderdome
+  suffix: Thunderdome, 3 uses
+  parent: SprayBottleSilverSulfadiazine
+  description: A compact spray bottle loaded with silver sulfadiazine. Contains enough for 3 applications.
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      spray:
+        maxVol: 30  # 3 uses x 10u per spray
+        reagents:
+        - ReagentId: SilverSulfadiazine
+          Quantity: 30

@@ -94,7 +94,7 @@ thunderdome-loadout-medical-default = Surgical Kit
 thunderdome-loadout-medical-ephedrine = Combat Stimulant
 thunderdome-loadout-medical-bicaridine = Rapid Healing
 
-thunderdome-desc-medical-default = Advanced surgical tools, regenerative mesh, medicated suture, and tricordrazine pills
+thunderdome-desc-medical-default = Medicated suture, regenerative mesh, compact styptic spray, compact burn spray, and tricordrazine pills
 thunderdome-desc-medical-ephedrine = Ephedrine autoinjector for speed boost, plus brutepack, ointment, and gauze
 thunderdome-desc-medical-bicaridine = Bicaridine and dermaline autoinjectors for rapid healing, plus brutepack, ointment, and gauze
 
@@ -210,3 +210,11 @@ ent-DermalineAutoInjectorThunderdome = dermaline autoinjector
 
 ent-PortableRechargerCompact = compact portable recharger
     .desc = A compact version of the portable recharger. Smaller, but just as effective.
+
+ent-SprayBottleStypticPowderThunderdome = compact styptic spray
+    .suffix = Thunderdome, 3 uses
+    .desc = A compact spray bottle loaded with styptic powder. Contains enough for 3 applications.
+
+ent-SprayBottleSilverSulfadiazineThunderdome = compact silver sulfadiazine spray
+    .suffix = Thunderdome, 3 uses
+    .desc = A compact spray bottle loaded with silver sulfadiazine. Contains enough for 3 applications.

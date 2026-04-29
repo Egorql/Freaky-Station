@@ -90,11 +90,11 @@ thunderdome-desc-grenade-stinger = Травматическая граната �
 thunderdome-desc-grenade-teargas = Слезоточивая граната в поясе, ослепляющая и замедляющая врагов
 
 # Medical loadouts
-thunderdome-loadout-medical-default = Базовая медицина + Хирургический набор
-thunderdome-loadout-medical-ephedrine = Боевой стимулятор
+thunderdome-loadout-medical-default = Базовая медицина
+thunderdome-loadout-medical-ephedrine = Боевой стимулятор 
 thunderdome-loadout-medical-bicaridine = Быстрое лечение
 
-thunderdome-desc-medical-default = Продвинутый хирургический инструмент, регенеративная сетка, медицинская нить и таблетки трикордразина
+thunderdome-desc-medical-default = Медицинская нить, регенеративная сетка, компактный спрей от ран, компактный спрей от ожогов и таблетки трикордразина
 thunderdome-desc-medical-ephedrine = Автоинъектор эфедрина для буста скорости, плюс бинты, мазь и марля
 thunderdome-desc-medical-bicaridine = Автоинъекторы бикаридина и дермалина для быстрого лечения, плюс бинты, мазь и марля
 
@@ -208,3 +208,11 @@ ent-DermalineAutoInjectorThunderdome = автоинъектор дермалин
 
 ent-PortableRechargerCompact = компактный портативный зарядник
     .desc = Компактная версия портативного зарядника. Меньше, но так же эффективна.
+
+ent-SprayBottleStypticPowderThunderdome = компактный спрей с кровоостанавливающим порошком
+    .suffix = Тандердом, 3 использования
+    .desc = Компактный флакон-спрей с кровоостанавливающим порошком. Хватит на 3 применения.
+
+ent-SprayBottleSilverSulfadiazineThunderdome = компактный спрей с сульфадиазином серебра
+    .suffix = Тандердом, 3 использования
+    .desc = Компактный флакон-спрей с сульфадиазином серебра. Хватит на 3 применения.

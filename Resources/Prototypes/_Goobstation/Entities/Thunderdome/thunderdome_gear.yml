@@ -100,8 +100,7 @@
   storage:
     back:
       - Flash
-      - Stimpack
-      - Stimpack
+      - Stimpack # терпите у вас и так авторефилл после убийства
 
 - type: startingGear
   id: ThunderdomeCapoeira
@@ -223,11 +222,12 @@
   id: ThunderdomeMedicalDefault
   storage:
     back:
-      - OmnimedToolSyndie
-      - PillCanisterTricordrazine
-      - RegenerativeMesh
       - MedicatedSuture
-
+      - RegenerativeMesh
+      - PillCanisterTricordrazine
+      - PillCanisterTricordrazine
+      - SprayBottleStypticPowderThunderdome
+      - SprayBottleSilverSulfadiazineThunderdome
 - type: startingGear
   id: ThunderdomeMedicalEphedrine
   storage:
