@@ -1,0 +1,16 @@
+- type: entity
+  categories: [ HideSpawnMenu, Spawner ]
+  parent: BaseAntagSpawner
+  id: SpawnPointGhostTesseract
+  components:
+  - type: GhostRole
+    name: тессеракт
+    description: Из гипотетического пространства вы решаетесь выйти в обычное.
+    rules: Давай без рдма просто так, братик
+    mindRoles:
+    - MindRoleGhostRoleNeutral
+  - type: Sprite
+    layers:
+    - state: green
+    - sprite: _FreakStation/Paraphys/tesseract.rsi
+      state: tesseract

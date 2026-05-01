@@ -1,0 +1,56 @@
+- type: entity
+  id: MobTesseract
+  parent: [BaseSimpleMob, MobCombat]
+  name: тессеракт
+  description: Многомерная метаструктура манипулирующая светом. Вероятно искусственного происхождения.
+  components:
+  - type: Sprite
+    sprite: _FreakStation/Paraphys/tesseract.rsi
+    layers:
+    - map: [ "enum.DamageStateVisualLayers.Base" ]
+      state: tesseract
+  - type: GhostRole
+    allowMovement: true
+    makeSentient: true
+    name: тессеракт
+    description: Из гипотетического пространства вы решаетесь выйти в обычное.
+    rules: Давай без рдма просто так, братик
+    mindRoles:
+    - MindRoleGhostRoleNeutral
+    raffle:
+      settings: default
+  - type: GhostTakeoverAvailable
+  - type: DamageStateVisuals
+    states:
+      Alive:
+        Base: tesseract
+      Dead:
+        Base: tesseract
+  - type: MeleeWeapon
+    damage:
+      types:
+        Heat: 25
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      2500: Dead
+  - type: HitscanBatteryAmmoProvider
+    proto: LightPulse
+    fireCost: 250
+  - type: Battery
+    maxCharge: 1000
+    startingCharge: 1000
+  - type: BatterySelfRecharger
+    autoRecharge: true
+    autoRechargeRate: 50
+  - type: Gun
+    fireRate: 0.3
+    useKey: false
+    showExamineText: false
+    selectedMode: SemiAuto
+    availableModes:
+      - SemiAuto
+    soundGunshot:
+      path: /Audio/Weapons/Guns/Gunshots/laser3.ogg
+    soundEmpty:
+      path: /Audio/Items/Lighters/lighter_off.ogg
