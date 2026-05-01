@@ -9,6 +9,10 @@
     layers:
     - map: [ "enum.DamageStateVisualLayers.Base" ]
       state: tesseract
+  - type: ResearchClient
+  - type: ResearchPointSource
+    pointspersecond: 10
+    active: true
   - type: GhostRole
     allowMovement: true
     makeSentient: true
